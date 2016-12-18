@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>IFE JavaScript Task 01</title>
+</head>
+<body>
+
+  <h3>污染城市列表</h3>
+  <ul id="aqi-list">
+<!--   
+    <li>第一名：福州（样例），10</li>
+    <li>第二名：福州（样例），10</li> -->
+  </ul>
+
+  <script type="text/javascript">
+
+    var aqiData = [
+    ["北京", 90],
+    ["上海", 50],
+    ["福州", 80],
+    ["广州", 85],
+    ["成都", 95],
+    ["西安", 100]
+    ];
+
+    (function () {
+
+  /*
+  在注释下方编写代码
+  遍历读取aqiData中各个城市的数据
+  将空气质量指数大于60的城市显示到aqi-list的列表中
+  */
+
+  var result = [];
+  for(var i=0;i<aqiData.length;i++){
+    if(aqiData[i][1] > 60){ //将空气质量大于60的城市筛选出来
+      result.push(aqiData[i]);
+    }
+  }
+
+  function quickSort(arr){
+    　if (arr.length <= 1) { return arr; }
+    　　var pivotIndex = Math.floor(arr.length / 2);
+        var temp=[];//
+        temp.push(arr[pivotIndex]);//把作为基准的城市数据暂存下来。
+    // 　　var pivot = arr.splice(pivotIndex, 1)[0][1];
+        var pivot = arr[pivotIndex][1];
+    　　var left = [];
+    　　var right = [];
+    　　for (var i = 0; i < arr.length; i++){
+      　　　　if (arr[i][1] < pivot) {
+        　　　　　　left.push(arr[i]);//把小于基准的城市数据放到左边的数组
+      　　　　} else if(arr[i][1] == pivot){
+            continue;
+      }else {
+        　　　　　　right.push(arr[i]);//把大于基准的城市数据放到右边的数组
+      　　　　}
+    　　}
+    　　return quickSort(left).concat(temp, quickSort(right));//拼接左右左右两边的数组和基准
+    　
+  }
+
+
+  console.log(quickSort(result));
+})();
+
+</script>
+</body>
+</html>
