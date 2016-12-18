@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>IFE JavaScript Task 01</title>
+  <style type="text/css">
+  li
+    {
+      list-style: none;
+    }
+  </style>
 </head>
 <body>
 
@@ -60,9 +66,17 @@
     　　return quickSort(left).concat(temp, quickSort(right));//拼接左右左右两边的数组和基准
     　
   }
-
-
   console.log(quickSort(result));
+
+  //动态生成li，将数据放入li中
+  var parentUl = document.getElementById('aqi-list');
+  var contentStr = "";
+  var len = result.length;
+  for(i = 1;i<=result.length;i++){
+    contentStr += "<li>第" + i + "名：" + result[len-i][0] + "，" + result[len-i][1] + "</li>";
+  }
+  parentUl.innerHTML = contentStr;
+
 })();
 
 </script>
