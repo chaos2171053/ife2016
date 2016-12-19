@@ -10,7 +10,7 @@
 [快速排序（Quicksort）的Javascript实现](http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html)<br>
 看了网上的别人的解法，可以用array.filter、array.sort来实现大于60的筛选和排序，用array.forEach方法来代替for循环遍历处理数组元素。<br>
 
-####1.2做任务十四对空气质量大于60筛选数据时，原始数据为如下：<br>
+####1.2对空气质量大于60筛选数据时，原始数据为如下：<br>
 ```var aqiData = [
     ["北京", 90],
     ["上海", 50],
@@ -26,7 +26,7 @@
 ```var temp=[];//声明一个临时数组
 temp.push(arr[pivotIndex]);//用push方法把作为基准的城市数据暂存下来。
 ```
-####1.3做任务十四动态添加li生成排行榜发现在循环在appendChild会导致回流。
+####1.3动态添加li生成排行榜发现在循环在appendChild会导致回流。
 ```//动态生成li，将数据放入li中
   var parentUl = document.getElementById('aqi-list');
 
@@ -52,3 +52,9 @@ parentUl.innerHTML = contentStr;
 
 [页面呈现流程 ](http://www.blogjava.net/BearRui/archive/2010/05/10/320502.html)
 
+###2.任务十六
+####2.1 运行时发现can't set property onclick' of null。
+解决方法把js文件放在</body>前执行
+####2.2 绑定删除按钮删除事件，参考了[别人的代码](http://www.cnblogs.com/AfterStories/articles/5384051.html)，学习了[call()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+
+使用call()可以实现继承，新的对象可以继承另一个对象的方法而不用重写这个方法。
