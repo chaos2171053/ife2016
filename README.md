@@ -21,7 +21,7 @@
 ];
 ``` 
 排序后发现![14-1](problemsPic/14-1.png)<br>
-返回的应该是一个一维数组，里面的元素都是一个数组。<br>
+返回的应该是一个二维数组，里面的元素都是一个数组。<br>
 解决方法：
 ```var temp=[];//声明一个临时数组
 temp.push(arr[pivotIndex]);//用push方法把作为基准的城市数据暂存下来。
@@ -58,3 +58,25 @@ parentUl.innerHTML = contentStr;
 ####2.2 绑定删除按钮删除事件，参考了[别人的代码](http://www.cnblogs.com/AfterStories/articles/5384051.html)，学习了[call()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
 
 使用call()可以实现继承，新的对象可以继承另一个对象的方法而不用重写这个方法。
+
+###3.任务十七
+####3.1 发现动态添加<option>的方法除了声明一个字符串，将option的内容使用innerHTML插入外，在《JavaScript高级程序设计》中发现
+还可以使用add（）方法。
+书中说，add（）接受两个参数：要添加的新选项和将位于新选项之后的选项。如果想在列表的最后添加一个选项，应该将第二个参数设置为null。在IE中，add（）第二个参数是可选的，兼容DOM的浏览器必须要求制定第二个参数。这时候，可以将第二个参数传入undefined。
+innerHTML方法：
+``` var cityStr = "";
+    for(var city in aqiSourceData){
+        cityStr +="<option>"+ city +"</option>";
+    }
+    document.getElementById('city-select').innerHTML = cityStr;
+```
+add():
+```var city = document.getElementById('city-select');//获取<select>的id
+
+   for(var cityName in aqiSourceData){//遍历数据源aqiSourceData的key
+      var newOption = new Option(cityName);
+      city.add(newOption,undefined);
+  }
+```
+####3.2事件委托
+如果为ui中的每个li添加点击事件，循环遍历li，为每个li添加处理，浏览器重绘与重排的次数回家多，增加交互就绪的时间。采用事件委托就是比较好的处理方式。适合用事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress。
