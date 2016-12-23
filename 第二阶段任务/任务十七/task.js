@@ -8,10 +8,16 @@ var aqiSourceData = {
   }
 };
 */
-/**
- * addEventHandler方法
- * 跨浏览器实现事件绑定
- */
+//跨浏览器事件绑定
+function addEventHandler(ele, event, hanlder) {
+    if (ele.addEventListener) {
+        ele.addEventListener(event, hanlder, false);
+    } else if (ele.attachEvent) {
+        ele.attachEvent("on"+event, hanlder);
+    } else  {
+        ele["on" + event] = hanlder;
+    }
+}
 
 
 // 以下两个函数用于随机模拟生成测试数据
@@ -79,13 +85,17 @@ var pageState = {
  function graTimeChange() {
   // console.log("Enter graTimeChange()");
   // 确定是否选项发生了变化
-  
-  for(var i = 0; i<radio.length;i++){
+  //利用for循环遍历寻找哪个radio被点击
+/*  for(var i = 0; i<radio.length;i++){
     if(radio[i].checked){
      pageState.nowGraTime = (pageState.nowGraTime == radio[i].value) ? pageState.nowGraTime:radio[i].value;
      
    }  
- }
+ }*/
+ //使用querySelctorAll()判断哪个radio被选择
+ var theDateChosen = document.querySelectorAll('input:checked')[0];
+ pageState.nowGraTime = (pageState.nowGraTime == theDateChosen.value) ? pageState.nowGraTime:theDateChosen.value;
+     
   // 设置对应数据
 
   initAqiChartData();
@@ -100,12 +110,15 @@ var pageState = {
   // console.log("Enter citySelectChange()");
   // 确定是否选项发生了变化 
   
-  for(var i = 0; i<city.length;i++){
+ /* for(var i = 0; i<city.length;i++){
     if(city[i].selected){
       pageState.nowSelectCity = (pageState.nowSelectCity == city[i].innerHTML) ? pageState.nowSelectCity:city[i].innerHTML;
       
     }
-  }
+  }*/
+  //使用querySelectorAll()判断哪个城市被选择
+  var theCityChosen = document.querySelectorAll('select option:checked')[0];
+  pageState.nowSelectCity = (pageState.nowSelectCity == theCityChosen.innerHTML) ? pageState.nowSelectCity:theCityChosen.innerHTML;
   // 设置对应数据
   initAqiChartData();
 
@@ -117,11 +130,22 @@ var pageState = {
  * 初始化日、周、月的radio事件，当点击时，调用函数graTimeChange
  */
  function initGraTimeForm() {
-
-  for(var i = 0;i<radio.length;i++){
+  //用for循环遍历radio绑定点击事件，为每个元素都添加监听函数，增加JavaScript和DOM节点之间的关联。
+/*  for(var i = 0;i<radio.length;i++){
     radio[i].addEventListener('click',graTimeChange);
   }
-
+  console.log(radio[0]);*/
+  //使用事件委托
+  var formGraTime = document.getElementById('form-gra-time');
+  /* addEventHandler(formGraTime,"click",graTimeChange);*/
+  　　　
+  addEventHandler(formGraTime,"click",function(ele){
+    　var ele = ele || window.event;
+    　var target = ele.target || ev.srcElement;
+    if(ele.target && ele.target.nodeName.toLowerCase() === "input"){
+      graTimeChange();
+    }
+  });
 }
 
 /**
@@ -129,18 +153,19 @@ var pageState = {
  */
  function initCitySelector() {
   // 读取aqiSourceData中的城市，然后设置id为city-select的下拉列表中的选项
-  //  var cityStr = "";
-  // for(var city in aqiSourceData){
-  //   cityStr +="<option>"+ city +"</option>";
-  // }
-  // document.getElementById('city-select').innerHTML = cityStr;
+ /*  var cityStr = "";
+  for(var city in aqiSourceData){
+    cityStr +="<option>"+ city +"</option>";
+  }
+  document.getElementById('city-select').innerHTML = cityStr;*/
 
   for(var cityName in aqiSourceData){
     var newOption = new Option(cityName);
     city.add(newOption,undefined);
   }
   // 给select设置事件，当选项发生变化时调用函数citySelectChange
-  city.addEventListener('change',citySelectChange);
+  // city.addEventListener('change',citySelectChange);
+  addEventHandler(city,'change',citySelectChange);
 }
 
 /**
@@ -151,11 +176,12 @@ var pageState = {
   var nowCityData = aqiSourceData[pageState.nowSelectCity];//nowCityData是一个对象，
   switch (pageState.nowGraTime){
     case "day":
+    chartData = {};//清空charData
     chartData = nowCityData;
     break;
     case "week":
     {
-      chartData = {};
+      chartData = {};//清空charData
       var countSum=0, daySum=0, week=0;
       for (var item in nowCityData) {
         countSum += nowCityData[item];
@@ -174,27 +200,27 @@ var pageState = {
   }
 
   break;
-  case "month":
-  {
-    chartData = {};
-    var countSum=0, daySum=0, month=0;
-    for (var item in nowCityData) {
-      countSum += nowCityData[item];
-      daySum ++;
-      if ((new Date(item)).getMonth() !== month) {
-        month ++;
-        chartData['第'+month+'月'] = Math.floor(countSum/daySum);
-        countSum = 0
-        daySum = 0;
+  case "month":{
+    chartData = {};//清空charData
+    var count= 0,month =-1,total = 0, month = -1,date;
+    for(var item in nowCityData){
+      date = new Date(item);
+      if(month == -1){
+        month = date.getMonth()+1;
       }
+      else if(date.getMonth()+1 != month){
+        chartData[month +"月"]  = Math.floor(total/count);
+        month = date.getMonth()+1;
+        count = 0;
+        total = 0;
+      }
+      count++;
+      total += aqiSourceData[pageState.nowSelectCity][item];
     }
-    if (daySum != 0) {
-      month ++;
-      chartData['第'+month+'月'] = Math.floor(countSum/daySum);
-    }
-
+    chartData[month +"月"]  = Math.floor(total/count);
+    break;
   }
-  break;
+  
 }
 
 

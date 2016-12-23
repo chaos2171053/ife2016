@@ -19,15 +19,15 @@
     ["成都", 95],
     ["西安", 100]
 ];
-``` 
+```
 排序后发现![14-1](problemsPic/14-1.png)<br>
 返回的应该是一个二维数组，里面的元素都是一个数组。<br>
 解决方法：
-```var temp=[];//声明一个临时数组
+var temp=[];//声明一个临时数组
 temp.push(arr[pivotIndex]);//用push方法把作为基准的城市数据暂存下来。
-```
+
 ####1.3动态添加li生成排行榜发现在循环在appendChild会导致回流。
-```//动态生成li，将数据放入li中
+//动态生成li，将数据放入li中
   var parentUl = document.getElementById('aqi-list');
 
   var len = result.length;
@@ -36,10 +36,10 @@ temp.push(arr[pivotIndex]);//用push方法把作为基准的城市数据暂存�
 　　　li.innerHTML = "第"+i+"名是："+result[len-i];
 　　　parentUl.appendChild(li);
 }
-```
+
 可考虑将ul中内容 保存到临时字符串 最后一次性添加。<br>
 解决如下： 
-```var parentUl = document.getElementById('aqi-list');
+var parentUl = document.getElementById('aqi-list');
 var contentStr = "";
 var len = result.length;
 for(i = 1;i<=result.length;i++){
@@ -48,7 +48,7 @@ contentStr += "<li>第" + i + "名：" + result[len-i][0] + "，" + result[len-i
 parentUl.innerHTML = contentStr;
 
 })();
-```
+
 
 [页面呈现流程 ](http://www.blogjava.net/BearRui/archive/2010/05/10/320502.html)
 
@@ -64,19 +64,25 @@ parentUl.innerHTML = contentStr;
 还可以使用add（）方法。
 书中说，add（）接受两个参数：要添加的新选项和将位于新选项之后的选项。如果想在列表的最后添加一个选项，应该将第二个参数设置为null。在IE中，add（）第二个参数是可选的，兼容DOM的浏览器必须要求制定第二个参数。这时候，可以将第二个参数传入undefined。
 innerHTML方法：
-``` var cityStr = "";
+var cityStr = "";
     for(var city in aqiSourceData){
         cityStr +="<option>"+ city +"</option>";
     }
     document.getElementById('city-select').innerHTML = cityStr;
-```
-add():
-```var city = document.getElementById('city-select');//获取<select>的id
+
+add()方法:
+var city = document.getElementById('city-select');//获取<select>的id
 
    for(var cityName in aqiSourceData){//遍历数据源aqiSourceData的key
       var newOption = new Option(cityName);
       city.add(newOption,undefined);
   }
-```
+
 ####3.2事件委托
-如果为ui中的每个li添加点击事件，循环遍历li，为每个li添加处理，浏览器重绘与重排的次数回家多，增加交互就绪的时间。采用事件委托就是比较好的处理方式。适合用事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress。
+如果为fieldset中的每个input添加点击事件，循环遍历radio，为每个radio添加处理，增加交互就绪的时间。采用事件委托就是比较好的处理方式。适合用事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress。
+好处：
+1. 管理的函数变少了。不需要为每个元素都添加监听函数。对于同一个父节点下面类似的子元素，可以通过委托给父元素的监听函数来处理事件。
+2. 以方便地动态添加和修改元素，不需要因为元素的改动而修改事件绑定。
+3. JavaScript和DOM节点之间的关联变少了，这样也就减少了因循环引用而带来的内存泄漏发生的概率。
+
+任务中只需为input的父层fieldset添加点击添加点击事件监听，判断是否点击input，点击则执行相应处理。
