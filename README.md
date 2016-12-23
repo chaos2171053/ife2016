@@ -86,3 +86,7 @@ var city = document.getElementById('city-select');//获取<select>的id
 3. JavaScript和DOM节点之间的关联变少了，这样也就减少了因循环引用而带来的内存泄漏发生的概率。
 
 任务中只需为input的父层fieldset添加点击添加点击事件监听，判断是否点击input，点击则执行相应处理。
+
+###4.任务十八
+delete 一个数组arr[i]，只能让原来的arr[i]的值为undefined，应该使用数组的splice方法。
+[MDN关于Array的描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)

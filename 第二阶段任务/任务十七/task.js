@@ -142,7 +142,7 @@ var pageState = {
   addEventHandler(formGraTime,"click",function(ele){
     　var ele = ele || window.event;
     　var target = ele.target || ev.srcElement;
-    if(ele.target && ele.target.nodeName.toLowerCase() === "input"){
+    if(target && target.nodeName.toLowerCase() === "input"){
       graTimeChange();
     }
   });
