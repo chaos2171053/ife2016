@@ -4,6 +4,7 @@
 
 ## 遇到的问题及其解决方法
 ###1. 任务十四
+
 ####1.1 遇到需要排序，复习了下几种基本排序算法
 [JS版十大排序算法](http://blog.csdn.net/fengyinchao/article/details/52667625)<br>
 [快速排序](http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html)<br>
@@ -53,6 +54,7 @@
 [页面呈现流程 ](http://www.blogjava.net/BearRui/archive/2010/05/10/320502.html)
 
 ###2. 任务十六
+
 ####2.1 运行时发现can't set property onclick' of null。
 解决方法把js文件放在</body>前执行
 ####2.2 绑定删除按钮删除事件，参考了[别人的代码](http://www.cnblogs.com/AfterStories/articles/5384051.html)，学习了[call()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
@@ -88,10 +90,11 @@ add()方法:
 任务中只需为input的父层fieldset添加点击添加点击事件监听，判断是否点击input，点击则执行相应处理。
 
 ###4.任务十八
+
 ####4.1 delete 一个数组arr[i]，只能让原来的arr[i]的值为undefined，应该使用数组的splice方法。
 [MDN关于Array的描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
 ####4.2 实现“点击队列中任何一个元素，则该元素会被从队列中删除”需求时，一开始考虑的是判断点击的div里面的数字和队列中的哪个数字相等，如果相等则删除。忘记考虑了从多个数字相等的情况。应该获取点击的div在父元素中的索引，删除队列中对应的索引。
-代码如下：
+for()方法代码如下：
     if(target && target.className === "numberList"){
       //方法一：判断点击的div里面的数字与队列中的哪个数字相等，只适合数字都不同的时候
       for(var i = 0; i<data.length;i++){
@@ -100,3 +103,9 @@ add()方法:
         }
         
       }
+利用call来调用Array的原型方法indexOf
+    var i = [].indexOf.call(target.parentNode.children, target);
+    data.splice(i,1);
+    renderChart(data);
+
+
