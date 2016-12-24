@@ -89,11 +89,15 @@ function deleteOneOfTheList() {
 		　var ele = ele || window.event;
 		　var target = ele.target || ev.srcElement;
 		if(target && target.className === "numberList"){
-			for(var i = 0; i<data.length;i++){
+			//方法一：判断点击的div里面的数字与队列中的哪个数字相等，只适合数字都不同的时候
+			/*for(var i = 0; i<data.length;i++){
 				if(data[i] == target.innerHTML){
 					data.splice(i,1);
 				}
-			}
+				
+			}*/
+			var i = [].indexOf.call(target.parentNode.children, target);
+			data.splice(i,1);
 			renderChart(data);
 		}
 	});
