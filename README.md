@@ -108,4 +108,22 @@ for()方法代码如下：
     data.splice(i,1);
     renderChart(data);
 
+###4.任务二十
+####4.1 在textarea中按tab键会调到页面的下一个元素，而又想在textarea中按tab进行缩进。解决方法
+是判断按下的键是否是tab键。
+代码:
+    function inputKeyDown(e){
+        if(e.keyCode == 9){
+            e.preventDefault();
+            var indent = '    ';
+            var start = this.selectionStart;
+            var end = this.selectionEnd;
+            var selected = window.getSelection().toString();
+            selected = indent + selected.replace(/\n/g,'\n'+indent);
+            this.value = this.value.substring(0,start) + selected + this.value.substring(end);
+            this.setSelectionRange(start+indent.length,start+selected.length);
+      }
+
+    }
+
 
