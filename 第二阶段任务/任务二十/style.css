@@ -1,4 +1,4 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
 }
@@ -9,10 +9,7 @@
     clear:both; 
 } 
 .clearfix {*zoom:1;}/*IE/7/6*/
-#wrapper {
 
-
-}
 
 .textList {
 	background-color: #ff0102;
@@ -22,20 +19,21 @@
 	float: left;
 	color: #fff;
 	text-align: center;
-
 }
-form div{
+form div {
     width: 80px;
     height: 30px;
     height: 30px;
     text-align: center;
+  
 
 }
-.input-error{
+.input-error {
 	color: 	#dc143c
 }
 #input-text {
 	margin-top: 5px;
+	margin-left: 10px;
 }
 form{
 	margin-top: 15px;

@@ -79,9 +79,6 @@ function validData(){
 	
 	var inputString = input.value.trim();
 	var regExp = /[^(\n|\,|\，|\、|\s|\v|\t)]+/g ;
-	var flag = 0;
-	
-	
 	if( inputString.length == ""){
 		inputError.innerHTML = "快输入点东西啦(ノω<。)ノ))☆.。";
 		return null;

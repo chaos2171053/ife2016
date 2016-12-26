@@ -126,4 +126,44 @@ for()方法代码如下：
 
     }
 
+###5. 任务二十一
+####5.1 input标签没有hover属性
+
+####5.2 当输入标签为input时，对input设置keydown事件监听，按回车会提交表单，如果按1，会判断按下的键值，但是不会将1放入input的value属性里，使得console.log(input的value属性)为空值。应改为监听input的onkeyup事件,同时判断当按下回车时，阻止input的默认行为。
+
+####5.3 想把获取的数据插入元素的内容，
+<pre>
+var str = "<div class=" + '"tagListTop"' + ">" + 123123 +"</div>";
+wrapperTagsTop.innerHTML = str;
+</pre>发现插入的是一个数组，原因在于通过getElementsByClassName返回的是一个数组，还要通过索引获取想要的节点。
+
+####5.4 给div设置onmouseover事件监听鼠标移动到div时获取点击的是哪个节点，然后通过innerHTML改变其样式，代码如下
+<pre>
+function divMouseOver(ele){
+  var ele = ele|| window.event;
+  var target = ele.target ||ev.srcElement;
+  if(target && target.className == "tagListTop"){
+    var i = [].indexOf.call(target.parentNode.children,target);
+    wrapperTagsTop.children[i].innerHTML = "<div class=" + '"tagListTop"' + ">" + "点击删除"+data[i] +"</div>";
+  }
+
+}
+
+function divMouseOut(){
+  var ele = ele|| window.event;
+  var target = ele.target ||ev.srcElement;
+  if(target && target.className == "tagListTop"){
+    var i = [].indexOf.call(target.parentNode.children,target);
+    wrapperTagsTop.children[i].innerHTML = "<div class=" + '"tagListTop"' + ">" +data[i] +"</div>";
+  }
+}
+</pre>
+发现鼠标悬停和移出的效果如下：
+[21-1](problemsPic/21-1.png)
+[21-2](problemsPic/21-2.png)
+原因：innerHTML实质是改变标签内的内容，即在该子节点`<div>``</div>`中间插入内容。
+解决方法：在mouseover时插入"点击删除"和该爱好标签的内容，在mouseout时插入该爱好标签的内容。
+
+
+
 
