@@ -1,6 +1,7 @@
 *{
 	margin: 0;
 	padding: 0;
+    font-family: "Comic Sans",Cursive;
 }
 .clearfix:after { 
     content:""; 
@@ -8,6 +9,10 @@
     height:0; 
     clear:both; 
 } 
+body{
+    width: 800px;
+    margin: 0 auto;
+}
 
 .clearfix {*zoom:1;}/*IE/7/6*/
 
@@ -56,6 +61,8 @@ form{
 	line-height: 20px;
 	font-size: 12px;
 	text-align: center;
+
+    margin: 10px auto 0px;
 
 }
 

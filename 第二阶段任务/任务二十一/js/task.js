@@ -61,7 +61,7 @@ function validDataTextArea(){
     var data = [];
     var object ={};
     for(var i=0;i<dataList.length;i++){
-    	if(!object[dataList[i]]){
+    	if(!object.hasOwnProperty(dataList[i])){
     		if(data.length <10 ){
     			data.push(dataList[i]);
     			object[dataList[i]] = 1;
@@ -155,7 +155,7 @@ function deleteOneOfTheList(ele) {
 
 function divMouseOver(ele){
 	var ele = ele|| window.event;
-	var target = ele.target ||ev.srcElement;
+	var target = ele.target ||ele.srcElement;
 	if(target && target.className == "tagListTop"){
 		var i = [].indexOf.call(target.parentNode.children,target);
 		wrapperTags.children[i].innerHTML = "点击删除"+data[i];
@@ -165,7 +165,7 @@ function divMouseOver(ele){
 
 function divMouseOut(){
 	var ele = ele|| window.event;
-	var target = ele.target ||ev.srcElement;
+	var target = ele.target ||ele.srcElement;
 	if(target && target.className == "tagListTop"){
 		var i = [].indexOf.call(target.parentNode.children,target);
 		wrapperTags.children[i].innerHTML = data[i];

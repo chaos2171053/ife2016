@@ -165,5 +165,31 @@ function divMouseOut(){
 解决方法：在mouseover时插入"点击删除"和该爱好标签的内容，在mouseout时插入该爱好标签的内容。
 
 
+####5.5 数组元素去重
+一开始的思路是：
+1. 声明一个新的数组用来存放结果；
+2. for循环中每次从原数组中取出一个元素，用这个元素循环与结果数组对比；
+3. 若结果数组中没有该元素，则存到结果数组中。
+发现这种方法不够简练，改为
+1. 声明一个新的数组用来存放结果
+2. 声明一个空对象
+3. for循环时，每次取出一个元素与对象进行对比，如果这个元素不重复，则把它存放到结果数组中，同时把这个元素的内容作为对象的一个属性，并赋值为1，存入到第2步建立的对象中。
+
+review别人的代码发现对数组使用indexof方法，如果返回-1则不重复。代码更简练。
+
+#####5.6 本来想用正则表达式和test（）判断标签输入框如果有空格、回车、逗号按下时，输入框内的内容自动生成一个标签，但是发现这样有一个bug就是先按空格、回车、逗号，会马上生成一个标签内容为空格、回车、逗号，而需求是输入标签内容后按空格、回车、逗号才生成标签。
+代码
+keyRegExp = /[,，、\s\n]/;
+function inputTagsEvent(event){
+  var inputData = inputTags.value;
+  if(keyRegExp.match(inputData)[0] || getEvent(event).keyCode == 13){
+    getEvent(event).preventDefault(event);//阻止回车默认事件
+    if(validData(inputData.trim(),inputTags)){
+      renderChart(tags,tagsListWrapper[0]);
+      clearText(inputTags);
+    }
+
+
+
 
 
