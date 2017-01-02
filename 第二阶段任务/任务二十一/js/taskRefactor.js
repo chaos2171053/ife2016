@@ -5,7 +5,6 @@ var inputTags = $('input-tags','id');
 	tagsListWrapper = $('tags-list-wrapper','className');
 	tags = []; //存放个人标签
 	hobbies = [];//存放个人爱好
-	// keyRegExp = /[,，、\s\n]/;//判断哪个键按下
 	inputRegExp = //;
 	contRegExp = /[^(\n|\,|\，|\、|\s)]+/g;
 
@@ -18,14 +17,13 @@ addEventHandler(confirm,'click',inputHobbiesEvent);
 
 /**
  * 提交爱好
- * @return {[type]} [description]
  */
 function inputHobbiesEvent(){
 	var inputdata = inputHobbies.value.trim();
 
 	if(validData(inputdata.match(contRegExp))){
 		renderChart(hobbies,tagsListWrapper[1]);
-		clearText(inputTags);
+		clearText(inputHobbies);
 	}
 	delegateEvent(tagsListWrapper[1],"hobbies","mouseover",divMouseOver);
 	delegateEvent(tagsListWrapper[1],"hobbies","mouseout",divMouseOut);
@@ -63,9 +61,12 @@ function inputHobbiesEvent(){
  */
 function renderChart(inputdata,wrapper){
 	var content ="";
-	for(var i = 0,len = inputdata.length; i < len;i++){
+/*	for(var i = 0,len = inputdata.length; i < len;i++){
 		content += "<div class=" + '"tags-list"' + ">" + inputdata[i] +"</div>";
-	}
+	}*/
+	content = inputdata.map(function(e){
+		return "<div class=" + '"tags-list"' + ">" + e +"</div>";
+	}).join("");
 	wrapper.innerHTML = content;
 }
 
@@ -194,6 +195,7 @@ function divMouseOut(target,tagsHobbies){
  * @param  {HTMLElement} target 元素节点
  */
 function deleteOne(target,tagsHobbies) {
+
 	var data = [];
 	var i = [].indexOf.call(target.parentNode.children, target);
 	data = (tagsHobbies == "tags" ? tags:hobbies);

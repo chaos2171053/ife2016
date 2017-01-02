@@ -37,10 +37,17 @@
   switch (type){
     case "id":{
       return document.getElementById(argument);
+      break;
     }
     case "className":{
       return document.getElementsByClassName(argument);
+      break;
     }
+    case "tagName":{
+      return document.getElementsByTagName(argument);
+      break;
+    }
+
   }
  }
 
@@ -114,4 +121,14 @@ function delegateEvent(element, tag, eventName, listener) {
             listener.call(target, event);
         }
     });
+}
+
+
+/**
+ * 去除首尾空格
+ * @param  {string} word 字符串
+ * @return {string}     字符串
+ */
+function trim(word) {
+    return word.replace(/^\s+|\s+$/g,"");
 }
