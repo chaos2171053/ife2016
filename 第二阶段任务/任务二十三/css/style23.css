@@ -1,0 +1,67 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Comic Sans",Cursive;
+}
+
+#dlr,#ldr,#lrd {
+	margin-top: 20px;
+	width: 80px;
+	background-color: #fff;
+	border: 2px solid #9da6bd;
+	line-height: 30px;
+	font-size: .75em;
+	border-radius: 10px;
+	cursor: pointer;
+	text-align: center;
+	letter-spacing:8px;
+}
+.root {
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+	border:1px solid #000;
+	height: 400px;
+	margin: 50px 50px;
+	justify-content: center;
+}
+.child_1 {
+	border: 1px solid #dc143c;
+	flex-grow: 1;
+	margin:20px 5px;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.child_2 {
+	border: 1px solid #32cd32;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.child_3 {
+	border: 1px solid #1e90ff;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.child_4 {
+	border: 1px solid #1e90ff;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+
+.divWrapper {
+	margin: 10px 100px;
+	justify-content: space-around;
+	display: -webkit-flex; /* Safari */
+	display: flex;
+}
+select {
+	border: 2px solid #9da6bd;
+	border-radius: 10px;
+}
