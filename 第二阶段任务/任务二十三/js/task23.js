@@ -3,19 +3,22 @@
 	var tree = new buildTree(),
 	    dlr = $('dlr','id'),
 	    ldr = $('ldr','id'),
-	    lrd = $('lrd','id');
+	    lrd = $('lrd','id'),
 	    rootNode = document.querySelector('.root');
 
 	addEventHandler(dlr,'click',function(){
 		tree.dlrOrder(rootNode);
+		tree.resetChart();
 		tree.animation();
 	});
 	addEventHandler(ldr,'click',function(){
 		tree.ldrOrder(rootNode);
+		tree.resetChart();
 		tree.animation();
 	});
 	addEventHandler(lrd,'click',function(){
 		tree.lrdOrder(rootNode);
+		tree.resetChart();
 		tree.animation();
 	});
 }());
@@ -70,19 +73,24 @@ function buildTree(){
  */
  buildTree.prototype.animation = function(){
  	var stack       = this.stack,
- 	speedSelect = document.querySelector('#speedSelect'),
- 	i           = 0,
- 	nodeThis = this,
- 	timer = 0;
+ 	    speedSelect = document.querySelector('#speedSelect'),
+ 	    i           = 0,
+ 	    nodeThis    = this,
+        regExp = /[^\n]+/;
+        search = $('searchInformation','id'),
+ 	    timer      = 0;
  	this.stack = [];
  	if(!this.isBuilding){
  		this.isBuilding = true;
-
-
  		stack[i].style.backgroundColor = '#9da6bd';
  		timer = setInterval(function(){
  			if(i == stack.length-1){
  				stack[i].style.backgroundColor = '#fff';
+ 				nodeThis.isBuilding = false;
+ 				clearInterval(timer);
+ 				alert("没有找到诶！")
+ 			}else if(stack[i].textContent.match(regExp)[0] == search.value){
+ 				stack[i].style.backgroundColor = '#dc143c';
  				nodeThis.isBuilding = false;
  				clearInterval(timer);
  			}
@@ -90,10 +98,18 @@ function buildTree(){
  				++i;
  				stack[i-1].style.backgroundColor = '#fff';
  				stack[i].style.backgroundColor = '#9da6bd';
-
-
  			}
  		},speedSelect.value);
 
  	}
  };
+
+/**
+ * 遍历前把遍历的动画颜色清空
+ */
+buildTree.prototype.resetChart  =function(){
+	var stack = this.stack;
+	stack.forEach(function(e){
+		e.style.backgroundColor = '#fff';
+	});
+};
