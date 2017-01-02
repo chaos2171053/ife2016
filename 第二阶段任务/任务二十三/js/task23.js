@@ -78,6 +78,7 @@ function buildTree(){
  	    nodeThis    = this,
         regExp = /[^\n]+/;
         search = $('searchInformation','id'),
+        found = 0,
  	    timer      = 0;
  	this.stack = [];
  	if(!this.isBuilding){
@@ -88,11 +89,15 @@ function buildTree(){
  				stack[i].style.backgroundColor = '#fff';
  				nodeThis.isBuilding = false;
  				clearInterval(timer);
- 				alert("没有找到诶！")
+ 				if(found == 0){
+ 					alert("纳尼！没有找到" + search.value + "!");
+ 				}
  			}else if(stack[i].textContent.match(regExp)[0] == search.value){
  				stack[i].style.backgroundColor = '#dc143c';
- 				nodeThis.isBuilding = false;
- 				clearInterval(timer);
+ 				// nodeThis.isBuilding = false;
+ 				// clearInterval(timer);
+ 				found++;
+ 				++i;
  			}
  			else{
  				++i;
@@ -102,6 +107,7 @@ function buildTree(){
  		},speedSelect.value);
 
  	}
+
  };
 
 /**
