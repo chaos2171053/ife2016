@@ -203,6 +203,46 @@ function inputTagsEvent(event){
 }
 ```
 
+###6. 任务二十二
+
+####6.1 实现前序遍历动画后点击其他遍历无法进行。
+```
+buildTree.prototype.animation = function(){
+  var stack       = this.stack,
+  speedSelect = document.querySelector('#speedSelect'),
+  i           = 0,
+  timer = 0;
+  this.stack = [];
+
+  console.log("1"+this);
+  if(!this.isBuilding){
+    this.isBuilding = true;
+    console.log("2"+this);
+
+    stack[i].style.backgroundColor = '#9da6bd';
+    timer = setInterval(function(){
+      if(i == stack.length-1){
+        stack[i].style.backgroundColor = '#fff';
+        this.isBuilding = false;
+        console.log("3"+this);
+        clearInterval(timer);
+      }
+      else{
+        ++i;
+        stack[i-1].style.backgroundColor = '#fff';
+        stack[i].style.backgroundColor = '#9da6bd';
+        console.log("every"+this);
+
+      }
+    },speedSelect.value);
+
+  }
+ };
+ ```
+ 打印this后发现进入if判断后this对象从节点对象变为Window，因为在setInterval方法中this为Window
+ ![22-1](problemsPic/22-1.png)<br>
+ 解决方法：
+ 在进入setInterval方法前，把this引用复制给一个变量，在setInterval中使用该变量引用节点对象。
 
 
 
