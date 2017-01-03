@@ -244,5 +244,49 @@ buildTree.prototype.animation = function(){
  解决方法：
  在进入setInterval方法前，把this引用复制给一个变量，在setInterval中使用该变量引用节点对象。
 
+###6. 任务二十四
+####6.1 设置默认背景色
+实现“点击某个节点元素，则该节点元素呈现一个特殊被选中的样式”需求时，对节点元素设置事件代理个，点击时改变其颜色为红色。发现点击一个节点后，里面的子节点颜色也变红。
+```
+    var event = event || window.event;
+    var target = event.target || event.srcElement;
+    if (target && target.tagName.toLowerCase() === "div") {
+      target.style.backgroundColor = 'red';
+    }
+```
+点击Shaq，里面的Shaq1、Shaq2、Shaq3、Shaq4背景颜色也变红。
+![24-1](problemsPic/24-1.png)<br>
+
+打开监控头发现Shaq的样式
+![24-2](problemsPic/24-2.png)<br>
+
+Shaq1、Shaq2、Shaq3、Shaq4的样式
+![24-3](problemsPic/24-3.png)<br>
+
+原来是没有设置div的默认背景颜色为白色。只需在css中设置div的默认样式为白色即可。
+在css中修改后，点击Shaq
+![24-4](problemsPic/24-4.png)<br>
 
 
+####6.2 
+删除节点及其子节点时，使用for循环从索引为0开始删除，发现不能删除完全部子节点，当删除索引为0的子节点后，原来索引为1的节点此时变成0了，而这时变量i已经变成1了，for继续运行时时就会删除原先索引为２的现在为1的节点删除。
+解决办法是从索引最大值开始删除，采用递减的方法。
+[Javascript removeChild()删除节点及删除子节点的方法](http://www.jb51.net/article/77042.htm);
+
+####6.3 将wrapper下所有节点删除后发现在chrome下还有两个text空白节点，而且使用querySelector获取wrapper,使用wrpper.childNodes 返回的是一个NodeList，而 NodeList 不是数组，不能用数组方法。
+```
+var wrapper= document.querySelector('.wrapper'),
+    NodeList = wrapper.childNodes,//返回的是NodeList！，NodeList不是数组，没有数组方法！
+    regExp = /[^text,]+/,
+    arr = Array.prototype.slice.call(NodeList)//将 NodeList 转换为 Array
+```
+-如果使用wrapper = document.getElementsByClassName('wrapper')，使用Object.prototype.toString.call判断wrapper，返回[object HTMLCollection].
+-wrapper= document.querySelector('.wrapper')，使用Object.prototype.toString.call判断wrapper返回[object HTMLDivElement]。
+-Node.childNodes返回的是[object NodeList]
+-Node.children返回的是[object HTMLCollection]
+
+删除wapper内所有节点后，看控制台可以发现
+![24-5](problemsPic/24-5.png)<br>
+元素是一个小范围的定义，必须是含有完整信息的节点才是一个元素； 一个节点不一定是一个元素，而一个元素一定是一个节点。
+[MDN关于NodeList的解释](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList)
+[DOM树中的Node（节点）与Element（元素）的区别](http://blog.csdn.net/zgrjkflmkyc/article/details/43268933)

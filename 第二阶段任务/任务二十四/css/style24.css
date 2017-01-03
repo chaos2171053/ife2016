@@ -1,0 +1,78 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Comic Sans",Cursive;
+}
+div{
+	background-color: #fff;
+}
+
+#dlr,#ldr,#lrd,#deleteTags,#comfirm {
+	width: 100px;
+	background-color: #fff;
+	border: 2px solid #9da6bd;
+	line-height: 30px;
+	font-size: .75em;
+	border-radius: 10px;
+	cursor: pointer;
+	text-align: center;
+	letter-spacing:8px;
+	display: inline-block;
+	margin: 20px 20px;
+}
+.root {
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+	border:1px solid #000;
+	height: 400px;
+	margin: 50px 50px;
+	justify-content: center;
+}
+.child_1 {
+	border: 1px solid #dc143c;
+	flex-grow: 1;
+	margin:20px 5px;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+.child_2 {
+	border: 1px solid #32cd32;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.child_3 {
+	border: 1px solid #1e90ff;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+.child_4 {
+	border: 1px solid #1e90ff;
+	margin:20px 5px;
+	flex-grow: 1;
+	display: -webkit-flex; /* NEW - Chrome */
+	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
+}
+
+fieldset {
+	text-align: center;
+	margin: auto 100px;
+	
+}
+
+select {
+	border: 2px solid #9da6bd;
+	border-radius: 10px;
+}
+
+label {
+	display: block;
+	margin: 10px 0;
+}
+input {
+	margin: 10px;
+}
