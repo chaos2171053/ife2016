@@ -1,6 +1,6 @@
 
 (function(){
-	var tree = new buildTree(),
+	var tree = new BuildTree(),
 	    dlr = $('dlr'),
 	    ldr = $('ldr'),
 	    lrd = $('lrd'),
@@ -61,24 +61,19 @@
 /**
  * 构建树
  */
-function buildTree(){
+function BuildTree(){
 	this.stack = [];
 	this.isBuilding = false;
 	this.selectedStack = [];
 }
 
-/**
- * 构建树
- */
-buildTree.prototype.constructor = function(){
-	
-};
+
 
 /**
  * 前序遍历
  * @param  {object} node 节点
  */
- buildTree.prototype.dlrOrder = function(node) {
+ BuildTree.prototype.dlrOrder = function(node) {
 	this.stack.push(node);
 	for(var i= 0,len = node.children.length;i<len;i++){
 		this.dlrOrder(node.children[i]);
@@ -90,7 +85,7 @@ buildTree.prototype.constructor = function(){
  * 中序遍历
  * @param  {object} node 节点
  */
- buildTree.prototype.ldrOrder = function(node){
+BuildTree.prototype.ldrOrder = function(node){
  	if(node.children.length == 0){
  		this.stack.push(node);//子节点入栈
  	}
@@ -106,7 +101,7 @@ buildTree.prototype.constructor = function(){
  * 后序遍历
  * @param  {object} node 节点
  */
- buildTree.prototype.lrdOrder = function(node){
+BuildTree.prototype.lrdOrder = function(node){
  	for(var i = 0,len = node.children.length;i<len;i++){
  		this.lrdOrder(node.children[i]);
  	}
@@ -116,7 +111,7 @@ buildTree.prototype.constructor = function(){
 /**
  * 渲染动画
  */
- buildTree.prototype.animation = function(){
+BuildTree.prototype.animation = function(){
  	var stack       = this.stack,
  	    speedSelect = document.querySelector('#speedSelect'),
  	    i           = 0,
@@ -158,7 +153,7 @@ buildTree.prototype.constructor = function(){
 /**
  * 清除颜色
  */
-buildTree.prototype.resetChart  =function(){
+BuildTree.prototype.resetChart  =function(){
 	var stack = this.stack;
 	stack.forEach(function(e){
 		e.style.backgroundColor = '#fff';
@@ -169,7 +164,7 @@ buildTree.prototype.resetChart  =function(){
  * 点击某个节点元素，则该节点元素背景色变绿
  * @param  {object} event  MouseEvent
  */
-buildTree.prototype.delegateEvent =  function (event) {
+BuildTree.prototype.delegateEvent =  function (event) {
 	var event = event || window.event;
 	var target = event.target || event.srcElement;
 	if (target && target.tagName.toLowerCase() === "div") {
@@ -180,7 +175,7 @@ buildTree.prototype.delegateEvent =  function (event) {
 /**
  * 判断有没有选择节点
  */
-buildTree.prototype.getSelected = function(){
+BuildTree.prototype.getSelected = function(){
 	var selectedStack = this.selectedStack,
 	            stack = this.stack;
     //根据颜色获取点击的节点
@@ -199,14 +194,14 @@ buildTree.prototype.getSelected = function(){
 /**
  * 点击删除按钮，将该节点及其所有子节点删除掉
  */
-buildTree.prototype.deleteTags = function(){
+BuildTree.prototype.deleteTags = function(){
     var selectedStack = this.selectedStack;
     selectedStack.forEach(function(e){
-    	var childs = e.childNodes;
-    	//从索引最大值开始删除，采用递减的方法，这样索引便不会移动改变了.
-    	for(var i = childs.length - 1; i >= 0; i--) { 
-    		e.removeChild(childs[i]); 
-    	} 
+    	// var childs = e.childNodes;
+    	// //从索引最大值开始删除，采用递减的方法，这样索引便不会移动改变了.
+    	// for(var i = childs.length - 1; i >= 0; i--) { 
+    	// 	e.removeChild(childs[i]); 
+    	// } 
     	e.parentNode.removeChild(e);
     });
 };
@@ -215,7 +210,7 @@ buildTree.prototype.deleteTags = function(){
  * 判断是否还有节点存在
  * @return {bollean} 判断结果
  */
-buildTree.prototype.validNode = function(){
+BuildTree.prototype.validNode = function(){
 	//使用childNode判断是否还有节点存在
 	// var wrapper= document.querySelector('.wrapper'),
 	//     NodeList = wrapper.childNodes;//返回的是NodeList！，NodeList不是数组，没有数组方法！
@@ -247,8 +242,8 @@ buildTree.prototype.validNode = function(){
 /**
  * 在选择的该节点下增加一个子节点
  */
-buildTree.prototype.appendNode = function(){
-	var value = $('nodeText').value,
+BuildTree.prototype.appendNode = function(){
+	var value = $('nodeText').value.trim(),
 	    selectedStack = this.selectedStack;
 	    
 
@@ -271,5 +266,5 @@ buildTree.prototype.appendNode = function(){
 		e.appendChild(createDiv);
 	});
 
-	value = "";
+	
 };

@@ -257,7 +257,7 @@ buildTree.prototype.animation = function(){
 点击Shaq，里面的Shaq1、Shaq2、Shaq3、Shaq4背景颜色也变红。
 ![24-1](problemsPic/24-1.png)<br>
 
-打开监控头发现Shaq的样式
+打开控制台发现Shaq的样式
 ![24-2](problemsPic/24-2.png)<br>
 
 Shaq1、Shaq2、Shaq3、Shaq4的样式
@@ -269,7 +269,7 @@ Shaq1、Shaq2、Shaq3、Shaq4的样式
 
 
 ####6.2 
-删除节点及其子节点时，使用for循环从索引为0开始删除，发现不能删除完全部子节点，当删除索引为0的子节点后，原来索引为1的节点此时变成0了，而这时变量i已经变成1了，for继续运行时时就会删除原先索引为２的现在为1的节点删除。
+删除子节点时，使用for循环从索引为0开始删除，发现不能删除完全部子节点，当删除索引为0的子节点后，原来索引为1的节点此时变成0了，而这时变量i已经变成1了，for继续运行时时就会删除原先索引为２的现在为1的节点删除。
 解决办法是从索引最大值开始删除，采用递减的方法。
 [Javascript removeChild()删除节点及删除子节点的方法](http://www.jb51.net/article/77042.htm);
 
@@ -290,3 +290,35 @@ var wrapper= document.querySelector('.wrapper'),
 元素是一个小范围的定义，必须是含有完整信息的节点才是一个元素； 一个节点不一定是一个元素，而一个元素一定是一个节点。
 [MDN关于NodeList的解释](https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList)
 [DOM树中的Node（节点）与Element（元素）的区别](http://blog.csdn.net/zgrjkflmkyc/article/details/43268933)
+
+
+###7. 任务二十五
+####7.1 js中静态方法
+[js中静态方法（属性）、实例方法（属性）、内部方法（属性）和原型的一点见解](http://blog.csdn.net/panying0903/article/details/50246091)
+
+#####7.2 查找祖节点
+实现“按照内容进行节点查找，并且把找到的节点进行特殊样式呈现，如果找到的节点处于被父节点折叠隐藏的状态，则需要做对应的展开”需求时，一开始想到的是找到该节点node，找到该节点的父节点node.parentNode，然后展开，但是发现如果还有祖节点，那还需要把祖节点也展开。于是需要遍历该节点的所有祖节点。
+```
+//寻找祖节点
+ var resultParent = [],
+                        x = node.children[i];
+                    while (x.getAttribute("id") != 'list') {
+                      resultParent.push(x);//把祖节点都入栈
+                      x = x.parentNode;
+                        }
+                        //对每个祖节点遍历,如果子节点是ul或li标签，则展开。
+                        resultParent.forEach(function(e){
+                          for(var j =0,ln = e.children.length;j<ln;j++){
+                            var tag =e.children[j].className.toLowerCase();
+                            if(tag != "toggle" && tag != "content" && tag !="add"
+                              && tag != "delete"){
+                              e.children[j].style.display = "block";
+                            }
+                            else{
+                              if(tag == "toggle") {
+                                e.children[j].innerHTML = "v";
+                              }
+                            }
+                          }
+                        });   
+```

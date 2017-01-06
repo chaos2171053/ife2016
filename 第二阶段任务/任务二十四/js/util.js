@@ -22,3 +22,12 @@ function addEventHandler(element,type,handler){
      element['on'+type]=handler;
    }
  }
+
+ /**
+  * 去除首尾空格
+  * @param  {string} str 字符串
+  * @return {string}     字符串
+  */
+ function trim(str){
+ 	return str.replace(/(^\s*)|(\s*$)/g,"");
+ }
