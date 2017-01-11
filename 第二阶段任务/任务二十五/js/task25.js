@@ -88,12 +88,14 @@ BuildTree.prototype.delegateEvent = function(event){
 
 /**
  * 搜索内容
+ * @param {array} node 节点
  * @param  {string} information 要查询的信息
  */
 BuildTree.prototype.searchInformation = function(node,information){
 	var regExp = new RegExp(information),
 	    wrapper= document.querySelector('#list'),
 	    stack =this.stack,
+	    count = 0,
 	    isSearching = this.isSearching,
 	    NodeList = wrapper.children;
         
@@ -114,34 +116,36 @@ BuildTree.prototype.searchInformation = function(node,information){
                 //查找p标签里面是否有要搜索的内容
                 if(node.children[i].tagName.toLowerCase() =="p"
                 	&& regExp.test(node.children[i].innerHTML)){
+                	count++;
                 	node.children[i].style.color = "#f56352";//有，则颜色标记
                 	//寻找祖节点
-                        var resultParent = [],
+                    var resultParent = [],
                         x = node.children[i];
                     while (x.getAttribute("id") != 'list') {
                 	    resultParent.push(x);//把祖节点都入栈
                 	    x = x.parentNode;
-                        }
+                    }
                         //对每个祖节点遍历,如果子节点是ul或li标签，则展开。
-                        resultParent.forEach(function(e){
-                        	for(var j =0,ln = e.children.length;j<ln;j++){
-                        		var tag =e.children[j].className.toLowerCase();
-                        		if(tag != "toggle" && tag != "content" && tag !="add"
-                        			&& tag != "delete"){
-                        			e.children[j].style.display = "block";
-                        		}
-                        		else{
-                        			if(tag == "toggle") {
+                    resultParent.forEach(function(e){
+                        for(var j =0,ln = e.children.length;j<ln;j++){
+                        	var tag =e.children[j].className.toLowerCase();
+                        	if(tag != "toggle" && tag != "content" && tag !="add"
+                        		&& tag != "delete"){
+                        		e.children[j].style.display = "block";
+                        	    }
+                        	else{
+                        		if(tag == "toggle") {
                         				e.children[j].innerHTML = "v";
-                        			}
                         		}
                         	}
-                        });		
-                	}
+                        }
+                    });		
+                }
                 }
             }
         }
         isSearching = false;
+        alert("共找到"+count+"个搜索结果");
 };
 
 (function(){
