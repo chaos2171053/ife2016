@@ -49,7 +49,7 @@
         var fly = function() {
             that.timer = setInterval(function() {
                 that.deg += SPACESHIP_SPEED;
-                if (that.deg >= 360) that.deg = 0; //飞完一圈时，重置角度
+                if (that.deg >= 360) {that.deg = 0;} //飞完一圈时，重置角度
             }, 20);
             ConsoleUtil.show("阿波罗" + that.id + "号正在飞行");
         };
@@ -151,14 +151,17 @@
             //根据状态执行指令
             states[state] && states[state]();
             switch(state){
-                case fly:  
+                case "fly":  
                 state = "飞行";
                 break;
-                case stop:  
+                case "stop":  
                 state = "停止";
                 break;
-                case destroy:  
+                case "destroy":  
                 state = "销毁";
+                break;
+                case "launch":
+                state = "启动";
                 break;
             }
             ConsoleUtil.show("阿波罗" + that.id + "号现在的状态是" + state);
@@ -256,25 +259,24 @@
                             }
 
                         }
-                        ConsoleUtil.show("发送成功~O(∩_∩)O~");
+                        ConsoleUtil.show("指令发送成功~O(∩_∩)O~");
                         return true;
                     } else {
                         ConsoleUtil.show("发送失败/(ㄒoㄒ)/~~");
                         return false;
                     }
-                }, 1000);
+                }, 1000);//1秒后执行
             },
 
             /**
              * remove 移除通讯对象
              * @param  {type} obj 移除对象
-             * @return {type}     description
+             * @return {bollean}     判断结果
              */
             remove: function(obj) {
                 if (obj instanceof Spaceship) {
                     ConsoleUtil.show("销毁阿波罗" + obj.id+"号/(ㄒoㄒ)/~~");
                     delete spaceships[obj.id];
-                    // spaceships[obj.id] = undefined;
                     return true;
                 }
                 ConsoleUtil.show("mediator 移除失败");
@@ -284,11 +286,11 @@
             /**
              * create 创建通讯对象
              * @param  {type} msg 信息
-             * @return {type}     创建失败返回false， 成功返回true
+             * @return {bollean}     创建失败返回false， 成功返回true
              */
             create: function(msg) {
                 if (spaceships[msg.id] !== undefined) {
-                    ConsoleUtil.show("飞船到达位置");
+                    ConsoleUtil.show("已有飞船");
                     return false;
                 }
                 var spaceship = new Spaceship(msg.id);
