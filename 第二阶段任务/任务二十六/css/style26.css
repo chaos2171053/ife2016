@@ -2,12 +2,14 @@
 	
 	font-family: "Comic Sans",Cursive;
 }
-/* body{
-	background-color: #369;
-	
-} */
+body{
+	margin:0;
+    padding:0;
+    overflow:hidden;
+}
 .container {
     margin: 0 auto;
+    min-width: 1536px;
     border: 1px solid #000;
     width: 1100px;
     height: 1000px;
@@ -82,4 +84,5 @@ ul {
 .console h2 {
     text-align: center;
 }
+
 

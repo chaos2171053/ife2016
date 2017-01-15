@@ -323,3 +323,63 @@ var wrapper= document.querySelector('.wrapper'),
 ```
 
 但是发现这样仍然存在不足，如果兄弟节点A、B都包含有需要查找的内容，如果找到A，再找到所有祖节点依次展开，到B的时候，还得再执行依次一样的流程，而这些祖节点在找到A后都已经展开了。
+
+###7. 任务二十六
+####7.1 当飞船飞行时，发现
+![26-1](problemsPic/24-4.png)<br>
+原因:
+```
+/**
+     * 画飞船
+     * @param  {array} spaceships 飞船队列
+     */
+    var drawSpaceships = function(spaceship){
+      var spaceshipImg = new Image(); //创建飞船贴图
+            spaceshipImg.src = "img/min-iconfont-rocket-active.png";
+            spaceshipImg.onload = function(){
+
+              ctx.save(); //保存画布原有状态
+              ctx.translate(SCREEN_CENTER_X, SCREEN_CENTER_Y); //将画布坐标原点移到画布中心
+              ctx.rotate(-spaceship.deg * Math.PI / 180); //根据飞船飞行角度进行画布选择
+              ctx.beginPath();
+              if (spaceship.power > 60) {
+                ctx.strokeStyle = POWERBAR_COLOR_GOOD;
+              } else if (spaceship.power <= 60 && spaceship.power >= 20) {
+                ctx.strokeStyle = POWERBAR_COLOR_MEDIUM;
+              } else {
+                ctx.strokeStyle = POWERBAR_COLOR_BAD;
+              }
+              ctx.lineWidth = POWERBAR_WIDTH;
+              ctx.moveTo(spaceship.orbit, -POWERBAR_POS_OFFSET);
+              ctx.lineTo(spaceship.orbit + SPACESHIP_SIZE * (spaceship.power / 100), -POWERBAR_POS_OFFSET);
+                ctx.stroke();
+                ctx.drawImage(spaceshipImg, spaceship.orbit, 0, SPACESHIP_SIZE, SPACESHIP_SIZE); //画飞船贴图
+                ctx.restore(); //恢复画布到原有状态
+            };
+
+    };
+```
+画飞船的时候，没有把canvas清屏，每次都在原来的基础上继续画飞船。
+在onload事件执行一开始开始添加
+```
+ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
+                AminateUtil.drawPlanet();
+                AminateUtil.drawOrbits();
+``
+
+####7.2image对象onload方法没有执行，没有显示图片。
+再次刷新canvas（如销毁飞船，需要重绘时）由于图片加载缓冲区的速度太快，以至于没有运行到onload的时候，图片已经被加载完毕了。所以没有显示图片。
+解决方法，利用image对象的complete属性,如：
+```var imgLoad = function (url) {
+    var img = new Image();
+    img.src = url;
+    if (img.complete) {
+        callback(img.width, img.height);
+    } else {
+        img.onload = function () {
+            callback(img.width, img.height);
+            img.onload = null;
+        };
+    };
+};
+```

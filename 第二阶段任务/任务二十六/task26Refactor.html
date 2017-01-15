@@ -9,44 +9,52 @@
 	</script>
 </head>
 <body>
-	<div class="container clearfix">
-		<div id = "space">
-			<canvas id="background">
+	<div class="container">
+		<div class="left-content">
+			<canvas id="canvas">
 			</canvas>
 			<!-- <canvas id="screen">
-		</canvas> -->
-	</div>
-	<div id = "control">
-		<div id = "console">
-			<h3>控制台</h3>
-			<ul></ul>
+			</canvas> -->
 		</div>
-		<div id = "control-pad">
-			<h3>休斯顿航天中心</h3>
-				<button id ="add-spaceship">新的飞船起飞</button>
-				<p>阿波罗1号:
-				    <button id="fly1">开始飞行</button>
-					<button id="stop1">停止飞行</button>
-					<button id="distroy1">销毁</button>
-				</p>
-				<p>阿波罗2号:
-				    <button id="fly2">开始飞行</button>
-				    <button id="stop2">停止飞行</button>
-				    <button id="distroy2">销毁</button>
-				</p>
-				<p>阿波罗3号:
-				    <button id="fly3">开始飞行</button>
-				    <button id="stop3">停止飞行</button>
-				    <button id="distroy3">销毁</button>
-				</p>
-				<p>阿波罗4号:
-				    <button id="fly4">开始飞行</button>
-				    <button id="stop4">停止飞行</button>
-				    <button id="distroy4">销毁</button>
-				</p>
+		<div class="right-content">
+			<div class="console">
+			    <ul>
+			    	<!-- <li>你好啊覃梁超</li> -->
+			    </ul>
+			</div>	
+			<div class = "control-pannel">
+			<!-- <button id = "addSpaceship">新的飞船起飞</button> -->
+				<div class="orbit">
+					<span>阿波罗1号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗2号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗3号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗4号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+			</div>
 		</div>
 	</div>
-</div>
 <script type="text/javascript" src = "js/task26Refactor.js"></script>
 </body>
 </html>

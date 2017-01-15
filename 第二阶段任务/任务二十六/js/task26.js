@@ -253,7 +253,7 @@
                                 that.create(msg);
                             }
                             for (var key in spaceships) {
-                                if (spaceships[key] !== from) { //所有飞船迭代接收消息
+                                if (spaceships[key]) { //所有飞船迭代接收消息
                                     spaceships[key].signalManager().receive(msg, from);
                                 }
                             }
