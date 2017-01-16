@@ -46,7 +46,7 @@ var requestAnimationFrame = window.requestAnimationFrame ||
 /**
  * 飞船
  */
-var Spaceships = function(id){
+var Spaceships = function(id,speed,chargeRate,dischargeRate){
 	this.id = id;
     this.power = 100; //飞船初始电量
     this.currState = "stop"; //飞船初始状态
@@ -54,6 +54,10 @@ var Spaceships = function(id){
     this.orbit = 100 + 85 * id - SPACESHIP_SIZE / 2; //飞船所在轨道的半径
     this.deg = 0; //飞船初始位置的角度
     this.timer = null;
+    this.chargeRate = chargeRate;//飞船充电速度
+    this.dischargeRate = dischargeRate;//飞船放电速度
+    this.speed = speed;
+
 };
 Spaceships.prototype.powerManager = function(){
     var that = this;

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>IFE JavaScript Task </title>
+	<link rel="stylesheet" type="text/css" href="css/style27.css">
+	<script type="text/javascript" src = "../../libs/jquery-3.1.1.min.js">
+
+	</script>
+</head>
+<body>
+	<div class="container">
+	    <div class="space-option-plannel">
+	        <div class="speed-wrapper">
+	    		<form>
+	    			<fieldset>
+	    				<legend>
+	    					<h3>飞船速度</h3>
+	    				</legend>
+	    				<input type="radio" name="speed" value="slow" checked="checked">慢
+	    				<input type="radio" name="speed" value="normal">中
+	    				<input type="radio" name="speed" value="fast">快
+	    			</fieldset>
+	    		</form>
+	    	</div>
+	    	<div class="power-wrapper">
+	    		<form>
+	    			<fieldset>
+	    				<legend>
+	    					<h3>飞船能量</h3>
+	    				</legend>
+	    				<input type="radio" name="power" value="slow" checked="checked">普通
+	    				<input type="radio" name="power" value="normal">加强
+	    				<input type="radio" name="power" value="fast">劲爆
+	    			</fieldset>
+	    		</form>
+	    	</div>
+	    	<div class="button-wrapper">
+	    		<button id = "confirm">确认</button>
+	    		<button id = "cancel">取消</button>
+	    	</div>
+	    </div>
+		<div class="left-content">
+			<canvas id="canvas">
+			</canvas>
+		</div>
+		<div class="right-content">
+			<div class="console">
+			    <ul>
+			    	<!-- <li>你好啊覃梁超</li> -->
+			    </ul>
+			</div>	
+			<div class = "control-pannel">
+			<!-- <button id = "addSpaceship">新的飞船起飞</button> -->
+				<div class="orbit">
+					<span>阿波罗0号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗1号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗2号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+				<div class="orbit">
+					<span>阿波罗3号 ：</span>
+					<button  class="launch">发射</button>
+					<button  class="fly">开始飞行</button>
+					<button  class="stop">停止</button>
+					<button  class="destroy">销毁</button>
+				</div>
+			</div>
+		</div>
+	</div>
+<script type="text/javascript" src = "js/task27.js"></script>
+</body>
+</html>

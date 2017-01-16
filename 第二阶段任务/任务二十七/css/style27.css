@@ -1,0 +1,134 @@
+*{
+	padding: 0;
+	margin: 0;
+
+}
+
+body {
+	background-color: #0A1628;
+}
+/*两列布局*/
+.container {
+	display: flex;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	flex-direction: row;
+	-webkit-flex-direction: row;
+	-moz-flex-direction: row;
+	-ms-flex-direction: row;
+	width:100%;
+	position:absolute;
+	
+}
+
+.left-content {
+	width: 900px;
+
+}
+.right-content {
+	flex: 1;
+
+}
+
+/*左边太空屏幕*/
+/* canvas {
+	border: 1px solid #666;
+	width: 800px;
+	height: 800px;
+}
+ */
+
+#canvas{
+	margin-top: 20px;
+	position: relative;
+	z-index: 1;
+	margin-left: 50px;
+}
+/*右边指令输出*/
+.console{
+	margin-top: 100px;
+	margin-left: 100px;
+	background-color: rgba(160, 160, 160, 0.2);
+	width: 700px;
+    height: 330px;
+    overflow: hidden;
+    text-align: center;
+}
+
+ul {
+	color: #369F1D;
+	list-style: none;
+	padding-top: 20px;
+}
+
+li {
+	margin-top: 15px;
+}
+
+/*右边控制面板*/
+
+.control-pannel {
+	margin-top: 80px;
+	margin-left: 100px;
+	background-color: rgba(160, 160, 160, 0.2);
+	width: 700px;
+	height: 200px;
+	text-align: center;
+	color: #FFF;
+	padding-top: 5px;
+	padding-bottom: 20px;
+}
+
+.orbit {
+	margin-top: 10px;
+}
+
+button {
+    height: 40px;
+    width: 100px;
+    border-radius: 50px;
+    border: none;
+    outline: 0;
+    color: #FFF;
+    margin-left: 10px;
+    background-color: rgba(10,22, 40, 0.5);
+    cursor: pointer;
+
+}
+
+
+/*飞船类型选择*/
+.space-option-plannel {
+	display: none;
+	position: fixed;
+	top: 40%;
+    left: 50%;
+    z-index: 100;
+    background-color: rgba(160, 160, 160, 0.3);
+    transform: translate(-50%, -50%);
+    height: 350px;
+    width: 500px;
+}
+
+fieldset {
+	color: #FFF;
+	text-align: center;
+	padding: 10px; 
+     
+}
+h3 {
+	font-size: 25px;
+}
+.speed-wrapper,.power-wrapper {
+	padding: 30px 50px; 
+}
+input {
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
+
+.button-wrapper {
+	margin-top: 5px;
+	text-align: center;
+}

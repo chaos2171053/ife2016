@@ -326,7 +326,7 @@ var wrapper= document.querySelector('.wrapper'),
 
 ###7. 任务二十六
 ####7.1 当飞船飞行时，发现
-![26-1](problemsPic/24-4.png)<br>
+![26-1](problemsPic/26-1.png)<br>
 原因:
 ```
 /**
