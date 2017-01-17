@@ -346,7 +346,7 @@ var Bus = function() {
 };
 
 
-/*/**
+/**
  * 指挥官
  */
 var Commander = function(){

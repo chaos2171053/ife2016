@@ -109,14 +109,16 @@ button {
     transform: translate(-50%, -50%);
     height: 350px;
     width: 500px;
+    color: #FFF;
 }
 
 fieldset {
-	color: #FFF;
-	text-align: center;
-	padding: 10px; 
-     
+	/* color: #FFF; */
+	/* text-align: center; */
+	padding: 10px;    
 }
+
+
 h3 {
 	font-size: 25px;
 }

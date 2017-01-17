@@ -383,3 +383,12 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
     };
 };
 ```
+
+####7.3使用requirejs对代码进行模块化优化
+学习了requirejs，提高了代码的维护性。
+-[require.js 入门学习](http://www.2cto.com/kf/201312/262057.html)
+-[使用RequireJS优化Web应用前端](http://www.csdn.net/article/2012-09-27/2810404)
+-[require.js 简洁入门](http://blog.sae.sina.com.cn/archives/4382)
+
+####7.4 this和$(this)的区别
+实际上$(this)=jquery()，所以$(this)获取的是jq对象
