@@ -24,7 +24,7 @@ var Bus = function() {
         if(obj instanceof man.Commander ){
             commander = obj;
             obj.bus = this;
-            util.ConsoleUtil().show("指挥官" + obj.name + "你好~请下指令。");
+            util.ConsoleUtil().show("指挥官 " + obj.name + " 你好~请下指令。");
             return true;
         }
         //如果是飞船实例

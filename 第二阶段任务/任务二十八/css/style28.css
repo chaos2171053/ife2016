@@ -87,7 +87,7 @@ body {
 }
 
 /*控制面板*/
-.control-wapper{
+.control-wrapper{
 	display: flex;
     position: relative;
     margin: 0 auto;
@@ -100,15 +100,15 @@ body {
 }
 
 
-.control-wapper ul {
+.control-wrapper ul {
 	color: #369F1D;
 	list-style: none;
 }
-.control-wapper ul li {
+.control-wrapper ul li {
 	margin-top: 5px;
 }
 
-.control-wapper button {
+.control-wrapper button {
     height: 40px;
     width: 100px;
     border-radius: 50px;
@@ -121,16 +121,16 @@ body {
 
 }
 
-.control-wapper span {
+.control-wrapper span {
 	color: #fff;
 }
 
 .console {
-	flex: 3;
+	flex: 0.7;
     margin: 0 20px;
     bottom: 0;
     width: 300px;
-    height: 280px;
+    height: 270px;
     padding: 0 10px;
     line-height: 16px;
     border-right: 2px dotted #3b3f58;
@@ -140,6 +140,29 @@ body {
     padding: 5px 0;
 }
 
+.control-pannel {
+	flex: 1.5;
+	text-align: center;
+}
+.screen-wrapper {
+	flex: 0.9;
+	border-right: 2px dotted #3b3f58;
+	text-align: center;
+
+}
+.screen-wrapper table {
+	color: #fff; 
+}
+.screen-wrapper table th{
+	height: 80px;
+	width: 80px;
+	border-bottom: 2px dotted #3b3f58;
+}
+
+.screen-wrapper table tr{
+	height: 40px;
+
+}
 
 .orbit button,.button-wrapper button {
     height: 40px;

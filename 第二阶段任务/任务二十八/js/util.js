@@ -43,9 +43,9 @@ define(function(){
  		$msg.text(getNowFormatDate() +": " + msg);
  		$consoleLog.prepend($msg);
         liCount++;
-        if(liCount == 12 ){
+        if(liCount == 11 ){
             liCount = 0;
-            $('.control-wapper ul').html("");
+            $('.control-wrapper ul').text("");
             return;
         }
 
