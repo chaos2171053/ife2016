@@ -392,3 +392,11 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
 
 ####7.4 this和$(this)的区别
 实际上$(this)=jquery()，所以$(this)获取的是jq对象
+
+####7.5飞船销毁
+飞船销毁时，如果一开始销毁1号，第二次销毁3号时，无法销毁。这是因为一开始我把每个飞船的id从0到3赋值，如果销毁1号（1号飞船在飞船队列的索引为1），那2号飞船在队列的索引自动变为1,3号为2，这样，执行
+`spaceships.splice(obj.id,1)`时，无法删除3号，因为他一开始的索引为3。解决方法使用delete删除属性:
+`delete spaceships[obj.id]`
+[MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
+
+

@@ -1,0 +1,195 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	background-color: #02071d;
+	width: 100%;
+    height: 100%;
+    min-width: 1280px;
+    font-family: "Microsoft YaHei", yaHei;
+}
+
+/*背景canvas及行星*/
+.background {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+}
+
+.canvans-wrapper {
+	position: relative;
+	margin:0 auto;
+	width: 600px;
+	height: 600px;
+}
+
+.background .planet-1 {
+	top: 400px;
+    left: 280px;
+    background-color: #11a4c6;
+    overflow: hidden;
+}
+
+.background .planet-2 {
+    width: 30px;
+    height: 30px;
+    top: 180px;
+    right: 250px;
+    background-color: #d9e6cd;
+    overflow: hidden;
+}
+
+.background .planet-3 {
+    top: 480px;
+    right: 350px;
+    background-color: #f5a83e;
+    overflow: hidden;
+}
+
+.background .planet-4 {
+    top: 80px;
+    left: 200px;
+    background-color: #f5a83e;
+    overflow: hidden;
+}
+
+.background [class^=planet] {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.rotating {
+    animation: rotating 50s linear infinite;
+}
+
+.background .hole-4 {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #cbd1c6;
+    border-radius: 50%;
+    top: 20px;
+    left: 20px
+}
+
+.background .hole-5 {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #999b8d;
+    border-radius: 50%;
+    top: 10px;
+    left: -5px
+}
+
+/*控制面板*/
+.control-wapper{
+	display: flex;
+    position: relative;
+    margin: 0 auto;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    height: 280px;
+    border: 2px dotted #3b3f58;
+    border-radius: 10px;
+}
+
+
+.control-wapper ul {
+	color: #369F1D;
+	list-style: none;
+}
+.control-wapper ul li {
+	margin-top: 5px;
+}
+
+.control-wapper button {
+    height: 40px;
+    width: 100px;
+    border-radius: 50px;
+    border: none;
+    outline: 0;
+    color: #fff;
+    margin-left: 10px;
+    background-color: rgba(10,22, 40, 0.5);
+    cursor: pointer;
+
+}
+
+.control-wapper span {
+	color: #fff;
+}
+
+.console {
+	flex: 3;
+    margin: 0 20px;
+    bottom: 0;
+    width: 300px;
+    height: 280px;
+    padding: 0 10px;
+    line-height: 16px;
+    border-right: 2px dotted #3b3f58;
+    color: #32a39d;
+    font-size: .75rem;
+    overflow: hidden;
+    padding: 5px 0;
+}
+
+
+.orbit button,.button-wrapper button {
+    height: 40px;
+    width: 100px;
+    border-radius: 50px;
+    border: none;
+    outline: 0;
+    color: #FFF;
+    margin: 15px;
+    background-color: #32a39d;
+    cursor: pointer;
+}
+
+
+/*飞船类型选择*/
+.space-option-plannel {
+	display: none;
+	position: fixed;
+	top: 40%;
+    left: 50%;
+    z-index: 100;
+    background-color: rgba(160, 160, 160, 0.3);
+    transform: translate(-50%, -50%);
+    height: 350px;
+    width: 500px;
+    color: #FFF;
+}
+
+fieldset {
+	/* color: #FFF; */
+	/* text-align: center; */
+	padding: 10px;    
+}
+
+
+h3 {
+	font-size: 25px;
+}
+.speed-wrapper,.power-wrapper {
+	padding: 30px 50px; 
+}
+input {
+	margin-left: 20px;
+	margin-bottom: 5px;
+}
+
+.button-wrapper {
+	margin-top: 5px;
+	text-align: center;
+}
+.button-wrapper button{
+	background-color: rgba(160, 160, 160, 0.3);
+}
