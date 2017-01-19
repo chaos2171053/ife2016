@@ -1,8 +1,5 @@
-define(['util'],function(util){
+define(['util','adapter'],function(util,adapter){
 	var SPACESHIP_SIZE = 40; //飞船大小
-   
-
-
 /**
  * 飞船构造函数
  * @param {int} id            飞船id
@@ -163,18 +160,37 @@ Spaceships.prototype.stateManager = function(){
 };
 
 /**
- * 飞船信号处理模块，只接受信号
- * @return {object} 接收功能
+ * 飞船信号处理模块，接受信号、发送自己的飞行状态
+ * @return {object} 接收功能、自己的飞行状态
  */
 Spaceships.prototype.signalManager = function(){
     var that = this;
+    /**
+     * 接受信号
+     * @param  {object} msg object
+     */
+    var receive = function(msg) {
+        if (that.currState != msg.cmd && that.id == msg.id) {
+            that.stateManager().changeState(msg.cmd);
+        }
+    };
+
+    /**
+     * 发送飞船的飞行状态
+     * @return {object} 飞行状态
+     */
+    var send = function(){
+        var message = new adapter.SpaceshipMessage(that.id,that.currState,that.speed,
+            that.chargeRate,that.dischargeRate,that.power); 
         return {
-            receive: function(msg) {
-                if (that.currState != msg.cmd && that.id == msg.id) {
-                    that.stateManager().changeState(msg.cmd);
-                }
-            }
+            message:message
         };
+
+    };
+    return {
+                receive: receive,
+                send:send
+    };
 };
 
 return {

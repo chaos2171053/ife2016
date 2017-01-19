@@ -1,15 +1,16 @@
 require.config({
 	paths: {
-	    // "jquery": "../../../libs/jquery-3.1.1.min",
 		"transmit": "transmit",
 		"man": "man",
 		"util":"util",
-		"aminate":"aminate"
+		"aminate":"aminate",
+		"adapter":"adapter"
 	},
 });
 
-var liCount = 0;////记录li条数，最多显示12条
-var commander,bus;
+var liCount = 0;//记录li条数，最多显示12条
+var commander,bus;//指挥官、Bus传播介质
+var stateCode = [];//所有飞船的飞行状态信息
 require(['man','transmit','util','aminate'], function (man,transmit,util,aminate){
     commander = new man.Commander();
     bus = new transmit.Bus(); 

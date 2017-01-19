@@ -106,7 +106,7 @@ var AminateUtil = function(){
      * @param  {array} spaceships 飞船队列
      * @return {bollean}    判断结果       
      */
-    var onDraw = function(spaceships){
+    var onDraw = function(spaceships,stateCode){
 
         if (spaceships.length != 0) {
             ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
@@ -117,6 +117,7 @@ var AminateUtil = function(){
                         drawSpaceships(spaceships[i]);
                     }
                 }
+                updateScreen(stateCode);//在屏幕上更新飞船信息
                 return true;
             } 
         else {
@@ -125,8 +126,35 @@ var AminateUtil = function(){
             drawOrbits();
             return false;
         }
+    };
 
-
+    /**
+     * 在屏幕上更新飞船信息
+     * @param {object} stateCode 所有飞船的飞行状态信息
+     */
+    var updateScreen = function(stateCode){
+        
+        for(var i = 0,len = stateCode.length;i<len;i++){
+            if(stateCode[i]){
+                var content = "";
+                content += "<td>" + stateCode[i].id + "号</td><td>" + stateCode[i].currState 
+                + "</td><td>" + stateCode[i].speed + "</td><td>" + stateCode[i].dynamicSystem
+                + "</td><td>" + stateCode[i].power +"</td>";            
+                var j = i + 1;
+                $('table tr:eq('+j+')').html(content);
+                j = 0;  
+                content = "";             
+            }
+            else{
+                var content = "";
+                content += "<td>" + i + "号</td><td>未发射</td><td>----"
+                +"</td><td>----</td><td>----</td>";
+                var k = i + 1;
+                $('table tr:eq('+k+')').html(content);
+                k = 0;  
+                content = ""; 
+            }   
+        }
     };
 
 
@@ -135,7 +163,7 @@ var AminateUtil = function(){
      */
     var animLoop = function(){
         requestAnimationFrame(animLoop);
-        onDraw(bus.getSpaceships());
+        onDraw(bus.getSpaceships(),stateCode);
     };
 
     return {

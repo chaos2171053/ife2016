@@ -1,6 +1,7 @@
-define(["man","util",'spaceship'],function (man,util,ship) {
+define(["man","util",'spaceship','adapter'],function (man,util,ship,adapter) {
     var BUS_TRAMIT_SPEED = 300;//介质bus的传播速度
     var FAILURE_RATE = 0.1;//命令发送失败几率
+    var SPACESHIP_BROADCAST_TIME = 1000;//飞船每秒广播自己的飞行状态
 /**
  * 挥官通过信号发射器发出的命令是通过一种叫做Bus的介质进行广播
  */
@@ -17,7 +18,6 @@ var Bus = function() {
      * 注册。指挥官通过信号发射器发出的命令是通过一种叫做Bus的介质进行广播。
      * 飞船通过Bus接受命令。
      * @param  {object} obj 指挥官/飞船实例
-     * @return {function}     bus的注册、发送
      */
     function register(obj){
         //如果是指挥官实例，绑定bus
@@ -48,11 +48,11 @@ var Bus = function() {
         var timer = null;
         timer = setInterval(function() {
             //随机数大于发送失败率则执行消息发送
-            var code = util.messageAapter().compile(msg);//编译指令转成二进制
+            var code = adapter.messageAapter().compile(msg).comenderCode;//编译指令转成二进制
             var success = Math.random() > FAILURE_RATE ? true : false;
             if(success) {
                 clearInterval(timer);
-                var decompileMsg = util.messageAapter().decompile(code);//反编译指令
+                var decompileMsg = adapter.messageAapter().decompile(code).msg;//反编译指令
                 if(decompileMsg.cmd == "launch"){
                     that.create(decompileMsg);
                 }
@@ -63,7 +63,7 @@ var Bus = function() {
                 }
             }
             else{
-                util.ConsoleUtil().show("指令发送失败,迷路了/(ㄒoㄒ)/~~");
+                util.ConsoleUtil().show("指令丢包,它迷路了/(ㄒoㄒ)/~~");
                 util.ConsoleUtil().show("指令重新发送ing...");
                 return;
             }
@@ -84,6 +84,7 @@ var Bus = function() {
         }
         var spaceship = new ship.Spaceships(msg.id,msg.speed,msg.chargeRate,msg.dischargeRate);
         this.register(spaceship);
+        this.broadcast();//创建飞船后，飞船开始发送自己的飞行状态
         return true;
     }
 
@@ -103,12 +104,33 @@ var Bus = function() {
         if (obj instanceof ship.Spaceships) {
             util.ConsoleUtil().show("销毁阿波罗" + obj.id+"号/(ㄒoㄒ)/~~");
             delete spaceships[obj.id];
+            delete stateCode[obj.id];
             // spaceships.splice(obj.id,1);
             return true;
         }
         util.ConsoleUtil().show("销毁阿波罗" + obj.id+"号失败/(ㄒoㄒ)/~~");
         return false;
     }
+
+    /**
+     * 飞船会通过BUS系统每秒广播自己的飞行状态
+     * @return {[type]} [description]
+     */
+    var broadcast = function(){
+        var that = this;
+        var timer = null;
+        timer = setInterval(function() {
+            for(var key in spaceships){
+                if(spaceships[key]){//所有飞船迭代发送自己的飞行状态消息
+                    //stateCode.push(spaceship[key].signalManager().send());
+                    msg = spaceships[key].signalManager().send().message;
+                    var code = adapter.messageAapter().compile(msg).spaceshipCode;//编译指令转成二进制
+                    var decompileCode = adapter.messageAapter().decompile(code).stateMsg;//反编译指令
+                    stateCode[decompileCode.id] = decompileCode;//反编译后放入全局飞船信息数组
+                }    
+            } 
+        },SPACESHIP_BROADCAST_TIME);//1s后执行
+    };
 
     Bus.instance = this;
 
@@ -123,6 +145,7 @@ var Bus = function() {
         send:send,
         create:create,
         getSpaceships:getSpaceships,
+        broadcast:broadcast
         // getInstance:getInstance
     };
 };
