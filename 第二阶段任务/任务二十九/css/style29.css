@@ -1,0 +1,57 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+form {
+	position: relative;
+    width: 800px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    overflow: auto;
+}
+
+section {
+    float: left;
+    width: 100%;
+}
+
+div {
+    margin: 0 200px 0 80px;
+}
+
+input {
+    display: block;
+    width: 100%;
+    line-height: 20px;
+    font-size: 1rem;
+    font-family: "Microsoft YaHei", yaHei;
+    outline: none;
+    border: 2px solid #ababab;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+span {
+    color: #ababab;
+}
+
+label {
+    float: left;
+    margin-left: -100%;
+    line-height: 40px;
+}
+
+button {
+    float: left;
+    margin-left: -150px;
+    width: 100px;
+    line-height: 40px;
+    background-color: #2e78bb;
+    border: none;
+    color: #ffffff;
+    font-family: "Microsoft YaHei", yaHei;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: 0;
+}
