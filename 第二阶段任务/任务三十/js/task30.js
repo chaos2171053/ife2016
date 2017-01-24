@@ -21,21 +21,21 @@
 		var validRule = function(str,obj){
 			obj.nextElementSibling.innerText = str;
 			obj.style.borderColor = "#00bfff";
-			obj.nextElementSibling.color = "#ccc";
+			obj.nextElementSibling.style.color = "#ccc";
 		};
 
 		//显示校验成功信息
 		var resultTrue = function(str,obj) {
 			obj.nextElementSibling.innerText = str;
 			obj.style.borderColor = "#32cd32";
-			obj.nextElementSibling.color = "#32cd32";
+			obj.nextElementSibling.style.color = "#32cd32";
 		};
 
         //显示校验失败信息
 		var resultFalse = function(str,obj) {
 			obj.nextElementSibling.innerText = str;
 			obj.style.borderColor = "#ff0000";
-			obj.nextElementSibling.color = "#ff0000";
+			obj.nextElementSibling.style.color = "#ff0000";
 		};
 
 		return {
@@ -88,7 +88,7 @@
 	});
 
 	addEventHandler(name,'blur',function(){
-		switch (validNamePassword(name.value)){
+		switch (validNamePassword(name.value.trim())){
 			case "":
 			UIRender().resultFalse("长度为4-16个字符!",name);
 			break;
@@ -108,7 +108,7 @@
 	});
 
 	addEventHandler(password,'blur',function(){
-		switch (validNamePassword(password.value)){
+		switch (validNamePassword(password.value.trim())){
 			case "":
 			UIRender().resultFalse("请输入密码",password);
 			break;
@@ -129,11 +129,11 @@
 	});
 
 	addEventHandler(rePassword,'blur',function(){
-		if(rePassword.value != password.value){
+		if(rePassword.value != password.value.trim()){
 			UIRender().resultFalse("密码不一致！",rePassword);
 			return;
 		}
-		switch (validNamePassword(rePassword.value)){
+		switch (validNamePassword(rePassword.value.trim())){
 			case "":
 			UIRender().resultFalse("请输入密码",rePassword);
 			break;
@@ -153,7 +153,7 @@
 	});
 
 	addEventHandler(email,'blur',function(){
-		switch (emailRegExp.test(email.value)){
+		switch (emailRegExp.test(email.value.trim())){
 			case true:
 			UIRender().resultTrue("邮箱可用",email);
 			break;
@@ -169,7 +169,7 @@
 		UIRender().validRule("请输入手机号码",phone);
 	});
 	addEventHandler(phone,'blur',function(){
-		switch (phoneRegExp.test(phone.value)){
+		switch (phoneRegExp.test(phone.value.trim())){
 			case true:
 			UIRender().resultTrue("手机号码可用",phone);
 			break;
