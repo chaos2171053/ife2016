@@ -1,0 +1,44 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.content-wrapper {
+	width: 800px;
+	margin: 200px auto auto auto;
+}
+
+.choose-role {
+	width: 400px;
+	height: 50px;
+	margin: 20px auto;
+	display: flex;
+	display:-moz-flex ;
+	display:-ms-flex;
+	display:-o-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+	
+}
+
+.content {
+	display: flex;
+	display:-moz-flex ;
+	display:-ms-flex;
+	display:-o-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.company {
+	display: none;
+}
+input[type = "radio"] {
+	margin-left: 20px;
+}
+
+select {
+	width: 150px;
+}
