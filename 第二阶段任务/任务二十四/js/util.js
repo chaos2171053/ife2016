@@ -31,3 +31,23 @@ function addEventHandler(element,type,handler){
  function trim(str){
  	return str.replace(/(^\s*)|(\s*$)/g,"");
  }
+
+
+ /**
+ * 事件代理
+ * @param  {[type]} element   [description]
+ * @param  {[type]} tag       [description]
+ * @param  {[type]} eventName [description]
+ * @param  {[type]} listener  [description]
+ * @return {[type]}           [description]
+ */
+function delegateEvent(element, tag, eventName, listener) {
+   addEventHandler(element, eventName, function (e) {
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+
+        if (target && target.tagName === tag.toUpperCase()) {
+            listener.call(target, event);
+        }
+    });
+}
