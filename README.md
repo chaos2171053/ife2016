@@ -400,3 +400,7 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
 [MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
 
 
+###8. 任务三十三
+####8.1 如何获取表格的在某行某列上的单元格
+`return table.rows[index].cells[index]`
+
