@@ -37,7 +37,7 @@ define(function() {
 	Square.prototype.change = ["Top", "Right", "Bottom", "Left"];
 
 	/**
-    * 重置功能
+    * 重置
     */
     Square.prototype.reset = function () {
     	this.block.className = "";
@@ -61,48 +61,45 @@ define(function() {
     	block.innerHTML="<div></div>";
     };
 
-
-
+    Square.prototype.moveDiv = function(){
+        var newBlock = this.getBlock(this.x, this.y);
+        this.setDiv(newBlock);
+        this.setDirection(newBlock, this.change[this.f]);
+        this.reset();
+        this.block = newBlock;
+    };
+    /**
+     * 方块向前移动
+     */
     Square.prototype.go = function(){
     	switch (this.block.className) {
         case "Top":
             if(this.x > 1){
                 this.x--;
-                var newBlock = this.getBlock(this.x, this.y);
-                this.setDiv(newBlock);
-                this.setDirection(newBlock, this.change[this.f]);
-                this.reset();
-                this.block = newBlock;
+                // var newBlock = this.getBlock(this.x, this.y);
+                // this.setDiv(newBlock);
+                // this.setDirection(newBlock, this.change[this.f]);
+                // this.reset();
+                // this.block = newBlock;
+                this.moveDiv();
             }
             break;
         case "Left":
             if(this.y > 1){
                 this.y--;
-                var newBlock = this.getBlock(this.x, this.y);
-                this.setDiv(newBlock);
-                this.setDirection(newBlock, this.change[this.f]);
-                this.reset();
-                this.block = newBlock;
+                this.moveDiv();
             }
             break;
         case "Bottom":
             if(this.x < 10){
                 this.x++;
-                var newBlock = this.getBlock(this.x, this.y);
-                this.setDiv(newBlock);
-                this.setDirection(newBlock, this.change[this.f]);
-                this.reset();
-                this.block = newBlock;
+                this.moveDiv();
             }
             break;
         case "Right":
             if(this.y < 10){
                 this.y++;
-                var newBlock = this.getBlock(this.x, this.y);
-                this.setDiv(newBlock);
-                this.setDirection(newBlock, this.change[this.f]);
-                this.reset();
-                this.block = newBlock;
+                this.moveDiv();
             }
             break;
     }
@@ -125,6 +122,42 @@ define(function() {
     		this.f = result;
     	}
     	this.block.className = this.change[this.f];
+    };
+
+    Square.prototype.moveNoChangeDirection = function(direction){
+
+        var div = function(){
+
+        }
+        switch(direction){
+            case "lef":
+            if(this.y > 1){
+                this.y--;
+                this.moveDiv();
+            }
+
+            break;
+            case "top":
+            if(this.x>1){
+                this.x--;
+                this.moveDiv();
+            }
+            break;
+            case "rig":
+            if(this.y<10){
+                this.y++;
+                this.moveDiv();
+            }
+            break;
+            case "bot":
+            if(this.x<10){
+                this.x++;
+                this.moveDiv();
+            }
+            break;
+        }
+
+
     };
 	return {
 		Square:Square

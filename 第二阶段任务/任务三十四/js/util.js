@@ -27,7 +27,7 @@ define(["constructor"],function(constructor){
      * 移动方块事件
      */
 	var moveSquare = function(){
-		var com = ["go","tun lef","tun rig","tun bac"];
+		var com = ["go","tun lef","tun rig","tun bac","tra lef","tra top","tra rig","tra bot"];
 		var command = $.trim($('#command')[0].value.toLowerCase());
 		if(com.indexOf(command) == -1){
 			alert("请输入有效的指令~");
@@ -52,6 +52,18 @@ define(["constructor"],function(constructor){
 				break;
 				case "tun bac":
 				square.changeDirection(2);
+				break;
+				case "tra lef":
+				square.moveNoChangeDirection("lef");
+				break;
+				case "tra top":
+				square.moveNoChangeDirection("top");
+				break;
+				case "tra rig":
+				square.moveNoChangeDirection("rig");
+				break;
+				case "tra bot":
+				square.moveNoChangeDirection("bot");
 				break;
 			}
 		},1000);
