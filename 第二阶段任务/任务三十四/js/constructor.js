@@ -4,7 +4,7 @@ define(function() {
 	 * @param {int} x x轴坐标
 	 * @param {int} y y轴坐标
 	 * @param {int} degree 初始角度
-     * @param {int} direction 上：0；右：1；下：2；左：3
+     * @param {int} direction 上：top；右：right；下：bottom；左：left
 	 */
 	var Square = function(bg,x,y,degree,direction) {
         if(typeof Square.instance === 'object'){
@@ -26,38 +26,31 @@ define(function() {
 		 // 隐式返回this
 	};
 
-    /**
-     * 设置Div
-     * @param {[type]} block [description]
-     */
-    Square.prototype.setDiv = function(block){
-    	block.innerHTML="<div></div>";
-    };
 
     /**
      * 方块向前移动
      */
     Square.prototype.go = function(){
     	switch (this.direction) {
-        case 0:
+        case "top":
         if(this.x>1){
             this.x--;
             this.div.style.top = this.x * 51 + 'px';
         }
             break;
-        case 1:
+        case "right":
             if(this.y < 10){
                 this.y ++;
                 this.div.style.left = this.y * 51 +'px';
             }
             break;
-        case 2:
+        case "bottom":
             if(this.x < 10){
                 this.x++;
                 this.div.style.top = this.x * 51 + 'px';
             }
             break;
-        case 3:
+        case "left":
             if(this.y > 1){
                 this.y--;
                 this.div.style.left = this.y * 51 +'px';
@@ -86,23 +79,23 @@ define(function() {
             break;
             case "mov top":{  // 方向转向屏幕上面，向屏幕的上面移动一格
                 switch(this.direction){
-                    case 0:
-                    this.direction = 0;
+                    case "top":
+                    this.direction = "top";
                     this.degree +=0;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 1:
-                    this.direction = 0;
+                    case "right":
+                    this.direction = "top";
                     this.degree -=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 2:
-                    this.direction = 0;
+                    case "bottom":
+                    this.direction = "top";
                     this.degree +=180;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 3:
-                    this.direction = 0;
+                    case "left":
+                    this.direction = "top";
                     this.degree +=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
@@ -111,23 +104,23 @@ define(function() {
             break;
             case "mov bot":{// 方向转向屏幕下面，向屏幕的下面移动一格
                 switch(this.direction){
-                    case 0:
-                    this.direction = 2;
+                    case "top":
+                    this.direction = "bottom";
                     this.degree +=180;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 1: 
-                    this.direction = 2;
+                    case "right": 
+                    this.direction = "bottom";
                     this.degree +=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 2:
-                    this.direction = 2;
+                    case "bottom":
+                    this.direction = "bottom";
                     this.degree +=0;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 3:
-                    this.direction = 2;
+                    case "left":
+                    this.direction = "bottom";
                     this.degree -=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
@@ -136,23 +129,23 @@ define(function() {
             break;
             case "mov lef":{ // 方向转向屏幕左侧，并向屏幕的左侧移动一格
                 switch (this.direction){
-                    case 0:
-                    this.direction = 3;
+                    case "top":
+                    this.direction = "left";
                     this.degree -=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 1: 
-                    this.direction = 3;
+                    case "right": 
+                    this.direction = "left";
                     this.degree +=180;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 2:
-                    this.direction = 3;
+                    case "bottom":
+                    this.direction = "left";
                     this.degree +=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 3:
-                    this.direction = 3;
+                    case "left":
+                    this.direction = "left";
                     this.degree -=0;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
@@ -162,23 +155,23 @@ define(function() {
             break;
             case "mov rig":{ // 方向转向屏幕右侧，并向屏幕的右侧移动一格
                 switch (this.direction){
-                    case 0:
-                    this.direction =1;
+                    case "top":
+                    this.direction ="right";
                     this.degree +=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 1: 
-                    this.direction =1;
+                    case "right": 
+                    this.direction ="right";
                     this.degree -=0;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 2:
-                    this.direction =1;
+                    case "bottom":
+                    this.direction ="right";
                     this.degree -=90;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
-                    case 3:
-                    this.direction =1;
+                    case "left":
+                    this.direction ="right";
                     this.degree -=180;
                     $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
                     return;
