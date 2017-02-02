@@ -1,6 +1,7 @@
 define(["constructor"],function(constructor){
     /**
      * 移动方块事件
+     * @return {function} 移动方块事件
      */
 	var moveSquare = function(){
 		var commandArray = ["go","tun lef","tun rig","tun bac",
@@ -28,33 +29,33 @@ define(["constructor"],function(constructor){
 				square.changeDirection(2,command);
 				break;
 				case "tra lef":
-				square.moveNoChangeDirection("lef");
+				square.moveNoChangeDirection(command);
 				break;
 				case "tra top":
-				square.moveNoChangeDirection("top");
+				square.moveNoChangeDirection(command);
 				break;
 				case "tra rig":
-				square.moveNoChangeDirection("rig");
+				square.moveNoChangeDirection(command);
 				break;
 				case "tra bot":
-				square.moveNoChangeDirection("bot");
+				square.moveNoChangeDirection(command);
 				break;
-				// case "mov lef":
-				// square.changeDirection(-1);
-				// square.go();
-				// break;
-				// case "mov top":
-				// square.changeDirection(10);
-				// square.go();
-				// break;
-				// case "mov rig":
-				// square.changeDirection(1);
-				// square.go();
-				// break;
-				// case "mov bot":
-				// square.changeDirection(-10);
-				// square.go();
-				// break;
+				case "mov lef":
+				square.changeDirection(-1,command);
+				square.go();
+				break;
+				case "mov top":
+				square.changeDirection(10,command);
+				square.go();
+				break;
+				case "mov rig":
+				square.changeDirection(1,command);
+				square.go();
+				break;
+				case "mov bot":
+				square.changeDirection(-10,command);
+				square.go();
+				break;
 			}
 		},1000);
 		}

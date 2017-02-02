@@ -26,38 +26,6 @@ define(function() {
 		 // 隐式返回this
 	};
 
-	/**
-	 * 获取小方块所在单元格
-	 * @param  {[type]} x [description]
-	 * @param  {[type]} y [description]
-	 * @return {[type]}   [description]
-	 */
-	// Square.prototype.getBlock = function(x,y) {
-	// 	return bg[0].rows[x].cells[y];
-	// };
-
-	/**
-	 * 小方块的方向译码器，上、右、下、左对应0、1、2、3
-	 */
-	Square.prototype.change = ["Top", "Right", "Bottom", "Left"];
-
-	// /**
- //    * 重置
- //    */
- //    Square.prototype.reset = function () {
- //    	this.block.className = "";
- //    	this.block.innerHTML = "";
- //    };
-
-    // /**
-    // * 设置方向
-    // * @param block
-    // * @param D
-    // */
-    // Square.prototype.setDirection = function (block, direction) {
- 	  //   block.className = direction;
-    // };
-
     /**
      * 设置Div
      * @param {[type]} block [description]
@@ -66,16 +34,6 @@ define(function() {
     	block.innerHTML="<div></div>";
     };
 
-    /**
-     * 移动小方块
-     */
-    // Square.prototype.moveDiv = function(){
-    //     var newBlock = this.getBlock(this.x, this.y);
-    //     this.setDiv(newBlock);
-    //     this.setDirection(newBlock, this.change[this.face]);
-    //     this.reset();
-    //     this.block = newBlock;
-    // };
     /**
      * 方块向前移动
      */
@@ -88,13 +46,13 @@ define(function() {
         }
             break;
         case 1:
-            if(this.y < 11){
+            if(this.y < 10){
                 this.y ++;
                 this.div.style.left = this.y * 51 +'px';
             }
             break;
         case 2:
-            if(this.x < 11){
+            if(this.x < 10){
                 this.x++;
                 this.div.style.top = this.x * 51 + 'px';
             }
@@ -116,56 +74,192 @@ define(function() {
     */
     Square.prototype.changeDirection = function (param,command) {
     	var result = this.direction + param;
-    	if (result == 4) {
-    		this.direction = 0;
-    	} else if (result == -1) {
-    		this.direction = 3;
-    	} else if (result == 5) {
-    		this.direction = 1;
-    	} else if(result >= 10 && result <=13){
-            this.direction = 0;
-        } else if(result >=-10 && result <=-7){
-            this.direction = 2;
-        }
-        else {
-    		this.direction= result;
-    	}
         switch(command){
             case "tun lef":
-            this.degree -=90;//左转
+            this.degree -=90;// 左转
             break;
             case "tun rig":
-            this.degree +=90;//右转
+            this.degree +=90;// 右转
             break;
             case "tun bac":
-            this.degree +=180;//转身
+            this.degree +=180;// 转身
+            break;
+            case "mov top":{  // 方向转向屏幕上面，向屏幕的上面移动一格
+                switch(this.direction){
+                    case 0:
+                    this.direction = 0;
+                    this.degree +=0;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 1:
+                    this.direction = 0;
+                    this.degree -=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 2:
+                    this.direction = 0;
+                    this.degree +=180;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 3:
+                    this.direction = 0;
+                    this.degree +=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                }
+            }
+            break;
+            case "mov bot":{// 方向转向屏幕下面，向屏幕的下面移动一格
+                switch(this.direction){
+                    case 0:
+                    this.direction = 2;
+                    this.degree +=180;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 1: 
+                    this.direction = 2;
+                    this.degree +=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 2:
+                    this.direction = 2;
+                    this.degree +=0;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 3:
+                    this.direction = 2;
+                    this.degree -=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                }
+            }
+            break;
+            case "mov lef":{ // 方向转向屏幕左侧，并向屏幕的左侧移动一格
+                switch (this.direction){
+                    case 0:
+                    this.direction = 3;
+                    this.degree -=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 1: 
+                    this.direction = 3;
+                    this.degree +=180;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 2:
+                    this.direction = 3;
+                    this.degree +=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 3:
+                    this.direction = 3;
+                    this.degree -=0;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                }
+
+            }
+            break;
+            case "mov rig":{ // 方向转向屏幕右侧，并向屏幕的右侧移动一格
+                switch (this.direction){
+                    case 0:
+                    this.direction =1;
+                    this.degree +=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 1: 
+                    this.direction =1;
+                    this.degree -=0;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 2:
+                    this.direction =1;
+                    this.degree -=90;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                    case 3:
+                    this.direction =1;
+                    this.degree -=180;
+                    $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
+                    return;
+                }
+
+            }
             break;
             }
-        $(this.div).css("transform", "rotate(" + this.degree +"deg)");
+
+    	// if (result == 4) {
+    	// 	this.direction = 0;
+    	// } 
+     //    else if (result == -1) {
+    	// 	this.direction = 3;
+    	// } 
+     //    else if (result == 5) {
+    	// 	this.direction = 1;
+    	// } 
+     //    else if(result >= 10 && result <=13){
+     //        this.direction = 0;
+     //    } 
+     //    else if(result >=-10 && result <=-7){
+     //        this.direction = 2;
+     //    }
+     //    else {
+    	// 	this.direction= result;
+    	// }
+
+        switch(result){
+            case -1:
+            this.direction = 3;
+            break;
+            case 4:
+            this.direction = 0;
+            break;
+            case 5:
+            this.direction = 1;
+            break;
+            case result >= 10 && result <=13:
+            this.direction = 0;
+            break;
+            case result >=-10 && result <=-7:
+            this.direction = 2;
+            break;
+            default:
+            this.direction= result;
+            break;
+
+
+
+        }
+
+        $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
     };
 
+    /**
+     * 不改变方向移动小方块
+     * @param  {string} direction 方向
+     */
     Square.prototype.moveNoChangeDirection = function(direction){
 
         switch(direction){
-            case "lef":
+            case "tra lef":
             if(this.y > 1){
                 this.y--;
                 this.div.style.left = this.y * 51 +'px';
             }
             break;
-            case "top":
+            case "tra top":
             if(this.x>1){
                 this.x--;
                 this.div.style.top = this.x * 51 +'px';
             }
             break;
-            case "rig":
+            case "tra rig":
             if(this.y<10){
                 this.y++;
                 this.div.style.left = this.y * 51 +'px';
             }
             break;
-            case "bot":
+            case "tra bot":
             if(this.x<10){
                 this.x++;
                 this.div.style.top = this.x * 51 +'px';
