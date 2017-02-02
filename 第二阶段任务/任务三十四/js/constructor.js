@@ -5,7 +5,7 @@ define(function() {
 	 * @param {[type]} y [description]
 	 * @param {[type]} f [description]
 	 */
-	var Square = function(x,y,f) {
+	var Square = function(x,y,face) {
         
 		
 		if(typeof Square.instance === 'object'){
@@ -14,7 +14,7 @@ define(function() {
 		}
 		this.x = x;
 		this.y = y;
-		this.f = f;
+		this.face = face;
 		this.block = this.getBlock(this.x, this.y);
 		 // 缓存
 		Square.instance = this;
@@ -49,8 +49,8 @@ define(function() {
     * @param block
     * @param D
     */
-    Square.prototype.setDirection = function (block, D) {
- 	    block.className = D;
+    Square.prototype.setDirection = function (block, direction) {
+ 	    block.className = direction;
     };
 
     /**
@@ -61,10 +61,13 @@ define(function() {
     	block.innerHTML="<div></div>";
     };
 
+    /**
+     * 移动小方块
+     */
     Square.prototype.moveDiv = function(){
         var newBlock = this.getBlock(this.x, this.y);
         this.setDiv(newBlock);
-        this.setDirection(newBlock, this.change[this.f]);
+        this.setDirection(newBlock, this.change[this.face]);
         this.reset();
         this.block = newBlock;
     };
@@ -76,11 +79,6 @@ define(function() {
         case "Top":
             if(this.x > 1){
                 this.x--;
-                // var newBlock = this.getBlock(this.x, this.y);
-                // this.setDiv(newBlock);
-                // this.setDirection(newBlock, this.change[this.f]);
-                // this.reset();
-                // this.block = newBlock;
                 this.moveDiv();
             }
             break;
@@ -111,31 +109,32 @@ define(function() {
     * @param para
     */
     Square.prototype.changeDirection = function (param) {
-    	var result = this.f + param;
+    	var result = this.face + param;
     	if (result == 4) {
-    		this.f = 0;
+    		this.face = 0;
     	} else if (result == -1) {
-    		this.f = 3;
+    		this.face = 3;
     	} else if (result == 5) {
-    		this.f = 1;
-    	} else {
-    		this.f = result;
+    		this.face = 1;
+    	} else if(result >= 10 && result <=13){
+            this.face = 0;
+        } else if(result >=-10 && result <=-7){
+            this.face = 2;
+        }
+        else {
+    		this.face = result;
     	}
-    	this.block.className = this.change[this.f];
+    	this.block.className = this.change[this.face];
     };
 
     Square.prototype.moveNoChangeDirection = function(direction){
 
-        var div = function(){
-
-        }
         switch(direction){
             case "lef":
             if(this.y > 1){
                 this.y--;
                 this.moveDiv();
             }
-
             break;
             case "top":
             if(this.x>1){

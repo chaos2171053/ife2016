@@ -15,7 +15,7 @@ define(["constructor"],function(constructor){
 			square = new constructor.Square(x, y, face);
 			var div = document.createElement("div");
 			var cellTd = square.getBlock(square.x, square.y);
-			cellTd.className = square.change[square.f];
+			cellTd.className = square.change[square.face];
 			cellTd.appendChild(div);
 		} else {
 			alert("请输入有效的坐标!");
@@ -27,9 +27,11 @@ define(["constructor"],function(constructor){
      * 移动方块事件
      */
 	var moveSquare = function(){
-		var com = ["go","tun lef","tun rig","tun bac","tra lef","tra top","tra rig","tra bot"];
+		var commandArray = ["go","tun lef","tun rig","tun bac",
+		           "tra lef","tra top","tra rig","tra bot",
+		           "mov lef","mov top","mov rig","mov bot"];
 		var command = $.trim($('#command')[0].value.toLowerCase());
-		if(com.indexOf(command) == -1){
+		if(commandArray.indexOf(command) == -1){
 			alert("请输入有效的指令~");
 			return;
 		}
@@ -64,6 +66,22 @@ define(["constructor"],function(constructor){
 				break;
 				case "tra bot":
 				square.moveNoChangeDirection("bot");
+				break;
+				case "mov lef":
+				square.changeDirection(-1);
+				square.go();
+				break;
+				case "mov top":
+				square.changeDirection(10);
+				square.go();
+				break;
+				case "mov rig":
+				square.changeDirection(1);
+				square.go();
+				break;
+				case "mov bot":
+				square.changeDirection(-10);
+				square.go();
 				break;
 			}
 		},1000);
