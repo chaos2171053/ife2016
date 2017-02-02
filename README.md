@@ -404,3 +404,9 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
 ####8.1 如何获取表格的在某行某列上的单元格
 `return table.rows[index].cells[index]`
 
+###9. 任务三十四
+####9.1 旋转div
+原本想通过角度变化，旋转div实现向左向右方向改变,如向左：
+`$(square.div).css("transform", "rotate(" -90 +"deg)");`
+发现只能旋转一次，第二次再向左就无法旋转了。这是因为在rotate（）中的角度永远都是根据最初始的角度0度旋转，不是根据现在的角度。
+

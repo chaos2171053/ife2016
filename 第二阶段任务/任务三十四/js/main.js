@@ -1,16 +1,19 @@
 require.config({
 	paths: {
 		"renderTable": "renderTable",
-		"constructor":"constructor"
+		"constructor":"constructor",
+		"util":"util"
 	}
 });
 
-var square = null;//小方块对象;
-var bg = $('#background');//表格
+var square;
 require(['renderTable',"constructor","util"], function (renderTable,constructor,util){
 	var ROW = 11;//11行
     var COL = 11;//11列
+    var bg = $('#background');//表格
 	renderTable.createTable(bg,ROW,COL);//渲染表格
-	$('#create').click(util.createDiv);
 	$('#comfirm').click(util.moveSquare);
+	var x = Math.floor(Math.random() * 10 + 1); //小方块x轴坐标
+	var y = Math.floor(Math.random() * 10 + 1); //小方块y轴坐标
+    square = new constructor.Square(bg,x,y,0,0);//小方块对象	
 });

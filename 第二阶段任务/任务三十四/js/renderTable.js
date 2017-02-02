@@ -1,4 +1,6 @@
 define(function(){
+	//var WIDTH = 42;
+	//var HEIGHT = 42;
 	/**
 	 * 渲染表格
 	 * @param  {object} tbody tbody
@@ -31,5 +33,6 @@ define(function(){
 	return {
 		createTable:createTable
 	};
+
 }	
 );
