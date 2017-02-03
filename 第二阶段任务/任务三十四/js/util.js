@@ -1,4 +1,5 @@
 define(["constructor"],function(constructor){
+	var TIME = 1000;//指令执行时间
     /**
      * 移动方块事件
      * @return {function} 移动方块事件
@@ -20,47 +21,27 @@ define(["constructor"],function(constructor){
 				square.go();
 				break;
 				case "tun lef":
-				square.changeDirection(-1,command);
-				break;
 				case "tun rig":
-				square.changeDirection(1,command);
-				break;
 				case "tun bac":
-				square.changeDirection(2,command);
+				square.changeDirection(command);
 				break;
 				case "tra lef":
-				square.moveNoChangeDirection(command);
-				break;
 				case "tra top":
-				square.moveNoChangeDirection(command);
-				break;
 				case "tra rig":
-				square.moveNoChangeDirection(command);
-				break;
 				case "tra bot":
 				square.moveNoChangeDirection(command);
 				break;
 				case "mov lef":
-				square.changeDirection(-1,command);
-				square.go();
-				break;
 				case "mov top":
-				square.changeDirection(10,command);
-				square.go();
-				break;
 				case "mov rig":
-				square.changeDirection(1,command);
-				square.go();
-				break;
 				case "mov bot":
-				square.changeDirection(-10,command);
+				square.changeDirection(command);
 				square.go();
 				break;
 			}
-		},1000);
+		},TIME);
 		}
 	};
-
 	return {
 		moveSquare:moveSquare
 	};
