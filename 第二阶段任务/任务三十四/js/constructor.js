@@ -174,16 +174,16 @@ define(function() {
                 switch (this.direction){
                     case "top":
                     this.degree -=90;
-                    return;
+                    break;
                     case "right": 
                     this.degree +=180;
-                    return;
+                    break;
                     case "bottom":
                     this.degree +=90;
-                    return;
+                    break;
                     case "left":
                     this.degree -=0;
-                    return;
+                    break;
                 }
                 this.direction = "left";
                 this.rotate();
@@ -194,20 +194,19 @@ define(function() {
                 switch (this.direction){
                     case "top":
                     this.degree +=90;
-                    return;
+                    break;
                     case "right": 
                     this.degree -=0;
-                    return;
+                    break;
                     case "bottom":
                     this.degree -=90;
-                    return;
+                    break;
                     case "left":
                     this.degree +=180;
-                    return;
+                    break;
                 }
                 this.direction ="right";
                 this.rotate();
-
             }
             break;
             }
@@ -245,8 +244,6 @@ define(function() {
             }
             break;
         }
-
-
     };
 	return {
 		Square:Square
