@@ -1,0 +1,63 @@
+* {
+	padding: 0;
+	margin-top: 0;
+	font-family: "Microsoft YaHei UI", sans-serif;
+}
+table {
+	border-collapse: collapse;
+    position: relative;
+	border-spacing: 0px;
+    margin: 0 auto;
+}
+.background td{
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.inputArea {
+    text-align: center;
+
+}
+input {
+    width: 218px;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    outline: 0;
+}
+
+/*从第二行开始，每列第二格右边框和下边框*/
+.background tr:nth-child(n + 2) td:nth-child(n + 2) {
+    border: 1px solid #aaa;
+}
+
+/* .actionDiv {
+    width: 36px;
+    height: 36px;
+    background-image: url('../img/bot.png');
+    background-repeat: no-repeat;
+    border-style:none;  
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+} */
+img{
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
