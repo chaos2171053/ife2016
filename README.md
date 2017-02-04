@@ -370,7 +370,8 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
 ####7.2image对象onload方法没有执行，没有显示图片。
 再次刷新canvas（如销毁飞船，需要重绘时）由于图片加载缓冲区的速度太快，以至于没有运行到onload的时候，图片已经被加载完毕了。所以没有显示图片。
 解决方法，利用image对象的complete属性,如：
-```var imgLoad = function (url) {
+```
+var imgLoad = function (url) {
     var img = new Image();
     img.src = url;
     if (img.complete) {
@@ -409,4 +410,29 @@ ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
 原本想通过角度变化，旋转div实现向左向右方向改变,如向左：
 `$(square.div).css("transform", "rotate(" -90 +"deg)");`
 发现只能旋转一次，第二次再向左就无法旋转了。这是因为在rotate（）中的角度永远都是根据最初始的角度0度旋转，不是根据现在的角度。
+
+###10. 任务三十五
+####10.1 textarea光标定位在最后一行
+![35-1](problemsPic/35-1.png)<br>
+想点击textarea时，光标定位在文本最后一行（第三行）。
+获取textarea的文本内容，利用focus()将光标定位在文本最后一行。
+```
+var content=$.trim($('#command-list').val());  
+$('#command-list').val("").focus().val(content); 
+``` 
+[JQUERY实现点击INPUT使光标移动到最后或指定位置](https://www.xiariboke.com/design/2441.html)
+
+####10.2 
+实现删除命令后，左边指令行标同步。但是发现这样再按回车就无法新增一行。因为删除li和添加li冲突。按下回车，新增一行（此时这行的内容为空，做了忽略前后空白字符处理），代码中根据换行符匹配出指令的条数，忽略了空指令。此时指令条数和li数目不同，就会把新增的li删掉。只需不忽略指令前后空字符即可。
+```
+var editorBackSpace = function(event){
+    var content=$('#command-list').val();
+    var liNum = $('#command-number').get(0).children.length;
+    var entnterNum = content.split(/\n/g).length;
+    if(liNum != entnterNum) {
+      $('li').last().remove();
+    }
+  };
+
+```
 

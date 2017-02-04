@@ -23,13 +23,11 @@ define(["constructor"],function(constructor){
 				case "tun lef":
 				case "tun rig":
 				case "tun bac":
-				square.changeDirection(command);
-				break;
 				case "tra lef":
 				case "tra top":
 				case "tra rig":
 				case "tra bot":
-				square.moveNoChangeDirection(command);
+				square.changeDirection(command);
 				break;
 				case "mov lef":
 				case "mov top":

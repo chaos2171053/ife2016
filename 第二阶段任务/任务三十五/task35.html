@@ -8,14 +8,35 @@
 	<script type="text/javascript" src = "../../libs/jquery-3.1.1.min.js"></script>
 </head>
 <body>
-	<div class="container">
+	<div class="container clearfix">
 		<table id="background" class="background">
-		<!-- <img src="img/bot.png" id = "bot"> -->
 		</table>
+		<div class="control-pannel clearfix">
+			<div class="button-pannel clearfix">
+				<button id  = "run" type="button">运行</button>
+				<button id  = "run" type="button">重置</button>
+			</div>
+			<div class="command-pannel">
+				<div class = "command-number-wrapper ">
+					<ol id="command-number">
+						<li></li>
+						<li></li>
+						<li></li>
+					</ol>
+				</div>
+				<textarea id = "command-list" rows="10" >
+go
+tun lef
+tra rig
+				</textarea>
+			</div>
+			
+		</div>
+
 	</div>
-	<div class="inputArea">
+	<!-- <div class="inputArea">
 		<input type="text" id="command" placeholder="请输入命令">
 		<button type="button" id="comfirm">确定</button>
-	</div>
+	</div> -->
 </body>
 </html>

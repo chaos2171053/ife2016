@@ -13,11 +13,6 @@ define(function() {
         if(typeof Square.instance === 'object'){
             return Square.instance;
         }
-        // var div = document.createElement("div");
-        // div.className = "actionDiv";
-        // div.style.position = "absolute";
-        // div.style.left = y * LEN_WID + 'px';
-        // div.style.top = x * LEN_WID + 'px';
         var img  = document.createElement("img");
         img.src = "img/bot.png";
         img.style.left = y * LEN_WID + 'px';
