@@ -435,4 +435,7 @@ var editorBackSpace = function(event){
   };
 
 ```
+####10.3 滚动右边指令时，左边指令行数同步滚动。
+![35-2](problemsPic/35-2.png)<br>
+```$commandNumber.scrollTop($commandList.get(0).scrollTop).get(0);```
 
