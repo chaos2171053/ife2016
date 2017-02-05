@@ -1,11 +1,12 @@
-define(["constructor"],function(constructor){
+define([],function(){
 	var TIME = 1000;//指令执行时间
     /**
      * 移动方块事件
      * @return {function} 移动方块事件
      */
 	var moveSquare = function(){
-		var commandArray = ["go","tun lef","tun rig","tun bac",
+		var commandArray = ["go",
+		           "tun lef","tun rig","tun bac",
 		           "tra lef","tra top","tra rig","tra bot",
 		           "mov lef","mov top","mov rig","mov bot"];
 		var command = $.trim($('#command')[0].value.toLowerCase());

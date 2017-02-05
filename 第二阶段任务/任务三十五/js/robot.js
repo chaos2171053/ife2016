@@ -23,7 +23,12 @@ define(function() {
 		this.div = img;
         this.direction = direction;
         this.degree = degree;
-        
+        // //角度修正
+        // if(this.degree<0) {
+        //     this.degree += 360;
+        // }else if(this.degree >0){
+        //     this.degree -=360;
+        // }
 		Square.instance = this;
 		 // 隐式返回this
 	};

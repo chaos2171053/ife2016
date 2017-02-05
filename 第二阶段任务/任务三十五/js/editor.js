@@ -1,12 +1,12 @@
 define(function(){
 	var $commandNumber = $('#command-number');// 指令行数列表
 	var $commandList = $('#command-list');//指令列表
+	
 	/**
 	 * textarea回车事件
 	 * @param  {object} event 事件
-	 * @return {[type]}       [description]
 	 */
-	var editorKeyDown = function(event){
+	var inputKeyDown = function(event){
 		if(event.keyCode == 13) {
 			$commandNumber.append("<li></li>").get(0);// 按下回车，ol添加一个li作为指令行数。
 		}
@@ -23,10 +23,10 @@ define(function(){
 	/**
 	 * 根据右边指令行数更新左边行数目显示
 	 */
-	var editorBackSpace = function(){
-		var content=$commandList.val();
+	var intutBackSpace = function(){
+		var command=$commandList.val();
 		var liNum = $commandNumber.get(0).children.length;// li标签数目
-		var enterNum = content.split(/\n/g).length;
+		var enterNum = command.split(/\n/g).length; // 换行符个数
 		if(liNum != enterNum) {
 			$('li').last().remove();
 		}
@@ -39,10 +39,24 @@ define(function(){
 		$commandNumber.scrollTop($commandList.get(0).scrollTop).get(0);
 	};
 
+    /**
+     * 编译指令 如果成功则返回命令对象，否则返回 false
+     * @return {bollean} 判断结果
+     */
+	var commandCompile = function(){
+		var array = $commandList.val().toLowerCase().split(/\n/g);
+		console.log(array);
+	};
+
+	var commandExecute = function(){
+		
+	};
 	return {
-		editorKeyDown:editorKeyDown,
+		commandExecute:commandExecute,
+		commandCompile:commandCompile,
+		inputKeyDown:inputKeyDown,
+		intutBackSpace:intutBackSpace,
 		editorFocus:editorFocus,
-		editorBackSpace:editorBackSpace,
 		editorScroll:editorScroll
 	};
 });
