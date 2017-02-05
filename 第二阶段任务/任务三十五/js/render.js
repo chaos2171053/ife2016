@@ -8,7 +8,7 @@ define(function(){
 		if(typeof Table.instance === 'object'){
             return Table.instance;
         }
-		this.$element = $('#background').eq(0);
+		this.$element = $('#background');
 		this.row = row;
 		this.col = col;
 		this.init();
@@ -40,7 +40,6 @@ define(function(){
 			strTr += "</tr>";
 			this.$element.append(strTr);
 		}
-		
 	};
 	return {
 		Table:Table
