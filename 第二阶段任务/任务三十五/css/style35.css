@@ -81,6 +81,15 @@ img {
     /* width:40px; */
     height: 721px;
 }
+#command-number .error {
+    background-color: #c42e35;
+}
+#command-number .success {
+    background-color: #7fe22e;
+}
+#command-number .warnning {
+    background-color: #ffc450;
+}
 #command-list {
     float: right;
     font-size: 16px;

@@ -398,7 +398,7 @@ var imgLoad = function (url) {
 飞船销毁时，如果一开始销毁1号，第二次销毁3号时，无法销毁。这是因为一开始我把每个飞船的id从0到3赋值，如果销毁1号（1号飞船在飞船队列的索引为1），那2号飞船在队列的索引自动变为1,3号为2，这样，执行
 `spaceships.splice(obj.id,1)`时，无法删除3号，因为他一开始的索引为3。解决方法使用delete删除属性:
 `delete spaceships[obj.id]`
-[MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
+-[MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
 
 
 ###8. 任务三十三
@@ -420,7 +420,7 @@ var imgLoad = function (url) {
 var content=$.trim($('#command-list').val());  
 $('#command-list').val("").focus().val(content); 
 ``` 
-[JQUERY实现点击INPUT使光标移动到最后或指定位置](https://www.xiariboke.com/design/2441.html)
+-[JQUERY实现点击INPUT使光标移动到最后或指定位置](https://www.xiariboke.com/design/2441.html)
 
 ####10.2 
 实现删除命令后，左边指令行标同步。但是发现这样再按回车就无法新增一行。因为删除li和添加li冲突。按下回车，新增一行（此时这行的内容为空，做了忽略前后空白字符处理），代码中根据换行符匹配出指令的条数，忽略了空指令。此时指令条数和li数目不同，就会把新增的li删掉。只需不忽略指令前后空字符即可。
@@ -436,6 +436,132 @@ var editorBackSpace = function(event){
 
 ```
 ####10.3 滚动右边指令时，左边指令行数同步滚动。
-![35-2](problemsPic/35-2.png)<br>
+-![35-2](problemsPic/35-2.png)<br>
 ```$commandNumber.scrollTop($commandList.get(0).scrollTop).get(0);```
 
+####10.4 jquery click()、keydown()中如何传递参数
+想在keydwons()事件中把editor对象当参数传进去
+```
+var Editor = function(x,y) {
+    var instance;
+    if(typeof instance === 'object' ) {
+      return instance;
+    }
+    instance = this;
+    this.$commandNumber = $('#command-number');// 指令行数列表
+    this.$commandList = $('#command-list');//指令列表
+    //this.$commandList.keydown({object: this},this.inputKeyDown);
+    this.$commandList.keydown(this,this.inputKeyDown);//this为editor对象当参数传进去
+    this.$commandList.focus(this.editorFocus());
+    this.$commandList.scroll(this.editorScroll);
+    this.$commandList.on('input propertychange',this.inputBackSpace);
+  };
+
+``
+但是在
+```
+Editor.prototype.inputKeyDown = function(event) {
+    // var e = event || window.event;
+    // if(e.keyCode == 13) {
+    //  $('#command-number').append("<li></li>");
+    // }
+    console.log(this);
+    
+  };
+```
+this是当前执行inputKeyDown的控件。查了资料，发现在
+`jQueryObject.click([[data,]handler])`中data是个jason对象。
+解决方法：
+声明一个对象`var object = {object:this};`
+在`this.$commandList.keydown(object,this.inputKeyDown);`中传进去。
+-[JQuery中如何传递参数如click(),change()等具体实现](http://www.jb51.net/article/36249.htm)
+
+####10.5 for循环里使用setTimeout()
+```
+//执行指令
+if(!commandError) {
+      var pre = 0;
+      for(var j = 0,l = commands.length;j<l;j++){
+        if(commands[j]){
+          setTimeout(function(){
+            _self.square.execute(_self.square,commands[j]);
+            _self.editor.clearFlag(pre,"");
+            _self.editor.setFlag(j,"success");
+            pre = j;
+          },TIME);
+        }
+      }
+    }
+```
+想每隔1s执行依次执行命令，但是发现这样写1s后才开始执行setTimeout里面的方法，而此时j已经为undefined。
+setTimeout和setInterval的运行机制是，将指定的代码移出本次执行，等到下一轮Event Loop时，再检查是否到了指定时间。如果到了，就执行对应的代码；如果不到，就等到再下一轮Event Loop时重新判断。这意味着，setTimeout指定的代码，必须等到本次执行的所有代码都执行完，才会执行。
+所以setTimeout的真正作用是，在“任务队列”的现有事件的后面再添加一个事件，规定在指定时间执行某段代码。setTimeout添加的事件，会在下一次Event Loop执行。
+解决方法，使用闭包:
+```
+//依次运行命令
+    if(!commandError) {
+      var pre = 0;
+      for (var j = 0,l = commands.length;j<l;j++) {
+        if(commands[j]){
+          (function(j){
+            setTimeout( function timer(){
+              _self.square.execute(_self.square,commands[j]);
+              _self.editor.clearFlag(pre,"");
+              _self.editor.setFlag(j,"success");
+              pre = j;
+            }, 1000 *j);//乘以j因为是指从开始进入队列开始等待的时间，1s、2s...即每隔1s执行。
+          })(j);
+        }
+      }
+    }
+```
+-[关于setTimeout()你所不知道的地方](http://caibaojian.com/about-settimeout.html)<br>
+-[js for里面setTimeout问题]()<br>
+
+####10.6 使用apply()、call()、bind()传递this
+依次执行执行的时候
+```
+ Square.prototype.execute = function(string) {
+        // var that = square;
+        if(!this.isRunning){
+            this.isRunning = true;
+            for(var i = 0,len = this.commands.length;i<len;i++) {
+                var command = this.commands[i];
+                var match = string.match(command.pattern);
+                if(match){
+                    console.log(this);
+                    command.handler(match[2]);
+                    //command.handler.apply(this,[match[2]]);
+                    match.shift();
+                    //this.isRunSucceed = true;
+                    this.isRunning = false;
+            }
+            }
+
+        }
+    };
+```
+这里的this是Square对象
+![35-3](problemsPic/35-3.png)<br>
+在指令中，this对象却变成了commands数组对象
+![35-4](problemsPic/35-4.png)<br>
+因为我没有指定comands中的this为Square,this变成运行时候的对象即commands数组。
+```
+ /**
+     * 指令
+     * @type {Array}
+     */
+    Square.prototype.commands = [
+    {
+        pattern: /^go(\s+)?(\d+)?$/i,
+        handler: function (step) {
+            // this.go(step);
+            for(var i = 0;i<step;i++) {
+                this.go();
+            }
+        }
+    },
+    ];
+```
+解决:`command.handler.apply(this,[match[2]]);`把Square对象当参数传进去。
+[js中bind、call、apply函数的用法](http://rangercyh.blog.51cto.com/1444712/1615809)

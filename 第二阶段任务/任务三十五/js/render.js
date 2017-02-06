@@ -5,14 +5,15 @@ define(function(){
 	 * @param  {int} col   列数
 	 */
 	var Table = function(row,col){
-		if(typeof Table.instance === 'object'){
-            return Table.instance;
+		var instance;
+		if(typeof instance === 'object'){
+            return instance;
         }
+        instance = this;
 		this.$element = $('#background');
 		this.row = row;
 		this.col = col;
 		this.init();
-		Table.instance = this;
 	};
 
 	/**

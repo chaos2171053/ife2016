@@ -1,6 +1,7 @@
 define(function() {
     var LEN_WID = 36;// 移动距离；
     var BOLCK_NUM = 20;// 一行、一列的单元格数量；
+  
 
 	/**
 	 * 小方块构造器
@@ -10,9 +11,11 @@ define(function() {
      * @param {string} direction 上：top；右：right；下：bottom；左：left
 	 */
 	var Square = function(bg,x,y,degree,direction) {
-        if(typeof Square.instance === 'object'){
-            return Square.instance;
+        var instance;
+        if(typeof instance === 'object'){
+            return instance;
         }
+        instance = this;
         var img  = document.createElement("img");
         img.src = "img/bot.png";
         img.style.left = y * LEN_WID + 'px';
@@ -23,14 +26,15 @@ define(function() {
 		this.div = img;
         this.direction = direction;
         this.degree = degree;
+        this.isRunning = false;
+        this.isRunSucceed = false;
+        // this.isRunning = false;
         // //角度修正
         // if(this.degree<0) {
         //     this.degree += 360;
         // }else if(this.degree >0){
         //     this.degree -=360;
         // }
-		Square.instance = this;
-		 // 隐式返回this
 	};
 
     /**
@@ -44,34 +48,49 @@ define(function() {
 
     /**
      * 方块向前移动
+     * @return {Bollean} 判断前方是否可走
      */
-    Square.prototype.go = function(){
+    Square.prototype.go = function(step){
+
     	switch (this.direction) {
-        case "top":
-        if(this.x>1){
-            this.x--;
-            this.div.style.top = this.x * LEN_WID + 'px';
-        }
+            case "top":
+            if(this.x>1){
+                this.x--;
+                this.div.style.top = this.x * LEN_WID + 'px';
+            }
+            else{
+                return false;
+            }
             break;
-        case "right":
+            case "right":
             if(this.y < BOLCK_NUM){
                 this.y ++;
                 this.div.style.left = this.y * LEN_WID +'px';
             }
+            else{
+                return false;
+            }
             break;
-        case "bottom":
+            case "bottom":
             if(this.x < BOLCK_NUM){
                 this.x++;
                 this.div.style.top = this.x * LEN_WID + 'px';
             }
+            else{
+                return false;
+            }
             break;
-        case "left":
+            case "left":
             if(this.y > 1){
                 this.y--;
                 this.div.style.left = this.y * LEN_WID +'px';
             }
+            else{
+                return false;
+            }
             break;
     }
+    return true;
     };
 
 
@@ -239,6 +258,82 @@ define(function() {
             break;
             }
     };
+
+    /**
+     * 指令
+     * @type {Array}
+     * @return {Bollen} 如果执行完全部指令则true，反之false。
+     */
+    Square.prototype.commands = [
+    {
+        pattern: /^go(\s+)?(\d+)?$/i,
+        step:/\d+/,
+        handler: function (step) {
+            if(step !== undefined){
+                for(var i = 0;i<step;i++) {
+                    if(this.go() === false) {
+                        this.isRunSucceed = false;
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else {
+                if(this.go() ===false){
+                    this.isRunSucceed = false;
+                    return false;
+                }
+            }
+            this.isRunSucceed = true;
+            return true;
+            
+        }
+    },
+    ];
+
+     /**
+     * 执行指令
+     * @param {String} command 指令
+     * @return {[type]} [description]
+     */
+    Square.prototype.execute = function(string) {
+        if(!this.isRunning){
+            this.isRunning = true;
+            for(var i = 0,len = this.commands.length;i<len;i++) {
+                var command = this.commands[i];
+                var match = string.match(command.pattern);
+                var step = match[0].match(command.step);// 移动格子数
+                if(match){
+                    command.handler.apply(this,step);
+                    match.shift();
+                    this.isRunning = false;
+            }
+            }
+
+        }
+    };
+    //     switch (command){
+    //         case "go":
+    //         this.go();
+    //         break;
+    //         case "tun lef":
+    //         case "tun rig":
+    //         case "tun bac":
+    //         case "tra lef":
+    //         case "tra top":
+    //         case "tra rig":
+    //         case "tra bot":
+    //         that.changeDirection(command);
+    //         break;
+    //         case "mov lef":
+    //         case "mov top":
+    //         case "mov rig":
+    //         case "mov bot":
+    //         that.changeDirection(command);
+    //         that.go();
+    //         break;
+    //     }
+    // };
 	return {
 		Square:Square
 	};
