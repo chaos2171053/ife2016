@@ -308,6 +308,7 @@ define(function() {
         pattern:/^tra\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
+            //this.correctAngle();
             var step = arguments[1];
             if(step !== null){
                 for(var i = 0;i<step;i++) {
@@ -331,6 +332,7 @@ define(function() {
         step:/\d+/,
         handler:function(){
             var step = arguments[1] ||1 ;
+            //this.correctAngle();
             this.changeDirection(arguments[0]);
             if(step !== null){
                 for(var i = 0;i<step;i++) {
@@ -352,7 +354,9 @@ define(function() {
     {
         pattern:/^tun\s+(lef|rig|bac)\s*\d*$/i,
         handler:function(){
+            //this.correctAngle();
             this.changeDirection(arguments[0]);
+            return true;
         }
     }
     ];
@@ -379,6 +383,16 @@ define(function() {
 
         }
     };
+    // /**
+    //  * 角度修正 使小方块角度始终在0到360
+    //  */
+    // Square.prototype.correctAngle = function(){
+    //     if(this.degree<0){
+    //         this.degree +=360;
+    //     }else if(this.degree>360){
+    //          this.degree -=360;
+    //     }
+    // };
 	return {
 		Square:Square
 	}; 

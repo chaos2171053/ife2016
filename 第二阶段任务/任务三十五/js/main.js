@@ -24,7 +24,6 @@ require(['render',"robot","control","editor"], function (render,robot,
 		this.$run = $('#run');
 		this.$reset = $('#reset');
 		this.init();
-		this.reset();
 	};
 
 	/**
@@ -102,7 +101,15 @@ require(['render',"robot","control","editor"], function (render,robot,
 
         	return true;	
         };
-	Application.prototype.reset = function() {
+
+	Application.prototype.reset = function(event) {
+		var e = event || window.event;
+		var _self = e.data.object;
+		_self.editor.clearFlag();
+		_self.editor.clearErrorText();
+		_self.editor.$commandList.val("");
+		_self.editor.textChanged();
+
 
 	};
 	new Application();
