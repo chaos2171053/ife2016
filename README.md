@@ -631,3 +631,39 @@ else{
     return true;
     }
 ```
+解决方法：
+```
+var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不一样。放里面清除不了。
+          for(var k=0,ln = validComandsIndex.length;k<ln;k++){
+            (function(){
+              var j = k;
+              var timer = setTimeout(function(){
+                if(t!= timer){
+                  console.log("t: "+t);
+                  console.log("timer: "+timer);
+                  _self.square.isRunSucceed = false;
+                  _self.editor.isRunning = true;
+                  pre = validComandsIndex[j];
+                  _self.editor.clearFlag();
+                  _self.square.execute(commands[validComandsIndex[j]]);
+                  if(_self.square.isRunSucceed){
+                    _self.editor.setFlag(validComandsIndex[j],"success");
+                  }
+                  else{
+                    _self.editor.setFlag(validComandsIndex[j],"warnning");
+                    _self.editor.setErrorText(j,"warnningText");
+                    _self.editor.isRunning = false;
+                    // return true;
+                    console.log("clear " +timer);
+                    window.clearTimeout(timer);
+                    t =timer+1;
+                    console.log("t = timer +1 .t:" +t);
+                  }
+                  _self.editor.isRunning = false;
+                }
+                },j*TIME);
+            })(k);
+          }
+          }
+```
+因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1；所以利用这一点，在需要清除的时候，把这一次执行的timer+1赋予一个值t（t需要声明在闭包外)。每次执行setTimeout时候，判断t和timer值是否相等。

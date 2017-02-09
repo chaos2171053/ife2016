@@ -133,7 +133,7 @@ define(function(){
 		$('#error').addClass(className);
 		switch(className){
 			case "errorText":
-			$("#error").text("错误：第"+i+"行无效指令/(ㄒoㄒ)/~~");
+			$("#error").text("错误：第"+(i+1)+"行无效指令/(ㄒoㄒ)/~~");
 			break;
 			case "warnningText":
 			$("#error").text("警告: 前面没有路了。");

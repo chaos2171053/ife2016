@@ -98,11 +98,15 @@ require(['render',"robot","control","editor"], function (render,robot,
         			validComandsIndex.push(i);
         		}
         	}
+        	var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不一样。放里面清除不了。
         	for(var k=0,ln = validComandsIndex.length;k<ln;k++){
         		(function(){
         			var j = k;
         			var timer = setTimeout(function(){
-        				    _self.square.isRunSucceed = false;
+        				if(t!= timer){
+        					console.log("t: "+t);
+        					console.log("timer: "+timer);
+        					_self.square.isRunSucceed = false;
         					_self.editor.isRunning = true;
         					pre = validComandsIndex[j];
         					_self.editor.clearFlag();
@@ -114,16 +118,36 @@ require(['render',"robot","control","editor"], function (render,robot,
         						_self.editor.setFlag(validComandsIndex[j],"warnning");
         						_self.editor.setErrorText(j,"warnningText");
         						_self.editor.isRunning = false;
-        						return true;
-        						// clearTimeout(timer);
+        						// return true;
+        						console.log("clear " +timer);
+        						window.clearTimeout(timer);
+        						t =timer+1;
+        						console.log("t = timer +1 .t:" +t);
         					}
         					_self.editor.isRunning = false;
+        				}
+        				 //    _self.square.isRunSucceed = false;
+        					// _self.editor.isRunning = true;
+        					// pre = validComandsIndex[j];
+        					// _self.editor.clearFlag();
+        					// _self.square.execute(commands[validComandsIndex[j]]);
+        					// if(_self.square.isRunSucceed){
+        					// 	_self.editor.setFlag(validComandsIndex[j],"success");
+        					// }
+        					// else{
+        					// 	_self.editor.setFlag(validComandsIndex[j],"warnning");
+        					// 	_self.editor.setErrorText(j,"warnningText");
+        					// 	_self.editor.isRunning = false;
+        					// 	// return true;
+        					// 	console.log("clear " +timer);
+        					// 	window.clearTimeout(timer);
+        					// 	// console.log(timer);
+        					// }
+        					// _self.editor.isRunning = false;
         				},j*TIME);
         		})(k);
         	}
         	}
-        	
-
         	return true;	
         };
 	Application.prototype.reset = function() {

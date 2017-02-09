@@ -41,7 +41,8 @@ define(function() {
 
     /**
      * 方块向前移动
-     * @return {Bollean} 判断前方是否可走
+     * @returns {Bollean} 判断前方是否可走
+     * @returns {Bollean} 小方块指令是否运行成功
      */
     Square.prototype.go = function(step){
 
