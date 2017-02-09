@@ -132,12 +132,12 @@ define(function(){
 	 * 清除li标签的className
 	 */
 	Editor.prototype.clearFlag = function(i,className) {
-		if(i !== undefined){
-			$('#command-number').children().eq(i).removeClass();
-		}else{
-			$('#command-number').children().removeClass();
-		}
-		
+		// if(i !== undefined){
+		// 	$('#command-number').children().eq(i-1).removeClass("success");
+		// }else{
+		// 	$('#command-number').children().removeClass();
+		// }
+		$('#command-number').children().removeClass();
 	};
 
 	/**

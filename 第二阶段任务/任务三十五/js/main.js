@@ -10,16 +10,14 @@ require.config({
 // var square;
 require(['render',"robot","control","editor"], function (render,robot,
 	control,editor) {
-	var ROW = 21;// 21行
-    var COL = 21;// 21列
-    var TIME = 1000;//每次指令执行时间 1s
-	var x = Math.floor(Math.random() * 10 + 1); // 小方块x轴坐标
-	var y = Math.floor(Math.random() * 10 + 1); // 小方块y轴坐标
-
     /**
      * constructor
      */
 	var Application = function () {
+		var ROW = 21;// 21行
+        var COL = 21;// 21列
+        var x = Math.floor(Math.random() * 10 + 1); // 小方块x轴坐标
+	    var y = Math.floor(Math.random() * 10 + 1); // 小方块y轴坐标
 		this.table = new render.Table(ROW,COL);//表格实例
 		this.square = new robot.Square($('#background'),x,y,0,"bottom");// 小方块实例，方向向下。
 		this.editor = new editor.Editor();//编辑器实例
@@ -44,12 +42,12 @@ require(['render',"robot","control","editor"], function (render,robot,
 	 * @return {bollean} 是否执行指令
 	 */
 	Application.prototype.run = function(event) {
+		var TIME = 1000;//每次指令执行时间 1s
 		var e = event || window.event;
 		var _self = e.data.object;
 		var commandError = false;
 		_self.editor.clearFlag();
 		var commands = _self.editor.getCommands();
-
         if(!_self.editor.isRunning){
         	_self.editor.isRunning = true;
         	//解析全部指令是否都有效
@@ -61,14 +59,17 @@ require(['render',"robot","control","editor"], function (render,robot,
         			return false;
         		}
         	}
+
+        	
         	//依次执行指令
         	var pre = 0 ;
         	for(i = 0;i<len;i++) {
         		if(commands[i]){
-        			var j = i;
         			(function(){
+        				var j = i;
         				_self.square.isRunSucceed = false;
         				setTimeout(function(){
+        					pre = j;
         					_self.editor.clearFlag(pre,"");
         					_self.square.execute(commands[j]);
         					if(_self.square.isRunSucceed){

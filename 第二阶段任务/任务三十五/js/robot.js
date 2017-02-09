@@ -312,29 +312,7 @@ define(function() {
 
         }
     };
-    //     switch (command){
-    //         case "go":
-    //         this.go();
-    //         break;
-    //         case "tun lef":
-    //         case "tun rig":
-    //         case "tun bac":
-    //         case "tra lef":
-    //         case "tra top":
-    //         case "tra rig":
-    //         case "tra bot":
-    //         that.changeDirection(command);
-    //         break;
-    //         case "mov lef":
-    //         case "mov top":
-    //         case "mov rig":
-    //         case "mov bot":
-    //         that.changeDirection(command);
-    //         that.go();
-    //         break;
-    //     }
-    // };
 	return {
 		Square:Square
-	};
+	}; 
 });
