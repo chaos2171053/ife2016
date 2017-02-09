@@ -47,6 +47,7 @@ require(['render',"robot","control","editor"], function (render,robot,
 		var _self = e.data.object;
 		var commandError = false;
 		_self.editor.clearFlag();
+		_self.editor.clearErrorText();
 		var commands = _self.editor.getCommands();
         if(!_self.editor.isRunning){
         	_self.editor.isRunning = true;
@@ -54,15 +55,16 @@ require(['render',"robot","control","editor"], function (render,robot,
         	for(var i =0,len = commands.length;i<len;i++){
         		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
         			_self.editor.setFlag(i, "error");//标记第一个错误的指令
+        			_self.editor.setError(i,"errorText");
         			commandError = true;
         			_self.editor.isRunning = false;
         			return false;
         		}
         	}
 
-        	
         	//依次执行指令
         	var pre = 0 ;
+        	_self.editor.clearErrorText();
         	for(i = 0;i<len;i++) {
         		if(commands[i]){
         			(function(){
@@ -77,6 +79,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         					}
         					else{
         						_self.editor.setFlag(j,"warnning");
+        						_self.editor.setError(i,"warnningText");
         						_self.editor.isRunning = false;
         						return true;
         					}

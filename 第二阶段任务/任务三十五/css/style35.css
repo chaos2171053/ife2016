@@ -65,6 +65,16 @@ img {
 .button-pannel {
     margin: 3px 0 10px 10px;
 }
+#error {
+    display: inline-block;
+    margin-left: 10px;
+}
+.errorText {
+    color: #c42e35;
+}
+.warnningText {
+    color: #ffc450;
+}
 .button-pannel button {
     height: 22px;
     width: 50px;
