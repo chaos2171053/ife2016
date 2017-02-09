@@ -638,7 +638,8 @@ var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不�
             (function(){
               var j = k;
               var timer = setTimeout(function(){
-                if(t!= timer){
+                //if(t!= timer){
+                if(t!=false){
                   console.log("t: "+t);
                   console.log("timer: "+timer);
                   _self.square.isRunSucceed = false;
@@ -655,8 +656,9 @@ var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不�
                     _self.editor.isRunning = false;
                     // return true;
                     console.log("clear " +timer);
-                    window.clearTimeout(timer);
-                    t =timer+1;
+                    //window.clearTimeout(timer);
+                    //t =timer+1;
+                    t =false;//这里赋值为false
                     console.log("t = timer +1 .t:" +t);
                   }
                   _self.editor.isRunning = false;
@@ -666,4 +668,4 @@ var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不�
           }
           }
 ```
-因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1；所以利用这一点，在需要清除的时候，把这一次执行的timer+1赋予一个值t（t需要声明在闭包外)。每次执行setTimeout时候，判断t和timer值是否相等。
+因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1。一开始想到的是把timer+1然后赋值给t，执行下一条指令判断t是否等于timer，但是忘记考虑多条指令的情况下了。毕竟还有timer+2、timer+3。所以利用这一点，在需要清除的时候，t值赋予false（t需要声明在闭包外)。每次执行setTimeout时候，判断t是否等于false。

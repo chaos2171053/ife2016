@@ -52,7 +52,6 @@ require(['render',"robot","control","editor"], function (render,robot,
 	
         if(!_self.editor.isRunning){
         	//解析全部指令是否都有效
-        	
         	for(var i =0,len = commands.length;i<len;i++){
         		_self.editor.isRunning = true;
         		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
@@ -66,31 +65,6 @@ require(['render',"robot","control","editor"], function (render,robot,
         	//依次执行指令
         	var pre = 0 ;
         	_self.editor.clearErrorText();
-        	// for(i = 0;i<len;i++) {
-        	// 	if(commands[i]){
-        	// 		(function(){
-        	// 			var j = i;
-        	// 			_self.square.isRunSucceed = false;
-        	// 			setTimeout(function(){
-        	// 				_self.editor.isRunning = true;
-        	// 				pre = j;
-        	// 				_self.editor.clearFlag(pre,"");
-        	// 				_self.square.execute(commands[j]);
-        	// 				if(_self.square.isRunSucceed){
-        	// 					_self.editor.setFlag(j,"success");
-        	// 				}
-        	// 				else{
-        	// 					_self.editor.setFlag(j,"warnning");
-        	// 					_self.editor.setErrorText(j,"warnningText");
-        	// 					_self.editor.isRunning = false;
-        	// 					return true;
-        	// 				}
-        	// 			},j*TIME);
-        	// 		})(i);
-        	// 	}
-        	// 	}
-        	// }
-
         	var validComandsIndex = [];
         	//筛选出有效指令
         	for(i =0;i<len;i++){
@@ -98,14 +72,12 @@ require(['render',"robot","control","editor"], function (render,robot,
         			validComandsIndex.push(i);
         		}
         	}
-        	var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不一样。放里面清除不了。
+        	var t = null;
         	for(var k=0,ln = validComandsIndex.length;k<ln;k++){
         		(function(){
         			var j = k;
         			var timer = setTimeout(function(){
-        				if(t!= timer){
-        					console.log("t: "+t);
-        					console.log("timer: "+timer);
+        				if(t!= false){
         					_self.square.isRunSucceed = false;
         					_self.editor.isRunning = true;
         					pre = validComandsIndex[j];
@@ -118,32 +90,10 @@ require(['render',"robot","control","editor"], function (render,robot,
         						_self.editor.setFlag(validComandsIndex[j],"warnning");
         						_self.editor.setErrorText(j,"warnningText");
         						_self.editor.isRunning = false;
-        						// return true;
-        						console.log("clear " +timer);
-        						window.clearTimeout(timer);
-        						t =timer+1;
-        						console.log("t = timer +1 .t:" +t);
+        						t =false;
         					}
         					_self.editor.isRunning = false;
         				}
-        				 //    _self.square.isRunSucceed = false;
-        					// _self.editor.isRunning = true;
-        					// pre = validComandsIndex[j];
-        					// _self.editor.clearFlag();
-        					// _self.square.execute(commands[validComandsIndex[j]]);
-        					// if(_self.square.isRunSucceed){
-        					// 	_self.editor.setFlag(validComandsIndex[j],"success");
-        					// }
-        					// else{
-        					// 	_self.editor.setFlag(validComandsIndex[j],"warnning");
-        					// 	_self.editor.setErrorText(j,"warnningText");
-        					// 	_self.editor.isRunning = false;
-        					// 	// return true;
-        					// 	console.log("clear " +timer);
-        					// 	window.clearTimeout(timer);
-        					// 	// console.log(timer);
-        					// }
-        					// _self.editor.isRunning = false;
         				},j*TIME);
         		})(k);
         	}
