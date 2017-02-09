@@ -101,7 +101,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         	for(var k=0,ln = validComandsIndex.length;k<ln;k++){
         		(function(){
         			var j = k;
-        			setTimeout(function(){
+        			var timer = setTimeout(function(){
         				    _self.square.isRunSucceed = false;
         					_self.editor.isRunning = true;
         					pre = validComandsIndex[j];
@@ -115,12 +115,14 @@ require(['render',"robot","control","editor"], function (render,robot,
         						_self.editor.setErrorText(j,"warnningText");
         						_self.editor.isRunning = false;
         						return true;
+        						// clearTimeout(timer);
         					}
+        					_self.editor.isRunning = false;
         				},j*TIME);
         		})(k);
         	}
         	}
-        	_self.editor.isRunning = false;
+        	
 
         	return true;	
         };

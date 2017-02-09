@@ -28,13 +28,6 @@ define(function() {
         this.degree = degree;
         this.isRunning = false;
         this.isRunSucceed = false;
-        // this.isRunning = false;
-        // //角度修正
-        // if(this.degree<0) {
-        //     this.degree += 360;
-        // }else if(this.degree >0){
-        //     this.degree -=360;
-        // }
 	};
 
     /**
@@ -59,6 +52,7 @@ define(function() {
                 this.div.style.top = this.x * LEN_WID + 'px';
             }
             else{
+                this.isRunSucceed = false;
                 return false;
             }
             break;
@@ -68,6 +62,7 @@ define(function() {
                 this.div.style.left = this.y * LEN_WID +'px';
             }
             else{
+                this.isRunSucceed = false;
                 return false;
             }
             break;
@@ -77,6 +72,7 @@ define(function() {
                 this.div.style.top = this.x * LEN_WID + 'px';
             }
             else{
+                this.isRunSucceed = false;
                 return false;
             }
             break;
@@ -86,10 +82,12 @@ define(function() {
                 this.div.style.left = this.y * LEN_WID +'px';
             }
             else{
+                this.isRunSucceed = false;
                 return false;
             }
             break;
     }
+    this.isRunSucceed = true;
     return true;
     };
 
@@ -284,8 +282,8 @@ define(function() {
                     return false;
                 }
             }
-            this.isRunSucceed = true;
-            return true;
+            // this.isRunSucceed = true;
+            // return true;
             
         }
     },

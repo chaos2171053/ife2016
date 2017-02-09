@@ -619,3 +619,15 @@ for(var k=0,ln = validComandsIndex.length;k<ln;k++){
             })(k);
           }
 ```
+
+####10.10 中断setTimeout
+当小方块前面有墙时，应该不能执行下一步指令。我在setTimeout中设置了return 中止。但是发现这样不行。
+![35-6](problemsPic/35-6.png)<br>
+```
+else{
+    _self.editor.setFlag(validComandsIndex[j],"warnning");
+    _self.editor.setErrorText(j,"warnningText");
+    _self.editor.isRunning = false;
+    return true;
+    }
+```
