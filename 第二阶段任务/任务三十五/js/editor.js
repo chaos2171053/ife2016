@@ -19,38 +19,43 @@ define(function(){
 	Editor.prototype.init = function() {
 		this.$commandNumber = $('#command-number');// 指令行数列表
 		this.$commandList = $('#command-list');//指令列表
-		this.$commandList.keydown(this.inputKeyDown);
+		//this.$commandList.keydown(this.inputKeyDown);
 		this.$commandList.focus(this.editorFocus());
 		this.$commandList.scroll(this.editorScroll);
-		this.$commandList.on('input propertychange',this.inputBackSpace);
+		this.$commandList.on('input propertychange',this.textChanged);
 
 	};
 
 
-	/**
-	 * 编辑器 回车事件 按下回车，ol添加一个li作为指令行数
-	 * @param  {object} event 事件
-	 */
-	Editor.prototype.inputKeyDown = function(event) {
-		var e = event || window.event;
-		if(e.keyCode == 13) {
-			$('#command-number').append("<li></li>");
-		}
-	};
+	// /**
+	//  * 编辑器 回车事件 按下回车，ol添加一个li作为指令行数
+	//  * @param  {object} event 事件
+	//  */
+	// Editor.prototype.inputKeyDown = function(event) {
+	// 	var e = event || window.event;
+	// 	if(e.keyCode == 13) {
+	// 		$('#command-number').append("<li></li>");
+	// 	}
+	// };
 
 	/**
 	 * 根据右边指令行数更新左边行数目显示
 	 */
-	Editor.prototype.inputBackSpace = function() {
+	Editor.prototype.textChanged = function() {
 		var commands=$('#command-list').val();
 		var liNum =$('#command-number').get(0).children.length;// li标签数目
 		var enterNum = commands.split(/\n/g).length; // 换行符个数
 		if(liNum != enterNum) {
-			$('li').last().remove();
+			//$('li').last().remove();
+			var htmlStr = "";
+			for(var i =0;i<enterNum;i++){
+				htmlStr +="<li></li>";
+			}
+			$('#command-number').html(htmlStr);
 		}
-		if(commands == ""){
-			$('#command-number').html("<li></li>");
-		}
+		// if(commands == ""){
+		// 	$('#command-number').html("<li></li>");
+		// }
 	};
 
 	/**
@@ -139,7 +144,7 @@ define(function(){
 			$("#error").text("错误：第"+(i+1)+"行无效指令/(ㄒoㄒ)/~~");
 			break;
 			case "warnningText":
-			$("#error").text("警告: 目的地有墙。");
+			$("#error").text("警告: 目的地有墙阻拦。");
 			break;
 
 		}

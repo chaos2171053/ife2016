@@ -92,7 +92,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         						_self.editor.isRunning = false;
         						t =false;
         					}
-        					_self.editor.isRunning = false;
+        					
         				}
         				},j*TIME);
         		})(k);
