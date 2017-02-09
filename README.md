@@ -633,42 +633,33 @@ else{
 ```
 解决方法：
 ```
-var t = 0;//不能放进for循环。因为每隔1s执行。timer每次值都不一样。放里面清除不了。
+var t = null;
           for(var k=0,ln = validComandsIndex.length;k<ln;k++){
             (function(){
               var j = k;
               var timer = setTimeout(function(){
-                //if(t!= timer){
                 if(t!= false && (_self.editor.isRunning != false)){
-                  console.log("t: "+t);
-                  console.log("timer: "+timer);
                   _self.square.isRunSucceed = false;
-                  _self.editor.isRunning = true;
                   pre = validComandsIndex[j];
                   _self.editor.clearFlag();
                   _self.square.execute(commands[validComandsIndex[j]]);
                   if(_self.square.isRunSucceed){
                     _self.editor.setFlag(validComandsIndex[j],"success");
+                    if(j == (ln-1)){
+                      _self.editor.isRunning = false;
+                    }
                   }
                   else{
                     _self.editor.setFlag(validComandsIndex[j],"warnning");
                     _self.editor.setErrorText(j,"warnningText");
                     _self.editor.isRunning = false;
-                    // return true;
-                    console.log("clear " +timer);
-                    //window.clearTimeout(timer);
-                    //t =timer+1;
-                    t =false;//这里赋值为false
-                    console.log("t = timer +1 .t:" +t);
+                    t =false;
                   }
-                 
                 }
                 },j*TIME);
             })(k);
           }
-          }
 ```
 因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1。一开始想到的是把timer+1然后赋值给t，执行下一条指令判断t是否等于timer，但是忘记考虑多条指令的情况下了。毕竟可能还有timer+2、timer+3等等情况。所以利用这一点，在需要清除的时候，t值赋予false（t需要声明在闭包外)。每次执行setTimeout时候，判断t是否等于false。同样编辑器是否正在运行的判断也要这样处理。
 
-####10.11 编辑器粘贴内容监听
-![35-6](problemsPic/35-6.png)<br>
+

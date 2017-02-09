@@ -116,6 +116,9 @@ define(function(){
     },
     {
     	pattern:/^mov\s+(lef|top|rig|bot)\s*\d*$/i
+    },
+    {
+    	pattern:/^tun\s+(lef|rig|bac)\s*\d*$/i
     }
     ];
 

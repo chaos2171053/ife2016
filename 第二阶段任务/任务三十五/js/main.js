@@ -79,13 +79,12 @@ require(['render',"robot","control","editor"], function (render,robot,
         			var timer = setTimeout(function(){
         				if(t!= false && (_self.editor.isRunning != false)){
         					_self.square.isRunSucceed = false;
-        					// _self.editor.isRunning = true;
         					pre = validComandsIndex[j];
         					_self.editor.clearFlag();
         					_self.square.execute(commands[validComandsIndex[j]]);
         					if(_self.square.isRunSucceed){
         						_self.editor.setFlag(validComandsIndex[j],"success");
-        						if(j == (ln-1)){
+        						if(j == (ln-1)){ //执行完所有指令时
         							_self.editor.isRunning = false;
         						}
         					}
@@ -95,8 +94,6 @@ require(['render',"robot","control","editor"], function (render,robot,
         						_self.editor.isRunning = false;
         						t =false;
         					}
-
-
         				}
         				},j*TIME);
         		})(k);

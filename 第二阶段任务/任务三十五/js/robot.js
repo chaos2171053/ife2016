@@ -348,6 +348,12 @@ define(function() {
                 }
             }        
         }
+    },
+    {
+        pattern:/^tun\s+(lef|rig|bac)\s*\d*$/i,
+        handler:function(){
+            this.changeDirection(arguments[0]);
+        }
     }
     ];
 
