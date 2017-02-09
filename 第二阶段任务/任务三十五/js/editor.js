@@ -136,7 +136,7 @@ define(function(){
 			$("#error").text("错误：第"+i+"行无效指令/(ㄒoㄒ)/~~");
 			break;
 			case "warnningText":
-			$("#error").text("警告: 前面没有路了");
+			$("#error").text("警告: 前面没有路了。");
 			break;
 
 		}

@@ -575,3 +575,7 @@ if(true){
 alert(color);//red
 ```
 如果在c、java、c++中，color会在if语句执行完毕后销毁。在js中，if中的变量声明会将变量添加到当前执行环境中。在使用for语句时要牢记这一点。
+
+####10.8 在点击运行时，在点击运行，小方块执行了两次全部指令
+原因还是同10.5中所说。setTimeout在“任务队列”的现有事件的后面再添加一个事件，规定在指定时间执行某段代码。第一次点击，判断编辑器是否在运行的变量_self.editor.isRunning已经在setTimeout的指定时间内运行完变成false，所以可以再点击运行按钮重复运行指令。
+解决方法，把原本在一开始执行指令后使```_self.editor.isRunning = ture```放在setTimeout方法里面。

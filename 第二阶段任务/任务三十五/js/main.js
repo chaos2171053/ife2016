@@ -49,10 +49,12 @@ require(['render',"robot","control","editor"], function (render,robot,
 		_self.editor.clearFlag();
 		_self.editor.clearErrorText();
 		var commands = _self.editor.getCommands();
+		console.log("开始" +_self.editor.isRunning);
         if(!_self.editor.isRunning){
-        	_self.editor.isRunning = true;
         	//解析全部指令是否都有效
+        	console.log("开始解析" +_self.editor.isRunning);
         	for(var i =0,len = commands.length;i<len;i++){
+        		_self.editor.isRunning = true;
         		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
         			_self.editor.setFlag(i, "error");//标记第一个错误的指令
         			_self.editor.setError(i,"errorText");
@@ -61,7 +63,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         			return false;
         		}
         	}
-
+console.log("开始执行" +_self.editor.isRunning);
         	//依次执行指令
         	var pre = 0 ;
         	_self.editor.clearErrorText();
@@ -71,6 +73,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         				var j = i;
         				_self.square.isRunSucceed = false;
         				setTimeout(function(){
+        					_self.editor.isRunning = true;
         					pre = j;
         					_self.editor.clearFlag(pre,"");
         					_self.square.execute(commands[j]);
@@ -89,6 +92,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         		}
         	}
         	_self.editor.isRunning = false;
+        	console.log("结束" +_self.editor.isRunning);
         	return true;	
         };
 	Application.prototype.reset = function() {
