@@ -236,11 +236,19 @@ define(function() {
                 this.y--;
                 this.div.style.left = this.y * LEN_WID +'px';
             }
+            else{
+                this.isRunSucceed = false;
+                return false;
+            }
             break;
             case "tra top":
             if(this.x>1){
                 this.x--;
                 this.div.style.top = this.x * LEN_WID +'px';
+            }
+            else{
+                this.isRunSucceed = false;
+                return false;
             }
             break;
             case "tra rig":
@@ -248,14 +256,24 @@ define(function() {
                 this.y++;
                 this.div.style.left = this.y * LEN_WID +'px';
             }
+            else{
+                this.isRunSucceed = false;
+                return false;
+            }
             break;
             case "tra bot":
             if(this.x<BOLCK_NUM){
                 this.x++;
                 this.div.style.top = this.x * LEN_WID +'px';
             }
+            else{
+                this.isRunSucceed = false;
+                return false;
+            }
             break;
             }
+            this.isRunSucceed = true;
+            return true;
     };
 
     /**
@@ -265,10 +283,11 @@ define(function() {
      */
     Square.prototype.commands = [
     {
-        pattern: /^go(\s+)?(\d+)?$/i,
+        pattern: /^go(\s+)?(\d+)*$/i,
         step:/\d+/,
-        handler: function (step) {
-            if(step !== undefined){
+        handler: function () {
+            var step =arguments[1];
+            if(step !== null){
                 for(var i = 0;i<step;i++) {
                     if(this.go() === false) {
                         this.isRunSucceed = false;
@@ -282,18 +301,38 @@ define(function() {
                     this.isRunSucceed = false;
                     return false;
                 }
-            }
-            // this.isRunSucceed = true;
-            // return true;
-            
+            }           
         }
     },
+    {
+        pattern:/^tra\s+(lef|top|rig|bot)/i,
+        step:/\d+/,
+        handler:function(){
+            //var step =arguments[1][0] || 1;
+            var step = arguments[1];
+            if(step !== null){
+                for(var i = 0;i<step;i++) {
+                    if(this.changeDirection(arguments[0]) === false) {
+                        this.isRunSucceed = false;
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else {
+                if(this.changeDirection(arguments[0]) ===false){
+                    this.isRunSucceed = false;
+                    return false;
+                }
+            }        
+        }
+    }
     ];
 
      /**
      * 执行指令
      * @param {String} command 指令
-     * @return {[type]} [description]
+     * @return {bollean} 执行则返回true 
      */
     Square.prototype.execute = function(string) {
         if(!this.isRunning){
@@ -301,12 +340,13 @@ define(function() {
             for(var i = 0,len = this.commands.length;i<len;i++) {
                 var command = this.commands[i];
                 var match = string.match(command.pattern);
-                var step = match[0].match(command.step);// 移动格子数
                 if(match){
-                    command.handler.apply(this,step);
+                    var step = string.match(command.step);// 移动格子  
+                    command.handler.call(this,match[0],step);//match[0]是指令
                     match.shift();
                     this.isRunning = false;
-            }
+                    return true;
+                }
             }
 
         }

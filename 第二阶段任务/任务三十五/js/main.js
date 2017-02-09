@@ -66,7 +66,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         	var pre = 0 ;
         	_self.editor.clearErrorText();
         	var validComandsIndex = [];
-        	//筛选出有效指令
+        	//筛选出有效指令的索引
         	for(i =0;i<len;i++){
         		if(commands[i]){
         			validComandsIndex.push(i);
@@ -77,7 +77,7 @@ require(['render',"robot","control","editor"], function (render,robot,
         		(function(){
         			var j = k;
         			var timer = setTimeout(function(){
-        				if(t!= false){
+        				if(t!= false && (_self.editor.isRunning != false)){
         					_self.square.isRunSucceed = false;
         					_self.editor.isRunning = true;
         					pre = validComandsIndex[j];

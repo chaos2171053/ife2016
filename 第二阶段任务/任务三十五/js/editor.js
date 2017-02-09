@@ -104,8 +104,11 @@ define(function(){
      */
     Editor.prototype.commands = [
     {
-        pattern: /^go(\s+)?(\d+)?$/i
+        pattern: /^go(\s+)?(\d+)*$/i
     },
+    {
+    	pattern:/^tra\s+(lef|top|rig|bot)\s*\d*$/i
+    }
     ];
 
 	 /**
@@ -136,7 +139,7 @@ define(function(){
 			$("#error").text("错误：第"+(i+1)+"行无效指令/(ㄒoㄒ)/~~");
 			break;
 			case "warnningText":
-			$("#error").text("警告: 前面没有路了。");
+			$("#error").text("警告: 目的地有墙。");
 			break;
 
 		}
