@@ -113,6 +113,9 @@ define(function(){
     },
     {
     	pattern:/^tra\s+(lef|top|rig|bot)\s*\d*$/i
+    },
+    {
+    	pattern:/^mov\s+(lef|top|rig|bot)\s*\d*$/i
     }
     ];
 

@@ -308,7 +308,6 @@ define(function() {
         pattern:/^tra\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
-            //var step =arguments[1][0] || 1;
             var step = arguments[1];
             if(step !== null){
                 for(var i = 0;i<step;i++) {
@@ -321,6 +320,29 @@ define(function() {
             }
             else {
                 if(this.changeDirection(arguments[0]) ===false){
+                    this.isRunSucceed = false;
+                    return false;
+                }
+            }        
+        }
+    },
+    {
+        pattern:/^mov\s+(lef|top|rig|bot)/i,
+        step:/\d+/,
+        handler:function(){
+            var step = arguments[1] ||1 ;
+            this.changeDirection(arguments[0]);
+            if(step !== null){
+                for(var i = 0;i<step;i++) {
+                    if(this.go() === false) {
+                        this.isRunSucceed = false;
+                        return false;
+                    }
+                }
+                return true;
+            }
+            else {
+                if(this.go() ===false){
                     this.isRunSucceed = false;
                     return false;
                 }
