@@ -579,3 +579,43 @@ alert(color);//red
 ####10.8 在点击运行时，在点击运行，小方块执行了两次全部指令
 原因还是同10.5中所说。setTimeout在“任务队列”的现有事件的后面再添加一个事件，规定在指定时间执行某段代码。第一次点击，判断编辑器是否在运行的变量_self.editor.isRunning已经在setTimeout的指定时间内运行完变成false，所以可以再点击运行按钮重复运行指令。
 解决方法，把原本在一开始执行指令后使```_self.editor.isRunning = ture```放在setTimeout方法里面。
+
+####10.9 指令执行时间
+当有空指令时，虽然没有执行指令，但是也等待了一段时间才执行有效指令。而我想要的是跳过空指令的等待时间，直接执行有效指令。
+![35-5](problemsPic/35-5.png)<br>
+这里等待了3秒后才执行go，应该是等待1s执行go。
+解决方法：
+1、先筛选有效指令的索引
+```
+var validComandsIndex = [];
+          //筛选出有效指令
+          for(i =0;i<len;i++){
+            if(commands[i]){
+              validComandsIndex.push(i);
+            }
+          }
+```
+2、再执行有效指令
+```
+for(var k=0,ln = validComandsIndex.length;k<ln;k++){
+            (function(){
+              var j = k;
+              _self.square.isRunSucceed = false;
+              setTimeout(function(){
+                  _self.editor.isRunning = true;
+                  pre = validComandsIndex[j];
+                  _self.editor.clearFlag();
+                  _self.square.execute(commands[validComandsIndex[j]]);
+                  if(_self.square.isRunSucceed){
+                    _self.editor.setFlag(validComandsIndex[j],"success");
+                  }
+                  else{
+                    _self.editor.setFlag(validComandsIndex[j],"warnning");
+                    _self.editor.setErrorText(j,"warnningText");
+                    _self.editor.isRunning = false;
+                    return true;
+                  }
+                },j*TIME);
+            })(k);
+          }
+```

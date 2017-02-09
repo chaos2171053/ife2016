@@ -72,7 +72,7 @@ define(function(){
 	/**
 	 * 清除li标签的className
 	 */
-	Editor.prototype.clearFlag = function(i,className) {
+	Editor.prototype.clearFlag = function() {
 		$('#command-number').children().removeClass();
 	};
 
@@ -129,7 +129,7 @@ define(function(){
 	 * @param {int} i         行数
 	 * @param {string} className 类名
 	 */
-	Editor.prototype.setError = function(i,className) {
+	Editor.prototype.setErrorText = function(i,className) {
 		$('#error').addClass(className);
 		switch(className){
 			case "errorText":

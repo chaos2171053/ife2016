@@ -49,50 +49,79 @@ require(['render',"robot","control","editor"], function (render,robot,
 		_self.editor.clearFlag();
 		_self.editor.clearErrorText();
 		var commands = _self.editor.getCommands();
-		console.log("开始" +_self.editor.isRunning);
+	
         if(!_self.editor.isRunning){
         	//解析全部指令是否都有效
-        	console.log("开始解析" +_self.editor.isRunning);
+        	
         	for(var i =0,len = commands.length;i<len;i++){
         		_self.editor.isRunning = true;
         		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
         			_self.editor.setFlag(i, "error");//标记第一个错误的指令
-        			_self.editor.setError(i,"errorText");
+        			_self.editor.setErrorText(i,"errorText");
         			commandError = true;
         			_self.editor.isRunning = false;
         			return false;
         		}
         	}
-console.log("开始执行" +_self.editor.isRunning);
         	//依次执行指令
         	var pre = 0 ;
         	_self.editor.clearErrorText();
-        	for(i = 0;i<len;i++) {
+        	// for(i = 0;i<len;i++) {
+        	// 	if(commands[i]){
+        	// 		(function(){
+        	// 			var j = i;
+        	// 			_self.square.isRunSucceed = false;
+        	// 			setTimeout(function(){
+        	// 				_self.editor.isRunning = true;
+        	// 				pre = j;
+        	// 				_self.editor.clearFlag(pre,"");
+        	// 				_self.square.execute(commands[j]);
+        	// 				if(_self.square.isRunSucceed){
+        	// 					_self.editor.setFlag(j,"success");
+        	// 				}
+        	// 				else{
+        	// 					_self.editor.setFlag(j,"warnning");
+        	// 					_self.editor.setErrorText(j,"warnningText");
+        	// 					_self.editor.isRunning = false;
+        	// 					return true;
+        	// 				}
+        	// 			},j*TIME);
+        	// 		})(i);
+        	// 	}
+        	// 	}
+        	// }
+
+        	var validComandsIndex = [];
+        	//筛选出有效指令
+        	for(i =0;i<len;i++){
         		if(commands[i]){
-        			(function(){
-        				var j = i;
-        				_self.square.isRunSucceed = false;
-        				setTimeout(function(){
+        			validComandsIndex.push(i);
+        		}
+        	}
+        	for(var k=0,ln = validComandsIndex.length;k<ln;k++){
+        		(function(){
+        			var j = k;
+        			setTimeout(function(){
+        				    _self.square.isRunSucceed = false;
         					_self.editor.isRunning = true;
-        					pre = j;
-        					_self.editor.clearFlag(pre,"");
-        					_self.square.execute(commands[j]);
+        					pre = validComandsIndex[j];
+        					_self.editor.clearFlag();
+        					_self.square.execute(commands[validComandsIndex[j]]);
         					if(_self.square.isRunSucceed){
-        						_self.editor.setFlag(j,"success");
+        						_self.editor.setFlag(validComandsIndex[j],"success");
         					}
         					else{
-        						_self.editor.setFlag(j,"warnning");
-        						_self.editor.setError(i,"warnningText");
+        						_self.editor.setFlag(validComandsIndex[j],"warnning");
+        						_self.editor.setErrorText(j,"warnningText");
         						_self.editor.isRunning = false;
         						return true;
         					}
         				},j*TIME);
-        			})(i);
-        		}
-        		}
+        		})(k);
+        	}
         	}
         	_self.editor.isRunning = false;
-        	console.log("结束" +_self.editor.isRunning);
+
         	return true;	
         };
 	Application.prototype.reset = function() {
