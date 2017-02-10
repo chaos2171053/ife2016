@@ -49,51 +49,87 @@ require(['render',"robot","control","editor"], function (render,robot,
 		var commands = _self.editor.getCommands();
 	
         if(!_self.editor.isRunning){
-        	//解析全部指令是否都有效
-        	for(var i =0,len = commands.length;i<len;i++){
+        	for(var i = 0,len = commands.index.length;i<len;i++){
         		_self.editor.isRunning = true;
-        		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
-        			_self.editor.setFlag(i, "error");//标记第一个错误的指令
-        			_self.editor.setErrorText(i,"errorText");
+        		if(_self.editor.compileComands(commands.cmd[commands.index[i]]) === false){
+        			_self.editor.setFlag(commands.index[i], "error");//标记第一个错误的指令
+        			_self.editor.setErrorText(commands.index[i],"errorText");
         			_self.editor.isRunning = false;
         			return false;
         		}
         	}
+
+
+        	//解析全部指令是否都有效
+        	// for(var i =0,len = commands.length;i<len;i++){
+        	// 	_self.editor.isRunning = true;
+        	// 	if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
+        	// 		_self.editor.setFlag(i, "error");//标记第一个错误的指令
+        	// 		_self.editor.setErrorText(i,"errorText");
+        	// 		_self.editor.isRunning = false;
+        	// 		return false;
+        	// 	}
+        	// }
         	//依次执行指令
-        	var pre = 0 ;
+        	var nowExc = 0 ;
         	_self.editor.clearErrorText();
-        	var validComandsIndex = [];
-        	//筛选出有效指令的索引
-        	for(i =0;i<len;i++){
-        		if(commands[i]){
-        			validComandsIndex.push(i);
-        		}
-        	}
+        	// var validComandsIndex = [];
+        	// //筛选出有效指令的索引
+        	// for(i =0;i<len;i++){
+        	// 	if(commands[i]){
+        	// 		validComandsIndex.push(i);
+        	// 	}
+        	// }
         	var t = null;
-        	for(var k=0,ln = validComandsIndex.length;k<ln;k++){
+        	// for(var k=0,ln = validComandsIndex.length;k<ln;k++){
+        	// 	(function(){
+        	// 		var j = k;
+        	// 		var timer = setTimeout(function(){
+        	// 			if(t!= false && (_self.editor.isRunning != false)){
+        	// 				_self.square.isRunSucceed = false;
+        	// 				pre = validComandsIndex[j];
+        	// 				_self.editor.clearFlag();
+        	// 				_self.square.execute(commands[validComandsIndex[j]]);
+        	// 				if(_self.square.isRunSucceed){
+        	// 					_self.editor.setFlag(validComandsIndex[j],"success");
+        	// 					if(j == (ln-1)){ //执行完所有指令时
+        	// 						_self.editor.isRunning = false;
+        	// 					}
+        	// 				}
+        	// 				else{
+        	// 					_self.editor.setFlag(validComandsIndex[j],"warnning");
+        	// 					_self.editor.setErrorText(j,"warnningText");
+        	// 					_self.editor.isRunning = false;
+        	// 					t =false;
+        	// 				}
+        	// 			}
+        	// 			},j*TIME);
+        	// 	})(k);
+        	// }
+        	for(i = 0;i<len;i++){
         		(function(){
-        			var j = k;
+        			var j = i;
         			var timer = setTimeout(function(){
         				if(t!= false && (_self.editor.isRunning != false)){
         					_self.square.isRunSucceed = false;
-        					pre = validComandsIndex[j];
+        					nowExc = commands.index[j];
         					_self.editor.clearFlag();
-        					_self.square.execute(commands[validComandsIndex[j]]);
+        					_self.square.execute(commands.cmd[nowExc]);
         					if(_self.square.isRunSucceed){
-        						_self.editor.setFlag(validComandsIndex[j],"success");
-        						if(j == (ln-1)){ //执行完所有指令时
+        						_self.editor.setFlag(nowExc,"success");
+        						if(j == (len-1)){ //执行完所有指令时
         							_self.editor.isRunning = false;
         						}
         					}
         					else{
-        						_self.editor.setFlag(validComandsIndex[j],"warnning");
+        						_self.editor.setFlag(nowExc,"warnning");
         						_self.editor.setErrorText(j,"warnningText");
         						_self.editor.isRunning = false;
         						t =false;
         					}
         				}
         				},j*TIME);
-        		})(k);
+        		})(i);
         	}
         	}
 

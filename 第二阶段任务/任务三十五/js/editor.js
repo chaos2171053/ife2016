@@ -95,14 +95,26 @@ define(function(){
 
 	/**
 	 * 获取指令编辑器中的输入内容
-	 * @return {array} 经过去除首尾空白符、中间多个空格的指令
+	 * @return {object} cmd：经过去除首尾空白符、中间多个空格的非空白指令, index：指令索引。
 	 */
 	Editor.prototype.getCommands = function() {
-		var commands = [];
-		$('#command-list').val().toLowerCase().split(/\n/g).forEach(function(command){
-			commands.push($.trim(command));
+		var commands = {};
+		var cmdIndex = [];
+		// $('#command-list').val().toLowerCase().split(/\n/g).forEach(function(command){
+		// 	commands.push($.trim(command));
+		// });
+		// return commands;
+		$('#command-list').val().toLowerCase().split(/\n/g).forEach(function(command,i){
+			if(command){
+				commands[i] = $.trim(command);
+				cmdIndex.push(i);
+			}
+			// commands.push($.trim(command));
 		});
-		return commands;
+		return {
+			cmd:commands,
+			index:cmdIndex
+		};
 	};
 
 	/**
