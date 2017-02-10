@@ -387,8 +387,8 @@ define(function() {
                 var command = this.commands[i];
                 var match = string.match(command.pattern);
                 if(match){
-                    var step = string.match(command.step);// 移动格子  
-                    command.handler.call(this,match[0],step);//match[0]是指令
+                    var step = string.match(command.step);// 移动格子 
+                    command.handler.call(this,match[0].replace(/\s+/g," "),step);
                     match.shift();
                     this.isRunning = false;
                     return true;
