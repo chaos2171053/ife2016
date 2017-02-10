@@ -171,7 +171,7 @@ define(function() {
             }
             this.rotate();
             break;
-            case "mov top":{  // 方向转向屏幕上面，向屏幕的上面移动一格
+            case "mov top":{  // 方向转向屏幕上面
                 switch(this.direction){
                     case "top":
                     this.degree +=0;
@@ -190,7 +190,7 @@ define(function() {
                 this.rotate();
             }
             break;
-            case "mov bot":{// 方向转向屏幕下面，向屏幕的下面移动一格
+            case "mov bot":{// 方向转向屏幕下面
                 switch(this.direction){
                     case "top":
                     this.degree +=180;
@@ -209,7 +209,7 @@ define(function() {
                 this.rotate();
             }
             break;
-            case "mov lef":{ // 方向转向屏幕左侧，并向屏幕的左侧移动一格
+            case "mov lef":{ // 方向转向屏幕左侧
                 switch (this.direction){
                     case "top":
                     this.degree -=90;
@@ -229,7 +229,7 @@ define(function() {
 
             }
             break;
-            case "mov rig":{ // 方向转向屏幕右侧，并向屏幕的右侧移动一格
+            case "mov rig":{ // 方向转向屏幕右侧
                 switch (this.direction){
                     case "top":
                     this.degree +=90;
@@ -375,7 +375,13 @@ define(function() {
             this.changeDirection(arguments[0]);
             return true;
         }
-    }
+    },
+    {
+        pattern:/^change\s+(lef|top|rig|bot)/i,
+        handler:function(){
+            this.changeDirection("mov " +arguments[0].match(/lef|top|rig|bot/i)); 
+        }
+    },
     ];
 
      /**

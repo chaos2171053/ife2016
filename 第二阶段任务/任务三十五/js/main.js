@@ -2,14 +2,13 @@ require.config({
 	paths: {
 		"renderTable": "renderTable",
 		"robot":"robot",
-		"control":"control",
 		"editor":"editor"
 	}
 });
 
 // var square;
-require(['render',"robot","control","editor"], function (render,robot,
-	control,editor) {
+require(['render',"robot","editor"], function (render,robot,
+	editor) {
     /**
      * constructor
      */
@@ -162,7 +161,7 @@ require(['render',"robot","control","editor"], function (render,robot,
 			if (event.target.tagName.toLowerCase()  == 'body') {
 				e.preventDefault();
 				if(_self.square.direction != direction){
-					_self.square.changeDirection("mov " + direction.slice(0,3));
+					_self.square.execute("change " + direction.slice(0,3));
 				}else{
 					_self.square.execute("go");
 				}
