@@ -42,6 +42,9 @@ define(function() {
         this.div.style.top = x * LEN_WID + 'px';
         this.isRunning = false;
         this.isRunSucceed = false;
+        this.degree = 0;
+        this.direction = "buttom";
+        this.rotate();
     };
 
     /**

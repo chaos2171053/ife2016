@@ -31,6 +31,7 @@ require(['render',"robot","control","editor"], function (render,robot,
 	 */
 	Application.prototype.init = function() {
 		var object = {object:this};
+		$(document).keydown(object,this.hotkey);
 		this.$run.click(object,this.run);
 		this.$reset.click(object,this.reset);
 	};
@@ -132,7 +133,6 @@ require(['render',"robot","control","editor"], function (render,robot,
         		})(i);
         	}
         	}
-
         	return true;	
         };
 
@@ -147,6 +147,26 @@ require(['render',"robot","control","editor"], function (render,robot,
 		_self.editor.init();
 	    _self.square.init();
 
+	};
+
+	/**
+	 * 键盘操控小方块移动
+	 * @param  {object} event 事件
+	 */
+	Application.prototype.hotkey = function(event){
+		var e = event || window.event;
+		var _self = e.data.object;
+		var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
+		var direction = code[event.keyCode];
+		if (event.target.tagName.toLowerCase()  == 'body') {
+			e.preventDefault();
+			if(_self.square.direction != direction){
+				_self.square.changeDirection("mov " + direction.slice(0,3));
+			}else{
+				_self.square.execute("go");
+			}
+
+		}
 	};
 	new Application();
 });
