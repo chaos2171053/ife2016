@@ -31,6 +31,20 @@ define(function() {
 	};
 
     /**
+     * 初始化小方块的位置
+     */
+    Square.prototype.init = function() {
+        var x = Math.floor(Math.random() * 10 + 1); // 小方块x轴坐标
+        var y = Math.floor(Math.random() * 10 + 1); // 小方块y轴坐标
+        this.x = x;
+        this.y = y;
+        this.div.style.left = y * LEN_WID + 'px'; 
+        this.div.style.top = x * LEN_WID + 'px';
+        this.isRunning = false;
+        this.isRunSucceed = false;
+    };
+
+    /**
      * 小方块旋转
      * @return {object} 小方块旋转
      */

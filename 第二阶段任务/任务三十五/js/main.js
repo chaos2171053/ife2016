@@ -44,7 +44,6 @@ require(['render',"robot","control","editor"], function (render,robot,
 		var TIME = 1000;//每次指令执行时间 1s
 		var e = event || window.event;
 		var _self = e.data.object;
-		var commandError = false;
 		_self.editor.clearFlag();
 		_self.editor.clearErrorText();
 		var commands = _self.editor.getCommands();
@@ -56,7 +55,6 @@ require(['render',"robot","control","editor"], function (render,robot,
         		if(commands[i] &&_self.editor.compileComands(commands[i]) === false) {
         			_self.editor.setFlag(i, "error");//标记第一个错误的指令
         			_self.editor.setErrorText(i,"errorText");
-        			commandError = true;
         			_self.editor.isRunning = false;
         			return false;
         		}
@@ -102,14 +100,16 @@ require(['render',"robot","control","editor"], function (render,robot,
         	return true;	
         };
 
+    /**
+     * 重置编辑器和小方块
+     * @param  {object} event 事件
+     */
 	Application.prototype.reset = function(event) {
 		var e = event || window.event;
 		var _self = e.data.object;
-		_self.editor.clearFlag();
-		_self.editor.clearErrorText();
 		_self.editor.$commandList.val("");
-		_self.editor.textChanged();
-
+		_self.editor.init();
+	    _self.square.init();
 
 	};
 	new Application();

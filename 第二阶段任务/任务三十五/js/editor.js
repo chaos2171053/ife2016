@@ -8,22 +8,24 @@ define(function(){
 			return instance;
 		}
 		instance = this;
-		this.isRunning = false;
-		this.isSuccessful = false;
+		this.$commandNumber = $('#command-number');// 指令行数列表
+		this.$commandList = $('#command-list');//指令列表
+		this.$commandList.focus(this.editorFocus());
+		this.$commandList.scroll(this.editorScroll);
+		this.$commandList.on('input propertychange',this.textChanged);
 		this.init();
 	};
 
     /**
-     * 编辑器绑定事件
+     * 编辑器初始化
      */
 	Editor.prototype.init = function() {
-		this.$commandNumber = $('#command-number');// 指令行数列表
-		this.$commandList = $('#command-list');//指令列表
+		this.isRunning = false;
+		this.isSuccessful = false;
+		this.textChanged();
+		this.clearFlag();
+		this.clearErrorText();
 		//this.$commandList.keydown(this.inputKeyDown);
-		this.$commandList.focus(this.editorFocus());
-		this.$commandList.scroll(this.editorScroll);
-		this.$commandList.on('input propertychange',this.textChanged);
-
 	};
 
 
