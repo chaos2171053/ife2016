@@ -158,14 +158,16 @@ require(['render',"robot","control","editor"], function (render,robot,
 		var _self = e.data.object;
 		var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
 		var direction = code[event.keyCode];
-		if (event.target.tagName.toLowerCase()  == 'body') {
-			e.preventDefault();
-			if(_self.square.direction != direction){
-				_self.square.changeDirection("mov " + direction.slice(0,3));
-			}else{
-				_self.square.execute("go");
-			}
+		if(direction != undefined){
+			if (event.target.tagName.toLowerCase()  == 'body') {
+				e.preventDefault();
+				if(_self.square.direction != direction){
+					_self.square.changeDirection("mov " + direction.slice(0,3));
+				}else{
+					_self.square.execute("go");
+				}
 
+			}
 		}
 	};
 	new Application();
