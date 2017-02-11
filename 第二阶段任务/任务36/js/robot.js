@@ -1,5 +1,5 @@
 define(function() {
-    var LEN_WID = 36;// 移动距离；
+    var DISTANCE = 36;// 移动距离；
     var BOLCK_NUM = 20;// 一行、一列的单元格数量；
   
 
@@ -18,8 +18,8 @@ define(function() {
         instance = this;
         var img  = document.createElement("img");
         img.src = "img/bot.png";
-        img.style.left = x * LEN_WID + 'px';
-        img.style.top = y * LEN_WID + 'px';
+        img.style.left = x * DISTANCE + 'px';
+        img.style.top = y * DISTANCE + 'px';
         bg[0].appendChild(img);
 		this.x = x;
 		this.y = y;
@@ -38,8 +38,8 @@ define(function() {
         var y = Math.floor(Math.random() * 10 + 1); // 小方块y轴坐标
         this.x = x;
         this.y = y;
-        this.div.style.left = y * LEN_WID + 'px'; 
-        this.div.style.top = x * LEN_WID + 'px';
+        this.div.style.left = y * DISTANCE + 'px'; 
+        this.div.style.top = x * DISTANCE + 'px';
         this.isRunning = false;
         this.isRunSucceed = false;
         this.degree = 0;
@@ -69,7 +69,7 @@ define(function() {
      * @returns {Bollean} 小方块指令是否运行成功
      */
     Square.prototype.go = function(step){
-        if(this.getAheadPosition()){
+        if(this.getAheadPosition(this.direction)){
             switch (this.direction) {
                 case "top":
                     this.y--;
@@ -84,58 +84,14 @@ define(function() {
                     this.x--;
                 break;
             }
-            this.div.style.top = this.y * LEN_WID + 'px';
-            this.div.style.left = this.x * LEN_WID +'px';
+            this.div.style.top = this.y * DISTANCE + 'px';
+            this.div.style.left = this.x * DISTANCE +'px';
             this.isRunSucceed = true;
             return true;
         }else{
           this.isRunSucceed = false;
           return false;
         }
-    // 	switch (this.direction) {
-    //         case "top":
-    //         if(this.y>1){
-    //             this.y--;
-    //             this.div.style.top = this.y * LEN_WID + 'px';
-    //         }
-    //         else{
-    //             this.isRunSucceed = false;
-    //             return false;
-    //         }
-    //         break;
-    //         case "right":
-    //         if(this.x < BOLCK_NUM){
-    //             this.x ++;
-    //             this.div.style.left = this.x * LEN_WID +'px';
-    //         }
-    //         else{
-    //             this.isRunSucceed = false;
-    //             return false;
-    //         }
-    //         break;
-    //         case "bottom":
-    //         if(this.y < BOLCK_NUM){
-    //             this.y++;
-    //             this.div.style.top = this.y * LEN_WID + 'px';
-    //         }
-    //         else{
-    //             this.isRunSucceed = false;
-    //             return false;
-    //         }
-    //         break;
-    //         case "left":
-    //         if(this.x > 1){
-    //             this.x--;
-    //             this.div.style.left = this.x * LEN_WID +'px';
-    //         }
-    //         else{
-    //             this.isRunSucceed = false;
-    //             return false;
-    //         }
-    //         break;
-    // }
-    // this.isRunSucceed = true;
-    // return true;
     };
 
 
@@ -281,9 +237,9 @@ define(function() {
             }
             break;
             case "tra lef":{
-                if(this.getAheadPosition()){
+                if(this.getAheadPosition("left")){
                     this.x--;
-                    this.div.style.left = this.x * LEN_WID +'px';
+                    this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
                     this.isRunSucceed = false;
@@ -292,9 +248,9 @@ define(function() {
             }
             break;
             case "tra top":{
-                if(this.getAheadPosition()){
+                if(this.getAheadPosition("top")){
                     this.y--;
-                    this.div.style.top = this.y * LEN_WID +'px';
+                    this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
                     this.isRunSucceed = false;
@@ -303,9 +259,9 @@ define(function() {
             }
             break;
             case "tra rig":{
-                if(this.getAheadPosition()){
+                if(this.getAheadPosition("right")){
                     this.x++;
-                    this.div.style.left = this.x * LEN_WID +'px';
+                    this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
                     this.isRunSucceed = false;
@@ -315,9 +271,9 @@ define(function() {
             }
             break;
             case "tra bot":{
-                if(this.getAheadPosition()){
+                if(this.getAheadPosition("bottom")){
                     this.y++;
-                    this.div.style.top = this.y * LEN_WID +'px';
+                    this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
                     this.isRunSucceed = false;
@@ -420,9 +376,13 @@ define(function() {
     {
         pattern:/^build$/i,
         handler:function(){
-            alert("fuck");
-            this.isRunSucceed =true;
-            return true;
+            if(this.getAheadPosition()){
+                this.isRunSucceed =true;
+                return true;
+            }else{
+                this.isRunSucceed =false;
+                return false;
+            }
         }
     }
     ];
@@ -460,11 +420,11 @@ define(function() {
      * 判断前方一格是否有墙
      * @return {bollean} 可走true，不可以false。
      */
-    Square.prototype.getAheadPosition =function(){
+    Square.prototype.getAheadPosition =function(direction){
         var x;
         var y;
         var targetClaaName;
-        switch(this.direction){
+        switch(direction){
             case "top":{
                 x = this.x;
                 y = this.y-1;
@@ -486,10 +446,9 @@ define(function() {
             }
             break;
         }
-        if( x>=1 && x<=11 && y<=11 && y>=1){
-            targetClaaName = $("tr:nth-child("+ x +") td:nth-child("+ y +")")
-            .attr('class')
-            .toLowerCase();
+        if( x>=1 && x<21 && y<21 && y>=1){
+            // console.log($("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className);
+            targetClaaName = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className;
             if (targetClaaName == "x-axis" || targetClaaName == "wall"|| targetClaaName =="y-axis"){
                 return false;
             }else{
