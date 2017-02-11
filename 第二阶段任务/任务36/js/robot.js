@@ -7,8 +7,8 @@ define(function() {
 	 * 小方块构造器
 	 * @param {int} x x轴坐标
 	 * @param {int} y y轴坐标
-	 * @param {int} degree 初始角度
-     * @param {string} direction 上：top；右：right；下：bottom；左：left
+	 * @param {int} degree 角度
+     * @param {string} direction 方向
 	 */
 	var Square = function(bg,x,y,degree,direction) {
         var instance;
@@ -18,8 +18,8 @@ define(function() {
         instance = this;
         var img  = document.createElement("img");
         img.src = "img/bot.png";
-        img.style.left = y * LEN_WID + 'px';
-        img.style.top = x * LEN_WID + 'px';
+        img.style.left = x * LEN_WID + 'px';
+        img.style.top = y * LEN_WID + 'px';
         bg[0].appendChild(img);
 		this.x = x;
 		this.y = y;
@@ -55,6 +55,13 @@ define(function() {
         return $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
     };
 
+    // Square.prototype.getCurrentDirection = function(){
+    //     var angle = this.degree % 360; 
+    //     angle >= 0 ? angle : angle + 360;
+    //     this.direction = {0:"bottom",90:"right",180:"top",270:"left"}[angle];
+    //     return this.direction;
+
+    // };
 
     /**
      * 方块向前移动
@@ -62,51 +69,73 @@ define(function() {
      * @returns {Bollean} 小方块指令是否运行成功
      */
     Square.prototype.go = function(step){
-
-    	switch (this.direction) {
-            case "top":
-            if(this.x>1){
-                this.x--;
-                this.div.style.top = this.x * LEN_WID + 'px';
+        if(this.getAheadPosition()){
+            switch (this.direction) {
+                case "top":
+                    this.y--;
+                break;
+                case "right":
+                    this.x ++;
+                break;
+                case "bottom":
+                    this.y++;
+                break;
+                case "left":
+                    this.x--;
+                break;
             }
-            else{
-                this.isRunSucceed = false;
-                return false;
-            }
-            break;
-            case "right":
-            if(this.y < BOLCK_NUM){
-                this.y ++;
-                this.div.style.left = this.y * LEN_WID +'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
-            }
-            break;
-            case "bottom":
-            if(this.x < BOLCK_NUM){
-                this.x++;
-                this.div.style.top = this.x * LEN_WID + 'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
-            }
-            break;
-            case "left":
-            if(this.y > 1){
-                this.y--;
-                this.div.style.left = this.y * LEN_WID +'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
-            }
-            break;
-    }
-    this.isRunSucceed = true;
-    return true;
+            this.div.style.top = this.y * LEN_WID + 'px';
+            this.div.style.left = this.x * LEN_WID +'px';
+            this.isRunSucceed = true;
+            return true;
+        }else{
+          this.isRunSucceed = false;
+          return false;
+        }
+    // 	switch (this.direction) {
+    //         case "top":
+    //         if(this.y>1){
+    //             this.y--;
+    //             this.div.style.top = this.y * LEN_WID + 'px';
+    //         }
+    //         else{
+    //             this.isRunSucceed = false;
+    //             return false;
+    //         }
+    //         break;
+    //         case "right":
+    //         if(this.x < BOLCK_NUM){
+    //             this.x ++;
+    //             this.div.style.left = this.x * LEN_WID +'px';
+    //         }
+    //         else{
+    //             this.isRunSucceed = false;
+    //             return false;
+    //         }
+    //         break;
+    //         case "bottom":
+    //         if(this.y < BOLCK_NUM){
+    //             this.y++;
+    //             this.div.style.top = this.y * LEN_WID + 'px';
+    //         }
+    //         else{
+    //             this.isRunSucceed = false;
+    //             return false;
+    //         }
+    //         break;
+    //         case "left":
+    //         if(this.x > 1){
+    //             this.x--;
+    //             this.div.style.left = this.x * LEN_WID +'px';
+    //         }
+    //         else{
+    //             this.isRunSucceed = false;
+    //             return false;
+    //         }
+    //         break;
+    // }
+    // this.isRunSucceed = true;
+    // return true;
     };
 
 
@@ -117,59 +146,62 @@ define(function() {
     */
     Square.prototype.changeDirection = function (command) {
         switch(command){
-            case "tun lef":
-            this.degree -=90;// 左转
-            switch(this.direction){
-                case "top":
-                this.direction = "left";
-                break;
-                case "right":
-                this.direction = "top";
-                break;
-                case "bottom":
-                this.direction = "right";
-                break;
-                case "left":
-                this.direction = "bottom";
-                break;
+            case "tun lef":{
+                this.degree -=90;// 左转
+                switch(this.direction){
+                    case "top":
+                    this.direction = "left";
+                    break;
+                    case "right":
+                    this.direction = "top";
+                    break;
+                    case "bottom":
+                    this.direction = "right";
+                    break;
+                    case "left":
+                    this.direction = "bottom";
+                    break;
+                }
+                this.rotate();
             }
-            this.rotate();
             break;
-            case "tun rig":
-            this.degree +=90;// 右转
-            switch(this.direction){
-                case "top":
-                this.direction = "right";
-                break;
-                case "right":
-                this.direction = "bottom";
-                break;
-                case "bottom":
-                this.direction = "left";
-                break;
-                case "left":
-                this.direction = "top";
-                break;
+            case "tun rig":{
+                this.degree +=90;// 右转
+                switch(this.direction){
+                    case "top":
+                    this.direction = "right";
+                    break;
+                    case "right":
+                    this.direction = "bottom";
+                    break;
+                    case "bottom":
+                    this.direction = "left";
+                    break;
+                    case "left":
+                    this.direction = "top";
+                    break;
+                }
+                this.rotate();
             }
-            this.rotate();
             break;
-            case "tun bac":
-            this.degree +=180;// 转身
-            switch(this.direction){
-                case "top":
-                this.direction = "bottom";
-                break;
-                case "right":
-                this.direction = "left";
-                break;
-                case "bottom":
-                this.direction = "top";
-                break;
-                case "left":
-                this.direction = "right";
-                break;
+            case "tun bac":{
+                this.degree +=180;// 转身
+                switch(this.direction){
+                    case "top":
+                    this.direction = "bottom";
+                    break;
+                    case "right":
+                    this.direction = "left";
+                    break;
+                    case "bottom":
+                    this.direction = "top";
+                    break;
+                    case "left":
+                    this.direction = "right";
+                    break;
+                }
+                this.rotate();
             }
-            this.rotate();
             break;
             case "mov top":{  // 方向转向屏幕上面
                 switch(this.direction){
@@ -248,44 +280,49 @@ define(function() {
                 this.rotate();
             }
             break;
-            case "tra lef":
-            if(this.y > 1){
-                this.y--;
-                this.div.style.left = this.y * LEN_WID +'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
-            }
-            break;
-            case "tra top":
-            if(this.x>1){
-                this.x--;
-                this.div.style.top = this.x * LEN_WID +'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
+            case "tra lef":{
+                if(this.getAheadPosition()){
+                    this.x--;
+                    this.div.style.left = this.x * LEN_WID +'px';
+                }
+                else{
+                    this.isRunSucceed = false;
+                    return false;
+                }
             }
             break;
-            case "tra rig":
-            if(this.y<BOLCK_NUM){
-                this.y++;
-                this.div.style.left = this.y * LEN_WID +'px';
-            }
-            else{
-                this.isRunSucceed = false;
-                return false;
+            case "tra top":{
+                if(this.getAheadPosition()){
+                    this.y--;
+                    this.div.style.top = this.y * LEN_WID +'px';
+                }
+                else{
+                    this.isRunSucceed = false;
+                    return false;
+                }
             }
             break;
-            case "tra bot":
-            if(this.x<BOLCK_NUM){
-                this.x++;
-                this.div.style.top = this.x * LEN_WID +'px';
+            case "tra rig":{
+                if(this.getAheadPosition()){
+                    this.x++;
+                    this.div.style.left = this.x * LEN_WID +'px';
+                }
+                else{
+                    this.isRunSucceed = false;
+                    return false;
+                }
+
             }
-            else{
-                this.isRunSucceed = false;
-                return false;
+            break;
+            case "tra bot":{
+                if(this.getAheadPosition()){
+                    this.y++;
+                    this.div.style.top = this.y * LEN_WID +'px';
+                }
+                else{
+                    this.isRunSucceed = false;
+                    return false;
+                }
             }
             break;
             }
@@ -417,6 +454,53 @@ define(function() {
 
         }
     };
+
+
+    /**
+     * 判断前方一格是否有墙
+     * @return {bollean} 可走true，不可以false。
+     */
+    Square.prototype.getAheadPosition =function(){
+        var x;
+        var y;
+        var targetClaaName;
+        switch(this.direction){
+            case "top":{
+                x = this.x;
+                y = this.y-1;
+            }
+            break;
+            case "right":{
+                x = this.x+1;
+                y = this.y;
+            }
+            break;
+            case "bottom":{
+                x = this.x;
+                y = this.y+1;
+            }
+            break;
+            case "left":{
+                x = this.x-1;
+                y = this.y;
+            }
+            break;
+        }
+        if( x>=1 && x<=11 && y<=11 && y>=1){
+            targetClaaName = $("tr:nth-child("+ x +") td:nth-child("+ y +")")
+            .attr('class')
+            .toLowerCase();
+            if (targetClaaName == "x-axis" || targetClaaName == "wall"|| targetClaaName =="y-axis"){
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            return false;
+        }
+    };
+
+
 	return {
 		Square:Square
 	}; 
