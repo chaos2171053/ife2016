@@ -1,0 +1,141 @@
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+body {
+    margin: 30px auto;
+    width: 1240px;
+}
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }
+table {
+    float: left;
+	border-collapse: collapse;
+    position: relative;
+	border-spacing: 0px;
+}
+.background td{
+    width: 35px;
+    height: 35px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+
+div.inputArea {
+    text-align: center;
+
+}
+input {
+    width: 218px;
+    height: 30px;
+    padding: 10px;
+    border: 1px solid #aaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -o-border-radius: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    outline: 0;
+}
+
+/*从第二行开始，每列第二格右边框和下边框*/
+.background tr:nth-child(n + 2) td:nth-child(n + 2) {
+    border: 1px solid #aaa;
+}
+
+img {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+
+.control-pannel {
+    margin-left: 10px;
+    float: right;
+    width: 474px;
+}
+.button-pannel {
+    margin: 3px 0 10px 10px;
+}
+#error {
+    display: inline-block;
+    margin-left: 10px;
+}
+.errorText {
+    color: #c42e35;
+}
+.warnningText {
+    color: #ffc450;
+}
+.button-pannel button {
+    height: 22px;
+    width: 50px;
+    margin-right: 5px;
+    font-size: 12px;
+    box-sizing: border-box;
+    float: left;
+}
+.command-pannel {
+    height: 721px;
+}
+#command-number-wrapper{
+    display: inline-block;
+    /* width:40px; */
+    height: 721px;
+}
+#command-number .error {
+    background-color: #c42e35;
+}
+#command-number .success {
+    background-color: #7fe22e;
+}
+#command-number .warnning {
+    background-color: #ffc450;
+}
+#command-list {
+    float: right;
+    font-size: 16px;
+    width: 434px;
+    height: 721px;
+    color: #fff;
+    line-height:25px;
+    box-sizing: border-box;
+    border: 0;
+    border-radius: 0 4px 4px 0;
+    outline: none;
+    margin: 0;
+    background-color: #34495e;
+    resize: none;
+    padding-left: 8px;
+}
+
+ol {
+    float: left;
+    width:40px;
+    height: 721px;
+    list-style-type:none;
+    counter-reset:sectioncounter;
+    border-radius: 4px 0 0 4px;
+    background-color: #2c3e50;
+    overflow: hidden;
+} 
+li {
+    text-align: right;
+    color: #fff;
+    line-height:25px;
+    padding-right: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+} 
+ol li:before {  
+    content:counter(sectioncounter) "";   
+    counter-increment:sectioncounter;  
+ } 

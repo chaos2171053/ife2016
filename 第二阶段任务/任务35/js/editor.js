@@ -176,8 +176,6 @@ define(function(){
 	Editor.prototype.clearErrorText = function() {
 		$("#error").text("");
 	};
-
-
 	return {
 		Editor:Editor
 	};
