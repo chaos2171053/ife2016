@@ -369,7 +369,17 @@ define(function() {
                 return false;
             }
         }
-    }
+    },
+    {
+        pattern:/^bru\s+#[0-9a-fA-F]{6}$/i,
+        color:/#[0-9a-fA-F]{6}$/i,
+        handler:function(){
+            if(!(this.canGo(this.direction))){
+                this.bru(arguments[1]);
+            }
+            return true;
+        }
+    },
     ];
 
      /**
@@ -383,9 +393,17 @@ define(function() {
             for(var i = 0,len = this.commands.length;i<len;i++) {
                 var command = this.commands[i];
                 var match = string.match(command.pattern);
+                var argument;
                 if(match){
-                    var step = string.match(command.step);// 移动格子 
-                    command.handler.call(this,match[0].replace(/\s+/g," "),step);
+                    if(command.step){
+                        argument= string.match(command.step);// 移动格子 
+                    }
+                    if(command.color){
+                        argument = string.match(command.color)[0].toLowerCase();// 16进制颜色 
+                    }
+                    command.handler.call(this,match[0].replace(/\s+/g," "),argument);
+                    // var step = string.match(command.step);// 移动格子 
+                    // command.handler.call(this,match[0].replace(/\s+/g," "),step);
                     match.shift();
                     this.isRunning = false;
                     if(this.isRunSucceed){
@@ -463,6 +481,19 @@ define(function() {
         $target.addClass("wall");
         this.isRunSucceed = true;
     };
+
+    Square.prototype.bru = function(color){
+        var targetClaaName;
+        var x = this.getPosition(this.direction).x;
+        var y = this.getPosition(this.direction).y;
+        var $target = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")");
+        targetClassName = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className;
+        if(targetClassName == "wall"){
+            $target.css("background-color",color);
+        }
+        this.isRunSucceed = true;
+
+    }
 
 
 	return {
