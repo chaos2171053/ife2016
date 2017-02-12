@@ -113,7 +113,10 @@ define(function(){
     },
     {
     	pattern:/^build$/i
-    }
+    },
+    {
+    	pattern:/^bru\s+#[0-9a-fA-F]{6}$/i
+    },
     ];
 
 	 /**
@@ -144,7 +147,7 @@ define(function(){
 			$("#error").text("错误：第"+(i+1)+"行无效指令/(ㄒoㄒ)/~~");
 			break;
 			case "warnningText":
-			$("#error").text("警告: 目的地有墙阻拦。");
+			$("#error").text("警告: 所选方向有墙。");
 			break;
 
 		}
@@ -156,7 +159,10 @@ define(function(){
 	Editor.prototype.clearErrorText = function() {
 		$("#error").text("");
 	};
+
 	return {
 		Editor:Editor
 	};
+
+
 });

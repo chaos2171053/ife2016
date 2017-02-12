@@ -42,6 +42,13 @@ define(function(){
 			this.$element.append(strTr);
 		}
 	};
+
+	/**
+	 * 清除所有墙
+	 */
+	Table.prototype.clearWall = function(){
+		$("td").removeClass("wall"); 
+	};
 	return {
 		Table:Table
 	};

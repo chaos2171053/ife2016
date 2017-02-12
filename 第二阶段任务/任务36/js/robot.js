@@ -38,12 +38,12 @@ define(function() {
         var y = Math.floor(Math.random() * 10 + 1); // 小方块y轴坐标
         this.x = x;
         this.y = y;
-        this.div.style.left = y * DISTANCE + 'px'; 
-        this.div.style.top = x * DISTANCE + 'px';
+        this.div.style.left = x * DISTANCE + 'px';
+        this.div.style.top = y * DISTANCE + 'px';
         this.isRunning = false;
         this.isRunSucceed = false;
         this.degree = 0;
-        this.direction = "buttom";
+        this.direction = "bottom";
         this.rotate();
     };
 
@@ -54,14 +54,6 @@ define(function() {
     Square.prototype.rotate = function(){
         return $(this.div).css("transform", "rotate(" + this.degree +"deg)");//翻转
     };
-
-    // Square.prototype.getCurrentDirection = function(){
-    //     var angle = this.degree % 360; 
-    //     angle >= 0 ? angle : angle + 360;
-    //     this.direction = {0:"bottom",90:"right",180:"top",270:"left"}[angle];
-    //     return this.direction;
-
-    // };
 
     /**
      * 方块向前移动
@@ -372,7 +364,6 @@ define(function() {
         handler:function(){
             if(this.canGo(this.direction)){
                 this.build();
-                this.isRunSucceed =true;
                 return true;
             }else{
                 return false;
@@ -397,7 +388,6 @@ define(function() {
                     command.handler.call(this,match[0].replace(/\s+/g," "),step);
                     match.shift();
                     this.isRunning = false;
-                    // return true;
                     if(this.isRunSucceed){
                         return true;
                     }else{
@@ -463,6 +453,9 @@ define(function() {
         }
     };
 
+    /**
+     * 在小方块前方修墙
+     */
     Square.prototype.build = function(){
         var x = this.getPosition(this.direction).x;
         var y = this.getPosition(this.direction).y;

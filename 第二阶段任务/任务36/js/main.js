@@ -102,6 +102,7 @@ require(['render',"robot","editor"], function (render,robot,
 		_self.editor.$commandList.val("");
 		_self.editor.init();
 	    _self.square.init();
+	    _self.table.clearWall();
 
 	};
 
@@ -112,21 +113,42 @@ require(['render',"robot","editor"], function (render,robot,
 	Application.prototype.hotkey = function(event){
 		var e = event || window.event;
 		var _self = e.data.object;
-		var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
-		var direction = code[event.keyCode];
-		if(direction != undefined){
-			if (event.target.tagName.toLowerCase()  == 'body') {
-				e.preventDefault();
-				if(_self.square.direction != direction){
-					_self.square.execute("change " + direction.slice(0,3));
-				}else{
-					_self.square.execute("go");
-				}
+		// var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
+		// var direction = code[event.keyCode];
+		// if(direction != undefined){
+		// 	if (e.target.tagName.toLowerCase()  == 'body') {
+		// 		e.preventDefault();
+		// 		if(_self.square.direction != direction){
+		// 			_self.square.execute("change " + direction.slice(0,3));
+		// 		}else{
+		// 			_self.square.execute("go");
+		// 		}
 
-			}
-		}
-		if(event.keyCode == 32){
-			_self.square.execute("build");
+		// 	}
+		// }
+		// if(event.keyCode == 32){
+		// 	e.preventDefault();
+		// 	_self.square.execute("build");
+		// }
+
+		if (e.target.tagName.toLowerCase()  == 'body') {
+			var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
+		    var direction = code[event.keyCode];
+		    if(direction != undefined){
+		    	if (e.target.tagName.toLowerCase()  == 'body') {
+		    		e.preventDefault();
+		    		if(_self.square.direction != direction){
+		    			_self.square.execute("change " + direction.slice(0,3));
+		    		}else{
+		    			_self.square.execute("go");
+		    		}
+
+		    	}
+		    }
+		    if(e.keyCode == 32){
+		    	e.preventDefault();
+		    	_self.square.execute("build");
+		    }
 		}
 	};
 	new Application();
