@@ -125,6 +125,9 @@ require(['render',"robot","editor"], function (render,robot,
 
 			}
 		}
+		if(event.keyCode == 32){
+			_self.square.execute("build");
+		}
 	};
 	new Application();
 });

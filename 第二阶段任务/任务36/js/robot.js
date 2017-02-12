@@ -69,7 +69,7 @@ define(function() {
      * @returns {Bollean} 小方块指令是否运行成功
      */
     Square.prototype.go = function(step){
-        if(this.getAheadPosition(this.direction)){
+        if(this.canGo(this.direction)){
             switch (this.direction) {
                 case "top":
                     this.y--;
@@ -237,7 +237,7 @@ define(function() {
             }
             break;
             case "tra lef":{
-                if(this.getAheadPosition("left")){
+                if(this.canGo("left")){
                     this.x--;
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
@@ -248,7 +248,7 @@ define(function() {
             }
             break;
             case "tra top":{
-                if(this.getAheadPosition("top")){
+                if(this.canGo("top")){
                     this.y--;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
@@ -259,7 +259,7 @@ define(function() {
             }
             break;
             case "tra rig":{
-                if(this.getAheadPosition("right")){
+                if(this.canGo("right")){
                     this.x++;
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
@@ -271,7 +271,7 @@ define(function() {
             }
             break;
             case "tra bot":{
-                if(this.getAheadPosition("bottom")){
+                if(this.canGo("bottom")){
                     this.y++;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
@@ -300,7 +300,6 @@ define(function() {
             if(step !== null){
                 for(var i = 0;i<step;i++) {
                     if(this.go() === false) {
-                        // this.isRunSucceed = false;
                         return false;
                     }
                 }
@@ -308,7 +307,6 @@ define(function() {
             }
             else {
                 if(this.go() ===false){
-                    // this.isRunSucceed = false;
                     return false;
                 }
             }           
@@ -322,7 +320,6 @@ define(function() {
             if(step !== null){
                 for(var i = 0;i<step;i++) {
                     if(this.changeDirection(arguments[0]) === false) {
-                        // this.isRunSucceed = false;
                         return false;
                     }
                 }
@@ -330,7 +327,6 @@ define(function() {
             }
             else {
                 if(this.changeDirection(arguments[0]) ===false){
-                    // this.isRunSucceed = false;
                     return false;
                 }
             }        
@@ -345,7 +341,6 @@ define(function() {
             if(step !== null){
                 for(var i = 0;i<step;i++) {
                     if(this.go() === false) {
-                        // this.isRunSucceed = false;
                         return false;
                     }
                 }
@@ -353,7 +348,6 @@ define(function() {
             }
             else {
                 if(this.go() ===false){
-                    // this.isRunSucceed = false;
                     return false;
                 }
             }        
@@ -376,11 +370,11 @@ define(function() {
     {
         pattern:/^build$/i,
         handler:function(){
-            if(this.getAheadPosition()){
+            if(this.canGo(this.direction)){
+                this.build();
                 this.isRunSucceed =true;
                 return true;
             }else{
-                this.isRunSucceed =false;
                 return false;
             }
         }
@@ -415,15 +409,14 @@ define(function() {
         }
     };
 
-
     /**
-     * 判断前方一格是否有墙
-     * @return {bollean} 可走true，不可以false。
+     * 获取选择的方向的第一个小方块坐标
+     * @param  {string} direction 选择的方向
+     * @return {object}           x、y坐标
      */
-    Square.prototype.getAheadPosition =function(direction){
+    Square.prototype.getPosition = function(direction){
         var x;
         var y;
-        var targetClaaName;
         switch(direction){
             case "top":{
                 x = this.x;
@@ -446,10 +439,21 @@ define(function() {
             }
             break;
         }
+        return {x:x,y:y};
+    };
+
+    /**
+     * 判断前方一格是否有墙
+     * @param {string} direction 要前进的方向
+     * @return {bollean} 可走true，不可以false。
+     */
+    Square.prototype.canGo =function(direction){
+        var targetClaaName;
+        var x = this.getPosition(direction).x;
+        var y = this.getPosition(direction).y;
         if( x>=1 && x<21 && y<21 && y>=1){
-            // console.log($("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className);
-            targetClaaName = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className;
-            if (targetClaaName == "x-axis" || targetClaaName == "wall"|| targetClaaName =="y-axis"){
+            targetClassName = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className;
+            if (targetClassName == "x-axis" || targetClassName == "wall" || targetClassName =="y-axis"){
                 return false;
             }else{
                 return true;
@@ -457,6 +461,14 @@ define(function() {
         }else{
             return false;
         }
+    };
+
+    Square.prototype.build = function(){
+        var x = this.getPosition(this.direction).x;
+        var y = this.getPosition(this.direction).y;
+        var $target = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")");
+        $target.addClass("wall");
+        this.isRunSucceed = true;
     };
 
 

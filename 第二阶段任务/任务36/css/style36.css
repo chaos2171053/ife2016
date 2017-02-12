@@ -139,3 +139,7 @@ ol li:before {
     content:counter(sectioncounter) "";   
     counter-increment:sectioncounter;  
  } 
+
+.wall {
+    background-color: #bdc3c7;
+}

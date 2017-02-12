@@ -27,11 +27,11 @@ define(function(){
 				var strTd = "";
 				//标注行数
 				if(i ==0 && j>0) {
-					strTd = "<td>"+ j +"</td>";
+					strTd = '<td class = "x-axis">'+ j +"</td>";
 				}
 				//标注列数
 				else if(j == 0 && i>0) {
-					strTd = "<td>" + i +"</td>"; 
+					strTd = '<td class = "y-axis">' + i +"</td>"; 
 				}
 				else {
 					strTd = "<td></td>";
