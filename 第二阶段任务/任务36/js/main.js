@@ -22,6 +22,7 @@ require(['render',"robot","editor"], function (render,robot,
 		this.editor = new editor.Editor();//编辑器实例
 		this.$run = $('#run');
 		this.$reset = $('#reset');
+		this.$random = $("#random");
 		this.init();
 	};
 
@@ -33,6 +34,7 @@ require(['render',"robot","editor"], function (render,robot,
 		$(document).keydown(object,this.hotkey);
 		this.$run.click(object,this.run);
 		this.$reset.click(object,this.reset);
+		this.$random.click(object,this.random);
 	};
 	
 	/**
@@ -44,11 +46,10 @@ require(['render',"robot","editor"], function (render,robot,
 		var TIME = 1000;//每次指令执行时间 1s
 		var e = event || window.event;
 		var _self = e.data.object;
-		_self.editor.clearFlag();
-		_self.editor.clearErrorText();
-		var commands = _self.editor.getCommands();
-	
         if(!_self.editor.isRunning){
+        	_self.editor.clearFlag();
+        	_self.editor.clearErrorText();
+        	var commands = _self.editor.getCommands();
         	for(var i = 0,len = commands.index.length;i<len;i++){
         		_self.editor.isRunning = true;
         		if(_self.editor.compileComands(commands.cmd[commands.index[i]]) === false){
@@ -115,23 +116,50 @@ require(['render',"robot","editor"], function (render,robot,
 		var _self = e.data.object;
 		if(!_self.editor.isRunning){
 			if (e.target.tagName.toLowerCase()  == 'body') {
-			var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
-		    var direction = code[event.keyCode];
-		    if(direction != undefined){
-		    	e.preventDefault();
-		    	if(_self.square.direction != direction){
-		    		_self.square.execute("change " + direction.slice(0,3));
-		    	}else{
-		    		_self.square.execute("go");
-		    	}
-		    }
-		    if(e.keyCode == 32){
-		    	e.preventDefault();
-		    	_self.square.execute("build");
-		    }
+				var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
+				var direction = code[event.keyCode];
+				if(direction != undefined){
+					e.preventDefault();
+					if(_self.square.direction != direction){
+						_self.square.execute("change " + direction.slice(0,3));
+					}else{
+						_self.square.execute("go");
+					}
+				}
+				if(e.keyCode == 32){
+					e.preventDefault();
+					_self.square.execute("build");
+				}
+			}
 		}
-		}
-		
 	};
+
+	/**
+	 * 随机修墙
+	 * @param  {object} event 事件
+	 * @return {[type]}       [description]
+	 */
+	Application.prototype.random = function(event) {
+		var e = event || window.event;
+		var _self = e.data.object;
+		if(!_self.editor.isRunning){
+			_self.table.clearWall();
+			var wallsNum = Math.floor(Math.random() * 10+1); // 随机要生成的墙数
+			for(var i = 0;i<wallsNum;i++){
+			var x = Math.floor(Math.random() * 20 + 1); // 墙x轴坐标
+			var y = Math.floor(Math.random() * 20 + 1); // 
+			var reuslt =_self.table.canBuild(x,y,_self.square.x,_self.square.y);
+			while(reuslt){
+				x = Math.floor(Math.random() * 20 + 1); 
+				y = Math.floor(Math.random() * 20 + 1); 
+				reuslt =_self.table.canBuild(x,y,_self.square.x,_self.square.y);
+			}
+			_self.table.build(x,y);
+		}
+		}
+		else{
+			_self.editor.setErrorText(null,"RunningText");
+		}
+	}
 	new Application();
 });

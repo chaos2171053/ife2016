@@ -1,4 +1,5 @@
 define(function(){
+	
 	/**
 	 * 表格constructor
 	 * @param  {int} row   行数
@@ -49,6 +50,36 @@ define(function(){
 	Table.prototype.clearWall = function(){
 		$("td").removeClass("wall"); 
 		$("td").css("background-color","");
+	};
+
+	/**
+	 * 判断目标是否可以修墙
+	 * @param  {int} x       目标x坐标
+	 * @param  {int} y       目标y坐标
+	 * @param  {int} squareX 小方块x坐标
+	 * @param  {int} squareY 小方块y坐标
+	 * @return {bollean}         可以返回false，不可以true。
+	 */
+	Table.prototype.canBuild = function(x,y,squareX,squareY) {
+		if( x>0 && x<21 && y>0 && y< 21 && x != squareX && y != squareY){
+			var targetClassName = $("tr:nth-child("+ y +") td:nth-child("+ x +")")[0].className;
+			if(targetClassName != "wall"){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return true;
+		}
+	}
+
+    /**
+     * 修建一堵墙
+     * @param  {int} x 墙的x轴坐标
+     * @param  {int} y 墙的y轴坐标
+     */
+	Table.prototype.build = function(x,y) {
+		$("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")").addClass("wall");
 	};
 	return {
 		Table:Table

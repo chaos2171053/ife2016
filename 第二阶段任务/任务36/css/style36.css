@@ -49,11 +49,11 @@ img {
     width: 36px;
     height: 36px;
     position: absolute;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    transition: all 1s ease;
+    -webkit-transition: all 0.25s ease;
+    -moz-transition: all 0.25s ease;
+    -ms-transition: all 0.25s ease;
+    -o-transition: all 0.25s ease;
+    transition: all 0.25s ease;
 }
 
 
@@ -72,12 +72,13 @@ img {
 .errorText {
     color: #c42e35;
 }
-.warnningText {
+.warnningText,.RunningText {
     color: #ffc450;
 }
+
 .button-pannel button {
     height: 22px;
-    width: 50px;
+    width: 65px;
     margin-right: 5px;
     font-size: 12px;
     box-sizing: border-box;

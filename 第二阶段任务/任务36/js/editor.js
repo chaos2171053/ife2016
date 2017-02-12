@@ -144,12 +144,13 @@ define(function(){
 		$('#error').addClass(className);
 		switch(className){
 			case "errorText":
-			$("#error").text("错误：第"+(i+1)+"行无效指令/(ㄒoㄒ)/~~");
+			$("#error").text("错误：第"+(i+1)+"行无效指令!");
 			break;
 			case "warnningText":
-			$("#error").text("警告: 所选方向有墙。");
+			$("#error").text("警告: 前进方向有墙!");
 			break;
-
+			case "RunningText":
+			$("#error").text("警告: 执行指令中!");
 		}
 	};
     

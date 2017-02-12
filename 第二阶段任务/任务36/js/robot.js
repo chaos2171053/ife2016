@@ -459,7 +459,7 @@ define(function() {
         var targetClaaName;
         var x = this.getPosition(direction).x;
         var y = this.getPosition(direction).y;
-        if( x>=1 && x<21 && y<21 && y>=1){
+        if( x>=1 && x<= BOLCK_NUM && y<= BOLCK_NUM && y>=1){
             targetClassName = $("tr:nth-child("+ (y+1) +") td:nth-child("+ (x+1) +")")[0].className;
             if (targetClassName == "x-axis" || targetClassName == "wall" || targetClassName =="y-axis"){
                 return false;
@@ -482,6 +482,10 @@ define(function() {
         this.isRunSucceed = true;
     };
 
+    /**
+     * 粉刷墙
+     * @param  {sring} color 颜色（16进制）
+     */
     Square.prototype.bru = function(color){
         var targetClaaName;
         var x = this.getPosition(this.direction).x;
