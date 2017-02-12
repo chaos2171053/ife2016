@@ -48,6 +48,7 @@ define(function(){
 	 */
 	Table.prototype.clearWall = function(){
 		$("td").removeClass("wall"); 
+		$("td").css("background-color","");
 	};
 	return {
 		Table:Table
