@@ -113,7 +113,8 @@ require(['render',"robot","editor"], function (render,robot,
 	Application.prototype.hotkey = function(event){
 		var e = event || window.event;
 		var _self = e.data.object;
-		if (e.target.tagName.toLowerCase()  == 'body') {
+		if(!_self.editor.isRunning){
+			if (e.target.tagName.toLowerCase()  == 'body') {
 			var code = {65: "left", 87: "top", 68: "right", 83: "bottom"};
 		    var direction = code[event.keyCode];
 		    if(direction != undefined){
@@ -129,6 +130,8 @@ require(['render',"robot","editor"], function (render,robot,
 		    	_self.square.execute("build");
 		    }
 		}
+		}
+		
 	};
 	new Application();
 });
