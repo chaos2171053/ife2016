@@ -370,7 +370,13 @@ define(["astar"],function(astar) {
         pattern:/^mov\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
-            var step = parseInt(arguments[1][0], 10) ||1 ;
+            var setp;
+            if(arguments[1]!=null){
+                step = parseInt(arguments[1][0], 10);
+            }else{
+                step = 1;
+            }
+            //var step = parseInt(arguments[1][0], 10) ||1 ;
             this.changeDirection(arguments[0]);
             // if(step !== null){
             //     for(var i = 0;i<step;i++) {
@@ -488,30 +494,53 @@ define(["astar"],function(astar) {
             item.x = item.y;
             item.y = temp;
         });
+        // result.forEach(function(item){
+        //     if((item.x < that.x) && (item.y == that.y)){
+        //         // setTimeout(function(){
+        //             that.execute("mov lef");
+        //         // },1000);  
+        //     }
+        //     if((item.x > that.x) && (item.y == that.y)){
+        //          // setTimeout(function(){
+        //             that.execute("mov rig")
+        //         // },1000)
+        //     }
+        //     if((item.x == that.x) && (item.y < that.y)){
+                
+        //          // setTimeout(function(){
+        //             that.execute("mov top")
+        //         // },1000)
+        //     }
+        //     if((item.x == that.x) && (item.y > that.y)){
+                
+        //          // setTimeout(function(){
+        //             that.execute("mov bot")
+        //         // },1000)
+        //     }
+        // });
+        var x =this.x;
+        var y = this.y;
+        var cmdArray = [];
         result.forEach(function(item){
-            if((item.x < that.x) && (item.y == that.y)){
-                // setTimeout(function(){
-                    that.execute("mov lef");
-                // },1000);  
+            if((item.x < x) && (item.y == y)){
+                x--;
+                cmdArray.push("mov lef");
             }
-            if((item.x > that.x) && (item.y == that.y)){
-                 // setTimeout(function(){
-                    that.execute("mov rig")
-                // },1000)
+            if((item.x > x) && (item.y == y)){
+                x++;
+                cmdArray.push("mov rig")
+
             }
-            if((item.x == that.x) && (item.y < that.y)){
-                
-                 // setTimeout(function(){
-                    that.execute("mov top")
-                // },1000)
+            if((item.x == x) && (item.y < y)){
+                y--;
+                cmdArray.push("mov top")
             }
-            if((item.x == that.x) && (item.y > that.y)){
-                
-                 // setTimeout(function(){
-                    that.execute("mov bot")
-                // },1000)
+            if((item.x == x) && (item.y > y)){
+                y++
+                cmdArray.push("mov bot")
             }
         });
+        this.execute(cmdArray);
 
     };
 
@@ -538,65 +567,65 @@ define(["astar"],function(astar) {
      * @param {String} command 指令
      * @return {bollean} 执行则返回true 
      */
-    // Square.prototype.execute = function(cmdArray) {
-    Square.prototype.execute = function(string) {
-        if(!this.isRunning){
-            this.isRunning = true;
-            for(var i = 0,len = this.commands.length;i<len;i++) {
-                var command = this.commands[i];
-                var match = string.match(command.pattern);
-                var argument;
-                if(match){
-                    if(command.step){
-                        argument= string.match(command.step);// 移动格子 
+    Square.prototype.execute = function(cmdArray) {
+    //Square.prototype.execute = function(string) {
+        // if(!this.isRunning){
+        //     this.isRunning = true;
+        //     for(var i = 0,len = this.commands.length;i<len;i++) {
+        //         var command = this.commands[i];
+        //         var match = string.match(command.pattern);
+        //         var argument;
+        //         if(match){
+        //             if(command.step){
+        //                 argument= string.match(command.step);// 移动格子 
+        //             }
+        //             if(command.color){
+        //                 argument = string.match(command.color)[0].toLowerCase();// 16进制颜色 
+        //             }
+        //             if(command.coordinate){
+        //                 argument = string.match(command.coordinate)[0];
+        //             }
+        //             command.handler.call(this,match[0].replace(/\s+/g," "),argument);
+        //             match.shift();
+        //             this.isRunning = false;
+        //             if(this.isRunSucceed){
+        //                 return true;
+        //             }else{
+        //                 return false;
+        //             }
+        //         }
+        //     }
+        // }
+            var that = this;
+            var cmd = cmdArray.shift();
+            if(cmd){
+                    for(var i = 0,len = this.commands.length;i<len;i++) {
+                        var command = this.commands[i];
+                        var match = cmd .match(command.pattern);
+                        var argument;
+                        if(match){
+                            if(command.step){
+                                argument= cmd .match(command.step);// 移动格子 
+                            }
+                            if(command.color){
+                                argument = cmd .match(command.color)[0].toLowerCase();// 16进制颜色 
+                            }
+                            if(command.coordinate){
+                                argument = cmd .match(command.coordinate)[0];
+                            }
+                            command.handler.call(this,match[0].replace(/\s+/g," "),argument);
+                            setTimeout(function () {
+                                that.execute(cmdArray);
+                            }, 1000);
+                            match.shift();
+                            if(this.isRunSucceed){
+                                return true;
+                            }else{
+                                return false;
+                            }
+                        }
                     }
-                    if(command.color){
-                        argument = string.match(command.color)[0].toLowerCase();// 16进制颜色 
-                    }
-                    if(command.coordinate){
-                        argument = string.match(command.coordinate)[0];
-                    }
-                    command.handler.call(this,match[0].replace(/\s+/g," "),argument);
-                    match.shift();
-                    this.isRunning = false;
-                    if(this.isRunSucceed){
-                        return true;
-                    }else{
-                        return false;
-                    }
-                }
-            }
-        }
-            // var that = this;
-            // var cmd = cmdArray.shift();
-            // if(cmd){
-            //         for(var i = 0,len = this.commands.length;i<len;i++) {
-            //             var command = this.commands[i];
-            //             var match = cmd .match(command.pattern);
-            //             var argument;
-            //             if(match){
-            //                 if(command.step){
-            //                     argument= cmd .match(command.step);// 移动格子 
-            //                 }
-            //                 if(command.color){
-            //                     argument = cmd .match(command.color)[0].toLowerCase();// 16进制颜色 
-            //                 }
-            //                 if(command.coordinate){
-            //                     argument = cmd .match(command.coordinate)[0];
-            //                 }
-            //                 command.handler.call(this,match[0].replace(/\s+/g," "),argument);
-            //                 setTimeout(function () {
-            //                     that.execute(cmdArray);
-            //                 }, 1000);
-            //                 match.shift();
-            //                 if(this.isRunSucceed){
-            //                     return true;
-            //                 }else{
-            //                     return false;
-            //                 }
-            //             }
-            //         }
-            //     }  
+                }  
     };
 
     /**

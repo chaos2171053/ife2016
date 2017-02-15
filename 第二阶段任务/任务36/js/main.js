@@ -65,46 +65,48 @@ require(['render',"robot","editor"], function (render,robot,
         	_self.editor.clearErrorText();
         	var t = null;
         	for(i = 0;i<len;i++){
-        		(function(){
-        			var j = i;
-        			var timer = setTimeout(function(){
-        				if(t!= false && (_self.editor.isRunning != false)){
-        					_self.square.isRunSucceed = false;
-        					nowExc = commands.index[j];
-        					_self.editor.clearFlag();
-        					if(_self.square.execute(commands.cmd[nowExc])){
-        						_self.editor.setFlag(nowExc,"success");
-        						if(j == (len-1)){ //执行完所有指令时
-        							_self.editor.isRunning = false;
-        						}
-        					}
-        					else{
-        						_self.editor.setFlag(nowExc,"warnning");
-        						_self.editor.setErrorText(j,"warnningText");
-        						_self.editor.isRunning = false;
-        						t =false;
-        					}
-        				}
-        				},j*TIME);
-        		})(i);
-        	}
-        }
-        		
-        		
-        // 			_self.editor.clearFlag();
-
-        // 			if(_self.square.execute([commands.cmd[commands.index[i]]])){
-        // 				_self.editor.setFlag(commands.index[i],"success");
-        // 			}else{
-        // 				_self.editor.setFlag(i,"warnning");
-        // 				_self.editor.setErrorText(i,"warnningText");
-        // 				_self.editor.isRunning = false;
-        // 				return false;
-        // 			}
-
+        // 		(function(){
+        // 			var j = i;
+        // 			var timer = setTimeout(function(){
+        // 				if(t!= false && (_self.editor.isRunning != false)){
+        // 					_self.square.isRunSucceed = false;
+        // 					nowExc = commands.index[j];
+        // 					_self.editor.clearFlag();
+        // 					if(_self.square.execute(commands.cmd[nowExc])){
+        // 						_self.editor.setFlag(nowExc,"success");
+        // 						if(j == (len-1)){ //执行完所有指令时
+        // 							_self.editor.isRunning = false;
+        // 						}
+        // 					}
+        // 					else{
+        // 						_self.editor.setFlag(nowExc,"warnning");
+        // 						_self.editor.setErrorText(j,"warnningText");
+        // 						_self.editor.isRunning = false;
+        // 						t =false;
+        // 					}
+        // 				}
+        // 				},j*TIME);
+        // 		})(i);
         // 	}
         // }
-        	//return true;	
+        //return true;	
+        		
+        		
+        			_self.editor.clearFlag();
+
+        			if(_self.square.execute([commands.cmd[commands.index[i]]])){
+        				_self.editor.setFlag(commands.index[i],"success");
+        			}else{
+        				_self.editor.setFlag(i,"warnning");
+        				_self.editor.setErrorText(i,"warnningText");
+        				_self.editor.isRunning = false;
+        				return false;
+        			}
+
+        	}
+        }
+        _self.editor.isRunning = false;
+        
     };
 
     /**
