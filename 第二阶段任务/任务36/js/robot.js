@@ -26,7 +26,7 @@ define(["astar"],function(astar) {
 		this.div = img;
         this.direction = direction;
         this.degree = degree;
-        //this.isRunning = false;
+        this.isRunning = false;
         this.isRunSucceed = false;
 	};
 
@@ -40,7 +40,7 @@ define(["astar"],function(astar) {
         this.y = y;
         this.div.style.left = x * DISTANCE + 'px';
         this.div.style.top = y * DISTANCE + 'px';
-        //this.isRunning = false;
+        this.isRunning = false;
         this.isRunSucceed = false;
         this.degree = 0;
         this.direction = "bottom";
@@ -64,48 +64,26 @@ define(["astar"],function(astar) {
         if(this.canGo(this.direction)){
             switch (this.direction) {
                 case "top":
-                    // this.y--;
-                    this.y -=step;
+                    this.y--;
+                    // this.y -=step;
                 break;
                 case "right":
-                    // this.x ++;
-                    this.x +=step;
+                    this.x ++;
+                    // this.x +=step;
                 break;
                 case "bottom":
-                    // this.y++;
-                    this.y +=step;
+                    this.y++;
+                    // this.y +=step;
                 break;
                 case "left":
-                    // this.x--;
-                    this.x -=step;
+                    this.x--;
+                    // this.x -=step;
                 break;
             }
             this.div.style.top = this.y * DISTANCE + 'px';
             this.div.style.left = this.x * DISTANCE +'px';
             this.isRunSucceed = true;
             return true;
-            // // 
-            // var that = this;
-            //     setTimeout(function(){
-            //     switch (that.direction) {
-            //     case "top":
-            //         that.y--;
-            //     break;
-            //     case "right":
-            //         that.x ++;
-            //     break;
-            //     case "bottom":
-            //         that.y++;
-            //     break;
-            //     case "left":
-            //         that.x--;
-            //     break;
-            // }
-            // that.div.style.top = that.y * DISTANCE + 'px';
-            // that.div.style.left = that.x * DISTANCE +'px';
-            // that.isRunSucceed = true;
-            // return true;
-            // },1000);
         }else{
           this.isRunSucceed = false;
           return false;
@@ -256,8 +234,7 @@ define(["astar"],function(astar) {
             break;
             case "tra lef":{
                 if(this.canGo("left")){
-                    // this.x--;
-                    this.x -=step;
+                    this.x--;
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
@@ -268,8 +245,7 @@ define(["astar"],function(astar) {
             break;
             case "tra top":{
                 if(this.canGo("top")){
-                    //this.y--;
-                    this.y -=step;
+                    this.y--;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
@@ -280,8 +256,7 @@ define(["astar"],function(astar) {
             break;
             case "tra rig":{
                 if(this.canGo("right")){
-                    //this.x++;
-                    this.x +=step
+                    this.x++;
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
@@ -293,8 +268,7 @@ define(["astar"],function(astar) {
             break;
             case "tra bot":{
                 if(this.canGo("bottom")){
-                    //this.y++;
-                    this.y += step;
+                    this.y++;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
@@ -318,52 +292,46 @@ define(["astar"],function(astar) {
         pattern: /^go(\s+)?(\d+)*$/i,
         step:/\d+/,
         handler: function () {
-            var step =arguments[1] | 1;
-            // if(step !== null){
-            //     for(var i = 0;i<step;i++) {
-            //         if(this.go() === false) {
-            //             return false;
-            //         }
-            //     }
-            //     return true;
-            // }
-            // else {
-            //     if(this.go() ===false){
-            //         return false;
-            //     }
-            // } 
-            // 修改  
-            if(this.go(step) == true){
+            var step = arguments[1];
+            if(step !== null){
+                for(var i = 0;i<step;i++) {
+                    if(this.go() === false) {
+                        return false;
+                    }
+                }
                 return true;
-            }else{
-                return false;
-            }       
+            }
+            else {
+                if(this.go() ===false){
+                    return false;
+                }
+            } 
+            // 修改  
+            // if(this.go(step) == true){
+            //     return true;
+            // }else{
+            //     return false;
+            // }       
         }
     },
     {
         pattern:/^tra\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
-            var step = arguments[1] | 1;
-            // if(step !== null){
-            //     for(var i = 0;i<step;i++) {
-            //         if(this.changeDirection(arguments[0]) === false) {
-            //             return false;
-            //         }
-            //     }
-            //     return true;
-            // }
-            // else {
-            //     if(this.changeDirection(arguments[0]) ===false){
-            //         return false;
-            //     }
-            // }  
-            if(this.changeDirection(arguments[0],step)){
+            var step = arguments[1];
+            if(step !== null){
+                for(var i = 0;i<step;i++) {
+                    if(this.changeDirection(arguments[0]) === false) {
+                        return false;
+                    }
+                }
                 return true;
-            }else{
-                return false;
             }
-                  
+            else {
+                if(this.changeDirection(arguments[0]) ===false){
+                    return false;
+                }
+            }         
         }
     },
     {
@@ -378,24 +346,24 @@ define(["astar"],function(astar) {
             }
             //var step = parseInt(arguments[1][0], 10) ||1 ;
             this.changeDirection(arguments[0]);
-            // if(step !== null){
-            //     for(var i = 0;i<step;i++) {
-            //         if(this.go() === false) {
-            //             return false;
-            //         }
-            //     }
-            //     return true;
-            // }
-            // else {
-            //     if(this.go() ===false){
-            //         return false;
-            //     }
-            // } 
-            if(this.go(step) == true){
+            if(step !== null){
+                for(var i = 0;i<step;i++) {
+                    if(this.go() === false) {
+                        return false;
+                    }
+                }
                 return true;
-            }else{
-                return false;
-            }    
+            }
+            else {
+                if(this.go() ===false){
+                    return false;
+                }
+            } 
+            // if(this.go(step) == true){
+            //     return true;
+            // }else{
+            //     return false;
+            // }    
                    
         }
     },
@@ -494,30 +462,6 @@ define(["astar"],function(astar) {
             item.x = item.y;
             item.y = temp;
         });
-        // result.forEach(function(item){
-        //     if((item.x < that.x) && (item.y == that.y)){
-        //         // setTimeout(function(){
-        //             that.execute("mov lef");
-        //         // },1000);  
-        //     }
-        //     if((item.x > that.x) && (item.y == that.y)){
-        //          // setTimeout(function(){
-        //             that.execute("mov rig")
-        //         // },1000)
-        //     }
-        //     if((item.x == that.x) && (item.y < that.y)){
-                
-        //          // setTimeout(function(){
-        //             that.execute("mov top")
-        //         // },1000)
-        //     }
-        //     if((item.x == that.x) && (item.y > that.y)){
-                
-        //          // setTimeout(function(){
-        //             that.execute("mov bot")
-        //         // },1000)
-        //     }
-        // });
         var x =this.x;
         var y = this.y;
         var cmdArray = [];
@@ -610,19 +554,36 @@ define(["astar"],function(astar) {
                             if(command.color){
                                 argument = cmd .match(command.color)[0].toLowerCase();// 16进制颜色 
                             }
-                            if(command.coordinate){
+                            if(command.coordinate){//对于mov to 指令
                                 argument = cmd .match(command.coordinate)[0];
+                                command.handler.call(this,match[0].replace(/\s+/g," "),argument);
+                                match.shift();
+                                this.isRunning = true;
+                                return true;
                             }
                             command.handler.call(this,match[0].replace(/\s+/g," "),argument);
-                            setTimeout(function () {
-                                that.execute(cmdArray);
-                            }, 1000);
                             match.shift();
-                            if(this.isRunSucceed){
-                                return true;
+                            if(cmdArray.length != 0){
+                                this.isRunning = true;
+                                setTimeout(function () {
+                                    that.execute(cmdArray);
+                                }, 1000);
                             }else{
-                                return false;
+                                if(this.isRunSucceed){
+                                    this.isRunning = false;
+                                    return true;
+                                }else{
+                                    this.isRunning = false;
+                                    return false;
+                                }
                             }
+                            // if(this.isRunSucceed){
+                            //     this.isRunning = true;
+                            //     return true;
+                            // }else{
+                            //     this.isRunning = false;
+                            //     return false;
+                            // }
                         }
                     }
                 }  

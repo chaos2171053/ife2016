@@ -47,24 +47,24 @@ require(['render',"robot","editor"], function (render,robot,
 		var TIME = 1000;//每次指令执行时间 1s
 		var e = event || window.event;
 		var _self = e.data.object;
-        if(!_self.editor.isRunning){
-        	_self.editor.clearFlag();
-        	_self.editor.clearErrorText();
-        	var commands = _self.editor.getCommands();
-        	for(var i = 0,len = commands.index.length;i<len;i++){
-        		_self.editor.isRunning = true;
-        		if(_self.editor.compileComands(commands.cmd[commands.index[i]]) === false){
-        			_self.editor.setFlag(commands.index[i], "error");//标记第一个错误的指令
-        			_self.editor.setErrorText(commands.index[i],"errorText");
-        			_self.editor.isRunning = false;
-        			return false;
-        		}
-        	}
-        	//依次执行指令
-        	var nowExc = 0 ;
-        	_self.editor.clearErrorText();
-        	var t = null;
-        	for(i = 0;i<len;i++){
+        // if(!_self.editor.isRunning){
+        // 	_self.editor.clearFlag();
+        // 	_self.editor.clearErrorText();
+        // 	var commands = _self.editor.getCommands();
+        // 	for(var i = 0,len = commands.index.length;i<len;i++){
+        // 		_self.editor.isRunning = true;
+        // 		if(_self.editor.compileComands(commands.cmd[commands.index[i]]) === false){
+        // 			_self.editor.setFlag(commands.index[i], "error");//标记第一个错误的指令
+        // 			_self.editor.setErrorText(commands.index[i],"errorText");
+        // 			_self.editor.isRunning = false;
+        // 			return false;
+        // 		}
+        // 	}
+        // 	//依次执行指令
+        // 	var nowExc = 0 ;
+        // 	_self.editor.clearErrorText();
+        // 	var t = null;
+        // 	for(i = 0;i<len;i++){
         // 		(function(){
         // 			var j = i;
         // 			var timer = setTimeout(function(){
@@ -72,7 +72,7 @@ require(['render',"robot","editor"], function (render,robot,
         // 					_self.square.isRunSucceed = false;
         // 					nowExc = commands.index[j];
         // 					_self.editor.clearFlag();
-        // 					if(_self.square.execute(commands.cmd[nowExc])){
+        // 					if(_self.square.execute([commands.cmd[nowExc]])){
         // 						_self.editor.setFlag(nowExc,"success");
         // 						if(j == (len-1)){ //执行完所有指令时
         // 							_self.editor.isRunning = false;
@@ -89,24 +89,60 @@ require(['render',"robot","editor"], function (render,robot,
         // 		})(i);
         // 	}
         // }
-        //return true;	
-        		
-        		
-        			_self.editor.clearFlag();
+        
 
-        			if(_self.square.execute([commands.cmd[commands.index[i]]])){
-        				_self.editor.setFlag(commands.index[i],"success");
+        if(!_self.editor.isRunning){
+        	_self.editor.clearFlag();
+        	_self.editor.clearErrorText();
+        	var commands = _self.editor.getCommands();
+        	for(var i = 0,len = commands.index.length;i<len;i++){
+        		_self.editor.isRunning = true;
+        		if(_self.editor.compileComands(commands.cmd[commands.index[i]]) === false){
+        			_self.editor.setFlag(commands.index[i], "error");//标记第一个错误的指令
+        			_self.editor.setErrorText(commands.index[i],"errorText");
+        			_self.editor.isRunning = false;
+        			return false;
+        		}
+        	}
+        	// for(var i = 0,len = commands.length;i<len;i++){
+        	// 	if(commands[i]){
+        	// 		if(_self.editor.compileComands(commands[i]) === false){
+        	// 			_self.editor.setFlag(commands[i], "error");//标记第一个错误的指令
+        	// 			_self.editor.setErrorText(commands[i],"errorText");
+        	// 			_self.editor.isRunning = false;
+        	// 			return false;
+        	// 		}
+        	// 	}
+        	// }
+        	//依次执行指令
+        	var nowExc = 0 ;
+        	var ind = 0;
+        	_self.editor.clearErrorText();
+        	var timer = setInterval(function(){
+        		if(!_self.square.isRunning){
+        			if(commands.index.length == 0){
+        				clearInterval(timer);
+        				return true;
+        			}
+        			_self.editor.clearFlag();
+        			var cmd = commands.cmd[commands.index[0]];
+        			var index = commands.index.shift();
+        			if(_self.square.execute([cmd])){
+        				_self.editor.setFlag(index,"success");
         			}else{
-        				_self.editor.setFlag(i,"warnning");
-        				_self.editor.setErrorText(i,"warnningText");
+        				_self.editor.setFlag(index,"warnning");
+        				_self.editor.setErrorText(index,"warnningText");
         				_self.editor.isRunning = false;
+        				clearInterval(timer);
         				return false;
         			}
-
-        	}
+        			delete commands.cmd[index];
+        		}
+        	},TIME);
+  
         }
         _self.editor.isRunning = false;
-        
+        return true;  
     };
 
     /**
@@ -137,14 +173,14 @@ require(['render',"robot","editor"], function (render,robot,
 				if(direction != undefined){
 					e.preventDefault();
 					if(_self.square.direction != direction){
-						_self.square.execute("change " + direction.slice(0,3));
+						_self.square.execute(["change " + direction.slice(0,3)]);
 					}else{
-						_self.square.execute("go");
+						_self.square.execute(["go"]);
 					}
 				}
 				if(e.keyCode == 32){
 					e.preventDefault();
-					_self.square.execute("build");
+					_self.square.execute(["build"]);
 				}
 			}
 		}

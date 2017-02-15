@@ -92,6 +92,7 @@ define(function(){
 			cmd:commands,
 			index:cmdIndex
 		};
+		// return [commands,cmdIndex];
 	};
 
 	/**
