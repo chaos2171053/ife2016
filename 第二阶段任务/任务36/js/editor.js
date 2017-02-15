@@ -21,7 +21,6 @@ define(function(){
      */
 	Editor.prototype.init = function() {
 		this.isRunning = false;
-		this.isSuccessful = false;
 		this.textChanged();
 		this.clearFlag();
 		this.clearErrorText();

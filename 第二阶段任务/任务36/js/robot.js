@@ -23,6 +23,7 @@ define(["astar"],function(astar) {
         bg[0].appendChild(img);
 		this.x = x;
 		this.y = y;
+        this.timer = true;
 		this.div = img;
         this.direction = direction;
         this.degree = degree;
@@ -41,6 +42,7 @@ define(["astar"],function(astar) {
         this.div.style.left = x * DISTANCE + 'px';
         this.div.style.top = y * DISTANCE + 'px';
         this.isRunning = false;
+        this.timer = false;
         this.isRunSucceed = false;
         this.degree = 0;
         this.direction = "bottom";
@@ -512,6 +514,7 @@ define(["astar"],function(astar) {
      * @return {bollean} 执行则返回true 
      */
     Square.prototype.execute = function(cmdArray) {
+
     //Square.prototype.execute = function(string) {
         // if(!this.isRunning){
         //     this.isRunning = true;
@@ -564,10 +567,15 @@ define(["astar"],function(astar) {
                             command.handler.call(this,match[0].replace(/\s+/g," "),argument);
                             match.shift();
                             if(cmdArray.length != 0){
-                                this.isRunning = true;
-                                setTimeout(function () {
-                                    that.execute(cmdArray);
-                                }, 1000);
+                                // this.isRunning = true;
+                                if(this.timer){
+                                    setTimeout(function () {
+                                       this.isRunning = true;
+                                       that.execute(cmdArray);
+                                    }, 1000);
+                                }else{
+                                    this.isRunning = false;
+                                }
                             }else{
                                 if(this.isRunSucceed){
                                     this.isRunning = false;
@@ -577,13 +585,6 @@ define(["astar"],function(astar) {
                                     return false;
                                 }
                             }
-                            // if(this.isRunSucceed){
-                            //     this.isRunning = true;
-                            //     return true;
-                            // }else{
-                            //     this.isRunning = false;
-                            //     return false;
-                            // }
                         }
                     }
                 }  
