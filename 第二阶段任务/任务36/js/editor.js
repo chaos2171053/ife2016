@@ -117,6 +117,9 @@ define(function(){
     {
     	pattern:/^bru\s+#[0-9a-fA-F]{6}$/i
     },
+    {
+    	pattern:/^mov\s+to\s*\d*,\d*$/i
+    },
     ];
 
 	 /**

@@ -1,4 +1,4 @@
-define(function() {
+define(["astar"],function(astar) {
     var DISTANCE = 36;// 移动距离；
     var BOLCK_NUM = 20;// 一行、一列的单元格数量；
   
@@ -26,7 +26,7 @@ define(function() {
 		this.div = img;
         this.direction = direction;
         this.degree = degree;
-        this.isRunning = false;
+        //this.isRunning = false;
         this.isRunSucceed = false;
 	};
 
@@ -40,7 +40,7 @@ define(function() {
         this.y = y;
         this.div.style.left = x * DISTANCE + 'px';
         this.div.style.top = y * DISTANCE + 'px';
-        this.isRunning = false;
+        //this.isRunning = false;
         this.isRunSucceed = false;
         this.degree = 0;
         this.direction = "bottom";
@@ -64,22 +64,48 @@ define(function() {
         if(this.canGo(this.direction)){
             switch (this.direction) {
                 case "top":
-                    this.y--;
+                    // this.y--;
+                    this.y -=step;
                 break;
                 case "right":
-                    this.x ++;
+                    // this.x ++;
+                    this.x +=step;
                 break;
                 case "bottom":
-                    this.y++;
+                    // this.y++;
+                    this.y +=step;
                 break;
                 case "left":
-                    this.x--;
+                    // this.x--;
+                    this.x -=step;
                 break;
             }
             this.div.style.top = this.y * DISTANCE + 'px';
             this.div.style.left = this.x * DISTANCE +'px';
             this.isRunSucceed = true;
             return true;
+            // // 
+            // var that = this;
+            //     setTimeout(function(){
+            //     switch (that.direction) {
+            //     case "top":
+            //         that.y--;
+            //     break;
+            //     case "right":
+            //         that.x ++;
+            //     break;
+            //     case "bottom":
+            //         that.y++;
+            //     break;
+            //     case "left":
+            //         that.x--;
+            //     break;
+            // }
+            // that.div.style.top = that.y * DISTANCE + 'px';
+            // that.div.style.left = that.x * DISTANCE +'px';
+            // that.isRunSucceed = true;
+            // return true;
+            // },1000);
         }else{
           this.isRunSucceed = false;
           return false;
@@ -92,7 +118,7 @@ define(function() {
     * @param para
     * @command 指令
     */
-    Square.prototype.changeDirection = function (command) {
+    Square.prototype.changeDirection = function (command,step) {
         switch(command){
             case "tun lef":{
                 this.degree -=90;// 左转
@@ -230,7 +256,8 @@ define(function() {
             break;
             case "tra lef":{
                 if(this.canGo("left")){
-                    this.x--;
+                    // this.x--;
+                    this.x -=step;
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
@@ -241,7 +268,8 @@ define(function() {
             break;
             case "tra top":{
                 if(this.canGo("top")){
-                    this.y--;
+                    //this.y--;
+                    this.y -=step;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
@@ -252,7 +280,8 @@ define(function() {
             break;
             case "tra rig":{
                 if(this.canGo("right")){
-                    this.x++;
+                    //this.x++;
+                    this.x +=step
                     this.div.style.left = this.x * DISTANCE +'px';
                 }
                 else{
@@ -264,7 +293,8 @@ define(function() {
             break;
             case "tra bot":{
                 if(this.canGo("bottom")){
-                    this.y++;
+                    //this.y++;
+                    this.y += step;
                     this.div.style.top = this.y * DISTANCE +'px';
                 }
                 else{
@@ -288,61 +318,79 @@ define(function() {
         pattern: /^go(\s+)?(\d+)*$/i,
         step:/\d+/,
         handler: function () {
-            var step =arguments[1];
-            if(step !== null){
-                for(var i = 0;i<step;i++) {
-                    if(this.go() === false) {
-                        return false;
-                    }
-                }
+            var step =arguments[1] | 1;
+            // if(step !== null){
+            //     for(var i = 0;i<step;i++) {
+            //         if(this.go() === false) {
+            //             return false;
+            //         }
+            //     }
+            //     return true;
+            // }
+            // else {
+            //     if(this.go() ===false){
+            //         return false;
+            //     }
+            // } 
+            // 修改  
+            if(this.go(step) == true){
                 return true;
-            }
-            else {
-                if(this.go() ===false){
-                    return false;
-                }
-            }           
+            }else{
+                return false;
+            }       
         }
     },
     {
         pattern:/^tra\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
-            var step = arguments[1];
-            if(step !== null){
-                for(var i = 0;i<step;i++) {
-                    if(this.changeDirection(arguments[0]) === false) {
-                        return false;
-                    }
-                }
+            var step = arguments[1] | 1;
+            // if(step !== null){
+            //     for(var i = 0;i<step;i++) {
+            //         if(this.changeDirection(arguments[0]) === false) {
+            //             return false;
+            //         }
+            //     }
+            //     return true;
+            // }
+            // else {
+            //     if(this.changeDirection(arguments[0]) ===false){
+            //         return false;
+            //     }
+            // }  
+            if(this.changeDirection(arguments[0],step)){
                 return true;
+            }else{
+                return false;
             }
-            else {
-                if(this.changeDirection(arguments[0]) ===false){
-                    return false;
-                }
-            }        
+                  
         }
     },
     {
         pattern:/^mov\s+(lef|top|rig|bot)/i,
         step:/\d+/,
         handler:function(){
-            var step = arguments[1] ||1 ;
+            var step = parseInt(arguments[1][0], 10) ||1 ;
             this.changeDirection(arguments[0]);
-            if(step !== null){
-                for(var i = 0;i<step;i++) {
-                    if(this.go() === false) {
-                        return false;
-                    }
-                }
+            // if(step !== null){
+            //     for(var i = 0;i<step;i++) {
+            //         if(this.go() === false) {
+            //             return false;
+            //         }
+            //     }
+            //     return true;
+            // }
+            // else {
+            //     if(this.go() ===false){
+            //         return false;
+            //     }
+            // } 
+            if(this.go(step) == true){
                 return true;
-            }
-            else {
-                if(this.go() ===false){
-                    return false;
-                }
-            }        
+            }else{
+                return false;
+            }    
+                   
         }
     },
     {
@@ -380,13 +428,117 @@ define(function() {
             return true;
         }
     },
+    {
+        pattern:/^mov\s+to\s*\d*,\d*$/i,
+        coordinate:/\d*,\d*$/,
+        handler:function(){
+            var coordinate =arguments[1].split(",");
+            var x = parseInt(coordinate[0]);
+            var y = parseInt(coordinate[1]);
+            var walls = [];
+            if(x>0 && x<21 && y>0 && y <21){
+                walls = this.findWalls();
+                this.findPath(x,y,walls);
+            }else{
+                this.isRunSucceed = false;
+                return false;
+            }
+            this.isRunSucceed = true;
+            return true;
+        }
+
+    },
     ];
+
+    Square.prototype.findPath = function(x,y,walls) {
+        var that  = this;
+        var map = [
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        ];
+        walls.forEach(function(item){
+            map[item[1]][item[0]] = 0;
+        });
+        var graph = new astar.Graph(map);
+        var start = graph.grid[that.y][that.x];
+        var end = graph.grid[y][x];
+        var result = astar.astar.search(graph, start, end);
+        var coordinate = [];
+        result.forEach(function(item){
+            var temp = item.x;
+            item.x = item.y;
+            item.y = temp;
+        });
+        result.forEach(function(item){
+            if((item.x < that.x) && (item.y == that.y)){
+                // setTimeout(function(){
+                    that.execute("mov lef");
+                // },1000);  
+            }
+            if((item.x > that.x) && (item.y == that.y)){
+                 // setTimeout(function(){
+                    that.execute("mov rig")
+                // },1000)
+            }
+            if((item.x == that.x) && (item.y < that.y)){
+                
+                 // setTimeout(function(){
+                    that.execute("mov top")
+                // },1000)
+            }
+            if((item.x == that.x) && (item.y > that.y)){
+                
+                 // setTimeout(function(){
+                    that.execute("mov bot")
+                // },1000)
+            }
+        });
+
+    };
+
+    /**
+     * 找出表格中所有墙
+     * @return {array} 墙的坐标
+     */
+    Square.prototype.findWalls  = function() {
+        var walls = [];
+        for(var i = 1;i<21;i++){
+            for(var j = 1;j<21;j++){     
+                targetClassName = $("tr:nth-child("+ (i+1) +") td:nth-child("+ (j+1) +")")[0].className;
+                if (targetClassName == "wall"){
+                    walls.push([j,i]);
+                }
+            }
+        }
+        return walls;
+
+    };
 
      /**
      * 执行指令
      * @param {String} command 指令
      * @return {bollean} 执行则返回true 
      */
+    // Square.prototype.execute = function(cmdArray) {
     Square.prototype.execute = function(string) {
         if(!this.isRunning){
             this.isRunning = true;
@@ -401,9 +553,10 @@ define(function() {
                     if(command.color){
                         argument = string.match(command.color)[0].toLowerCase();// 16进制颜色 
                     }
+                    if(command.coordinate){
+                        argument = string.match(command.coordinate)[0];
+                    }
                     command.handler.call(this,match[0].replace(/\s+/g," "),argument);
-                    // var step = string.match(command.step);// 移动格子 
-                    // command.handler.call(this,match[0].replace(/\s+/g," "),step);
                     match.shift();
                     this.isRunning = false;
                     if(this.isRunSucceed){
@@ -413,8 +566,37 @@ define(function() {
                     }
                 }
             }
-
         }
+            // var that = this;
+            // var cmd = cmdArray.shift();
+            // if(cmd){
+            //         for(var i = 0,len = this.commands.length;i<len;i++) {
+            //             var command = this.commands[i];
+            //             var match = cmd .match(command.pattern);
+            //             var argument;
+            //             if(match){
+            //                 if(command.step){
+            //                     argument= cmd .match(command.step);// 移动格子 
+            //                 }
+            //                 if(command.color){
+            //                     argument = cmd .match(command.color)[0].toLowerCase();// 16进制颜色 
+            //                 }
+            //                 if(command.coordinate){
+            //                     argument = cmd .match(command.coordinate)[0];
+            //                 }
+            //                 command.handler.call(this,match[0].replace(/\s+/g," "),argument);
+            //                 setTimeout(function () {
+            //                     that.execute(cmdArray);
+            //                 }, 1000);
+            //                 match.shift();
+            //                 if(this.isRunSucceed){
+            //                     return true;
+            //                 }else{
+            //                     return false;
+            //                 }
+            //             }
+            //         }
+            //     }  
     };
 
     /**
@@ -498,8 +680,6 @@ define(function() {
         this.isRunSucceed = true;
 
     }
-
-
 	return {
 		Square:Square
 	}; 

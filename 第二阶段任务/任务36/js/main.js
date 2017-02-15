@@ -20,6 +20,7 @@ require(['render',"robot","editor"], function (render,robot,
 		this.table = new render.Table(ROW,COL);//表格实例
 		this.square = new robot.Square($('#background'),x,y,0,"bottom");// 小方块实例，方向向下。
 		this.editor = new editor.Editor();//编辑器实例
+		this.walls = [];
 		this.$run = $('#run');
 		this.$reset = $('#reset');
 		this.$random = $("#random");
@@ -71,8 +72,6 @@ require(['render',"robot","editor"], function (render,robot,
         					_self.square.isRunSucceed = false;
         					nowExc = commands.index[j];
         					_self.editor.clearFlag();
-        					//_self.square.execute(commands.cmd[nowExc]);
-        					//if(_self.square.isRunSucceed){
         					if(_self.square.execute(commands.cmd[nowExc])){
         						_self.editor.setFlag(nowExc,"success");
         						if(j == (len-1)){ //执行完所有指令时
@@ -89,9 +88,24 @@ require(['render',"robot","editor"], function (render,robot,
         				},j*TIME);
         		})(i);
         	}
-        	}
-        	return true;	
-        };
+        }
+        		
+        		
+        // 			_self.editor.clearFlag();
+
+        // 			if(_self.square.execute([commands.cmd[commands.index[i]]])){
+        // 				_self.editor.setFlag(commands.index[i],"success");
+        // 			}else{
+        // 				_self.editor.setFlag(i,"warnning");
+        // 				_self.editor.setErrorText(i,"warnningText");
+        // 				_self.editor.isRunning = false;
+        // 				return false;
+        // 			}
+
+        // 	}
+        // }
+        	//return true;	
+    };
 
     /**
      * 重置编辑器和小方块
@@ -155,6 +169,7 @@ require(['render',"robot","editor"], function (render,robot,
 				reuslt =_self.table.canBuild(x,y,_self.square.x,_self.square.y);
 			}
 			_self.table.build(x,y);
+			//_self.walls.push([x,y]);
 		}
 		}
 		else{
