@@ -201,7 +201,7 @@ class Dialog extends Component {
 			connectDropTarget
 		} = this.props;
 		return connectDropTarget(
-			<div className={styles.wrap}>
+			<div>
                 <div
                     style={ enter || leave ? { animationDuration: `${duration}s` } : {} }
                     className={classNames({
