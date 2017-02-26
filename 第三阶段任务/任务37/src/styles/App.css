@@ -1,0 +1,27 @@
+/* Base Application Styles */
+.btn {
+    width: 80px;
+    height: 40px;
+    margin: 40px;
+    border: 1px solid #357ebd;
+    border-radius: 3px;
+    font: 16px/1 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    text-align: center;
+    color: #fff;
+    background: #4a8bca;
+}
+.btn:hover {
+    cursor: pointer;
+    background: #3276b1;
+}
+.paragraph {
+    width: 864px;
+    margin-left: 40px;
+    font: 14px/1.5 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+@media screen and (max-width: 960px) {
+    .paragraph {
+        width: 90%;
+        margin: 0 auto;
+    }
+}

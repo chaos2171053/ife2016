@@ -1,0 +1,152 @@
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: .5;
+    }
+}
+@keyframes fade-out {
+    from {
+        opacity: .5;
+    }
+    to {
+        opacity: 0;
+    }
+}
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+}
+.appear {
+    animation-name: fade-in;
+}
+.disappear {
+    animation-name: fade-out;
+}
+@keyframes zoom-in {
+    from {
+        transform: scale3d(.05, .05, 1);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+@keyframes zoom-out {
+    from {
+        opacity: 1;
+    }
+    to {
+        transform: scale3d(.05, .05, 1);
+        opacity: 0;
+    }
+}
+.dialog {
+    position: fixed;
+    border: 1px solid #999;
+    border-radius: 5px;
+    transform-origin: 0 0;
+    background: #fff;
+    opacity: 1;
+}
+.enter {
+    animation-name: zoom-in;
+}
+.leave {
+    animation-name: zoom-out;
+}
+.title {
+    padding: 16px;
+    font: 20px/1 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    border-bottom: 1px solid #eee;
+}
+.title:hover {
+    cursor: move;
+}
+.hint {
+    margin: 16px;
+    font: 16px/1.5 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+}
+.btn {
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    border: 1px solid #357ebd;
+    border-radius: 3px;
+    font: 16px/1 "Microsoft YaHei", Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif;
+    text-align: center;
+    color: #fff;
+    background: #4a8bca;
+}
+.btn:hover {
+    cursor: pointer;
+    background: #3276b1;
+}
+.confirm {
+    right: 104px;
+    bottom: 16px;
+}
+.cancel {
+    right: 16px;
+    bottom: 16px;
+}
+@media screen and (min-width: 481px) and (max-width: 960px) {
+    .dialog {
+        width: 400px !important;
+        height: 200px !important;
+    }
+    .title {
+        padding: 14px;
+        font-size: 18px;
+    }
+    .hint {
+        margin: 14px;
+        font-size: 14px;
+    }
+    .btn {
+        width: 60px;
+        height: 30px;
+        font-size: 14px;
+    }
+    .confirm {
+        right: 81px;
+        bottom: 14px;
+    }
+    .cancel {
+        right: 14px;
+        bottom: 14px;
+    }
+}
+@media screen and (max-width: 480px) {
+    .dialog {
+        width: 240px !important;
+        height: 120px !important;
+    }
+    .title {
+        padding: 12px;
+        font-size: 16px;
+    }
+    .hint {
+        margin: 12px;
+        font-size: 12px;
+    }
+    .btn {
+        width: 60px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .confirm {
+        right: 78px;
+        bottom: 12px;
+    }
+    .cancel {
+        right: 12px;
+        bottom: 12px;
+    }
+}
