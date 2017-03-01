@@ -30,9 +30,9 @@ th,td {
 th span {
   content: '';
   border: .6rem solid transparent;
-
   position: absolute;
   right: .8rem;
+  cursor: pointer;
 }
 
 .asc {
