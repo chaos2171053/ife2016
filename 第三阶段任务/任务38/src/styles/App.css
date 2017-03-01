@@ -1,55 +1,53 @@
-@font-face {
-  font-family: 'anticon';
-  src: url('https://at.alicdn.com/t/font_r5u29ls31bgldi.eot');
-  /* IE9*/
-  src: url('https://at.alicdn.com/t/font_r5u29ls31bgldi.eot?#iefix') format('embedded-opentype'), /* chrome、firefox */ url('https://at.alicdn.com/t/font_r5u29ls31bgldi.woff') format('woff'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/ url('https://at.alicdn.com/t/font_r5u29ls31bgldi.ttf') format('truetype'), /* iOS 4.1- */ url('https://at.alicdn.com/t/font_r5u29ls31bgldi.svg#iconfont') format('svg');
+* {
+  box-sizing: border-box;
 }
-.anticon {
-  display: inline-block;
-  font-style: normal;
-  vertical-align: baseline;
-  text-align: center;
-  text-transform: none;
-  line-height: 1;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  font-size: 62.5%;
 }
-/*table-header  start*/
-.header {
-  background: #555;
-  color: #fff;
-  position: relative;
-  border: 1px solid #555;
-  width: 130px;
-  height: 25px;
-  text-align: center;
-  line-height: 25px;
+body {
+  font-size: 1.6rem;
 }
 
-.sorter {
-  margin-left: 4px;
-  display: inline-block;
-  width: 12px;
-  height: 14px;
-  vertical-align: middle;
-  text-align: center;
+/*table start*/
+table {
+  border: .1rem solid #cbcbcb;
+  border-collapse: collapse;
 }
 
-.caret {
-  line-height: 4px;
-  height: 5px;
-  display: block;
-  width: 12px;
-  cursor: pointer;
+th {
+  background: #e0e0e0;
+  color: #000;
+  text-align: left;
+}
+td {
+  color: #777;
+}
+th,td {
+  padding: 1rem 2.5rem;
+  border-left: .1rem solid #cbcbcb;
+  position: relative
+}
+th span {
+  content: '';
+  border: .6rem solid transparent;
+
+  position: absolute;
+  right: .8rem;
 }
 
-/*table-header  end*/
-
-/*table-body  end*/
-.td {
-  width: 130px;
-  height: 25px;
-  text-align: center;
-  line-height: 25px;
+.asc {
+  border-top: .6rem solid #aaa;
+  top: 2rem;
 }
+.desc {
+  border-bottom: .6rem solid #aaa;
+  bottom: 2rem;
+}
+
+tbody tr:nth-child(2n) {
+  background: #eee; 
+}
+
+
+
+/*table end*/

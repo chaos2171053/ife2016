@@ -5,29 +5,28 @@ class TalbeHeader extends React.Component {
 		return (
 			<thead>
 				<tr>
-				    <th className = {styles.header}>
+				    <th>
 				        姓名
-				        <div className = "ant-table-column-sorter">
-				            <span className = "ant-table-column-sorter-up" title="up">
-				                <i className ="anticon anticon-caret-up"></i>
-				            </span>
-				        </div>
 				    </th>
-				     <th className = {styles.header}>
+				    <th>
 				        语文
-				        <div class = {styles.sorter}></div>
+				        <span className={styles.desc}></span>
+				        <span className={styles.asc}></span>
 				    </th>
-				     <th className = {styles.header}>
+				    <th>
 				        数学
-				        <div class = {styles.sorter}></div>
+				        <span className={styles.desc}></span>
+				        <span className={styles.asc}></span>
 				    </th>
-				    <th className = {styles.header}>
+				    <th>
 				        英语
-				        <div class = {styles.sorter}></div>
+				        <span className={styles.desc}></span>
+				        <span className={styles.asc}></span>
 				    </th>
-				    <th className = {styles.header}>
+				    <th>
 				        总分
-				        <div class = {styles.sorter}></div>
+				        <span className={styles.desc}></span>
+				        <span className={styles.asc}></span>
 				    </th>
 				</tr>
 			</thead>
