@@ -10,20 +10,26 @@ body {
 
 /*table start*/
 table {
-  border: .1rem solid #cbcbcb;
+  /*border: .1rem solid #cbcbcb;*/
   border-collapse: collapse;
 }
 
 th {
+  border: .1rem solid #cbcbcb;
   background: #e0e0e0;
   color: #000;
   text-align: left;
 }
 td {
+  border-right: .1rem solid #cbcbcb;
   color: #777;
 }
 th,td {
   padding: 1rem 2.5rem;
+/*  width: 9.4rem;
+  height: 4.3red;*/
+  width: 10rem;
+  height: 5rem;
   border-left: .1rem solid #cbcbcb;
   position: relative
 }
@@ -37,11 +43,11 @@ th span {
 
 .asc {
   border-top: .6rem solid #aaa;
-  top: 2rem;
+  top: 1.6rem;
 }
 .desc {
   border-bottom: .6rem solid #aaa;
-  bottom: 2rem;
+  bottom: 1.6rem;
 }
 
 tbody tr:nth-child(2n) {

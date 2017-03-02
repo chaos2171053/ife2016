@@ -16,10 +16,11 @@ class TalbeHeader extends Component {
 		})),
 		handleSorter:React.PropTypes.func
 	};
-
+	
 	upDate(e,sorter) {
 		this.props.handleSorter(sorter);	
 	}
+
 	render() {
 		let content = [];
 		this.props.columns.map((value,index)=>{
@@ -36,7 +37,7 @@ class TalbeHeader extends Component {
 		    }
 		});
 		return (
-			<thead>
+			<thead ref = "thead">
 				<tr>{content}</tr>
 			</thead>
 		);
