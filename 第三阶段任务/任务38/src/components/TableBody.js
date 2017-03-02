@@ -5,11 +5,17 @@ class TableBody extends React.Component {
 		super(props);
 	}
 	static propTypes = {
-		data:React.PropTypes.array.isRequired
+		data: React.PropTypes.arrayOf(React.PropTypes.shape({
+			name: React.PropTypes.string,
+			Chinese: React.PropTypes.number,
+			Math:React.PropTypes.number,
+			English:React.PropTypes.number,
+			total:React.PropTypes.number
+		})).isRequired
 	}
 	render() {
 		let content = [];
-		this.props.data.forEach((value,index)=>{
+		this.props.data.map((value,index)=>{
 			content.push(
 				<tr key = {index}>
 				    <td className = {styles.td}>{value.name}</td>

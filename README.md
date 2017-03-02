@@ -662,6 +662,38 @@ var t = null;
 ```
 因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1。一开始想到的是把timer+1然后赋值给t，执行下一条指令判断t是否等于timer，但是忘记考虑多条指令的情况下了。毕竟可能还有timer+2、timer+3等等情况。所以利用这一点，在需要清除的时候，t值赋予false（t需要声明在闭包外)。每次执行setTimeout时候，判断t是否等于false。同样编辑器是否正在运行的判断也要这样处理。
 
+###11 任务37
+####11.1  `<button>`和`<input type="button">`的区别
+-[HTML<button>和<input type="button"> 的区别](http://blog.csdn.net/lee_sire/article/details/50312301)<br>
 
+####11.2 配置CSS Modules
+-[CSS Modules 用法教程](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)<br>
 
+####11.3 React中设置不同class
+-[React中classSet的用法](http://lib.csdn.net/article/react/12201?knId=685)
+-[React学习笔记—类名操作](http://www.07net01.com/2015/04/827648.html)
+-[github-Classnames](https://github.com/JedWatson/classnames)
 
+####11.4 学习使用React DnD 实现拖拽浮出层
+-[React-DnD 的使用](http://www.phperz.com/article/16/0115/183290.html)
+-[HTML5拖放事件](http://www.bubuko.com/infodetail-832223.html)
+-[HTML5 拖放（Drag 和 Drop）](http://www.runoob.com/html/html5-draganddrop.html)
+-[React-DnD 官方文档](https://react-dnd.github.io/react-dnd/docs-tutorial.html)
+
+####11.5 修饰器
+-[ECMAScript 6 入门-修饰器](http://es6.ruanyifeng.com/#docs/decorator#Mixin)
+-[github-Babel Legacy Decorator plugin](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
+
+###12 任务38
+####12.1 px em rem区别
+一般`1rem=16px`
+em是相对于元素的父元素的font-size进行计算；rem是相对于根元素html的font-size进行计算。
+[彻底弄懂css中单位px和em,rem的区别](https://www.baidu.com/s?ie=UTF-8&wd=rem)
+[Sass基础——Rem与Px的转换](http://www.w3cplus.com/preprocessor/sass-px-to-rem-with-mixin-and-function.html)
+
+####12.1 react中this问题
+想在父组件TableController中实现一个回调函数，子组件TableHeader中点击降序/升序调用这个回调函数，在父组件中更新表格中的数据进行排序，但是遇到了[这种情况](http://react-china.org/t/this-null/3749/2。
+解决方法：在注入该回调函数给子组件时绑定this，同时在文件头`import React, {Component,PropTypes} from 'react';`，声明组建时使用`class TableController extends Component `。原来为`class TableController extends React.Component`
+Component是React内的一个基类，用于继承和创建React自定义组件。ES6规范下的面向对象实现起来非常精简，class关键字 可以快速创建一个类，而Component类内的所有属性和方法均可以通过this访问。换而言之，在Component内的任意方法内，可以通过this.xxx的方式调用该Component的其他属性和方法。
+-[深入理解React中的上下文this](http://blog.csdn.net/u011413061/article/details/51946425)
+-[react中this](http://react-china.org/t/this-null/3749/2)
