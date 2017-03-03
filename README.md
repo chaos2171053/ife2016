@@ -697,6 +697,7 @@ em是相对于元素的父元素的font-size进行计算；rem是相对于根元
 Component是React内的一个基类，用于继承和创建React自定义组件。ES6规范下的面向对象实现起来非常精简，class关键字 可以快速创建一个类，而Component类内的所有属性和方法均可以通过this访问。换而言之，在Component内的任意方法内，可以通过this.xxx的方式调用该Component的其他属性和方法。
 -[深入理解React中的上下文this](http://blog.csdn.net/u011413061/article/details/51946425)
 -[react中this](http://react-china.org/t/this-null/3749/2)
+-[React:ES6:ES7中的6种this绑定方法](http://blog.csdn.net/wzgl708937822/article/details/52399617)
 
 ####12.3 react中获取到真实的DOM节点
 想在渲染完表格后获取表头的真是dom节点。需要`import ReactDOM from 'react-dom';`

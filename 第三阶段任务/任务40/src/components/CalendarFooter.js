@@ -6,7 +6,7 @@ class CalendarFooter extends Component {
 	render() {
 		return(
 			<div className="calendar-footer">
-			    <button>
+			    <button onClick = {this.props.datePickerToggle}>
 			    确定
 			    </button>
 			</div>
