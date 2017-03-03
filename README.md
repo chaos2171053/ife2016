@@ -684,16 +684,25 @@ var t = null;
 -[ECMAScript 6 入门-修饰器](http://es6.ruanyifeng.com/#docs/decorator#Mixin)
 -[github-Babel Legacy Decorator plugin](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
 
-###12 任务38
+###12 任务38、39
 ####12.1 px em rem区别
 一般`1rem=16px`
 em是相对于元素的父元素的font-size进行计算；rem是相对于根元素html的font-size进行计算。
 [彻底弄懂css中单位px和em,rem的区别](https://www.baidu.com/s?ie=UTF-8&wd=rem)
 [Sass基础——Rem与Px的转换](http://www.w3cplus.com/preprocessor/sass-px-to-rem-with-mixin-and-function.html)
 
-####12.1 react中this问题
+####12.2 react中this问题
 想在父组件TableController中实现一个回调函数，子组件TableHeader中点击降序/升序调用这个回调函数，在父组件中更新表格中的数据进行排序，但是遇到了[这种情况](http://react-china.org/t/this-null/3749/2。
 解决方法：在注入该回调函数给子组件时绑定this，同时在文件头`import React, {Component,PropTypes} from 'react';`，声明组建时使用`class TableController extends Component `。原来为`class TableController extends React.Component`
 Component是React内的一个基类，用于继承和创建React自定义组件。ES6规范下的面向对象实现起来非常精简，class关键字 可以快速创建一个类，而Component类内的所有属性和方法均可以通过this访问。换而言之，在Component内的任意方法内，可以通过this.xxx的方式调用该Component的其他属性和方法。
 -[深入理解React中的上下文this](http://blog.csdn.net/u011413061/article/details/51946425)
 -[react中this](http://react-china.org/t/this-null/3749/2)
+
+####12.3 react中获取到真实的DOM节点
+想在渲染完表格后获取表头的真是dom节点。需要`import ReactDOM from 'react-dom';`
+`let headerDOM = ReactDOM.findDOMNode(this.refs.tHeader);`
+
+###13 任务40
+安装不了node-sass
+-[安装node-sass](https://segmentfault.com/q/1010000006025361)
+-[node-sass安装](http://www.jianshu.com/p/0ccf4587122d)

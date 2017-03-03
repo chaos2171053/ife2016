@@ -45,6 +45,7 @@ class TableController extends Component {
 		    tableDOM = ReactDOM.findDOMNode(this.refs.table),
 		    top = tableDOM.offsetTop,
 		    height = tableDOM.clientHeight + top;
+		    debugger;
 		if (window.scrollY > top) {
 			headerDOM .style.position = "fixed";
 			headerDOM .style.zIndex = "999";
