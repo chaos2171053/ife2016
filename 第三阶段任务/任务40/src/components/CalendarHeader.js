@@ -6,14 +6,16 @@ class CalendarHeader extends Component {
 	render() {
 		return(
 			<div className = "calendar-header">
-			    <span className = "prev">
+			    <span className = "prev" 
+			          onClick = {this.props.prevMonth}>
 			    《
 			    </span>
-			    <span className = "next">
+			    <span className = "next"
+			          onClick = {this.props.nextMonth}>
 			    》
 			    </span>
 			    <span className="date-info">
-                    2017年3月
+                    {this.props.year}年{this.props.month + 1}月
                 </span>
 			</div>);
 	}

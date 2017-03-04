@@ -27,7 +27,14 @@
     box-shadow: $shadow;
   }
 }
-
+@keyframes starAnimation {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-510px);
+  }
+}
 .calendar-containner {
   font-family: Century Gothic, sans-serif;
   position: relative;
