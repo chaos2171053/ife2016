@@ -27,7 +27,11 @@ function getDefaultModules() {
       {
         test: /\.css$/,
         // loader: 'style-loader!css-loader'
-        loader: "style-loader!css-loader?modules"
+        // loader: "style-loader!css-loader?modules"
+        loaders: [
+          'style?sourceMap',
+          'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'
+        ]
       },
       {
         test: /\.sass/,

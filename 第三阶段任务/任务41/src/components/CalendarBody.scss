@@ -1,0 +1,28 @@
+.body {
+    border-spacing: 20px;
+    border-collapse: separate;
+    margin: 0 auto;
+    thead {
+        color: #FFF;
+    }
+    tbody tr {
+        td {
+            box-sizing: border-box;
+            height: 30px;
+            width: 30px;
+            font-size: 14px;
+            text-align: center;
+            cursor: pointer;
+            color: #FFF;
+            border-radius: 50%;
+        }
+        td.prev-month, td.next-month {
+            color: darken(#FFF, 40%);//让颜色亮度降低40%
+        }
+    }
+    tr td {
+        &:first-of-type, &:last-of-type {
+            font-size: 16px;
+        }
+    }
+}

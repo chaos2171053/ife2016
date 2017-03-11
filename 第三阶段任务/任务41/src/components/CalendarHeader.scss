@@ -1,0 +1,26 @@
+.header {
+    height: 50px;
+    text-align: center;
+    span {
+        position: relative;
+        display: inline-block;
+        height: 50px;
+        line-height: 50px;
+        color: #FFF;
+    }
+    span.prev {
+        font-size: 20px;
+        left: 20px;
+        float: left;
+        cursor: pointer;
+    }
+    span.next {
+        font-size: 20px;
+        right: 20px;
+        float: right;
+        cursor: pointer;
+    }
+    span.date-info {
+        cursor: default;
+    }
+}
