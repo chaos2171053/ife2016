@@ -705,5 +705,26 @@ Component是React内的一个基类，用于继承和创建React自定义组件�
 
 ###13 任务40
 安装不了node-sass
+
 -[安装node-sass](https://segmentfault.com/q/1010000006025361)
 -[node-sass安装](http://www.jianshu.com/p/0ccf4587122d)
+-[sass-loader](https://github.com/webpack-contrib/sass-loader)
+
+###14 react-yelp
+####14.1
+-[Sass with CSS Modules & Webpack](http://stackoverflow.com/questions/34443827/sass-with-css-modules-webpack)
+####14.2 
+使用了css modules处理样式，但是使用了sass，所以要将scss文件转成css
+webpack中配置
+`
+{
+    test: /\.scss$/,
+    exclude: path.resolve(__dirname, 'src/styles'),
+    loader: 'style!css?modules&localIdentName=[name]__[local]!sass?sourceMap=true'
+  }, {
+    test: /\.scss$/,
+    include: path.resolve(__dirname, 'src/styles'),
+    loader: 'style!css!sass?sourceMap=true'
+  }
+`
+-[CSS Modules 详解及 React 中实践](https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender)
