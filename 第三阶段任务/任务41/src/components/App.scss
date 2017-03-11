@@ -1,0 +1,10 @@
+/* Base Application Styles */
+.app {
+  font-family: Century Gothic, sans-serif;
+  position: relative;
+  width: 400px;
+  margin: 100px auto;
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+  box-shadow: 5px 5px 10px gray;
+  overflow: hidden;
+}
