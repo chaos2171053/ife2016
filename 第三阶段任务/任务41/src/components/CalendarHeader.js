@@ -11,7 +11,7 @@ class CalendarHeader extends Component {
                 <span styleName='prev'>《</span>
                 <span styleName='next'>》</span>
                 <span styleName='date-info'>
-                    2017年3月
+                    {this.props.year}年{this.props.month}月
                 </span>
             </div>
         )

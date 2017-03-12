@@ -40,7 +40,7 @@ class Calendar extends Component {
                     onClick={::this.toogleShow}>
                     {datePicked}</p>
                 <div styleName='main' ref='main'>
-                    <CalendarHeader />
+                    <CalendarHeader year = {year} month = {month+1}/>
                     <CalendarBody />
                     <CalendarFooter toogleShow={::this.toogleShow}/>
                 </div>
