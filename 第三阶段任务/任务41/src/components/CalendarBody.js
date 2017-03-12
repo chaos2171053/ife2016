@@ -8,9 +8,8 @@ class CalendarBody extends Component {
     //处理日期选择时间，如果是当月，触发日期选择；
     //如果不是当月，切换月份
     handleDatePick(index, styleName) {
-        debugger
         switch (styleName) {
-            case 'thisMonth':
+            case 'this-month':
                 let month = this.props.viewData[this.props.month];
                 this.props.datePick(month[index]);
                 break;
@@ -34,7 +33,7 @@ class CalendarBody extends Component {
             if (previousEl && (name === 'i' || name === 'td')) {
                 previousEl.style = '';
             }
-            if (event.target.className === 'thisMonth') {
+            if (event.target.className === 'CalendarBody__this-month') {
                 event.target.style = 'background:#F8F8F8;color:#000';
                 previousEl = event.target;
             }
@@ -47,7 +46,7 @@ class CalendarBody extends Component {
         document.getElementById('app')
             .addEventListener('click', changeColor, false);
     }
-    render() {
+    render() {     
         //确定当前月数据中每一天所属的月份，以此赋予不同className
         let month = this.props.viewData[this.props.month],
             rowsInMonth = [],
@@ -57,7 +56,7 @@ class CalendarBody extends Component {
                     j = month.indexOf(1, i + 1),
                     arr = new Array(42);
                 arr.fill('prev-month', 0, i)
-                arr.fill('thisMonth', i, j)
+                arr.fill('this-month', i, j)
                 arr.fill('next-month', j)
                 return arr;
             })();
@@ -89,7 +88,7 @@ class CalendarBody extends Component {
                                     {
                                         row.map((day) => {
                                             return (
-                                                <td className={`${styleOfDays[i]}`}
+                                                <td styleName={styleOfDays[i]}
                                                     onClick={
                                                         this.handleDatePick.bind
                                                             (this, i, styleOfDays[i])}
