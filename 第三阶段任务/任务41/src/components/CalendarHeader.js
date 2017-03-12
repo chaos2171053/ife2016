@@ -1,4 +1,4 @@
-import React, { Component,PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './CalendarHeader.scss'
 
@@ -24,7 +24,7 @@ const CalendarHeader = ({prevMonth, nextMonth, year, month}) => (
         <span styleName='prev' onClick={prevMonth}>《</span>
         <span styleName='next' onClick={nextMonth}>》</span>
         <span styleName='date-info'>
-            {year}年{month}月
+            {year}年{month+1}月
         </span>
     </div>
 )

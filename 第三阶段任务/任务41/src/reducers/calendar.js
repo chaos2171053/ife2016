@@ -1,10 +1,11 @@
-import { TOOGLE_SHOW, PREVIOUS_MONTH, NEXT_MONTH } from '../constants/CalendarActionTypes'
+import { TOOGLE_SHOW, PREVIOUS_MONTH, NEXT_MONTH,DATE_PICK ,DATE_PICKED} from '../constants/CalendarActionTypes'
 const initialState =
     {
         year: new Date().getFullYear(),
         month: new Date().getMonth(),
         day: new Date().getDate(),
-        isShow: false
+        isShow: false,
+        picked:false
     }
 
 const calendar = (state = initialState, action) => {
@@ -42,6 +43,17 @@ const calendar = (state = initialState, action) => {
                     })
                 }
             }
+            break
+        case DATE_PICK:
+            return Object.assign({},state,{
+               day:action.day
+           })
+           break
+        case DATE_PICKED:
+            return Object.assign({},state,{
+                picked:true
+            })
+            
         default:
             return state
     }
