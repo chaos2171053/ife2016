@@ -1,14 +1,14 @@
 import { TOOGLE_SHOW } from '../constants/CalendarActionTypes'
-const initialState = [
+const initialState =
     {
-        isShow: false
+        isShow: false 
     }
-]
+
 const calendar = (state = initialState, action) => {
     switch (action.type) {
         case TOOGLE_SHOW:
             return Object.assign({}, state, {
-                isShow:!state.isShow
+                isShow: !state.isShow
             })
         default:
             return state
