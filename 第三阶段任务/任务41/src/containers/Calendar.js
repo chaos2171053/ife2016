@@ -32,17 +32,18 @@ class Calendar extends Component {
 
     render() {
         // const {actions,calendar} = this.props
-
+        const { calendar: { year, month, day } } = this.props;
+        const datePicked = `${year}年${month + 1}月${day}日`
         return (
             <div styleName='calendar'>
                 <p styleName='date-picked'
-                    onClick={::this.toogleShow} 
-                    >2017/3/11</p>
-            <div styleName='main' ref = 'main'>
-                <CalendarHeader />
-                <CalendarBody />
-                <CalendarFooter toogleShow= {::this.toogleShow}/>
-            </div>
+                    onClick={::this.toogleShow}>
+                    {datePicked}</p>
+                <div styleName='main' ref='main'>
+                    <CalendarHeader />
+                    <CalendarBody />
+                    <CalendarFooter toogleShow={::this.toogleShow}/>
+                </div>
             </div >
         )
     }

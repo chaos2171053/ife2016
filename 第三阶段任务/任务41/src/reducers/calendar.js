@@ -1,7 +1,10 @@
 import { TOOGLE_SHOW } from '../constants/CalendarActionTypes'
 const initialState =
     {
-        isShow: false 
+        year: new Date().getFullYear(),
+        month: new Date().getMonth(),
+        day: new Date().getDate(),
+        isShow: false
     }
 
 const calendar = (state = initialState, action) => {

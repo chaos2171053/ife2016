@@ -5,9 +5,7 @@ import App from './components/App';
 import { Provider } from "react-redux";
 import {createStore} from 'redux'
 import rootReducer from './reducers/index'
-// import store from './stores/store'
-// Render the main component into the dom
-const store = createStore(rootReducer)
+import store from './stores/store'
 ReactDOM.render(
     <Provider store={store}>
         <App />
