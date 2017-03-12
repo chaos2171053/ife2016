@@ -29,7 +29,17 @@ class Calendar extends Component {
     toogleShow() {
         this.refs.main.style.height = this.refs.main.style.height === '460px' ? '0px' : '460px';
     }
-
+    //切换到上一个月
+    prevMonth() {
+        const { calendar: { month},actions:{previousMonth} } = this.props;
+        previousMonth(month);
+    }
+    
+    //切换下一个月
+    nextMonth() {
+        const { calendar: { month},actions:{nextMonth} } = this.props;
+        nextMonth(month);
+    }
     render() {
         // const {actions,calendar} = this.props
         const { calendar: { year, month, day } } = this.props;
@@ -40,7 +50,12 @@ class Calendar extends Component {
                     onClick={::this.toogleShow}>
                     {datePicked}</p>
                 <div styleName='main' ref='main'>
-                    <CalendarHeader year = {year} month = {month+1}/>
+                    <CalendarHeader 
+                        year = {year} 
+                        month = {month+1}
+                        prevMonth={::this.prevMonth}
+                        nextMonth = {::this.nextMonth}
+                        />
                     <CalendarBody />
                     <CalendarFooter toogleShow={::this.toogleShow}/>
                 </div>

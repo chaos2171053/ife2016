@@ -1,6 +1,5 @@
 import React, { Component,PropTypes } from 'react';
-//import CSSModules from 'react-css-modules';
-
+import CSSModules from 'react-css-modules';
 import styles from './CalendarFooter.scss'
 //import  './CalendarFooter.scss'
 // @CSSModules(styles)
@@ -17,7 +16,7 @@ import styles from './CalendarFooter.scss'
 //     }
 // }
 const CalendarFooter = ({ toogleShow }) => (
-    <div className={styles.footer}>
+    <div styleName='footer'>
         <button onClick={toogleShow}>
             确定
         </button>
@@ -26,4 +25,4 @@ const CalendarFooter = ({ toogleShow }) => (
 CalendarFooter.propTypes = {
     toogleShow:PropTypes.func.isRequired,
 }
-export default CalendarFooter
+export default CSSModules(CalendarFooter, styles);
