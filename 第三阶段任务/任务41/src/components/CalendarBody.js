@@ -3,7 +3,9 @@ import CSSModules from 'react-css-modules';
 import styles from './CalendarBody.scss'
 @CSSModules(styles)
 class CalendarBody extends Component {
-
+    constructor(props) {
+        super(props);
+    }
 
     //处理日期选择时间，如果是当月，触发日期选择；
     //如果不是当月，切换月份
@@ -40,13 +42,14 @@ class CalendarBody extends Component {
         }
 
     }
-    //绑定颜色改变事件
+    绑定颜色改变事件
     componentDidMount() {
         let changeColor = this.changeColor()
-        document.getElementById('app')
+        document.getElementById('table')
             .addEventListener('click', changeColor, false);
     }
-    render() {     
+
+    render() {
         //确定当前月数据中每一天所属的月份，以此赋予不同className
         let month = this.props.viewData[this.props.month],
             rowsInMonth = [],
@@ -68,7 +71,7 @@ class CalendarBody extends Component {
             }
         })
         return (
-            <table styleName='body'>
+            <table styleName='body' id = 'table'>
                 <thead>
                     <tr>
                         <th>一</th>

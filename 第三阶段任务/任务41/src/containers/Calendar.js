@@ -107,7 +107,7 @@ class Calendar extends Component {
 
         let props = {
             viewData: this.displayDaysPerMonth(year),
-            datePicked: datePicked
+            datePicked: datePicked,
         }
 
         return (
@@ -124,6 +124,7 @@ class Calendar extends Component {
                         />
                 <CalendarBody
                     {...props}
+                    toogleShow ={::this.toogleShow}
                     year={year}
                     month={month}
                     day={day}

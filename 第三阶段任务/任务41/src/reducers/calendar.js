@@ -1,4 +1,4 @@
-import { TOOGLE_SHOW, PREVIOUS_MONTH, NEXT_MONTH,DATE_PICK ,DATE_PICKED} from '../constants/CalendarActionTypes'
+import { PREVIOUS_MONTH, NEXT_MONTH,DATE_PICK ,DATE_PICKED} from '../constants/CalendarActionTypes'
 const initialState =
     {
         year: new Date().getFullYear(),
@@ -10,11 +10,6 @@ const initialState =
 
 const calendar = (state = initialState, action) => {
     switch (action.type) {
-        case TOOGLE_SHOW:
-            return Object.assign({}, state, {
-                isShow: !state.isShow
-            })
-            break;
         case PREVIOUS_MONTH:
             {
                 if (action.month == 0) {
