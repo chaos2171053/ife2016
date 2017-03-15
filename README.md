@@ -728,3 +728,29 @@ webpack中配置
   }
 `
 -[CSS Modules 详解及 React 中实践](https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender)
+
+
+###15 问卷管理系统
+####15.1 
+1. calc()
+2. em
+3. rem
+4. 在开发页面的时候在head中添加个viewport的meta 
+`<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">`
+5. 视窗 viewport
+简单的理解，viewport是严格等于浏览器的窗口。在桌面浏览器中，viewport就是浏览器窗口的宽度高度。但在移动端设备上就有点复杂。
+6. meta标签
+主要用来告诉浏览器如何规范的渲染Web页面
+-[CSS3的calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)
+-[CSS中强大的EM ](http://www.uml.org.cn/html/201207311.asp)
+-[css中的px、em、rem 详解](http://www.mamicode.com/info-detail-655497.html)
+-[css3的字体大小单位[rem]到底好在哪？](https://www.zhihu.com/question/21504656)
+-[移动端适配方案(上)](https://github.com/riskers/blog/issues/17)
+-[深入了解viewport和px](http://tgideas.qq.com/webplat/info/news_version3/804/7104/7106/m5723/201509/376281.shtml)
+-[移动端适配方案(下)](https://github.com/riskers/blog/issues/18)
+-[MobileWeb 适配总结](http://html-js.com/article/MobileWeb)
+-[手机百度移动适配切图解决方案介绍](http://js8.in/2015/12/12/%E6%89%8B%E6%9C%BA%E7%99%BE%E5%BA%A6%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D%E5%88%87%E5%9B%BE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D/)
+-[使用Flexible实现手淘H5页面的终端适配](https://github.com/amfe/article/issues/17)
+-[掘金-rem](http://www.w3cplus.com/blog/tags/143.html)
+-[viewports剖析](http://www.w3cplus.com/css/viewports.html)
+-[媒体查询](http://www.cnblogs.com/lyzg/p/4877277.html)
