@@ -754,3 +754,40 @@ webpack中配置
 -[掘金-rem](http://www.w3cplus.com/blog/tags/143.html)
 -[viewports剖析](http://www.w3cplus.com/css/viewports.html)
 -[媒体查询](http://www.cnblogs.com/lyzg/p/4877277.html)
+
+####15.2 子路由嵌套问题
+在react-router v4之前 
+可能需要这样写
+`
+<Provider store={store}>
+        <Router history={history}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Home} />
+                <Route path="edit" component={Edit} />
+                <Route path="fill" component={Fill} />
+                <Route path="check" component={Check} />
+            </Route>
+        </Router>
+    </Provider>,
+`
+但是在V4之后，需要改为这样，这样才支持嵌套
+`
+<Provider store={store}>
+        { /* ConnectedRouter will use the store from Provider automatically */}
+        <ConnectedRouter history={history}>
+            <App>
+                <div>
+                    <Header />
+                    <Main>
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route path="/edit" component={Edit} />
+               {/* <Route path="/fill" component={Fill} />
+                <Route path="/check" component={Check} >*/}
+                        </Switch>
+                    </Main>
+                </div>
+            </App>
+        </ConnectedRouter>
+`
+因为在v4版本，this.props.children已被移除

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-
+import {Link} from 'react-router-dom'
 
 class Home extends Component {
     constructor(props) {
@@ -10,17 +10,20 @@ class Home extends Component {
 
     }
     handleAddQuestionnaire() {
-        
+
     }
     render() {
-        <div>
-            <div
-                className={styles["add-btn"]}
-                onClick={::this.handleAddQuestionnaire}
+
+        return (
+            <div>
+                <div
+
+                    onClick={::this.handleAddQuestionnaire}
             >
-                <span>新建问卷</span>
+               <Link to = '/edit'> <span>新建问卷</span></Link>
             </div>
-        </div>
+        </div >
+        )
     }
 }
 export default Home

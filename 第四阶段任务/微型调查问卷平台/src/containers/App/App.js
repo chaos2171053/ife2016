@@ -1,11 +1,15 @@
 import React, { PropTypes } from 'react';
 import '../../styles/reset.css';
 import { Header,Main } from '../';
-
-const App = () => (
+// const App = () => (
+//     <div>
+//         <Header/>
+//         <Main/>
+//     </div>
+// )
+const App = ({children}) => (
     <div>
-        <Header/>
-        <Main/>
+        {children}
     </div>
 )
 
