@@ -16,13 +16,11 @@ class Home extends Component {
 
         return (
             <div>
-                <div
-
-                    onClick={::this.handleAddQuestionnaire}
-            >
-               <Link to = '/edit'> <span>新建问卷</span></Link>
+            <Link to ='edit'>
+            <div>创建问卷</div>
+            
+            </Link>
             </div>
-        </div >
         )
     }
 }
