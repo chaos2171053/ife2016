@@ -14,18 +14,32 @@ class Home extends Component {
     handleAddQuestionnaire() {
 
     }
-    render() {
 
+    //如果系统中没有问卷，则显示新建问卷
+    renderNewQuestionnaireLayout() {
         return (
-            <div className = {styles.wrapper}>
-                <Link to='/edit' className = {styles.link}>
-                    <div className = {styles['add-btn']}>
-                {/*<Button type="primary" className = {styles['ant-btn ant-btn-primary']}>新建问卷</Button>*/}
+            <Link to='/edit' className={styles.link}>
+                <div className={styles['add-btn']}>
+                    {/*<Button type="primary" className = {styles['ant-btn ant-btn-primary']}>新建问卷</Button>*/}
                     <span>新建问卷</span>
-                    </div>
-                </Link>
-            </div>
+                </div>
+            </Link>
         )
+
+    }
+    a() {
+        return (<div>666</div>)
+    }
+
+    render() {
+        let a = 2;
+        return a > 1 ? (
+            <div className={styles.wrapper}>
+                {this.renderNewQuestionnaireLayout()}
+            </div>) : (
+                <div>
+                {this.a()}
+                </div>)
     }
 }
 export default Home
