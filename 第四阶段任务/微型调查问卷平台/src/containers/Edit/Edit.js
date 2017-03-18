@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/calendar'
 import styles from './Edit.scss'
 
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+//import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 // const mapStateToProps = state => ({
 

@@ -1,4 +1,9 @@
 @import '../../styles/variables.scss';
+@keyframes fade-in {  
+    0% {opacity: 0;}/*初始状态 透明度为0*/  
+    40% {opacity: 0.4;}/*过渡状态 透明度为0*/  
+    100% {opacity: 1;}/*结束状态 透明度为1*/  
+}  
 .wrapper {
     width: 75%;
     margin: 4.2em auto 3em;
@@ -10,4 +15,6 @@
     @media screen and (max-width: 480px) {
         padding: .5em 0 2em;
     }
+    animation: fade-in;/*动画名称*/  
+    animation-duration: 1.5s;/*动画持续时间*/  
 }

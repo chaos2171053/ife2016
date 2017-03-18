@@ -11,10 +11,12 @@ import { Route } from 'react-router'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
 import rootReducer from './reducers/index'
-import { App, Header, Home, Main,Edit } from './containers/index';
-
+import { App, Header, Home, Main, Edit } from './containers/index';
 
 import { Switch } from 'react-router-dom'
+
+
+
 const history = createHistory()
 const middleware = routerMiddleware(history)
 
@@ -36,7 +38,7 @@ ReactDOM.render(
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/edit" component={Edit} />
-               {/* <Route path="/fill" component={Fill} />
+                            {/* <Route path="/fill" component={Fill} />
                 <Route path="/check" component={Check} >*/}
                         </Switch>
                     </Main>
