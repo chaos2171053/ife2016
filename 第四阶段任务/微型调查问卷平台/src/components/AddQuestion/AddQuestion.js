@@ -1,35 +1,37 @@
 import React, { PropTypes, Component } from 'react';
 import QuestionType from '../index'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 import styles from './AddQuestion.scss'
 import classNames from "classnames";
+
+import QueueAnim from 'rc-queue-anim';
 
 class AddQuestion extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            show: true
+            show: false
         }
     }
 
     renderChooseQuestionType() {
-
         if (this.state.show) {
             return (
-                <div>
-                    <div className={styles['type-wrapper']}>
+                <QueueAnim
+                    type={['bottom', 'top']}
+                    ease={['easeOutQuart', 'easeInOutQuart']}>
+                    <div className={styles['type-wrapper']} key='type-wrapper'>
                         <div className={classNames(styles.type, styles.radio)}>单选</div>
                         <div className={classNames(styles.type, styles.checkbox)}>多选</div>
                         <div className={classNames(styles.type, styles.text)}>文本</div>
                     </div>
-                </div>)
+                </QueueAnim>)
 
         }
     }
 
     toogleAddQuestionType() {
         this.setState({
-            show:!this.state.show
+            show: !this.state.show
         })
 
     }
@@ -39,11 +41,13 @@ class AddQuestion extends Component {
             <div className={styles['add-question']}>
                 {this.renderChooseQuestionType()}
                 <div className={styles["add-question-btn"]}
-                     onClick = {::this.toogleAddQuestionType}>
+                    key='a'
+                    onClick={::this.toogleAddQuestionType}>
                     <span>添加问题</span>
-                </div>
             </div>
-        )
+
+            </div >
+            )
 
     }
 }

@@ -1,7 +1,7 @@
-@import "../../styles/mixins/flex-center.scss";
-@import "../../styles/variables.scss";
-@import "../../styles/mixins/iconfont.scss";
-@import "../../styles/mixins/size.scss";
+@import '../../styles/mixins/flex-center.scss';
+@import '../../styles/variables.scss';
+@import '../../styles/mixins/iconfont.scss';
+@import '../../styles/mixins/size.scss';
 
 .add-question {
     width: 90%;
@@ -55,5 +55,6 @@
         .text::before {
             @include iconfont($text, .8em, .8em);
         }
+         
 
 }
