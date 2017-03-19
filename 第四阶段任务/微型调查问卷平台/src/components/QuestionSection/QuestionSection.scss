@@ -1,0 +1,9 @@
+@import "../../styles/mixins/flex-center.scss";
+
+.type-wrapper{
+      @include flex-center;
+      height: 5em;
+      border-bottom: none;
+      margin: 0 auto;
+      font-size: 80%;
+}

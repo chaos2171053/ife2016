@@ -8,6 +8,8 @@ import styles from './Edit.scss'
 
 //import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
+import {QuestionSection} from　'../../components'
+
 // const mapStateToProps = state => ({
 
 //     calendar: state.calendar
@@ -41,6 +43,7 @@ class Edit extends Component {
                 <hr className={styles.line} />
                 <div>展示问题</div>
                 <div className={styles['add-question']}>
+                    <QuestionSection></QuestionSection>
                     <div className={styles["add-question-btn"]}>
                         <span>添加问题</span>
                     </div>

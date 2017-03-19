@@ -19,10 +19,10 @@ class Home extends Component {
 
     //如果系统中没有问卷，则显示新建问卷
     renderNewQuestionnaireLayout() {
-        const config = {opacity:[1, 0],translateY:[0, -30]}
+        const config = {opacity:[1, 0]}
         return (
             <Link to='/edit' className={styles.link}>
-                <QueueAnim className="demo-page" key="page" type="bottom" delay = '500'>
+                <QueueAnim className="demo-page" key="page" type="bottom" delay = '800' animConfig= {config}>
                     <div className={styles['add-btn']} key = 'add'>
                         {/*<Button type="primary" className = {styles['ant-btn ant-btn-primary']}>新建问卷</Button>*/}
 
