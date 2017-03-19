@@ -1,18 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import styles from './QuestionSection.scss';
-class QuestionSection extends Component {
-    constructor(props) {
-        super(props)
-    }
-    render() {
-        return (
-            <div className={styles['type-wrapper']}>
-                <div className = 'radio'>单选</div>
-                <div className = 'checkbox'>多选</div>
-                <div className = 'text'>文本</div>
-            </div>
-        )
-    }
+import classNames from "classnames";
+
+const QuestionSection = props => {
+    return (
+        <div className={styles['type-wrapper']}>
+            <div className={classNames(styles.type, styles.radio)}>单选</div>
+            <div className={classNames(styles.type, styles.checkbox)}>多选</div>
+            <div className={classNames(styles.type, styles.text)}>文本</div>
+        </div>
+    )
+}
+
+QuestionSection.propTypes = {
+
 }
 
 export default QuestionSection

@@ -1,9 +1,48 @@
 @import "../../styles/mixins/flex-center.scss";
-
+@import "../../styles/mixins/iconfont.scss";
+@import "../../styles/mixins/size.scss";
 .type-wrapper{
       @include flex-center;
       height: 5em;
       border-bottom: none;
       margin: 0 auto;
       font-size: 80%;
+    //   &::before {
+    //         content: "";
+    //         position: fixed;
+    //         top: 0;
+    //         right: 0;
+    //         bottom: 0;
+    //         left: 0;
+    //         z-index: 1;
+    //     }
+    .type {
+            @include flex-center;
+            @include size(6.25em, 2em);
+            z-index: 1;
+            margin: 0 1em;
+            border: 1px solid $gray-light;
+            border-radius: .2em;
+            box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
+            // color: $gray;
+            background: $gray-light;
+            &:hover {
+                border-color: $blue;
+                color: $white;
+                background: $blue;
+                cursor: pointer;
+            }
+            @media screen and (max-width: $small-page-max-width) {
+                margin: 0 .2em;
+            }
+        }
+        .radio::before {
+            @include iconfont($radio, .8em, .8em);
+        }
+        .checkbox::before {
+            @include iconfont($checkbox, .8em, .8em);
+        }
+        .text::before {
+            @include iconfont($text, .8em, .8em);
+        }
 }

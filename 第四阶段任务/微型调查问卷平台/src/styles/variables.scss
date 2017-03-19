@@ -2,13 +2,19 @@ $font-size-base:          20px !default;
 
 $background-z-index:      -1 !default;
 
+$small-page-max-width:    480px !default;
+$medium-page-max-width:   960px !default;
+
 $gray-base:               #000 !default;
 $white:                  #fff    !default;
 $blue:                   #108EE9 !default; 
-$gray:                   #EEEEEE !default;
-$gray-light:             #cccccc !default; 
+$gray:                   #CCCCCC !default;
+$gray-light:             #DDDDDD !default; 
 $gray-lighter:            lighten($gray-base, 93.3%) !default; // #eee
 $gray-dark:              #777777 !default;  
 
 
 $add:                     "\e600" !default;
+$radio:                   "\e601" !default;
+$checkbox:                "\e602" !default;
+$text:                    "\e603" !default;
