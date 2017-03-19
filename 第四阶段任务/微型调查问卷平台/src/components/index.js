@@ -1,3 +1,2 @@
-import QuestionSection from './QuestionSection/QuestionSection'
-
-export {QuestionSection}
+import AddQuestion from './AddQuestion/AddQuestion';
+export {AddQuestion}

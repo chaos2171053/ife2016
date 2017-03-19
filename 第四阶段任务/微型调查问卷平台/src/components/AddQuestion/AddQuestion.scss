@@ -1,21 +1,31 @@
 @import "../../styles/mixins/flex-center.scss";
+@import "../../styles/variables.scss";
 @import "../../styles/mixins/iconfont.scss";
 @import "../../styles/mixins/size.scss";
-.type-wrapper{
+
+.add-question {
+    width: 90%;
+    margin: 1.5em auto;
+    .add-question-btn {
+        @include flex-center;
+        height: 5em;
+        // border: 1px solid $gray-light;
+        font-size: 80%;
+        color: $gray-dark;
+        background: #dddddd;
+        cursor: pointer;
+        &::before {
+            @include iconfont($add, 1.25em, 1em);
+        }
+    }
+    .type-wrapper{
       @include flex-center;
       height: 5em;
       border-bottom: none;
       margin: 0 auto;
       font-size: 80%;
-    //   &::before {
-    //         content: "";
-    //         position: fixed;
-    //         top: 0;
-    //         right: 0;
-    //         bottom: 0;
-    //         left: 0;
-    //         z-index: 1;
-    //     }
+      border: 1px solid $gray-light;
+    }
     .type {
             @include flex-center;
             @include size(6.25em, 2em);
@@ -45,4 +55,5 @@
         .text::before {
             @include iconfont($text, .8em, .8em);
         }
+
 }

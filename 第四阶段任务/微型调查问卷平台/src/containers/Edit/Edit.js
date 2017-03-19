@@ -6,9 +6,9 @@ import { bindActionCreators } from 'redux'
 import * as Actions from '../../actions/calendar'
 import styles from './Edit.scss'
 
-//import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
-import {QuestionSection} from　'../../components'
+import { QuestionSection,AddQuestion } from '../../components'
 
 // const mapStateToProps = state => ({
 
@@ -42,12 +42,18 @@ class Edit extends Component {
                 <input placeholder="Enter your userName" className={styles["edit-questionnaire-title"]}></input>
                 <hr className={styles.line} />
                 <div>展示问题</div>
-                <div className={styles['add-question']}>
-                    <QuestionSection></QuestionSection>
+                {/*<div className={styles['add-question']}>
+                    <ReactCSSTransitionGroup>
+                        transitionName={styles['css-transition']}
+                        transitionEnterTimeout={300}
+                        transitionLeaveTimeout={300}
+                        <QuestionSection />
+                    </ReactCSSTransitionGroup>
                     <div className={styles["add-question-btn"]}>
                         <span>添加问题</span>
                     </div>
-                </div>
+                </div>*/}
+                <AddQuestion/>
                 <hr className={styles.line} />
                 <div className={styles.footer}>
                     <div className={styles["date-wrap"]}>

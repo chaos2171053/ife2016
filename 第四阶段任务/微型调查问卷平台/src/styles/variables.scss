@@ -13,6 +13,7 @@ $gray-light:             #DDDDDD !default;
 $gray-lighter:            lighten($gray-base, 93.3%) !default; // #eee
 $gray-dark:              #777777 !default;  
 
+$edit-transition-timeout: .3s !default;
 
 $add:                     "\e600" !default;
 $radio:                   "\e601" !default;
