@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import '../../styles/reset.css';
 import { Header,Main } from '../';
+
+import styles from "./App.scss";
 // const App = () => (
 //     <div>
 //         <Header/>
@@ -8,7 +10,7 @@ import { Header,Main } from '../';
 //     </div>
 // )
 const App = ({children}) => (
-    <div>
+    <div className={styles.container}>
         {children}
     </div>
 )
