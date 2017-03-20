@@ -11,7 +11,7 @@ import { Route } from 'react-router'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
 import rootReducer from './reducers/index'
-import { App, Header, Home, Main, Edit } from './containers/index';
+import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
 import { Switch } from 'react-router-dom'
 
@@ -31,15 +31,18 @@ ReactDOM.render(
     <Provider store={store}>
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
-            <App>
 
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/edit" component={Edit} />
-                            {/* <Route path="/fill" component={Fill} />
+            <Switch>
+                <Route exact path="/" component={Login} />
+                <App>
+                    <div>
+                        <Route exact path="/home" component={Home} />
+                        <Route path="/edit" component={Edit} />
+                        {/* <Route path="/fill" component={Fill} />
                 <Route path="/check" component={Check} >*/}
-                        </Switch>
-            </App>
+                    </div>
+                </App>
+            </Switch>
+
         </ConnectedRouter>
     </Provider>, document.getElementById('app'));
-    

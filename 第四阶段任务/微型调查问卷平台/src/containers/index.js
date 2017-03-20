@@ -3,4 +3,5 @@ import Header from './Header/Header';
 import Main from './Main/Main';
 import Home from "./Home/Home";
 import Edit from './Edit/Edit'
-export { App,Header,Main,Home,Edit};
+import Login from './Login/Login'
+export { App,Header,Main,Home,Edit,Login};
