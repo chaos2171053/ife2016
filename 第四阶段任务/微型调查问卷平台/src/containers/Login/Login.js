@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
-import {Link,Redirect,} from 'react-router-dom'
+import {Link,Redirect} from 'react-router-dom'
 
 // const FormItem = Form.Item;
 import { bindActionCreators } from 'redux'
@@ -22,11 +22,9 @@ class Login extends Component {
     constructor(props) {
         super(props);
     }
-    toHome() {
-    }
+    
     render(){
-        console.log(localStorage.statusState)
-        const {actions:{logIn,signOut},status:{isLogin}} = this.props;
+        const {actions:{logIn},status:{isLogin}} = this.props;
         if(isLogin){
             return <Redirect to='/home'/>
         }
