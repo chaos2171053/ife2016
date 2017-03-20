@@ -32,17 +32,13 @@ ReactDOM.render(
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
             <App>
-                <div>
-                    <Header />
-                    <Main>
+
                         <Switch>
                             <Route exact path="/" component={Home} />
                             <Route path="/edit" component={Edit} />
                             {/* <Route path="/fill" component={Fill} />
                 <Route path="/check" component={Check} >*/}
                         </Switch>
-                    </Main>
-                </div>
             </App>
         </ConnectedRouter>
     </Provider>, document.getElementById('app'));
