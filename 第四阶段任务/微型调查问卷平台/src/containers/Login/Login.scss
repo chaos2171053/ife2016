@@ -1,0 +1,70 @@
+@import "../../styles/variables.scss";
+
+.main {
+    display: flex;
+    min-height: auto;
+    white-space: nowrap;
+    text-align: center;
+    .main-body {
+    //    position: absolute;
+    //     top:50%;
+        margin: auto;
+        padding: 0;
+        width: 75%;
+        display: inline-block;
+        vertical-align:middle;
+        // text-align:left;
+        white-space:normal;
+        .header{
+            text-align: center;
+            .logo-wrapper{
+                margin: 0 auto;
+                height:6em;
+                .logo{
+                    color:$blue;
+                    font-size: 80px;
+                    font-weight: 400;
+                    text-align: center;
+                    -webkit-text-rendering: optimizeLegibility;
+                    -moz-text-rendering: optimizeLegibility;
+                    -ms-text-rendering: optimizeLegibility;
+                    text-rendering: optimizeLegibility;
+                }
+            }
+            .subtitle {
+                    margin:2.3em 0 1em;
+                    font-size:18px;
+                    font-weight:400;
+                    font-size:18px;
+                    line-height:1;
+                }
+
+        }
+        .content {
+            .navs{
+                margin-bottom:.8em;
+                font-size:1.5em;
+                text-align:center;
+                .navs-slider{
+                    position:relative;
+                    display:inline-block;
+                    a {
+                        color: #555;
+                        float:left;
+                        width:4em;
+                        text-decoration:none;
+                        line-height:3em;
+                        opacity:.8;
+                        transition:opacity .15s,color .15s;
+                    }
+                    a.active {
+                        opacity:1;
+                        color:$blue;
+
+                    }
+                }
+            }
+        }
+
+    }
+}

@@ -15,7 +15,8 @@ import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
 import { Switch } from 'react-router-dom'
 
-
+import { Layout} from 'antd';
+const { Footer } = Layout;
 
 const history = createHistory()
 const middleware = routerMiddleware(history)
@@ -42,6 +43,7 @@ ReactDOM.render(
                 <Route path="/check" component={Check} >*/}
                     </div>
                 </App>
+                
             </Switch>
 
         </ConnectedRouter>
