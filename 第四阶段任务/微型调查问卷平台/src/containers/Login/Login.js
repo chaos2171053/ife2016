@@ -46,7 +46,7 @@ class Login extends Component {
         return (
             <div className={styles.navs}>
                 <div className={styles['navs-slider']}>
-                    <a href='#' className={classNames({active:this.state.chooseSignup})}>注册</a>
+                    <a href='#' className={classNames({[styles['active']]:this.state.chooseSignup})}>注册</a>
                     <a href='#' className={classNames({active:this.state.chooseSignin})}>登录</a>
                     <span className={styles['navs-slider-bar']}></span>
                 </div>
