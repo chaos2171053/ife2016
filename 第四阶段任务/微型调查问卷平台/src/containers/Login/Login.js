@@ -12,9 +12,9 @@ import styles from './Login.scss'
 import classNames from "classnames";
 
 import { Main } from '../';
-// import { LoginComponents } from '../../components'
+import { LoginComponents } from '../../components'
 
-// const {Header} = LoginComponents
+const {Header} = LoginComponents
 
 const mapStateToProps = state => ({
     status: state.rootReducer.status
@@ -30,22 +30,16 @@ const mapDispatchToProps = dispatch => ({
 class Login extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     chooseSignin: false,
-        //     chooseSignup: true
-        // }
-        // this.toogleRenderSignup = this.toogleRenderSignup.bind(this,true)
-        // this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
     }
 
-    renderHeader() {
-        return (
-            <div className={styles.header}>
-                <div className={styles['logo-wrapper']}><h1 className={styles.logo}>问吧</h1></div>
-                <h2 className={styles.subtitle}>与世界分享你瞎编的问卷</h2>
-            </div>
-        )
-    }
+    // renderHeader() {
+    //     return (
+    //         <div className={styles.header}>
+    //             <div className={styles['logo-wrapper']}><h1 className={styles.logo}>问吧</h1></div>
+    //             <h2 className={styles.subtitle}>与世界分享你瞎编的问卷</h2>
+    //         </div>
+    //     )
+    // }
     renderNavs() {
         const { actions: { logIn,renderSignin,renderSignup, }, status: { isRenderSignin,isRenderSignup } } = this.props;
         
@@ -64,20 +58,7 @@ class Login extends Component {
             </div>
         )
     }
-    toogleRenderSignup() {
-        this.setState({
-            chooseSignin:false,
-            chooseSignup: true
-        })
-        
-    }
-    toogleRenderSignin() {
-        this.setState({
-            chooseSignin:true,
-            chooseSignup: false
-        })
-        
-    }
+
     renderSignup() {
         return (
             <div className={styles.signup}>
@@ -126,7 +107,7 @@ class Login extends Component {
             <div className = {styles['main-warpper']}>
             <div className={styles.main}>
                 <div className={styles['main-body']}>
-                    {this.renderHeader()}
+                    <Header/>
                     <div className={styles.content}>
                         {this.renderNavs()}
                         {isRenderSignup?(this.renderSignup()):(this.renderSignin())}

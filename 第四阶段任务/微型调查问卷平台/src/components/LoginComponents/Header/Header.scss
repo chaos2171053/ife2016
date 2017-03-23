@@ -1,5 +1,8 @@
-@import "../../../styles/variables.scss";
-
+@import '../../../styles/variables.scss';
+@import '../../../containers/Login/Login.scss';
+.wrapper{
+    @extend .main;
+    @extend .main-body;
 .header{
     text-align: center;
     .logo-wrapper{
@@ -23,4 +26,5 @@
         line-height:1;
         }
 
+}
 }
