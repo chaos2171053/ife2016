@@ -51,20 +51,21 @@
                 .navs-slider{
                     position:relative;
                     display:inline-block;
-                    a {
+                    span {
                         color: #555;
                         float:left;
                         width:4em;
                         text-decoration:none;
                         line-height:2em;
                         opacity:.7;
+                        cursor: pointer;
                         transition:opacity .15s,color .15s;
                         &.active{
                              opacity:1;
                              color:$blue;
                         }
                     }
-                    .navs-slider-bar {
+                    .navs-slider-bar, {
                         position:absolute;
                         left:0;
                         bottom:0;
@@ -72,6 +73,8 @@
                         width: 2.4em;
                         height: .1em;
                         background: #0f88eb;
+                        -moz-transition: left .15s ease-in; /* Firefox 4 */
+                        -o-transition: left .15s ease-in; /* Opera */
                         -webkit-transition: left .15s ease-in;
                         transition: left .15s ease-in;
                         &.bar-active{

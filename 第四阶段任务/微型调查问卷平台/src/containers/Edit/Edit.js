@@ -8,7 +8,7 @@ import styles from './Edit.scss'
 
 
 
-import { QuestionSection,AddQuestion } from '../../components'
+import { AddQuestion } from '../../components'
 
 
 

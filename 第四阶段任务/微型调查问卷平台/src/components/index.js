@@ -1,3 +1,3 @@
 import AddQuestion from './AddQuestion/AddQuestion';
-
-export {AddQuestion}
+import LoginComponents from './LoginComponents/index'
+export {AddQuestion,LoginComponents}

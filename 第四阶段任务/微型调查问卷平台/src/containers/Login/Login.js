@@ -12,11 +12,14 @@ import styles from './Login.scss'
 import classNames from "classnames";
 
 import { Main } from '../';
+// import { LoginComponents } from '../../components'
 
+// const {Header} = LoginComponents
 
 const mapStateToProps = state => ({
     status: state.rootReducer.status
 })
+
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
@@ -27,10 +30,12 @@ const mapDispatchToProps = dispatch => ({
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            chooseSignin: false,
-            chooseSignup: true
-        }
+        // this.state = {
+        //     chooseSignin: false,
+        //     chooseSignup: true
+        // }
+        // this.toogleRenderSignup = this.toogleRenderSignup.bind(this,true)
+        // this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
     }
 
     renderHeader() {
@@ -42,20 +47,36 @@ class Login extends Component {
         )
     }
     renderNavs() {
-
+        const { actions: { logIn,renderSignin,renderSignup, }, status: { isRenderSignin,isRenderSignup } } = this.props;
+        
         return (
             <div className={styles.navs}>
                 <div className={styles['navs-slider']}>
-                    <a href='#' className={classNames({ [styles['active']]: this.state.chooseSignup })}>注册</a>
-                    <a href='#' className={classNames({ [styles['active']]: this.state.chooseSignin })}>登录</a>
-                    <span className={styles['navs-slider-bar']}></span>
+                    <span className={classNames({ [styles['active']]: isRenderSignup })}
+                                onClick ={renderSignup}>注册</span>
+                    <span className={classNames({ [styles['active']]: isRenderSignin })}
+                                onClick ={renderSignin}>登录</span>
                     <span className={classNames({
-                        [styles["navs-slider-bar"]]: true,
-                        [styles['bar-acitve']]: this.state.chooseSignin,
+                        [styles['navs-slider-bar']]: true, 
+                        [styles['bar-active']]: isRenderSignin,                      
                     })}></span>
                 </div>
             </div>
         )
+    }
+    toogleRenderSignup() {
+        this.setState({
+            chooseSignin:false,
+            chooseSignup: true
+        })
+        
+    }
+    toogleRenderSignin() {
+        this.setState({
+            chooseSignin:true,
+            chooseSignup: false
+        })
+        
     }
     renderSignup() {
         return (
@@ -89,10 +110,14 @@ class Login extends Component {
         )
     }
     renderSignin() {
-        
+        return(
+            <div>123</div>
+        )
     }
     render() {
-        const { actions: { logIn }, status: { isLogin } } = this.props;
+        const { actions: { logIn,renderSignin,renderSignup, }, status: { isLogin,isRenderSignin,isRenderSignup } } = this.props;
+        
+        //如果已经登录过，则调到home页面
         if (isLogin) {
             return <Redirect to='/home' />
         }
@@ -104,7 +129,7 @@ class Login extends Component {
                     {this.renderHeader()}
                     <div className={styles.content}>
                         {this.renderNavs()}
-                        {this.state.chooseSignup?this.renderSignup():this.renderSignin()}
+                        {isRenderSignup?(this.renderSignup()):(this.renderSignin())}
                     </div>
                 </div>
             </div>

@@ -1,11 +1,21 @@
 import * as types from '../constants/AppStatusActionsTypes'
-import { Log_In, Sign_Out } from '../constants/AppStatusActionsTypes'
+import { LOG_IN, SIGN_OUT,RENDER_SIGNIN,RENDER_SIGNUP } from '../constants/AppStatusActionsTypes'
 
-const initialState = localStorage.statusState ? JSON.parse(localStorage.statusState) : { isLogin: false };
+//需要本地存储的数据
+const localState = localStorage.statusState ? JSON.parse(localStorage.statusState): {
+     isLogin: false,
+}
+
+const initialState =  
+{ 
+    ...localState,
+    isRenderSignin:false,
+    isRenderSignup:true,
+};
 
 const status = (state = initialState, action) => {
     switch (action.type) {
-        case Log_In: {
+        case LOG_IN: {//登录状态
             const state = Object.assign({}, state, {
                 isLogin: true
             })
@@ -13,7 +23,7 @@ const status = (state = initialState, action) => {
             return state
         }
             break;
-        case Sign_Out: {
+        case SIGN_OUT: {//登出状态
             const state = Object.assign({}, state, {
                 isLogin: false
             })
@@ -21,7 +31,20 @@ const status = (state = initialState, action) => {
             return state
         }
             break;
-
+        case RENDER_SIGNIN:{
+            return Object.assign({}, state, {
+                isRenderSignin:true,
+                isRenderSignup:false,
+            })
+        }
+        break;
+        case RENDER_SIGNUP:{
+            return Object.assign({}, state, {
+                isRenderSignin:false,
+                isRenderSignup:true,
+            })
+        }
+        break;
         default:
             return state
     }

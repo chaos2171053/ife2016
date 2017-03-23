@@ -791,3 +791,56 @@ webpack中配置
         </ConnectedRouter>
 `
 因为在v4版本，this.props.children已被移除
+
+####15.3 组件重复渲染
+`
+this.state = {
+            chooseSignin: false,
+            chooseSignup: true
+        }
+`
+`renderNavs() {
+        console.log(this.state.chooseSignin)
+        return (
+            <div className={styles.navs}>
+                <div className={styles['navs-slider']}>
+                    <span href='#' className={classNames({ [styles['active']]: this.state.chooseSignup })}
+                                onClick ={()=>{ this.setState({
+            chooseSignin: false,
+            chooseSignup: true
+        })}}>注册</span>
+                    <span href='#' className={classNames({ [styles['active']]: this.state.chooseSignin })}
+                                onClick ={::this.toogleRenderSignin}>登录</span>
+                    <span className={styles['navs-slider-bar']}></span>
+                    <span className={classNames({
+                        [styles["navs-slider-bar"]]: true,
+                        [styles['bar-acitve']]: this.state.chooseSignin
+                    })}></span>
+                </div>
+            </div>
+        )
+    }
+`
+想点击登录、注册改变state切换显示登录、注册面板组件。但是发现点击一次，打印两次`this.state.chooseSignin`的值。
+原因在于使用了a标签，点击时改变了一次state，页面跳转，改变一次state，一共两次。
+解决方法：改为用div或span标签。
+
+####15.4 上面的代码出现了另外的bug
+![50-1](problemsPic/50-1.png)<br>
+原因是我在 state 还在更新中时 setState。
+解决方法:
+在组件constructor方法里面
+`
+this.toogleRenderSignup = this.toogleRenderSignup.bind(this,true)
+this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
+`
+在render方法里
+`
+<span className={classNames({ [styles['active']]: this.state.chooseSignup })}
+                                onClick ={this.toogleRenderSignup}>注册</span>
+<span className={classNames({ [styles['active']]: this.state.chooseSignin })}
+                                onClick ={this.toogleRenderSignin}>登录</span>
+`
+
+使用redux action 控制组件切换更新
+-[参考](http://4dev.tech/2016/03/reactjs-error-cannot-update-during-an-existing-state-transition-such-as-within-render-render-methods-should-be-a-pure-function-of-props-and-state/)

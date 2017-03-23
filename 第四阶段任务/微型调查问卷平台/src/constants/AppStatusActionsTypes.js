@@ -1,2 +1,4 @@
-export const Log_In = 'Log_In' // 登录
-export const Sign_Out = 'Sign_Out' // 登出
+export const LOG_IN = 'LOG_IN' // 登录状态
+export const SIGN_OUT = 'SIGN_OUT' // 登出状态
+export const RENDER_SIGNIN = 'RENDER_SIGNIN' //渲染登录面板
+export const RENDER_SIGNUP = 'RENDER_SIGNUP' //渲染注册面板
