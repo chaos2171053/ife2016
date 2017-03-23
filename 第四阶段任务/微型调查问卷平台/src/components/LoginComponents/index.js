@@ -1,3 +1,3 @@
 import Header from './Header/Header'
-
-export default {Header}
+import Navigation from './Navigation/Navigation'
+export default {Header,Navigation}

@@ -14,7 +14,7 @@ import classNames from "classnames";
 import { Main } from '../';
 import { LoginComponents } from '../../components'
 
-const {Header} = LoginComponents
+const {Header,Navigation} = LoginComponents
 
 const mapStateToProps = state => ({
     status: state.rootReducer.status
@@ -40,24 +40,24 @@ class Login extends Component {
     //         </div>
     //     )
     // }
-    renderNavs() {
-        const { actions: { logIn,renderSignin,renderSignup, }, status: { isRenderSignin,isRenderSignup } } = this.props;
+    // renderNavs() {
+    //     const { actions: { logIn,renderSignin,renderSignup, }, status: { isRenderSignin,isRenderSignup } } = this.props;
         
-        return (
-            <div className={styles.navs}>
-                <div className={styles['navs-slider']}>
-                    <span className={classNames({ [styles['active']]: isRenderSignup })}
-                                onClick ={renderSignup}>注册</span>
-                    <span className={classNames({ [styles['active']]: isRenderSignin })}
-                                onClick ={renderSignin}>登录</span>
-                    <span className={classNames({
-                        [styles['navs-slider-bar']]: true, 
-                        [styles['bar-active']]: isRenderSignin,                      
-                    })}></span>
-                </div>
-            </div>
-        )
-    }
+    //     return (
+    //         <div className={styles.navs}>
+    //             <div className={styles['navs-slider']}>
+    //                 <span className={classNames({ [styles['active']]: isRenderSignup })}
+    //                             onClick ={renderSignup}>注册</span>
+    //                 <span className={classNames({ [styles['active']]: isRenderSignin })}
+    //                             onClick ={renderSignin}>登录</span>
+    //                 <span className={classNames({
+    //                     [styles['navs-slider-bar']]: true, 
+    //                     [styles['bar-active']]: isRenderSignin,                      
+    //                 })}></span>
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     renderSignup() {
         return (
@@ -92,7 +92,7 @@ class Login extends Component {
     }
     renderSignin() {
         return(
-            <div>123</div>
+            <div>666</div>
         )
     }
     render() {
@@ -109,7 +109,7 @@ class Login extends Component {
                 <div className={styles['main-body']}>
                     <Header/>
                     <div className={styles.content}>
-                        {this.renderNavs()}
+                        <Navigation {...this.props}/>
                         {isRenderSignup?(this.renderSignup()):(this.renderSignin())}
                     </div>
                 </div>
