@@ -842,5 +842,5 @@ this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
                                 onClick ={this.toogleRenderSignin}>登录</span>
 `
 
-使用redux action 控制组件切换更新
+解决方法：使用redux控制组件切换更新。
 -[参考](http://4dev.tech/2016/03/reactjs-error-cannot-update-during-an-existing-state-transition-such-as-within-render-render-methods-should-be-a-pure-function-of-props-and-state/)

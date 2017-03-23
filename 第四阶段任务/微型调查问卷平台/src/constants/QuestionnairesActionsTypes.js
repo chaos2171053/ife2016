@@ -1,0 +1,1 @@
+export const USERNAME_REPEAT = 'USERNAME_REPEAT' // 用户名重复

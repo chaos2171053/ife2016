@@ -5,7 +5,8 @@ import { Link, Redirect } from 'react-router-dom'
 
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as Actions from '../../actions/status'
+import * as StatusActions from '../../actions/status'
+import * as QuestionnairesActions from '../../actions/questionnaires'
 
 import '../../styles/reset.css';
 import styles from './Login.scss'
@@ -17,12 +18,16 @@ import { LoginComponents } from '../../components'
 const { Header, Navigation, Signup, Signin } = LoginComponents
 
 const mapStateToProps = state => ({
-    status: state.rootReducer.status
+    status: state.rootReducer.status,
+    questionnaires:state.rootReducer.questionnaires,
 })
 
 
 const mapDispatchToProps = dispatch => ({
-    actions: bindActionCreators(Actions, dispatch)
+    actions: Object.assign({},
+        bindActionCreators(StatusActions, dispatch),
+        bindActionCreators(QuestionnairesActions, dispatch),
+    )
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
@@ -38,6 +43,9 @@ class Login extends Component {
             isRenderSignin: React.PropTypes.bool.isRequired,
             isRenderSignup: React.PropTypes.bool.isRequired,
         }),
+        questionnaires: React.PropTypes.shape({
+            isUsernameRepeat: React.PropTypes.bool.isRequired,
+        }),
     }
     constructor(props) {
         super(props);
@@ -45,9 +53,11 @@ class Login extends Component {
 
     render() {
         const {
-            actions: { logIn, renderSignin, renderSignup, },
-            status: { isLogin, isRenderSignin, isRenderSignup }
+            actions: { logIn, renderSignin, renderSignup,checkUsernameRepeat },
+            status: { isLogin, isRenderSignin, isRenderSignup },
+            questionnaires:{isUsernameRepeat}
         } = this.props;
+
 
         //如果已经登录过，则调到home页面
         if (isLogin) {
@@ -58,10 +68,14 @@ class Login extends Component {
             <div className={styles['main-warpper']}>
                 <div className={styles.main}>
                     <div className={styles['main-body']}>
-                        <Header />
+                        <Header/>
                         <div className={styles.content}>
                             <Navigation {...this.props} />
-                            {isRenderSignup ? (<Signup />) : (<Signin />)}
+                            {isRenderSignup ? 
+                                (<Signup 
+                                    checkUsernameRepeat = {checkUsernameRepeat}
+                                    isUsernameRepeat = {isUsernameRepeat}/>) 
+                                : (<Signin />)}
                         </div>
                     </div>
                 </div>

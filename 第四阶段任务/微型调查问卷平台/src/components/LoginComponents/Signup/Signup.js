@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,PropTypes } from 'react';
 import styles from '../../../containers/Login/Login.scss'
 import classNames from "classnames";
 import { message } from 'antd';
@@ -11,14 +11,20 @@ const error = (msg) => {
   message.error(msg);
 };
 class Signup extends Component {
-
+    static propTypes = {
+        checkUsernameRepeat:React.PropTypes.func.isRequired,
+        isUsernameRepeat:React.PropTypes.bool.isRequired,
+    }
     //校验登录信息
-    validData(){
+    validata(){
         const phoneRegx = /^1(3|4|5|7|8)[0-9]\d{8}$/;
-        const {username,phonenumber,password} =this.refs
+        const {username,phonenumber,password} =this.refs;
+        const {checkUsernameRepeat,isUsernameRepeat} = this.props;
+
         let userName = trim(username.value),
             phoneNumber = trim(phonenumber.value),
             passWord = trim(password.value);
+
             if(userName === null || userName === undefined || userName === '') {
                 return '请填写用户名'
             }
@@ -28,19 +34,25 @@ class Signup extends Component {
             if(!phoneRegx.test(phoneNumber)) {
                 return '请填写有效的手机号'
             }
-            if(passWord == null || passWord == undefined || passWord == '') {
+            if(passWord === null || passWord === undefined || passWord === '') {
                 return '请填写密码'
             }
             if(passWord.length<6) {
                 return '密码长度不少于6位'
             }
-            
+           
+            checkUsernameRepeat(userName);
+
+            if(isUsernameRepeat){
+                return '用户名已存在'
+            }
+            console.log(isUsernameRepeat)
         return true
     }
 
     //处理注册
     handleSignup(){
-        this.validData() === true ? success(): error(this.validData()) ;
+        this.validata() === true ? success(): error(this.validata()) ;
     }
     render() {
         return (
