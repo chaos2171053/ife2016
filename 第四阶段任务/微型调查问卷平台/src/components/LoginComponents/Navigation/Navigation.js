@@ -10,9 +10,9 @@ const Navigation = ({ actions, status }) => {
         <div className={styles.navs}>
             <div className={styles['navs-slider']}>
                 <span className={classNames({ [styles['active']]: isRenderSignup })}
-                    onClick={renderSignup}>注册</span>
+                    onClick={()=>{renderSignup()}}>注册</span>
                 <span className={classNames({ [styles['active']]: isRenderSignin })}
-                    onClick={renderSignin}>登录</span>
+                    onClick={()=>{renderSignin()}}>登录</span>
                 <span className={classNames({
                     [styles['navs-slider-bar']]: true,
                     [styles['bar-active']]: isRenderSignin,

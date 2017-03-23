@@ -4,7 +4,7 @@ import classNames from "classnames";
 
 const Signup = ()=>{
     return (
-            <div className={styles.signup}>
+            <div className={styles['signup-signin']}>
                 <div className={styles['login-box']}>
                     <div className={styles['group-inputs']}>
                         <div className={styles['input-wrapper']}>
@@ -24,7 +24,7 @@ const Signup = ()=>{
                         </div>
                     </div>
                     <div className={styles['button-wrapper']}>
-                        <button className={styles['sign-button']}>注册问啊</button>
+                        <button className={styles['signin-signup-button']}>注册问啊</button>
                     </div>
                 </div>
                 <p className={styles.agreement}>点击「注册」按钮，即代表你同意

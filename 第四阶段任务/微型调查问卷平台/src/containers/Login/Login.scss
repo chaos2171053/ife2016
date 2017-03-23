@@ -8,9 +8,9 @@
     // position: relative;
     .main-body {
         position: absolute;
-        top: 50%;
+        top: 40%;
         left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -40%);
         // margin: auto;
         padding: 0;
         // display: inline-block;
@@ -83,9 +83,9 @@
                     }
                 }
             }
-            .signup {
+            .signup-signin {
                 margin:auto;
-                width: 28em;
+                width: 25em;
                 text-align: left;
                 .login-box {
                     .group-inputs {
@@ -116,12 +116,12 @@
                     }
                     .button-wrapper {
                         margin-top: 1.5em;
-                        .sign-button {
+                        .signin-signup-button {
                             background: $blue;
                             box-shadow: none;
                             border: 0;
                             border-radius: .25em;
-                            line-height: 3.4em;
+                            line-height: 3em;
                             color: $white;
                             display: block;
                             padding: 0;
@@ -137,7 +137,7 @@
                 }
                 .agreement {
                         margin-top: 1.8em;
-                        font-size: 13px;
+                        font-size: 12px;
                         text-align: center;
                         color: #999;
                         text-align: left;
@@ -148,3 +148,4 @@
 
     }
 }
+
