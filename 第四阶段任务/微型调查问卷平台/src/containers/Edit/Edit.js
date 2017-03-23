@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import * as Actions from '../../actions/calendar'
+
 import styles from './Edit.scss'
 
 
@@ -19,7 +19,7 @@ import { AddQuestion } from '../../components'
 // })
 const mapStateToProps = state => {
     return {
-        calendar: state.rootReducer.calendar
+        
     }
 }
 
