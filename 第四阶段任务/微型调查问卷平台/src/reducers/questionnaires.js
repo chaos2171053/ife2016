@@ -1,14 +1,14 @@
 import * as types from '../constants/QuestionnairesActionsTypes'
-import {  } from '../constants/QuestionnairesActionsTypes'
+import { USER_SIGNUP, } from '../constants/QuestionnairesActionsTypes'
 import { userModel, questionnaireModel, questionModel } from '../data/data'
 
 //需要本地存储的数据
-const dataBase = localStorage.dataBase  ? JSON.parse(localStorage.dataBase ) :
+const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
     [
         {
-            username: 'chaos', // 用户名
-            phonenumber: '', // 手机号
-            password: '', // 密码
+            username: 'chaos666', // 用户名
+            phonenumber: '18664376937', // 手机号
+            password: '666666', // 密码
             questionnaires: [{ // 问卷数组
                 id: '',// 每个问卷的id
                 questionnaireTitle: '', // 该问卷的标题
@@ -53,17 +53,33 @@ const dataBase = localStorage.dataBase  ? JSON.parse(localStorage.dataBase ) :
 //     // },
 // ]
 
-const questionnaire = (state = dataBase , action) => {
+const questionnaire = (state = {}, action) => {
     switch (action.type) {
-        
+        case USER_SIGNUP: {
+            const { username, phonenumber, password } = action.payload;
+            return {
+                username: username,
+                phonenumber: phonenumber, 
+                password: password, 
+            }
+        }
+            break;
         default:
             return state
     }
 }
+
 const questionnaires = (state = dataBase, action) => {
-    
     switch (action.type) {
-        
+        case USER_SIGNUP: { //用户注册
+            state =   [
+                ...state,
+                questionnaire(undefined, action)
+            ]
+            localStorage.dataBase = JSON.stringify(state);
+            return state
+        }
+            break;
         default:
             return state
     }

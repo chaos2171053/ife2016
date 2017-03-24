@@ -1,8 +1,4 @@
 import React, { Component,PropTypes } from 'react';
-// import { Form, Icon, Input, Button, Checkbox } from 'antd';
-
-import { Link, Redirect } from 'react-router-dom'
-
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as StatusActions from '../../actions/status'
@@ -38,6 +34,7 @@ class Login extends Component {
             logIn: React.PropTypes.func.isRequired,
             renderSignin: React.PropTypes.func.isRequired,
             renderSignup: React.PropTypes.func.isRequired,
+            userSignup:React.PropTypes.func.isRequired,
         }),
         status: React.PropTypes.shape({
             isRenderSignin: React.PropTypes.bool.isRequired,
@@ -51,12 +48,11 @@ class Login extends Component {
 
     render() {
         const {
-            actions: { logIn, renderSignin, renderSignup,},
+            actions: { logIn, renderSignin, renderSignup,userSignup},
             status: { isLogin, isRenderSignin, isRenderSignup },
-            questionnaires:{}
+            questionnaires,
         } = this.props;
-
-        //如果已经登录过，则调到home页面
+        //如果已经登录过，跳到home页面
         if (isLogin) {
             return <Redirect to='/home' />
         }
@@ -70,8 +66,8 @@ class Login extends Component {
                             <Navigation {...this.props} />
                             {isRenderSignup ? 
                                 (<Signup 
-                                    
-                                    />) 
+                                    questionnaires = {questionnaires}
+                                    userSignup = {userSignup}/>) 
                                 : (<Signin />)}
                         </div>
                     </div>

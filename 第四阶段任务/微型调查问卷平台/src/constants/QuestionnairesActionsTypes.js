@@ -1,0 +1,1 @@
+export const USER_SIGNUP = 'USER_SIGNUP' // 注册用户
