@@ -3,20 +3,32 @@ import styles from '../../../containers/Login/Login.scss'
 import classNames from 'classnames';
 import { trim } from '../../../utils/util'
 import { message } from 'antd';
-import { Link,Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 class Signin extends Component {
     constructor(props) {
         super(props);
     }
     static propTypes = {
+        logIn: React.PropTypes.func,
         questionnaires: React.PropTypes.arrayOf(React.PropTypes.object)
     }
 
     success(userName) {
-        // this.props.userSignin(userName, phoneNumber, passWord)
-        this.props.logIn()
-        return message.success(`哈喽~${userName}`);
         
+        const now = new Date(),
+            hour = now.getHours();
+            let msg = '';
+        if (hour < 6) { msg = '凌晨好~' }
+        else if (hour < 9) { msg = '早上好~' }
+        else if (hour < 12) { msg = '上午好~' }
+        else if (hour < 14) { msg = '中午好~' }
+        else if (hour < 17) { msg = '下午好~' }
+        else if (hour < 19) { msg = '傍晚好~' }
+        else if (hour < 22) { msg = '晚上好~' }
+        else { document.write("夜里好！") }
+        this.props.logIn()
+        return message.success(`${msg}${userName}`);
+
     };
 
     error(msg) {
@@ -24,7 +36,7 @@ class Signin extends Component {
     };
 
     //校验登录信息
-    validata(questionnaires, userName, passWord) {  
+    validata(questionnaires, userName, passWord) {
         if (userName === null || userName === undefined || userName === '') {
             return '请填写用户名'
         }
@@ -34,15 +46,15 @@ class Signin extends Component {
         if (passWord.length < 6) {
             return '密码长度不少于6位'
         }
- 
+
         if (questionnaires.some(data => {
             return (data.username === userName) && (data.password === passWord)
         })) {
             return true
-        }else {
+        } else {
             return '用户名或密码不正确'
         }
-        
+
     }
 
     handleSignin() {

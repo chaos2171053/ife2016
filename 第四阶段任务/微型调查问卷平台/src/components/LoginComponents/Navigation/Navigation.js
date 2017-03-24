@@ -3,7 +3,7 @@ import styles from '../../../containers/Login/Login.scss'
 import classNames from "classnames";
 
 const Navigation = ({ actions, status }) => {
-    const { logIn, renderSignin, renderSignup } = actions;
+    const {  renderSignin, renderSignup } = actions;
     const { isRenderSignin, isRenderSignup } = status;
 
     return (
@@ -23,13 +23,13 @@ const Navigation = ({ actions, status }) => {
 }
 Navigation.propTypes = {
     actions: React.PropTypes.shape({
-        logIn: React.PropTypes.func.isRequired,
-        renderSignin: React.PropTypes.func.isRequired,
-        renderSignup:React.PropTypes.func.isRequired,
+        logIn: React.PropTypes.func,
+        renderSignin: React.PropTypes.func,
+        renderSignup:React.PropTypes.func,
     }),
     status: React.PropTypes.shape({
-        isRenderSignin: React.PropTypes.bool.isRequired,
-        isRenderSignup: React.PropTypes.bool.isRequired,
+        isRenderSignin: React.PropTypes.bool,
+        isRenderSignup: React.PropTypes.bool,
     }),
 };
 export default Navigation

@@ -17,6 +17,8 @@ const status = (state = initialState, action) => {
     switch (action.type) {
         case LOG_IN: {//登录状态
             const state = Object.assign({}, state, {
+                isRenderSignin:true,
+                isRenderSignup:false,
                 isLogin: true
             })
             localStorage.statusState = JSON.stringify(state);
@@ -25,6 +27,8 @@ const status = (state = initialState, action) => {
             break;
         case SIGN_OUT: {//登出状态
             const state = Object.assign({}, state, {
+                isRenderSignin:false,
+                isRenderSignup:true,
                 isLogin: false
             })
             localStorage.statusState = JSON.stringify(state);

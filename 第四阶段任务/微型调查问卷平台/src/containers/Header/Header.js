@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link,Redirect } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 import styles from './Header.scss';
 import QueueAnim from 'rc-queue-anim';
 
@@ -22,27 +22,26 @@ const mapDispatchToProps = dispatch => ({
 })
 
 @connect(mapStateToProps, mapDispatchToProps)
-
+@withRouter
 class Header extends Component {
     constructor(props) {
         super(props);
     }
 
-    exit() {
-        const {actions:{signOut}} = this.props;
-        signOut();
-        return <Redirect to='/'/>
+    signout() {
+        const history = this.props.history
+        history.push('/')
+        this.props.actions.signOut()
     }
     render() {
         const config = { opacity: [1, 0], translateX: [0, 150] }//动画设置
 
-        const {actions:{signOut},status:{isLogin}} = this.props;
-        
-        //登出
-        if(!isLogin) {
-            return <Redirect to='/'/>
-        }
+        const { actions: { signOut }, status: { isLogin } } = this.props;
 
+        //登出
+        // if(!isLogin) {
+        //     return <Redirect to='/'/>
+        // }
         return (
             <div>
                 <QueueAnim className="queue-anim-header" duration='1000' animConfig={config}>
@@ -51,11 +50,15 @@ class Header extends Component {
                         <Link to='/edit' key='link'>
                             <h1 >新建问卷</h1>
                         </Link>
-                        <button onClick = {signOut}>退出</button>
+                        
+                            {/*<button onClick = {signOut}>退出</button>*/}
+                            <button onClick={::this.signout}>退出</button>
+
                     </div>
                 </QueueAnim>
-            </div>
+            </div >
         )
     }
 }
+
 export default Header;
