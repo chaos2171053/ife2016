@@ -12,15 +12,14 @@ const error = (msg) => {
 };
 class Signup extends Component {
     static propTypes = {
-        checkUsernameRepeat:React.PropTypes.func.isRequired,
-        isUsernameRepeat:React.PropTypes.bool.isRequired,
+        
     }
     //校验登录信息
     validata(){
         const phoneRegx = /^1(3|4|5|7|8)[0-9]\d{8}$/;
         const {username,phonenumber,password} =this.refs;
-        const {checkUsernameRepeat,isUsernameRepeat} = this.props;
-
+        const {} = this.props;
+        
         let userName = trim(username.value),
             phoneNumber = trim(phonenumber.value),
             passWord = trim(password.value);
@@ -41,9 +40,7 @@ class Signup extends Component {
                 return '密码长度不少于6位'
             }
            
-            if(checkUsernameRepeat(userName)){
-                return '用户名已存在'
-            };
+           
             return true
     }
 

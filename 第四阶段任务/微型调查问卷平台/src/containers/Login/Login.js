@@ -1,5 +1,5 @@
 import React, { Component,PropTypes } from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+// import { Form, Icon, Input, Button, Checkbox } from 'antd';
 
 import { Link, Redirect } from 'react-router-dom'
 
@@ -43,9 +43,7 @@ class Login extends Component {
             isRenderSignin: React.PropTypes.bool.isRequired,
             isRenderSignup: React.PropTypes.bool.isRequired,
         }),
-        questionnaires: React.PropTypes.shape({
-            isUsernameRepeat: React.PropTypes.bool.isRequired,
-        }),
+        questionnaires: React.PropTypes.arrayOf(React.PropTypes.object)
     }
     constructor(props) {
         super(props);
@@ -53,11 +51,10 @@ class Login extends Component {
 
     render() {
         const {
-            actions: { logIn, renderSignin, renderSignup,checkUsernameRepeat },
+            actions: { logIn, renderSignin, renderSignup,},
             status: { isLogin, isRenderSignin, isRenderSignup },
-            questionnaires:{isUsernameRepeat}
+            questionnaires:{}
         } = this.props;
-
 
         //如果已经登录过，则调到home页面
         if (isLogin) {
@@ -73,8 +70,8 @@ class Login extends Component {
                             <Navigation {...this.props} />
                             {isRenderSignup ? 
                                 (<Signup 
-                                    checkUsernameRepeat = {checkUsernameRepeat}
-                                    isUsernameRepeat = {isUsernameRepeat}/>) 
+                                    
+                                    />) 
                                 : (<Signin />)}
                         </div>
                     </div>
