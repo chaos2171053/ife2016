@@ -2,26 +2,29 @@ import React, { Component, PropTypes } from 'react';
 import styles from '../../../containers/Login/Login.scss'
 import classNames from "classnames";
 import { message } from 'antd';
-
 import { trim } from '../../../utils/util'
 
 class Signup extends Component {
+    constructor(props) {
+        super(props);
+    }
     static propTypes = {
-        userSignup:React.PropTypes.func.isRequired,
+        renderSignin: React.PropTypes.func.isRequired,
+        userSignup: React.PropTypes.func.isRequired,
         questionnaires: React.PropTypes.arrayOf(React.PropTypes.object)
     }
 
-    success(userName,phoneNumber,passWord){
-        this.props.userSignup(userName,phoneNumber,passWord)
+    success(userName, phoneNumber, passWord) {
+        this.props.userSignup(userName, phoneNumber, passWord)
         return message.success('注册成功~');
     };
 
-    error(msg){
+    error(msg) {
         return message.error(msg);
     };
 
-    //校验登录信息
-    validata(questionnaires,userName,phoneNumber,passWord) {
+    //校验注册信息
+    validata(questionnaires, userName, phoneNumber, passWord) {
         const phoneRegx = /^1(3|4|5|7|8)[0-9]\d{8}$/;
 
         if (userName === null || userName === undefined || userName === '') {
@@ -51,18 +54,19 @@ class Signup extends Component {
     //处理注册
     handleSignup() {
         const { username, phonenumber, password } = this.refs;
-        const { questionnaires } = this.props;
+        const { questionnaires, renderSignin } = this.props;
 
         let userName = trim(username.value),
             phoneNumber = trim(phonenumber.value),
             passWord = trim(password.value);
 
-        const result = this.validata(questionnaires,userName,phoneNumber,passWord)
+        const result = this.validata(questionnaires, userName, phoneNumber, passWord)
         if (result === true) {
-            this.success(userName,phoneNumber,passWord);
-            username.value = '';
-            phonenumber.value = '';
-            password.value = '';
+            this.success(userName, phoneNumber, passWord);
+            // username.value = '';
+            // phonenumber.value = '';
+            // password.value = '';
+            renderSignin()
         } else {
             this.error(result)
         }

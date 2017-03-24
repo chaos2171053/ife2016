@@ -55,7 +55,7 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
 
 const questionnaire = (state = {}, action) => {
     switch (action.type) {
-        case USER_SIGNUP: {
+        case USER_SIGNUP: { //用户注册
             const { username, phonenumber, password } = action.payload;
             return {
                 username: username,

@@ -66,9 +66,11 @@ class Login extends Component {
                             <Navigation {...this.props} />
                             {isRenderSignup ? 
                                 (<Signup 
+                                    renderSignin = {renderSignin}
                                     questionnaires = {questionnaires}
                                     userSignup = {userSignup}/>) 
-                                : (<Signin />)}
+                                : (<Signin 
+                                    questionnaires = {questionnaires}/>)}
                         </div>
                     </div>
                 </div>
