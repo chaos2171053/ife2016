@@ -41,13 +41,10 @@ class Signup extends Component {
                 return '密码长度不少于6位'
             }
            
-            checkUsernameRepeat(userName);
-
-            if(isUsernameRepeat){
+            if(checkUsernameRepeat(userName)){
                 return '用户名已存在'
-            }
-            console.log(isUsernameRepeat)
-        return true
+            };
+            return true
     }
 
     //处理注册
@@ -55,6 +52,7 @@ class Signup extends Component {
         this.validata() === true ? success(): error(this.validata()) ;
     }
     render() {
+        const a = 'fuck'
         return (
             <div className={styles['signup-signin']}>
                 <div className={styles['login-box']}>

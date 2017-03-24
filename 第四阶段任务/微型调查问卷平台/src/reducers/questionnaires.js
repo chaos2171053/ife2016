@@ -6,7 +6,7 @@ import { userModel, questionnaireModel, questionModel } from '../data/data'
 const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
     [
         {
-            username: '', // 用户名
+            username: 'chaos', // 用户名
             phonenumber: '', // 手机号
             password: '', // 密码
             questionnaires: [{ // 问卷数组
@@ -67,13 +67,13 @@ const questionnaire = (state = {}, action) => {
     }
 }
 const questionnaires = (state = initialState, action) => {
-    debugger
+    
     let { dataBase, isUsernameRepeat } = state
     switch (action.type) {
         case USERNAME_REPEAT: {
             dataBase.forEach(data => {
                 if (data.username === action.payload) {
-                    state = object.assign({}, state, {
+                    state = Object.assign({}, state, {
                         ...state,
                         isUsernameRepeat: true
                     })
