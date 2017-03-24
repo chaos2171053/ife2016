@@ -14,7 +14,7 @@ class Signin extends Component {
 
     success(userName) {
         // this.props.userSignin(userName, phoneNumber, passWord)
-        <Redirect to='home'/>
+        this.props.logIn()
         return message.success(`哈喽~${userName}`);
         
     };
@@ -59,6 +59,7 @@ class Signin extends Component {
         }
     }
     render() {
+
         return (
             <div className={styles['signup-signin']}>
                 <div className={styles['login-box']}>

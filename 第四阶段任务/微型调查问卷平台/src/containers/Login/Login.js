@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as StatusActions from '../../actions/status'
 import * as QuestionnairesActions from '../../actions/questionnaires'
-
+import { Link,Redirect } from 'react-router-dom'
 import '../../styles/reset.css';
 import styles from './Login.scss'
 import classNames from "classnames";
@@ -32,13 +32,14 @@ class Login extends Component {
     static propTypes = {
         actions: React.PropTypes.shape({
             logIn: React.PropTypes.func.isRequired,
-            renderSignin: React.PropTypes.func.isRequired,
-            renderSignup: React.PropTypes.func.isRequired,
+            renderSignin: React.PropTypes.func,
+            renderSignup: React.PropTypes.func,
             userSignup:React.PropTypes.func.isRequired,
         }),
         status: React.PropTypes.shape({
-            isRenderSignin: React.PropTypes.bool.isRequired,
-            isRenderSignup: React.PropTypes.bool.isRequired,
+            isLogin: React.PropTypes.bool.isRequired,
+            isRenderSignin: React.PropTypes.bool,
+            isRenderSignup: React.PropTypes.bool,
         }),
         questionnaires: React.PropTypes.arrayOf(React.PropTypes.object)
     }
@@ -46,12 +47,15 @@ class Login extends Component {
         super(props);
     }
 
+
     render() {
         const {
             actions: { logIn, renderSignin, renderSignup,userSignup},
             status: { isLogin, isRenderSignin, isRenderSignup },
             questionnaires,
+            location,
         } = this.props;
+        
         //如果已经登录过，跳到home页面
         if (isLogin) {
             return <Redirect to='/home' />
@@ -70,6 +74,7 @@ class Login extends Component {
                                     questionnaires = {questionnaires}
                                     userSignup = {userSignup}/>) 
                                 : (<Signin 
+                                    logIn= {logIn}
                                     questionnaires = {questionnaires}/>)}
                         </div>
                     </div>
