@@ -11,9 +11,9 @@
     // position: relative;
     .main-body {
         position: absolute;
-        top: 40%;
+        top: 50%;
         left: 50%;
-        transform: translate(-50%, -40%);
+        transform: translate(-50%, -50%);
         // margin: auto;
         padding: 0;
         // display: inline-block;
@@ -24,7 +24,7 @@
             text-align: center;
             .logo-wrapper{
                 margin: 0 auto;
-                height:9em;
+                height:10em;
                 .logo{
                     color:$blue;
                     font-size: 700%;
@@ -37,8 +37,8 @@
                 }
             }
             .subtitle {
-                margin:0.01em 0 1em;
-                font-size:1.2em;
+                margin:0.5em 0 1em;
+                font-size:1.5em;
                 font-weight:400;
                 line-height:1;
                 }

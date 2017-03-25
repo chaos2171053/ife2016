@@ -69,6 +69,7 @@ class Login extends Component {
         window.onresize();
     }
     render() {
+        
         const {
             actions: { logIn, renderSignin, renderSignup, userSignup },
             status: { isLogin, isRenderSignin, isRenderSignup },

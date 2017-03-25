@@ -9,14 +9,12 @@ import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-
-import rootReducer from './reducers/index'
-import { App, Header, Home, Main, Edit, Login } from './containers/index';
-
 import { Switch } from 'react-router-dom'
+import rootReducer from './reducers/index'
+// import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
-import { Layout} from 'antd';
-const { Footer } = Layout;
+import { App, Login} from './containers/index';
+
 
 const history = createHistory()
 const middleware = routerMiddleware(history)
@@ -28,23 +26,31 @@ const store = createStore(
     }),
     applyMiddleware(middleware)
 )
+// <Switch>
+//                     <Route exact path="/" component={Login} />
+//                     <Main>
+//                         <div>
+//                             <Route exact path="/home" component={Home} />
+//                         </div>
+//                     </Main>
+//                     {/*<App>
+//                     <div>
+//                         <Route exact path="/home" component={Home} />
+//                         <Route path="/edit" component={Edit} />
+//                         {/* <Route path="/fill" component={Fill} />
+//                 <Route path="/check" component={Check} >
+//                     </div>
+//                 </App>*/}
+
+//                 </Switch>
 ReactDOM.render(
     <Provider store={store}>
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
-
+            <App>
             <Switch>
-                <Route exact path="/" component={Login} />
-                <App>
-                    <div>
-                        <Route exact path="/home" component={Home} />
-                        <Route path="/edit" component={Edit} />
-                        {/* <Route path="/fill" component={Fill} />
-                <Route path="/check" component={Check} >*/}
-                    </div>
-                </App>
-                
-            </Switch>
-
+            <Route exact path="/" component={Login} />
+                </Switch>
+            </App>
         </ConnectedRouter>
     </Provider>, document.getElementById('app'));
