@@ -844,3 +844,21 @@ this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
 
 解决方法：使用redux控制组件切换更新。
 -[参考](http://4dev.tech/2016/03/reactjs-error-cannot-update-during-an-existing-state-transition-such-as-within-render-render-methods-should-be-a-pure-function-of-props-and-state/)
+
+####15.5 canvas的宽高自适应
+登录界面的背景用了canvas，可是发现css设置了宽高100%，高度都无法达到100%。
+解决方法：
+在render方法里使用内联式
+`
+const canvasStyle = {
+            position: 'absolute',
+            top: '0',
+            height: '100%',
+            width: '100%',
+            margin: '0',
+            padding: '0',
+            display: 'block',
+            background: 'blue',
+        }
+`
+`<canvas id='canvas' style={canvasStyle} className={styles.canvasBackground}></canvas>`

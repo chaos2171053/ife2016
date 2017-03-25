@@ -1,5 +1,8 @@
 @import "../../styles/variables.scss";
-
+.canvasBackground {
+    z-index:-1;
+    // background-color: blue
+}
 .main {
 
     // min-height: auto;
