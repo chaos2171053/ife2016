@@ -5,4 +5,5 @@
 // import Edit from './Edit/Edit'
 import Login from './Login/Login'
 import App from './App/App';
-export {App,Login};
+import MainLayout from './MainLayout/MainLayout'
+export {App,Login,MainLayout};

@@ -13,7 +13,7 @@ import { Switch } from 'react-router-dom'
 import rootReducer from './reducers/index'
 // import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
-import { App, Login} from './containers/index';
+import { App, Login, MainLayout } from './containers/index';
 
 
 const history = createHistory()
@@ -48,8 +48,9 @@ ReactDOM.render(
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
             <App>
-            <Switch>
-            <Route exact path="/" component={Login} />
+                <Switch>
+                    <MainLayout>
+                    </MainLayout>
                 </Switch>
             </App>
         </ConnectedRouter>

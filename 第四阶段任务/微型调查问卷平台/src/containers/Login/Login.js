@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as StatusActions from '../../actions/status'
 import * as QuestionnairesActions from '../../actions/questionnaires'
-import { Link, Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import '../../styles/reset.css';
 import styles from './Login.scss'
 import classNames from "classnames";
