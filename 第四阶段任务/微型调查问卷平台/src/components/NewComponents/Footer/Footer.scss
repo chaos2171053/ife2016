@@ -1,0 +1,27 @@
+@import '../../../styles/variables.scss';
+.footer {
+    width: 93.5%;
+    margin: 0 auto;
+    // .ant-calendar-picker{
+    //     width: 20rem;
+    // }
+    
+    button {
+        margin-left: 1rem;
+        float:right;
+        background-color: $white;
+        padding: .5rem 1rem;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: .3rem;
+        outline: none;
+        font-weight: 400;
+        cursor: pointer;
+        border: 1px solid $gray;
+    }
+}
+// span.ant-calendar-picker {
+//     width: 8rem;
+// }
+.clearfix:after {content:"."; display:block; height:0; visibility:hidden; clear:both; }
+.clearfix { *zoom:1; }

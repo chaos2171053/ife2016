@@ -10,7 +10,7 @@
         @include flex-center;
         height: 5em;
         // border: 1px solid $gray-light;
-        font-size: 80%;
+        font-size: 150%;
         color: $gray-dark;
         background: #dddddd;
         cursor: pointer;
@@ -35,11 +35,12 @@
             border-radius: .2em;
             box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
             // color: $gray;
-            background: $gray-light;
+            background: $white;
             &:hover {
-                border-color: $blue;
+                border-color: $gray-light;
                 color: $white;
-                background: $blue;
+                background: $gray-light linear-gradient(rgba(255, 255, 255, .2), transparent);
+                // background: $blue;
                 cursor: pointer;
             }
             @media screen and (max-width: $small-page-max-width) {
