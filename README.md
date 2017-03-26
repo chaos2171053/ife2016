@@ -953,6 +953,13 @@ const status = (state = initialState, action) => {
 可能是因为重定向的action也同时执行了？后面发现其实刷新页面触发了很多种action。所以需要对action的payload里判断是不是登出。
 解决：
 `
+signout() {
+        const history = this.props.history
+        history.push('/')
+        this.props.actions.signOut('SIGN_OUT')
+    }
+`
+`
 case ROUTER_LOACTION_CHANGE: { //路由切换
             if (action.payload.signout === SIGN_OUT) {//登出
                 const state = Object.assign({}, state, {

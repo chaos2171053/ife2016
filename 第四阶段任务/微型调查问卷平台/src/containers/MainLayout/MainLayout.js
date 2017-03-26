@@ -18,6 +18,14 @@ class MainLayout extends Component {
     constructor(props) {
         super(props)
     }
+    static propTypes = {
+        actions: React.PropTypes.shape({
+            signOut: React.PropTypes.func.isRequired,
+        }),
+        status: React.PropTypes.shape({
+            isLogin: React.PropTypes.bool.isRequired,
+        })
+    }
     signout() {
         const history = this.props.history
         history.push('/')
@@ -25,9 +33,10 @@ class MainLayout extends Component {
     }
     render() {
         const { actions: { signOut }, status: { isLogin } } = this.props;
+        debugger
         return (
             <div>
-                <Navigation signout = {::this.signout}/>
+                <Navigation signout={::this.signout}/>
                 {this.props.children}
             </div>
         )

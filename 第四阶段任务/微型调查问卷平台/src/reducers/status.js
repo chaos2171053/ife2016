@@ -16,18 +16,20 @@ const initialState = localStorage.statusState ? JSON.parse(localStorage.statusSt
     isLogin: false,
     isRenderSignin: false,
     isRenderSignup: true,
+    username:'',
 }
 
 // console.log("获取：" + localStorage.statusState)
 const status = (state = initialState, action) => {
-    console.log(action)
+    // console.log(action)
 // debugger
     switch (action.type) {
         case LOG_IN: {//登录
             const state = Object.assign({}, state, {
                 isRenderSignin: false,
                 isRenderSignup: true,
-                isLogin: true
+                isLogin: true,
+                username:action.payload.username,
             })
             localStorage.statusState = JSON.stringify(state);
             // console.log("login:   " + localStorage.statusState)

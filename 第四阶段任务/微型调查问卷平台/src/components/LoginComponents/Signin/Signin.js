@@ -26,7 +26,7 @@ class Signin extends Component {
         else if (hour < 19) { msg = '傍晚好~' }
         else if (hour < 22) { msg = '晚上好~' }
         else { document.write("夜里好！") }
-        this.props.logIn()
+        this.props.logIn(userName)
         return message.success(`${msg}${userName}`);
 
     };
