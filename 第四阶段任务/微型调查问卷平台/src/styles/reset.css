@@ -63,3 +63,4 @@ hr {
 
 /* 让非ie浏览器默认也显示垂直滚动条，防止因滚动条引起的闪烁 */
 html { overflow-y: scroll; }
+@font-face{font-family:"iconfont";src:url("//at.alicdn.com/t/font_1462636883_5265043.eot");src:url("//at.alicdn.com/t/font_1462636883_5265043.eot?#iefix")format("embedded-opentype"),url("//at.alicdn.com/t/font_1462636883_5265043.woff")format("woff"),url("//at.alicdn.com/t/font_1462636883_5265043.ttf")format("truetype"),url("//at.alicdn.com/t/font_1462636883_5265043.svg#iconfont")format("svg");}
