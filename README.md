@@ -954,9 +954,7 @@ const status = (state = initialState, action) => {
 解决：
 `
 signout() {
-        const history = this.props.history
-        history.push('/')
-        this.props.actions.signOut('SIGN_OUT')
+       this.props.actions.signOut('SIGN_OUT')
     }
 `
 `
@@ -973,4 +971,13 @@ case ROUTER_LOACTION_CHANGE: { //路由切换
                 return state;
             }
         }
+`
+`
+render() {
+        const { actions: { signOut }, status: { isLogin } } = this.props;
+        // debugger
+        if (!isLogin) {
+            return <Redirect to='/' />
+        }
+        ......
 `

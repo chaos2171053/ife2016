@@ -27,13 +27,17 @@ class MainLayout extends Component {
         })
     }
     signout() {
-        const history = this.props.history
-        history.push('/')
+        // const history = this.props.history
+        // history.push('/')
         this.props.actions.signOut('SIGN_OUT')
+        // return <Redirect to='/' />
     }
     render() {
         const { actions: { signOut }, status: { isLogin } } = this.props;
-        debugger
+        // debugger
+        if (!isLogin) {
+            return <Redirect to='/' />
+        }
         return (
             <div>
                 <Navigation signout={::this.signout}/>
