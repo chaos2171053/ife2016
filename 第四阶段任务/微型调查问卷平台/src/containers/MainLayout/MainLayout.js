@@ -27,7 +27,7 @@ class MainLayout extends Component {
         status: React.PropTypes.shape({
             isLogin: React.PropTypes.bool.isRequired,
         }),
-        children:React.PropTypes.element.isRequired,
+        children: React.PropTypes.element.isRequired,
     }
     signout() {
         // const history = this.props.history
@@ -45,8 +45,10 @@ class MainLayout extends Component {
             <div>
                 <Navigation signout={::this.signout}/>
                 <div className={styles['content-wrapper']}>
-                    <div className={styles.jumbotron}>
-                    {this.props.children}
+                    <div className = {styles.wrapper}>
+                        <div className={styles.jumbotron}>
+                            {this.props.children}
+                        </div>
                     </div>
                 </div>
             </div>

@@ -12,6 +12,7 @@
     z-index: 20;
     border-width: 0 0 .1rem;
     border-color: $light-white;
+    background-color: $white;
     @media (min-width: 768px){
         border-radius: 4px;
     }
@@ -73,11 +74,13 @@
 
 .content-wrapper {
     z-index: 1;
+    .wrapper{
+        display: flex;
+        justify-content: center;
     .jumbotron {
         background-color: $gray-lighter;
         border-radius: 6px;
-        margin-right: auto;
-        margin-left: auto;
+        margin-top: 8rem;
         padding:2rem 3rem;
         @media screen and (max-width: $small-page-max-width) {
             margin-right: 1.5rem;
@@ -93,5 +96,6 @@
             width: 1170px;
         }
 
+    }
     }
 }
