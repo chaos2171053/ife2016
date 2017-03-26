@@ -82,6 +82,7 @@
         border-radius: 6px;
         margin-top: 7.5rem;
         padding:2rem 3rem;
+        min-width: 284px;
         @media screen and (max-width: $small-page-max-width) {
             margin-right: 1.5rem;
             margin-left: 1.5rem;
@@ -98,7 +99,7 @@
             width: 378px;
             padding:1.5rem .5rem;
         }
-        @media (max-width: 414px) {
+        @media (min-width: 414px) {
             width: 378px;
             padding:1.5rem .5rem;
         }

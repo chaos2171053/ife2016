@@ -1,9 +1,13 @@
 import React from 'react'
-
-const Main = ()=> {
-    return(
-        <div>
-        Main
+import styles from '../../../containers/New/New.scss'
+import AddQuestion from './AddQuestion'
+const Main = () => {
+    return (
+        <div className={styles.main}>
+            <hr className={styles.hr}/>
+            问题列表
+            <AddQuestion/>
+            <hr className={styles.hr}/>
         </div>
     )
 }

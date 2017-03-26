@@ -22,12 +22,13 @@
     align-items: center;
     justify-content: center;
     height: 3.5rem;
-    width: 100%;
+    width: 93.5%;
     background-color: $gray-lighter;
     border:none;
     text-align: center;
     color: #000000;
     font-size: 150%;
+    margin: 0 auto;
     &:hover{
         background-color: $white;
     }
@@ -35,5 +36,13 @@
         outline:none;
     }
 
+}
+
+.main{
+    .hr {
+            width: 93.5%;
+            border-top: 2px solid $gray-light;
+            margin: 1rem auto;
+    }
 }
 
