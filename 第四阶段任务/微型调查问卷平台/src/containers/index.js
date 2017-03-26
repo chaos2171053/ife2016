@@ -6,4 +6,5 @@
 import Login from './Login/Login'
 import App from './App/App';
 import MainLayout from './MainLayout/MainLayout'
-export {App,Login,MainLayout};
+import Home from "./Home/Home";
+export {App,Login,MainLayout,Home};

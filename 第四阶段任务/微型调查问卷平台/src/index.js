@@ -13,7 +13,7 @@ import { Switch } from 'react-router-dom'
 import rootReducer from './reducers/index'
 // import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
-import { App, Login, MainLayout } from './containers/index';
+import { App, Login, MainLayout,Home } from './containers/index';
 
 
 const history = createHistory()
@@ -49,7 +49,9 @@ ReactDOM.render(
         <ConnectedRouter history={history}>
             <App>
                 <Switch>
+                <Route exact path="/" component={Login} />
                     <MainLayout>
+                    <Route exact path="/home" component={Home}/>
                     </MainLayout>
                 </Switch>
             </App>

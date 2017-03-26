@@ -6,7 +6,7 @@ import * as QuestionnairesActions from '../../actions/questionnaires'
 import { Redirect } from 'react-router-dom'
 import '../../styles/reset.css';
 import styles from './Login.scss'
-import classNames from "classnames";
+
 
 import { Main } from '../';
 import { LoginComponents } from '../../components'
@@ -49,27 +49,29 @@ class Login extends Component {
     }
 
     componentDidMount() {
-        var cx = document.getElementById('canvas');
-        var ctx = cx.getContext('2d');
-        var St = new Starry(cx, ctx);
-        St.step();
-        window.onresize = function () {
-            St.cx.width = St.cx.clientWidth;
-            St.cx.height = St.cx.clientHeight;
-            if (St.dots.length == 0) {
-                St.construct();
+        let cx = document.getElementById('canvas');
+        if (cx!==null) {
+            let ctx = cx.getContext('2d');
+            let St = new Starry(cx, ctx);
+            St.step();
+            window.onresize = function () {
+                St.cx.width = St.cx.clientWidth;
+                St.cx.height = St.cx.clientHeight;
+                if (St.dots.length == 0) {
+                    St.construct();
+                }
+                St.render();
+            };
+
+            cx.onmousemove = function (e) {
+                St.mousePos[0] = e.clientX - cx.offsetLeft;
+                St.mousePos[1] = e.clientY - 64;
             }
-            St.render();
-        };
-        
-        cx.onmousemove = function (e) {
-            St.mousePos[0] = e.clientX - cx.offsetLeft;
-            St.mousePos[1] = e.clientY - 64;
+            window.onresize();
         }
-        window.onresize();
     }
     render() {
-        
+
         const {
             actions: { logIn, renderSignin, renderSignup, userSignup },
             status: { isLogin, isRenderSignin, isRenderSignup },
@@ -87,7 +89,6 @@ class Login extends Component {
             display: 'block',
             // background: 'blue',
         }
-
         //如果已经登录过，跳到home页面
         if (isLogin) {
             return <Redirect to='/home' />

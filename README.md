@@ -862,3 +862,108 @@ const canvasStyle = {
         }
 `
 `<canvas id='canvas' style={canvasStyle} className={styles.canvasBackground}></canvas>`
+
+####15.5 div内文字怎么水平垂直居中忘记了
+令行高等于div高度，然后加上`text-align:center;`即可
+
+####15.6 如果之前已经登录过系统，再重新刷新页面，应该直接跳过登录页面到主界面。但是此时报错
+`Uncaught TypeError: Cannot read property 'getContext' of null`
+这是因为在登录页面的componentDidMount方法里，我渲染canvas,需要获取getContext，但是此时已调到主界面了，获取不到。
+解决方法
+`let cx = document.getElementById('canvas');
+        if (cx!==null) {
+          let ctx = cx.getContext('2d');
+          ...
+        }
+`
+
+####15.7 登出的时候路由重定向，action的type不同。
+我定义了action的type为 `SIGN_OUT`
+`
+case SIGN_OUT: {//登出状态
+            const state = Object.assign({}, state, {
+                isRenderSignin:false,
+                isRenderSignup:true,
+                isLogin: false
+            })
+            localStorage.statusState = JSON.stringify(state);
+            return state
+        }
+`
+但是在我定义Link点击事件的时候
+`
+signout() {
+        const history = this.props.history
+        history.push('/')
+        this.props.actions.signOut()
+        <!--return <Redirect to='/home' />-->
+    }
+`
+触发action signOout方法，在reducer里面应该根据signOout的type来计算新的state，但是打断点发现action的type变了。无论是我使用
+`
+const history = this.props.history
+history.push('/')
+this.props.actions.signOut()
+`
+还是`return <Redirect to='/home'`，action的type都是 `
+![50-2](problemsPic/50-2.png)<br>
+解决方法就把action的type改成`@@router/LOCATION_CHANGE`
+
+
+#### 路由重定向
+`
+const initialState = localStorage.statusState ? JSON.parse(localStorage.statusState) : {
+    isLogin: false,
+    isRenderSignin: false,
+    isRenderSignup: true,
+}
+
+console.log("获取："+localStorage.statusState)
+const status = (state = initialState, action) => {
+
+    switch (action.type) {
+        case LOG_IN: {//登录
+            const state1 = Object.assign({}, state, {
+                // isRenderSignin: false,
+                // isRenderSignup: true,
+                isLogin: true
+            })
+            localStorage.statusState = JSON.stringify(state1);
+            console.log("login:   "+localStorage.statusState)
+            return state1
+        }
+            break;
+        case SIGN_OUT: {//登出
+            const state = Object.assign({}, state, {
+                isRenderSignin: false,
+                isRenderSignup: true,
+                isLogin: false
+            })
+            localStorage.statusState = JSON.stringify(state);
+            console.log("logout:   "+localStorage.statusState);
+            return state
+        }
+            break;
+`
+发现第一次进入系统，打印出来
+![50-3](problemsPic/50-3.png)<br>
+登陆后打印：
+![50-4](problemsPic/50-4.png)<br>
+登陆后竟然触发了logout的action。。。
+可能是因为重定向的action也同时执行了？后面发现其实刷新页面触发了很多种action。所以需要对action的payload里判断是不是登出。
+解决：
+`
+case ROUTER_LOACTION_CHANGE: { //路由切换
+            if (action.payload.signout === SIGN_OUT) {//登出
+                const state = Object.assign({}, state, {
+                    isRenderSignin: false,
+                    isRenderSignup: true,
+                    isLogin: false
+                })
+                localStorage.statusState = JSON.stringify(state);
+                return state
+            }else {
+                return state;
+            }
+        }
+`
