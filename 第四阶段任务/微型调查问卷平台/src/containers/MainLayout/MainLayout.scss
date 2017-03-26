@@ -86,6 +86,15 @@
             margin-right: 1.5rem;
             margin-left: 1.5rem;
         }
+         @media (min-width: 320px) {
+            width: 284px;
+        }
+        @media (min-width: 375px) {
+            width: 339px;
+        }
+        @media (min-width: 414px) {
+            width: 378px;
+        }
         @media (min-width: 768px) {
             width: 750px;
         }

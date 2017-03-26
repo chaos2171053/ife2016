@@ -27,7 +27,7 @@ class MainLayout extends Component {
         status: React.PropTypes.shape({
             isLogin: React.PropTypes.bool.isRequired,
         }),
-        children: React.PropTypes.element.isRequired,
+        children: React.PropTypes.arrayOf(React.PropTypes.element),
     }
     signout() {
         // const history = this.props.history

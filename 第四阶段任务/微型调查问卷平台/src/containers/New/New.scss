@@ -1,0 +1,37 @@
+@import '../../styles/variables.scss';
+// .header{
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     height: 3.5rem;
+//     width: 100%;
+//     background-color: $gray-lighter;
+//     border:none;
+//     text-align: center;
+//     color: $gray-dark;
+//     &:hover{
+//         background-color: $white;
+//     }
+//     &:focus {
+//         outline:none;
+//     }
+
+// }
+
+.header-wrapper {
+overflow:hidden;  
+    text-align:left;  
+    padding:0;
+    .header {
+-webkit-appearance:none;  
+    background:none;  
+    width:99%;  
+    border:0;  
+    font-size:14px;  
+    vertical-align:middle;  
+    border:solid 1px #ccc;  
+    margin:0;  
+    padding:5px 0  
+
+    }
+}

@@ -6,11 +6,8 @@ import * as QuestionnairesActions from '../../actions/questionnaires'
 import { Redirect } from 'react-router-dom'
 import '../../styles/reset.css';
 import styles from './Login.scss'
-
-
 import { Main } from '../';
 import { LoginComponents } from '../../components'
-
 
 const { Header, Navigation, Signup, Signin, Starry } = LoginComponents
 
