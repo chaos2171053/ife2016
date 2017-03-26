@@ -910,7 +910,7 @@ this.props.actions.signOut()
 解决方法就把action的type改成`@@router/LOCATION_CHANGE`
 
 
-#### 路由重定向
+####15.8 路由重定向
 `
 const initialState = localStorage.statusState ? JSON.parse(localStorage.statusState) : {
     isLogin: false,
@@ -980,4 +980,13 @@ render() {
             return <Redirect to='/' />
         }
         ......
+`
+
+####15.9 导航固定
+`.nav{
+    position: fixed;
+    top: 0;
+    left: 0;
+    ....    
+}
 `

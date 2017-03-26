@@ -2,9 +2,11 @@ import React, { PropTypes, Component } from 'react';
 import { MainLayoutComponents } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
-import * as Actions from '../../actions/status'
-import { Redirect } from 'react-router-dom'
+// import { withRouter } from 'react-router-dom'
+import * as Actions from '../../actions/status';
+import { Redirect } from 'react-router-dom';
+import styles from './MainLayout.scss';
+
 const { Navigation } = MainLayoutComponents
 const mapStateToProps = state => ({
     status: state.rootReducer.status
@@ -13,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
 })
 @connect(mapStateToProps, mapDispatchToProps)
-@withRouter
+// @withRouter
 class MainLayout extends Component {
     constructor(props) {
         super(props)
@@ -41,7 +43,12 @@ class MainLayout extends Component {
         return (
             <div>
                 <Navigation signout={::this.signout}/>
-                {this.props.children}
+                <div className={styles['content-wrapper']}>
+                    <div className={styles.jumbotron}>
+                        jumbotron
+                    </div>
+                </div>
+                {/*this.props.children*/}
             </div>
         )
     }
