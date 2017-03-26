@@ -80,26 +80,31 @@
     .jumbotron {
         background-color: $gray-lighter;
         border-radius: 6px;
-        margin-top: 8rem;
+        margin-top: 7.5rem;
         padding:2rem 3rem;
         @media screen and (max-width: $small-page-max-width) {
             margin-right: 1.5rem;
             margin-left: 1.5rem;
         }
-         @media (max-width: 320px) {
+        @media (max-width: 320px) {
             width: 284px;
+            padding:1.5rem .5rem;
         }
         @media (max-width: 375px) {
             width: 339px;
+            padding:1.5rem .5rem;
         }
         @media (max-width: 412px) {
             width: 378px;
+            padding:1.5rem .5rem;
         }
         @media (max-width: 414px) {
             width: 378px;
+            padding:1.5rem .5rem;
         }
         @media (min-width: 768px) {
             width: 750px;
+            padding:1.5rem .5rem;
         }
         @media (min-width: 992px) {
             width: 970px;
