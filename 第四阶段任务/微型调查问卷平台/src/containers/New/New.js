@@ -10,9 +10,6 @@ class New extends Component {
     }
     constructor(props) {
         super(props);
-        this.state = {
-            showChooseQuestionType: false
-        }
     }
 
     render() {

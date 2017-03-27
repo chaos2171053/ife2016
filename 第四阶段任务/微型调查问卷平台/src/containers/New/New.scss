@@ -40,9 +40,14 @@
 
 .main{
     .hr {
-            width: 93.5%;
-            border-top: 2px solid $gray-light;
-            margin: 1rem auto;
+        width: 93.5%;
+        border-top: 2px solid $gray-light;
+        margin: 1rem auto;
+    }
+    .radio-checkbox-wrapper{
+        margin: 0 auto;
+        width: 93.5%;
+        padding:1.645rem;
     }
 }
 
