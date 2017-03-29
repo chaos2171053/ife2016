@@ -1,5 +1,5 @@
 import Header from './Header/Header'
 import Main from './Main/Main'
 import Footer from './Footer/Footer'
-
-export default {Header,Main,Footer}
+import AddQuestion from './AddQuestion/AddQuestion'
+export default {Header,Main,Footer,AddQuestion}

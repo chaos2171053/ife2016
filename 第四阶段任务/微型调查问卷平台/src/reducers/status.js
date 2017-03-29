@@ -1,5 +1,5 @@
 import * as types from '../constants/AppStatusActionsTypes'
-import { LOG_IN, SIGN_OUT, RENDER_SIGNIN, RENDER_SIGNUP,ROUTER_LOACTION_CHANGE } from '../constants/AppStatusActionsTypes'
+import { LOG_IN, SIGN_OUT, RENDER_SIGNIN, RENDER_SIGNUP,ROUTER_LOACTION_CHANGE} from '../constants/AppStatusActionsTypes'
 
 //需要本地存储的数据
 // const localState = localStorage.statusState ? JSON.parse(localStorage.statusState) : {

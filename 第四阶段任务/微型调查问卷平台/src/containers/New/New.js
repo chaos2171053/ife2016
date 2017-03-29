@@ -3,7 +3,8 @@ import styles from './New.scss'
 import { Link } from 'react-router-dom'
 import { NewComponents } from '../../components'
 
-const { Header, Main, Footer } = NewComponents
+const { Header, Main, Footer,AddQuestion } = NewComponents
+
 class New extends Component {
     static propTypes = {
 
@@ -13,10 +14,10 @@ class New extends Component {
     }
 
     render() {
-        return (
+         return (
             <div>
                 <Header/>
-                <Main/>
+                <AddQuestion/>
                 <Footer/>
             </div>
         )

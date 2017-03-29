@@ -1,0 +1,61 @@
+@import '../../../styles/mixins/flex-center.scss';
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins/iconfont.scss';
+@import '../../../styles/mixins/size.scss';
+
+.add-question {
+    width: 90%;
+    margin: 1.5em auto;
+    .add-question-btn {
+        @include flex-center;
+        height: 5em;
+        // border: 1px solid $gray-light;
+        font-size: 150%;
+        color: $gray-dark;
+        background: #dddddd;
+        cursor: pointer;
+        &::before {
+            @include iconfont($add, 1.25em, 1em);
+        }
+    }
+    .type-wrapper{
+      @include flex-center;
+      height: 5em;
+      border-bottom: none;
+      margin: 0 auto;
+      font-size: 80%;
+      border: 1px solid $gray-light;
+    }
+    .type {
+            @include flex-center;
+            @include size(6.25em, 2em);
+            z-index: 1;
+            margin: 0 1em;
+            border: 1px solid $gray-light;
+            border-radius: .2em;
+            box-shadow: 0 .05em .25em rgba(0, 0, 0, .5);
+            // color: $gray;
+            background: $white;
+            &:hover {
+                border-color: $gray-light;
+                color: $white;
+                background: $gray-light linear-gradient(rgba(255, 255, 255, .2), transparent);
+                // background: $blue;
+                cursor: pointer;
+            }
+            @media screen and (max-width: $small-page-max-width) {
+                margin: 0 .2em;
+            }
+        }
+        .radio::before {
+            @include iconfont($radio, .8em, .8em);
+        }
+        .checkbox::before {
+            @include iconfont($checkbox, .8em, .8em);
+        }
+        .text::before {
+            @include iconfont($text, .8em, .8em);
+        }
+         
+
+}
