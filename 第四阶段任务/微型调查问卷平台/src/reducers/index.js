@@ -5,7 +5,7 @@ import questionnaires from './questionnaires';
 const rootReducer = combineReducers({
     questionnaires:questionnaires,
     status:status,
-    router: routerReducer
+    router: routerReducer,
 });
 
 export default rootReducer;

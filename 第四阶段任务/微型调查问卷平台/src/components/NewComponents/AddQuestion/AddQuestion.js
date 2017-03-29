@@ -10,16 +10,19 @@ class AddQuestion extends Component {
         }
     }
 
-    renderChooseQuestionType() {
+    renderChooseQuestionType(addRadioQuestion) {
+        const RADIO = 'RADIO',
+              CHECKBOX = 'CHECKBOX',
+              TEXT = 'TEXT'
         if (this.state.show) {
             return (
                 <QueueAnim
                     type={['bottom', 'top']}
                     ease={['easeOutQuart', 'easeInOutQuart']}>
                     <div className={styles['type-wrapper']} key='type-wrapper'>
-                        <div className={classNames(styles.type, styles.radio)}>单选</div>
-                        <div className={classNames(styles.type, styles.checkbox)}>多选</div>
-                        <div className={classNames(styles.type, styles.text)}>文本</div>
+                        <div className={classNames(styles.type, styles.radio)} onClick = {()=>addRadioQuestion('RADIO')}>单选</div>
+                        <div className={classNames(styles.type, styles.checkbox)} onClick = {()=>addRadioQuestion('CHECKBOX')}>多选</div>
+                        <div className={classNames(styles.type, styles.text)} onClick = {()=>addRadioQuestion('TEXT')}>文本</div>
                     </div>
                 </QueueAnim>)
 
@@ -34,9 +37,10 @@ class AddQuestion extends Component {
     }
 
     render() {
+        const {addRadioQuestion} = this.props
         return (
             <div className={styles['add-question']}>
-                {this.renderChooseQuestionType()}
+                {this.renderChooseQuestionType(addRadioQuestion)}
                 <div className={styles["add-question-btn"]}
                     key='a'
                     onClick={::this.toogleAddQuestionType}>
