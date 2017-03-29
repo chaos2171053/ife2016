@@ -17,6 +17,12 @@ const initialState = localStorage.statusState ? JSON.parse(localStorage.statusSt
     isRenderSignin: false,
     isRenderSignup: true,
     username:'',
+    questionnarire:{
+        questionnarireTitle:' ',
+        deadline:'',
+        status:'',
+        questions:[]
+    }
 }
 
 // console.log("获取：" + localStorage.statusState)
