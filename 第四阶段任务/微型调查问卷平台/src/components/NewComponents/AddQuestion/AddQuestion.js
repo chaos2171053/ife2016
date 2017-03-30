@@ -17,7 +17,6 @@ class AddQuestion extends Component {
               CHECKBOX = 'CHECKBOX',
               TEXT = 'TEXT'
         if (this.state.show) {
-            console.log(types)
             return (
                 <QueueAnim
                     type={['bottom', 'top']}

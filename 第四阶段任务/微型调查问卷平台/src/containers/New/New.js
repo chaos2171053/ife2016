@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './New.scss'
 import { Link } from 'react-router-dom'
-import { NewComponents } from '../../components'
+import { NewComponents,Input } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import {RADIO,CHECKBOX,TEXT} from '../../constants/QuestionType'
 import classNames from 'classnames'
+import {trim} from '../../utils/util'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -26,19 +27,40 @@ const mapStateToProps = state => {
 
 class New extends Component {
     static propTypes = {
+        username:React.PropTypes.string.isRequired,
 
     }
     constructor(props) {
         super(props);
         this.state = {
             id: '',
-            questionnarireTitle: ' ',
+            questionnarireTitle: '',
             deadline: '',
             status: '',
             questions: []
         }
     }
-    addQuestion(QUESTION_TYPE) { //添加问题
+
+    //编辑问卷标题
+    handleEditQuestionnaireTitle(event){
+        this.setState({questionnarireTitle: trim(event.target.value),})
+    }
+
+    //修改问题标题
+    handleEditQuetion(event,questionIndex){
+        let questions = this.state.questions
+        questions.forEach((q,index)=>{
+            if(questionIndex === index){
+                q.questionTitle = trim(event.target.value)
+            }
+        })
+        this.setState({
+            questions:questions
+        })
+    }
+
+    //添加问题 单选 多选 文本.单选 多选 预设两个选项
+    addQuestion(QUESTION_TYPE) { 
         let option
         switch(QUESTION_TYPE){
             case RADIO:
@@ -67,13 +89,15 @@ class New extends Component {
         if(questions.length === 0){
             return null;
         }
-
+        // console.log(this.state)
         return(
             questions.map((question,questionIndex) => 
                 <div className = {styles['question-wrapper']} key = {questionIndex}>
                     <div className ={styles['question-title-wrapper']}>
                         <span>{`Q${questionIndex + 1}`}</span>
-                        <input className = {styles['bkcolor']} placeholder={`(${question.type}) 请输入标题`}/>
+                        <Input 
+                        placeholder= {`(${question.type}) 请填写标题`} 
+                        handleEditText = {(event)=>this.handleEditQuetion(event,questionIndex)}/>
                     </div>
                     <div>
                         {question.type !== TEXT?(
@@ -85,7 +109,7 @@ class New extends Component {
                                         [styles["radio-option-icon"]]: question.type === RADIO,
                                         [styles["checkbox-option-icon"]]: question.type === CHECKBOX
                                     })} />
-                                <input placeholder={`(选项${optionIndex+1}) 请输入内容`}/>
+                                <input/>
                                 <span
                                     className={styles["remove-option-btn"]}
                                 />
@@ -105,7 +129,7 @@ class New extends Component {
         let qusetionsArray = this.renderQuestions();
         return (
             <div>
-                <Header/>
+                <Header handleEditText = {::this.handleEditQuestionnaireTitle}/>
                 <div className ={styles.main}>
                 <hr className = {styles.hr}/>
                 {this.renderQuestions()}

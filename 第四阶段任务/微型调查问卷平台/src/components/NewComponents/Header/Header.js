@@ -1,10 +1,13 @@
-import React from 'react'
+import React,{PropTypes} from 'react'
 import styles from '../../../containers/New/New.scss'
-const Header = () => {
+import Input from '../../Input/Input'
+const Header = ({handleEditText}) => {
     return (
-        <div>
-            <input className={styles.header} placeholder='请填写标题'></input>
-        </div>
+        <Input className = {styles.header} placeholder='请填写标题' handleEditText = {handleEditText}/>
     )
+
 }
+Header.propTypes = {
+    handleEditText: PropTypes.func.isRequired
+};
 export default Header
