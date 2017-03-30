@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
 import classNames from 'classnames'
-import { trim,swapArrayItems } from '../../utils/util'
+import { trim, swapArrayItems } from '../../utils/util'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -77,11 +77,11 @@ class New extends Component {
     }
 
     //修改文本题内容
-    handleEditTextQuestion(event,questionIndex) {
+    handleEditTextQuestion(event, questionIndex) {
         let questions = this.state.questions
         questions.forEach((q, index) => {
             if (questionIndex === index) {
-                questions[questionIndex].content = trim(event.target.value) ;
+                questions[questionIndex].content = trim(event.target.value);
             }
         })
         this.setState({
@@ -90,11 +90,11 @@ class New extends Component {
     }
 
     //修改文本题是否必填
-    handleToggleRequirement(questionIndex){
+    handleToggleRequirement(questionIndex) {
         let questions = this.state.questions
         questions.forEach((q, index) => {
             if (questionIndex === index) {
-                questions[questionIndex].isRequired = !questions[questionIndex].isRequired ;
+                questions[questionIndex].isRequired = !questions[questionIndex].isRequired;
             }
         })
         this.setState({
@@ -103,7 +103,7 @@ class New extends Component {
     }
 
     //添加选项
-    handleAddOption(questionIndex){
+    handleAddOption(questionIndex) {
         let questions = this.state.questions
         questions.forEach((q, index) => {
             if (questionIndex === index) {
@@ -113,7 +113,7 @@ class New extends Component {
         this.setState({
             questions: questions
         })
-    }    
+    }
     //删除选项
     handleRemoveOption(questionIndex, optionIndex) {
         let questions = this.state.questions
@@ -132,21 +132,27 @@ class New extends Component {
         // console.log(this.state)
     }
 
-    //对问题进行上移
-    handleChangeQuestionIndex(questionIndex,operation){
+    //对问题进行上移、下移、删除、复用操作
+    handleChangeQuestionIndex(questionIndex, operation) {
         let questions = this.state.questions
-        switch(operation){
-            case '上移':{this.setState({questions:swapArrayItems(questions,questionIndex,questionIndex-1)})}
-            break;
-            case '下移':{this.setState({questions:swapArrayItems(questions,questionIndex,questionIndex+1)})}
-            break;
+        switch (operation) {
+            case '上移': { this.setState({ questions: swapArrayItems(questions, questionIndex, questionIndex - 1) }) }
+                break;
+            case '下移': { this.setState({ questions: swapArrayItems(questions, questionIndex, questionIndex + 1) }) }
+                break;
+            case '删除': {
+                questions.splice(questionIndex, 1);
+                this.setState({ questions: questions })
+            }
+                break;
         }
-        
+
+
     }
 
     //添加问题 单选/多选/文本.单选,多选预设两个选项
     addQuestion(QUESTION_TYPE) {
-        let option,content;
+        let option, content;
         switch (QUESTION_TYPE) {
             case RADIO:
                 option = ['', ''];
@@ -166,8 +172,8 @@ class New extends Component {
                     type: QUESTION_TYPE,
                     questionTitle: '', // 问题标题
                     options: option, // 问题选项
-                    content:content,
-                    isRequired:false,
+                    content: content,
+                    isRequired: false,
                 }
             ]
 
@@ -176,17 +182,17 @@ class New extends Component {
     renderQuestions() { //渲染题目
         let qusetionsArray = [];
         const { questions } = this.state;
-        if (questions.length === 0) {
-            return null;
-        }
-        let last = questions.length-1
+        // if (questions.length === 0) {
+        //     return null;
+        // }
+        let last = questions.length - 1
         return (
             questions.map((question, questionIndex) =>
                 <div className={styles['question-wrapper']} key={questionIndex}>
                     <div className={styles['question-title-wrapper']}>
                         <span>{`Q${questionIndex + 1} (${question.type})`}</span>
                         <Input
-                            value = {question.questionTitle}
+                            value={question.questionTitle}
                             placeholder={`请填写标题`}
                             handleEditText={(event) => this.handleEditQuetion(event, questionIndex)} />
                     </div>
@@ -213,46 +219,53 @@ class New extends Component {
                                     )
                                 })}
                                 <div className={styles['add-option-btn']}
-                                     onClick ={()=>{this.handleAddOption(questionIndex)}}/>
+                                    onClick={() => { this.handleAddOption(questionIndex) }} />
                             </div>
                         ) : (
-                            <div>
-                                <textarea
-                                    value={question.content}
-                                    className={styles.text}
-                                    onChange={(event)=>this.handleEditTextQuestion(event,questionIndex)}
-                                />
-                               <div
-                                   className={classNames({
-                                    [styles.required]: !question.isRequired,
-                                    [styles['not-required']]: question.isRequired
-                                })}
-                                onClick={()=>this.handleToggleRequirement(questionIndex)}
-                               >
-                                   <span>此题是否必填</span>
-                               </div>
-                            </div>)}
-                            <div className = {styles['operation-wraper']}>
+                                <div>
+                                    <textarea
+                                        value={question.content}
+                                        className={styles.text}
+                                        onChange={(event) => this.handleEditTextQuestion(event, questionIndex)}
+                                    />
+                                    <div
+                                        className={classNames({
+                                            [styles.required]: !question.isRequired,
+                                            [styles['not-required']]: question.isRequired
+                                        })}
+                                        onClick={() => this.handleToggleRequirement(questionIndex)}
+                                    >
+                                        <span>此题是否必填</span>
+                                    </div>
+                                </div>)}
+                        <div className={styles['operation-wraper']}>
                             {
-                                questionIndex >0 &&(
+                                questionIndex > 0 && (
                                     <div
                                         className={styles.operation}
-                                        onClick = {()=>this.handleChangeQuestionIndex(questionIndex,'上移')}>
+                                        onClick={() => this.handleChangeQuestionIndex(questionIndex, '上移')}>
                                         <span>上移</span>
                                     </div>
                                 )
                             }
                             {
-                                questionIndex < last &&(
+                                questionIndex < last && (
                                     <div
                                         className={styles.operation}
-                                        onClick = {()=>this.handleChangeQuestionIndex(questionIndex,'下移')}
+                                        onClick={() => this.handleChangeQuestionIndex(questionIndex, '下移')}
                                     >
-                                    <span>下移</span>
+                                        <span>下移</span>
                                     </div>
                                 )
                             }
+                            <div>
+                                <div
+                                    className={styles.operation}
+                                    onClick={() => this.handleChangeQuestionIndex(questionIndex, '删除')}>
+                                    <span>删除</span>
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
             )
