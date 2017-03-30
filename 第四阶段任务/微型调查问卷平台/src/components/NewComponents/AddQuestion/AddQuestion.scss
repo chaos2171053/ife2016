@@ -12,7 +12,7 @@
         // border: 1px solid $gray-light;
         font-size: 150%;
         color: $gray-dark;
-        background: #dddddd;
+        background: $gray-light;
         cursor: pointer;
         &::before {
             @include iconfont($add, 1.25em, 1em);

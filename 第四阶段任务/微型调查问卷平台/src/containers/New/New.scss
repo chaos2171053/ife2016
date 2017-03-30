@@ -1,22 +1,6 @@
 @import '../../styles/variables.scss';
 @import "../../styles/mixins/iconfont.scss";
-// .header-wrapper {
-//     overflow:hidden;  
-//     text-align:left;  
-//     padding:0;
-//     .header {
-// -webkit-appearance:none;  
-//     background:none;  
-//     width:99%;  
-//     border:0;  
-//     font-size:14px;  
-//     vertical-align:middle;  
-//     border:solid 1px #ccc;  
-//     margin:0;  
-//     padding:5px 0  
 
-//     }
-// }
 .header{
     display: flex;
     align-items: center;
@@ -55,6 +39,7 @@
             background-color: $gray-lighter;
             outline: 0;
             border: none;
+            display: inline-block;
             &:focus{
                 background-color: $white;
             }
@@ -64,24 +49,48 @@
             font-size: 120%;
             input {
                 margin-left:1rem;
-                // background-color: $gray-lighter;
-                // outline: 0;
-                // border: none;
                 line-height: 2rem;
+                @media screen and (max-width: $small-page-max-width){
+                    margin-left:.5rem;
+                    }
                 &:focus{
                     width: 30%;    
                 }
             }
         }
         .option-wrapper {
+            margin-top: .6rem;
             padding-left: 1.5rem;
+            input{
+                line-height: 1.8rem;
+                font-size: 110%;
+                &:focus {
+                    width:20%;
+                }
+            }
             .radio-option-icon::before {
                 @include iconfont($radio-option, .8em, 1em);
             }
              .checkbox-option-icon::before {
                 @include iconfont($checkbox-option, .8em, 1em);
             }
+            .remove-option-btn {
+                display: none;
+                &::before {
+                    @include iconfont($remove, .8em, 0, 1em);
+                }
+                &:hover {
+                    cursor: pointer;
+                }
+            }
         }
+        &:hover {
+            background-color: $gray-light;
+            .remove-option-btn {
+                display: inline;
+                color: $gray-dark;
+                }
+            }
 
     }
 }

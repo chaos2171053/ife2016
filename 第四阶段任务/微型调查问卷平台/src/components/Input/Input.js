@@ -11,9 +11,9 @@ export default class Input extends Component {
         }
     }
 
-    handleEditText(event,questionIndex){
+    handleEditText(event,questionIndex,optionIndex){
         // debugger
-        this.props.handleEditText(event,questionIndex)
+        this.props.handleEditText(event,questionIndex,optionIndex)
     }
 
     handleSaveText(event){

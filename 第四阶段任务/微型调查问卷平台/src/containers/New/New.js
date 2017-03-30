@@ -1,12 +1,12 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './New.scss'
 import { Link } from 'react-router-dom'
-import { NewComponents,Input } from '../../components'
+import { NewComponents, Input } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import {RADIO,CHECKBOX,TEXT} from '../../constants/QuestionType'
+import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
 import classNames from 'classnames'
-import {trim} from '../../utils/util'
+import { trim } from '../../utils/util'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -27,7 +27,7 @@ const mapStateToProps = state => {
 
 class New extends Component {
     static propTypes = {
-        username:React.PropTypes.string.isRequired,
+        username: React.PropTypes.string.isRequired,
 
     }
     constructor(props) {
@@ -42,33 +42,50 @@ class New extends Component {
     }
 
     //编辑问卷标题
-    handleEditQuestionnaireTitle(event){
-        this.setState({questionnarireTitle: trim(event.target.value),})
+    handleEditQuestionnaireTitle(event) {
+        this.setState({ questionnarireTitle: trim(event.target.value), })
     }
 
     //修改问题标题
-    handleEditQuetion(event,questionIndex){
+    handleEditQuetion(event, questionIndex) {
         let questions = this.state.questions
-        questions.forEach((q,index)=>{
-            if(questionIndex === index){
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
                 q.questionTitle = trim(event.target.value)
             }
         })
         this.setState({
-            questions:questions
+            questions: questions
+        })
+    }
+
+    //修改选项内容
+    handleEditOption(event, questionIndex,optionIndex){
+        let questions = this.state.questions
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
+                questions[questionIndex].options.forEach((o,i)=>{
+                    if(optionIndex === i) {
+                        questions[questionIndex].options[optionIndex] = trim(event.target.value)
+                    }
+                })
+            }
+        })
+        this.setState({
+            questions: questions
         })
     }
 
     //添加问题 单选/多选/文本.单选,多选预设两个选项
-    addQuestion(QUESTION_TYPE) { 
+    addQuestion(QUESTION_TYPE) {
         let option
-        switch(QUESTION_TYPE){
+        switch (QUESTION_TYPE) {
             case RADIO:
             case CHECKBOX:
-            option = ['选项1','选项2'];
-            break;
+                option = ['选项1', '选项2'];
+                break;
             case TEXT:
-            break;
+                break;
         }
         //设置预设选项
         this.setState({
@@ -86,39 +103,42 @@ class New extends Component {
     renderQuestions() { //渲染题目
         let qusetionsArray = [];
         const { questions } = this.state;
-        if(questions.length === 0){
+        if (questions.length === 0) {
             return null;
         }
         // console.log(this.state)
-        return(
-            questions.map((question,questionIndex) => 
-                <div className = {styles['question-wrapper']} key = {questionIndex}>
-                    <div className ={styles['question-title-wrapper']}>
+        return (
+            questions.map((question, questionIndex) =>
+                <div className={styles['question-wrapper']} key={questionIndex}>
+                    <div className={styles['question-title-wrapper']}>
                         <span>{`Q${questionIndex + 1} (${question.type})`}</span>
-                        <Input 
-                        placeholder= {`请填写标题`} 
-                        handleEditText = {(event)=>this.handleEditQuetion(event,questionIndex)}/>
+                        <Input
+                            placeholder={`请填写标题`}
+                            handleEditText={(event) => this.handleEditQuetion(event, questionIndex)} />
                     </div>
                     <div>
-                        {question.type !== TEXT?(
+                        {question.type !== TEXT ? (
                             <div>
-                            {question.options.map((option,optionIndex)=>{
-                                console.log(question.type)
-                                return(     
-                                <div className = {styles['option-wrapper']} key = {optionIndex}>
-                                <span className={classNames({
-                                        [styles["radio-option-icon"]]: question.type === RADIO,
-                                        [styles["checkbox-option-icon"]]: question.type === CHECKBOX
-                                    })} />
-                                <input/>
-                                <span
-                                    className={styles["remove-option-btn"]}
-                                />
-                                <div className={styles["add-option-btn"]}/>
-                                </div>
-                            )})}
+                                {question.options.map((option, optionIndex) => {
+                                    return (
+                                        <div className={styles['option-wrapper']} key={optionIndex}>
+                                            <span className={classNames({
+                                                [styles["radio-option-icon"]]: question.type === RADIO,
+                                                [styles["checkbox-option-icon"]]: question.type === CHECKBOX
+                                            })} />
+                                            <Input
+                                                placeholder={`选项${optionIndex+1}`}
+                                                handleEditText={(event) => this.handleEditOption(event, questionIndex,optionIndex)}
+                                              />
+                                            <span
+                                                className={styles["remove-option-btn"]}
+                                            />
+                                            <div className={styles["add-option-btn"]} />
+                                        </div>
+                                    )
+                                })}
                             </div>
-                        ):(<span/>)}
+                        ) : (<span />)}
                     </div>
                 </div>
             )
@@ -130,12 +150,12 @@ class New extends Component {
         let qusetionsArray = this.renderQuestions();
         return (
             <div>
-                <Header handleEditText = {::this.handleEditQuestionnaireTitle}/>
-                <div className ={styles.main}>
-                <hr className = {styles.hr}/>
-                {this.renderQuestions()}
-                <AddQuestion addQuestion={::this.addQuestion}/>
-                <hr className = {styles.hr}/>
+                <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
+                <div className={styles.main}>
+                    <hr className={styles.hr} />
+                    {this.renderQuestions()}
+                    <AddQuestion addQuestion={::this.addQuestion}/>
+                <hr className={styles.hr} />
                 </div>
                 <Footer />
             </div>
