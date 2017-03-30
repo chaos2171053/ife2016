@@ -61,7 +61,7 @@ function isPlain(obj){
  * @param  {Object} source 需要进行拷贝的对象
  * @return {Object} 拷贝后的新对象
  */
-function cloneObject (source) {
+export function cloneObject (source) {
     var result = source, i, len;
     if (!source
         || source instanceof Number

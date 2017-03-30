@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
 import classNames from 'classnames'
-import { trim, swapArrayItems } from '../../utils/util'
+import { trim, swapArrayItems,cloneObject } from '../../utils/util'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -145,6 +145,17 @@ class New extends Component {
                 this.setState({ questions: questions })
             }
                 break;
+            case '复用': {
+                questions.forEach((q, index) => {
+                    if (questionIndex === index) {
+                        let cloneQuestion =cloneObject(q)
+                        questions.splice(questionIndex+1,0,cloneQuestion);
+
+                    }
+                })
+                this.setState({ questions: questions })
+            }
+                break;
         }
 
 
@@ -258,13 +269,16 @@ class New extends Component {
                                     </div>
                                 )
                             }
-                            <div>
                                 <div
                                     className={styles.operation}
                                     onClick={() => this.handleChangeQuestionIndex(questionIndex, '删除')}>
                                     <span>删除</span>
                                 </div>
-                            </div>
+                                <div
+                                    className={styles.operation}
+                                    onClick={() => this.handleChangeQuestionIndex(questionIndex, '复用')}>
+                                    <span>复用</span>
+                                </div>
                         </div>
                     </div>
                 </div>
