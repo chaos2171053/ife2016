@@ -58,7 +58,7 @@
                 }
             }
         }
-        .option-wrapper {
+        .options-wrapper {
             margin-top: .6rem;
             padding-left: 1.5rem;
             input{
@@ -84,14 +84,47 @@
                 }
             }
         }
+        .add-option-btn {
+            height: 2.5rem;
+            margin: .5rem auto;
+            text-align: center;
+            &::before {
+                @include iconfont($add, .8em);
+                visibility: hidden;
+            }
+            // &:hover {
+            //     border: .2rem dashed $gray;
+            //     border-radius: 2px;
+            //     cursor: pointer;
+            //     &::before {
+            //         visibility: visible;
+            //     }
+            // }
+        }
+        
         &:hover {
             background-color: $gray-light;
+            input{
+                background-color: $gray-light;
+            }
             .remove-option-btn {
                 display: inline;
                 color: $gray-dark;
                 }
+            .add-option-btn{
+                border: .2rem dashed $gray;
+                border-radius: 2px;
+                cursor: pointer;
+                &::before {
+                    visibility: visible;
+                }
             }
-
+        }
+            input{
+                &:focus{
+                    background-color: $white;
+                    }
+            }
     }
 }
 

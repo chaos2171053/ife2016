@@ -76,6 +76,21 @@ class New extends Component {
         })
     }
 
+    //添加选项
+    handleAddOption(questionIndex){
+        let questions = this.state.questions
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
+                questions[questionIndex].options.push('');
+            }
+        })
+        this.setState({
+            questions: questions
+        })
+        console.log(this.state)
+
+    }    
+    //删除选项
     handleRemoveOption(questionIndex, optionIndex) {
         let questions = this.state.questions
         questions.forEach((q, index) => {
@@ -141,10 +156,10 @@ class New extends Component {
                             <div>
                                 {question.options.map((option, optionIndex) => {
                                     return (
-                                        <div className={styles['option-wrapper']} key={optionIndex}>
+                                        <div className={styles['options-wrapper']} key={optionIndex}>
                                             <span className={classNames({
-                                                [styles["radio-option-icon"]]: question.type === RADIO,
-                                                [styles["checkbox-option-icon"]]: question.type === CHECKBOX
+                                                [styles['radio-option-icon']]: question.type === RADIO,
+                                                [styles['checkbox-option-icon']]: question.type === CHECKBOX
                                             })} />
                                             <Input
                                                 value={question.options[optionIndex]}
@@ -152,13 +167,14 @@ class New extends Component {
                                                 handleEditText={(event) => this.handleEditOption(event, questionIndex, optionIndex)}
                                             />
                                             <span
-                                                className={styles["remove-option-btn"]}
+                                                className={styles['remove-option-btn']}
                                                 onClick={() => { this.handleRemoveOption(questionIndex, optionIndex) }}
                                             />
-                                            <div className={styles["add-option-btn"]} />
                                         </div>
                                     )
                                 })}
+                                <div className={styles['add-option-btn']}
+                                     onClick ={()=>{this.handleAddOption(questionIndex)}}/>
                             </div>
                         ) : (<span />)}
                     </div>

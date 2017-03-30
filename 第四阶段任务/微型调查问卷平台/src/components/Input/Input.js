@@ -24,7 +24,6 @@ export default class Input extends Component {
         return (
             <input
                 placeholder={this.props.placeholder}
-                autoFocus='true'
                 value={this.props.value}
                 className = {className}
                 onChange={::this.handleEditText}
