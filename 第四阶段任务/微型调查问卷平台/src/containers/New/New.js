@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { NewComponents } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import {RADIO,CHECKBOX,TEXT} from '../../constants/QuestionType'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -36,7 +37,8 @@ class New extends Component {
             questions: []
         }
     }
-    addRadioQuestion(QUESTION_TYPE) {
+    addQuestion(QUESTION_TYPE) { //添加问题
+        //设置预设选项
         this.setState({
             questions: [
                 ...this.state.questions,
@@ -61,14 +63,24 @@ class New extends Component {
                 <div className = {styles['question-wrapper']} key = {questionIndex}>
                     <div className ={styles['question-title-wrapper']}>
                         <span>{`Q${questionIndex + 1}`}</span>
-                        <input/>
-                        {question.type !== 'TEXT'?(
+                        <input className = {styles['bkcolor']} placeholder={`(${question.type}) 请输入标题`}/>
+                    </div>
+                    <div>
+                        {question.type !== TEXT?(
                             <div>
-                                <div>
-                                    <span className ={styles['123']}>图标</span>
-                                    <input/>
-                                    <span>删除</span>
+                            {question.options.map((option,optionIndex)=>{
+                                <div className = {styles['option-wrapper']} key = {optionIndex}>
+                                <span className={classNames({
+                                        [styles["radio-option-icon"]]: question.type === RADIO,
+                                        [styles["checkbox-option-icon"]]: question.type === CHECKBOX
+                                    })} />
+                                <input placeholder={`(选项${optionIndex}) 请输入内容`}/>
+                                <span
+                                    className={styles["remove-option-btn"]}
+                                />
+                                <div className={styles["add-option-btn"]}/>
                                 </div>
+                            })}
                             </div>
                         ):(<span/>)}
                     </div>
@@ -82,9 +94,13 @@ class New extends Component {
         let qusetionsArray = this.renderQuestions();
         return (
             <div>
-                <Header />
+                <Header/>
+                <div className ={styles.main}>
+                <hr className = {styles.hr}/>
                 {this.renderQuestions()}
-                <AddQuestion addRadioQuestion={::this.addRadioQuestion}/>
+                <AddQuestion addQuestion={::this.addQuestion}/>
+                <hr className = {styles.hr}/>
+                </div>
                 <Footer />
             </div>
         )

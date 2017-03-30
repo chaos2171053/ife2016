@@ -44,10 +44,32 @@
         border-top: 2px solid $gray-light;
         margin: 1rem auto;
     }
-    .radio-checkbox-wrapper{
-        margin: 0 auto;
+    .bkcolor{
+         background-color: $gray-lighter;
+    }
+    .question-wrapper{
         width: 93.5%;
-        padding:1.645rem;
+        margin: 0 auto;
+        padding: 1.6rem;
+        .question-title-wrapper{
+            margin-top: 1rem;
+            font-size: 120%;
+            span {
+                
+            }
+            input {
+                margin-left:1rem;
+                background-color: $gray-lighter;
+                outline: 0;
+                border: none;
+                line-height: 2rem;
+                &:focus{
+                    width: 30%;
+                    background-color: $white;
+                }
+            }
+        }
+
     }
 }
 

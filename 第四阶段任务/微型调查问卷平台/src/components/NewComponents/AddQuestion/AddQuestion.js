@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import classNames from "classnames";
 import styles from './AddQuestion.scss'
+import { RADIO, CHECKBOX, TEXT } from "../../../constants/QuestionType";
+import * as types from '../../../constants/QuestionType'
 class AddQuestion extends Component {
     constructor(props) {
         super(props)
@@ -10,19 +12,20 @@ class AddQuestion extends Component {
         }
     }
 
-    renderChooseQuestionType(addRadioQuestion) {
+    renderChooseQuestionType(addQuestion) {
         const RADIO = 'RADIO',
               CHECKBOX = 'CHECKBOX',
               TEXT = 'TEXT'
         if (this.state.show) {
+            console.log(types)
             return (
                 <QueueAnim
                     type={['bottom', 'top']}
                     ease={['easeOutQuart', 'easeInOutQuart']}>
                     <div className={styles['type-wrapper']} key='type-wrapper'>
-                        <div className={classNames(styles.type, styles.radio)} onClick = {()=>addRadioQuestion('RADIO')}>单选</div>
-                        <div className={classNames(styles.type, styles.checkbox)} onClick = {()=>addRadioQuestion('CHECKBOX')}>多选</div>
-                        <div className={classNames(styles.type, styles.text)} onClick = {()=>addRadioQuestion('TEXT')}>文本</div>
+                        <div className={classNames(styles.type, styles.radio)} onClick = {()=>{addQuestion(types.RADIO)}}>单选</div>
+                        <div className={classNames(styles.type, styles.checkbox)} onClick = {()=>addQuestion(types.CHECKBOX)}>多选</div>
+                        <div className={classNames(styles.type, styles.text)} onClick = {()=>addQuestion(types.TEXT)}>文本</div>
                     </div>
                 </QueueAnim>)
 
@@ -37,10 +40,10 @@ class AddQuestion extends Component {
     }
 
     render() {
-        const {addRadioQuestion} = this.props
+        const {addQuestion} = this.props
         return (
             <div className={styles['add-question']}>
-                {this.renderChooseQuestionType(addRadioQuestion)}
+                {this.renderChooseQuestionType(addQuestion)}
                 <div className={styles["add-question-btn"]}
                     key='a'
                     onClick={::this.toogleAddQuestionType}>
