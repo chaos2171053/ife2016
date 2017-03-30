@@ -76,6 +76,32 @@ class New extends Component {
         })
     }
 
+    //修改文本题内容
+    handleEditTextQuestion(event,questionIndex) {
+        let questions = this.state.questions
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
+                questions[questionIndex].content = trim(event.target.value) ;
+            }
+        })
+        this.setState({
+            questions: questions
+        })
+    }
+
+    //修改文本题是否必填
+    handleToggleRequirement(questionIndex){
+        let questions = this.state.questions
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
+                questions[questionIndex].isRequired = !questions[questionIndex].isRequired ;
+            }
+        })
+        this.setState({
+            questions: questions
+        })
+    }
+
     //添加选项
     handleAddOption(questionIndex){
         let questions = this.state.questions
@@ -87,8 +113,6 @@ class New extends Component {
         this.setState({
             questions: questions
         })
-        console.log(this.state)
-
     }    
     //删除选项
     handleRemoveOption(questionIndex, optionIndex) {
@@ -110,7 +134,7 @@ class New extends Component {
 
     //添加问题 单选/多选/文本.单选,多选预设两个选项
     addQuestion(QUESTION_TYPE) {
-        let option
+        let option,content;
         switch (QUESTION_TYPE) {
             case RADIO:
                 option = ['', ''];
@@ -119,6 +143,7 @@ class New extends Component {
                 option = ['', '', '', ''];
                 break;
             case TEXT:
+                content = ''
                 break;
         }
         //设置预设选项
@@ -129,6 +154,8 @@ class New extends Component {
                     type: QUESTION_TYPE,
                     questionTitle: '', // 问题标题
                     options: option, // 问题选项
+                    content:content,
+                    isRequired:false,
                 }
             ]
 
@@ -176,7 +203,23 @@ class New extends Component {
                                 <div className={styles['add-option-btn']}
                                      onClick ={()=>{this.handleAddOption(questionIndex)}}/>
                             </div>
-                        ) : (<span />)}
+                        ) : (
+                            <div>
+                                <textarea
+                                    value={question.content}
+                                    className={styles.text}
+                                    onChange={(event)=>this.handleEditTextQuestion(event,questionIndex)}
+                                />
+                               <div
+                                   className={classNames({
+                                    [styles.required]: !question.isRequired,
+                                    [styles['not-required']]: question.isRequired
+                                })}
+                                onClick={()=>this.handleToggleRequirement(questionIndex)}
+                               >
+                                   <span>此题是否必填</span>
+                               </div>
+                            </div>)}
                     </div>
                 </div>
             )
@@ -186,6 +229,7 @@ class New extends Component {
     render() {
         const { username } = this.props.username;
         let qusetionsArray = this.renderQuestions();
+        // console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>

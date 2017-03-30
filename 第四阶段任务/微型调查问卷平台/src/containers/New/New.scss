@@ -34,7 +34,7 @@
     .question-wrapper{
         width: 93.5%;
         margin: 0 auto;
-        padding: 1.6rem;
+        padding: 1.2rem;
         input{
             background-color: $gray-lighter;
             outline: 0;
@@ -100,6 +100,27 @@
             //         visibility: visible;
             //     }
             // }
+        }
+        .text {
+            height: 8rem;
+            width: 100%;
+            margin-top: .25em;
+        }
+        .required,
+        .not-required {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+        .required {
+            &::before {
+                @include iconfont($checkbox-option, .8em, 1em);
+            }
+        }
+        .not-required {
+            &::before {
+               @include iconfont($checkbox, .8em, 1em);
+            }
         }
         
         &:hover {
