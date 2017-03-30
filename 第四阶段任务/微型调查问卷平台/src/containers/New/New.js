@@ -60,12 +60,12 @@ class New extends Component {
     }
 
     //修改选项内容
-    handleEditOption(event, questionIndex,optionIndex){
+    handleEditOption(event, questionIndex, optionIndex) {
         let questions = this.state.questions
         questions.forEach((q, index) => {
             if (questionIndex === index) {
-                questions[questionIndex].options.forEach((o,i)=>{
-                    if(optionIndex === i) {
+                questions[questionIndex].options.forEach((o, i) => {
+                    if (optionIndex === i) {
                         questions[questionIndex].options[optionIndex] = trim(event.target.value)
                     }
                 })
@@ -76,13 +76,32 @@ class New extends Component {
         })
     }
 
+    handleRemoveOption(questionIndex, optionIndex) {
+        let questions = this.state.questions
+        questions.forEach((q, index) => {
+            if (questionIndex === index) {
+                questions[questionIndex].options.forEach((o, i) => {
+                    if (optionIndex === i) {
+                        questions[questionIndex].options.splice(optionIndex, 1);
+                    }
+                })
+            }
+        })
+        this.setState({
+            questions: questions
+        })
+        // console.log(this.state)
+    }
+
     //添加问题 单选/多选/文本.单选,多选预设两个选项
     addQuestion(QUESTION_TYPE) {
         let option
         switch (QUESTION_TYPE) {
             case RADIO:
+                option = ['', ''];
+                break
             case CHECKBOX:
-                option = ['选项1', '选项2'];
+                option = ['', '', '', ''];
                 break;
             case TEXT:
                 break;
@@ -106,13 +125,14 @@ class New extends Component {
         if (questions.length === 0) {
             return null;
         }
-        // console.log(this.state)
+        
         return (
             questions.map((question, questionIndex) =>
                 <div className={styles['question-wrapper']} key={questionIndex}>
                     <div className={styles['question-title-wrapper']}>
                         <span>{`Q${questionIndex + 1} (${question.type})`}</span>
                         <Input
+                            value = {question.questionTitle}
                             placeholder={`请填写标题`}
                             handleEditText={(event) => this.handleEditQuetion(event, questionIndex)} />
                     </div>
@@ -127,11 +147,13 @@ class New extends Component {
                                                 [styles["checkbox-option-icon"]]: question.type === CHECKBOX
                                             })} />
                                             <Input
-                                                placeholder={`选项${optionIndex+1}`}
-                                                handleEditText={(event) => this.handleEditOption(event, questionIndex,optionIndex)}
-                                              />
+                                                value={question.options[optionIndex]}
+                                                placeholder={`选项${optionIndex + 1}`}
+                                                handleEditText={(event) => this.handleEditOption(event, questionIndex, optionIndex)}
+                                            />
                                             <span
                                                 className={styles["remove-option-btn"]}
+                                                onClick={() => { this.handleRemoveOption(questionIndex, optionIndex) }}
                                             />
                                             <div className={styles["add-option-btn"]} />
                                         </div>
