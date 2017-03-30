@@ -1,5 +1,5 @@
 @import '../../styles/variables.scss';
-
+@import "../../styles/mixins/iconfont.scss";
 // .header-wrapper {
 //     overflow:hidden;  
 //     text-align:left;  
@@ -51,22 +51,35 @@
         width: 93.5%;
         margin: 0 auto;
         padding: 1.6rem;
+        input{
+            background-color: $gray-lighter;
+            outline: 0;
+            border: none;
+            &:focus{
+                background-color: $white;
+            }
+        }
         .question-title-wrapper{
             margin-top: 1rem;
             font-size: 120%;
-            span {
-                
-            }
             input {
                 margin-left:1rem;
-                background-color: $gray-lighter;
-                outline: 0;
-                border: none;
+                // background-color: $gray-lighter;
+                // outline: 0;
+                // border: none;
                 line-height: 2rem;
                 &:focus{
-                    width: 30%;
-                    background-color: $white;
+                    width: 30%;    
                 }
+            }
+        }
+        .option-wrapper {
+            padding-left: 1.5rem;
+            .radio-option-icon::before {
+                @include iconfont($radio-option, .8em, 1em);
+            }
+             .checkbox-option-icon::before {
+                @include iconfont($checkbox-option, .8em, 1em);
             }
         }
 

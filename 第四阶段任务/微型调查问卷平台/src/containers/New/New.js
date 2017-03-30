@@ -59,7 +59,7 @@ class New extends Component {
         })
     }
 
-    //添加问题 单选 多选 文本.单选 多选 预设两个选项
+    //添加问题 单选/多选/文本.单选,多选预设两个选项
     addQuestion(QUESTION_TYPE) { 
         let option
         switch(QUESTION_TYPE){
@@ -77,7 +77,7 @@ class New extends Component {
                 {
                     type: QUESTION_TYPE,
                     questionTitle: '', // 问题标题
-                    options: option,//[], // 问题选项
+                    options: option, // 问题选项
                 }
             ]
 
@@ -94,15 +94,16 @@ class New extends Component {
             questions.map((question,questionIndex) => 
                 <div className = {styles['question-wrapper']} key = {questionIndex}>
                     <div className ={styles['question-title-wrapper']}>
-                        <span>{`Q${questionIndex + 1}`}</span>
+                        <span>{`Q${questionIndex + 1} (${question.type})`}</span>
                         <Input 
-                        placeholder= {`(${question.type}) 请填写标题`} 
+                        placeholder= {`请填写标题`} 
                         handleEditText = {(event)=>this.handleEditQuetion(event,questionIndex)}/>
                     </div>
                     <div>
                         {question.type !== TEXT?(
                             <div>
                             {question.options.map((option,optionIndex)=>{
+                                console.log(question.type)
                                 return(     
                                 <div className = {styles['option-wrapper']} key = {optionIndex}>
                                 <span className={classNames({
