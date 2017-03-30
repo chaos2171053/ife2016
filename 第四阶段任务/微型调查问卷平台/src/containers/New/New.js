@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
 import classNames from 'classnames'
-import { trim } from '../../utils/util'
+import { trim,swapArrayItems } from '../../utils/util'
 // import * as Actions from '../../actions/addQuestionnaire';
 
 const { Header, Main, Footer, AddQuestion } = NewComponents
@@ -132,6 +132,18 @@ class New extends Component {
         // console.log(this.state)
     }
 
+    //对问题进行上移
+    handleChangeQuestionIndex(questionIndex,operation){
+        let questions = this.state.questions
+        switch(operation){
+            case '上移':{this.setState({questions:swapArrayItems(questions,questionIndex,questionIndex-1)})}
+            break;
+            case '下移':{this.setState({questions:swapArrayItems(questions,questionIndex,questionIndex+1)})}
+            break;
+        }
+        
+    }
+
     //添加问题 单选/多选/文本.单选,多选预设两个选项
     addQuestion(QUESTION_TYPE) {
         let option,content;
@@ -167,7 +179,7 @@ class New extends Component {
         if (questions.length === 0) {
             return null;
         }
-        
+        let last = questions.length-1
         return (
             questions.map((question, questionIndex) =>
                 <div className={styles['question-wrapper']} key={questionIndex}>
@@ -220,6 +232,27 @@ class New extends Component {
                                    <span>此题是否必填</span>
                                </div>
                             </div>)}
+                            <div className = {styles['operation-wraper']}>
+                            {
+                                questionIndex >0 &&(
+                                    <div
+                                        className={styles.operation}
+                                        onClick = {()=>this.handleChangeQuestionIndex(questionIndex,'上移')}>
+                                        <span>上移</span>
+                                    </div>
+                                )
+                            }
+                            {
+                                questionIndex < last &&(
+                                    <div
+                                        className={styles.operation}
+                                        onClick = {()=>this.handleChangeQuestionIndex(questionIndex,'下移')}
+                                    >
+                                    <span>下移</span>
+                                    </div>
+                                )
+                            }
+                            </div>
                     </div>
                 </div>
             )
@@ -229,7 +262,7 @@ class New extends Component {
     render() {
         const { username } = this.props.username;
         let qusetionsArray = this.renderQuestions();
-        // console.log(this.state)
+        console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>

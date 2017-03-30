@@ -44,6 +44,27 @@
                 background-color: $white;
             }
         }
+        // &:hover {
+        //     background-color: $gray-light;
+        //     input{
+        //         background-color: $gray-light;
+        //     }
+        //     .operation-wraper {
+        //         visibility: visible;
+        //     }
+        //     .remove-option-btn {
+        //         display: inline;
+        //         color: $gray-dark;
+        //         }
+        //     .add-option-btn{
+        //         border: .2rem dashed $gray;
+        //         border-radius: 2px;
+        //         cursor: pointer;
+        //         &::before {
+        //             visibility: visible;
+        //         }
+        //     }
+        // }
         .question-title-wrapper{
             margin-top: 1rem;
             font-size: 120%;
@@ -92,19 +113,10 @@
                 @include iconfont($add, .8em);
                 visibility: hidden;
             }
-            // &:hover {
-            //     border: .2rem dashed $gray;
-            //     border-radius: 2px;
-            //     cursor: pointer;
-            //     &::before {
-            //         visibility: visible;
-            //     }
-            // }
         }
         .text {
             height: 8rem;
             width: 100%;
-            margin-top: .25em;
         }
         .required,
         .not-required {
@@ -122,11 +134,31 @@
                @include iconfont($checkbox, .8em, 1em);
             }
         }
-        
+
+        .operation-wraper {
+            visibility: hidden;
+            width: 100%;
+            text-align: right;
+            .operation {
+                display: inline-block;
+                margin-left: 1em;
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+        input{
+            &:focus{
+                background-color: $white;
+                }
+        }
         &:hover {
             background-color: $gray-light;
             input{
                 background-color: $gray-light;
+            }
+            .operation-wraper {
+                visibility: visible;
             }
             .remove-option-btn {
                 display: inline;
@@ -141,11 +173,6 @@
                 }
             }
         }
-            input{
-                &:focus{
-                    background-color: $white;
-                    }
-            }
     }
 }
 

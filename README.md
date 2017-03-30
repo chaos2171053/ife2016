@@ -991,3 +991,16 @@ render() {
 }
 `
 ####15.10 切图先把大概div分布确定好
+
+####15.14 数组中元素交换位置
+在新增页面中，对问题进行上移下移操作，需要对state中question数组进行重新排序
+`var swapItems = function(arr, index1, index2) {
+    arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+    return arr;
+    };
+ // 上移
+swapItems(arr, index, index - 1);
+//下移
+swapItems(arr, index, index + 1);
+`
+-[JavaScript下实现交换数组元素上下移动例子](http://www.111cn.net/wy/js-ajax/80973.htm)

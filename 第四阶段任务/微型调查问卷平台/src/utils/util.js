@@ -2,6 +2,10 @@
 export const trim = (str)=> {
     return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
 }
+export const swapArrayItems = (arr, index1, index2)=>{
+    arr[index1] = arr.splice(index2, 1, arr[index1])[0];
+    return arr
+}
 
 /**
  * 判断arr是否为一个数组，返回一个bool值
