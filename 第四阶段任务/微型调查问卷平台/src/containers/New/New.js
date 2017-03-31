@@ -6,34 +6,27 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
 import classNames from 'classnames'
-import { trim, swapArrayItems,cloneObject } from '../../utils/util'
-// import * as Actions from '../../actions/addQuestionnaire';
-
+import { trim, swapArrayItems, cloneObject } from '../../utils/util'
+import * as Actions from '../../actions/questionnaires';
 const { Header, Main, Footer, AddQuestion } = NewComponents
 
-// const mapStateToProps = state => ({
-//     // username：state.rootReducer.status.
-//     addQuestionnaire: state.rootReducer.addQuestionnaire
-// })
-const mapStateToProps = state => {
-    return {
+const mapStateToProps = state => ({
         username: state.rootReducer.status.username,
-    }
-}
-// const mapDispatchToProps = dispatch => ({
-//     actions: bindActionCreators(Actions, dispatch)
-// })
-@connect(mapStateToProps)
+})
+
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(Actions, dispatch)
+})
+@connect(mapStateToProps,mapDispatchToProps)
 
 class New extends Component {
     static propTypes = {
         username: React.PropTypes.string.isRequired,
-
     }
     constructor(props) {
         super(props);
         this.state = {
-            id: '',
+            id: -1,
             questionnarireTitle: '',
             deadline: 0,
             status: '',
@@ -148,8 +141,8 @@ class New extends Component {
             case '复用': {
                 questions.forEach((q, index) => {
                     if (questionIndex === index) {
-                        let cloneQuestion =cloneObject(q)
-                        questions.splice(questionIndex+1,0,cloneQuestion);
+                        let cloneQuestion = cloneObject(q)
+                        questions.splice(questionIndex + 1, 0, cloneQuestion);
 
                     }
                 })
@@ -193,13 +186,21 @@ class New extends Component {
 
     //处理获取设置的问卷截止时间
     handleSetDeadLine(...args) {
-        // const timestamp = args[0].valueOf()
-        this.setState({deadline:args[0].valueOf() })
+        this.setState({ deadline: args[0].valueOf() })
+    }
+
+    //保存问卷
+    handleSaveQuestionnaire() {
+        const questionnaire = this.state;
+        const {saveQuestionnarie} = this.props.actions;
+        const username = this.props.username;
+        saveQuestionnarie(questionnaire,username);
+        
     }
     renderQuestions() { //渲染题目
-        let qusetionsArray = [];
+        // let qusetionsArray = [];
         const { questions } = this.state;
-        let last = questions.length - 1
+        const last = questions.length - 1
         return (
             questions.map((question, questionIndex) =>
                 <div className={styles['question-wrapper']} key={questionIndex}>
@@ -272,16 +273,16 @@ class New extends Component {
                                     </div>
                                 )
                             }
-                                <div
-                                    className={styles.operation}
-                                    onClick={() => this.handleChangeQuestionIndex(questionIndex, '删除')}>
-                                    <span>删除</span>
-                                </div>
-                                <div
-                                    className={styles.operation}
-                                    onClick={() => this.handleChangeQuestionIndex(questionIndex, '复用')}>
-                                    <span>复用</span>
-                                </div>
+                            <div
+                                className={styles.operation}
+                                onClick={() => this.handleChangeQuestionIndex(questionIndex, '删除')}>
+                                <span>删除</span>
+                            </div>
+                            <div
+                                className={styles.operation}
+                                onClick={() => this.handleChangeQuestionIndex(questionIndex, '复用')}>
+                                <span>复用</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -290,9 +291,7 @@ class New extends Component {
     }
 
     render() {
-        const { username } = this.props.username;
         let qusetionsArray = this.renderQuestions();
-        console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
@@ -302,7 +301,9 @@ class New extends Component {
                     <AddQuestion addQuestion={::this.addQuestion}/>
                 <hr className={styles.hr} />
                 </div>
-                <Footer handleSetDeadLine = {::this.handleSetDeadLine}/>
+                <Footer
+                    handleSaveQuestionnaire= {::this.handleSaveQuestionnaire}
+                    handleSetDeadLine={::this.handleSetDeadLine}/>
             </div>
         )
     }
