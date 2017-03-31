@@ -1085,3 +1085,7 @@ export function cloneObject (source) {
     return result;
 }
 `
+
+####15.16 使用Redux DevTools浏览器插件调试redux
+使用了Redux DevTools来调试
+-[使用Redux DevTools浏览器插件调试redux](http://blog.csdn.net/applebomb/article/details/54918659)
