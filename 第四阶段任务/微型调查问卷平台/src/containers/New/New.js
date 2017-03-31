@@ -11,13 +11,13 @@ import * as Actions from '../../actions/questionnaires';
 const { Header, Main, Footer, AddQuestion } = NewComponents
 
 const mapStateToProps = state => ({
-        username: state.rootReducer.status.username,
+    username: state.rootReducer.status.username,
 })
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
 })
-@connect(mapStateToProps,mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 
 class New extends Component {
     static propTypes = {
@@ -192,10 +192,79 @@ class New extends Component {
     //保存问卷
     handleSaveQuestionnaire() {
         const questionnaire = this.state;
-        const {saveQuestionnarie} = this.props.actions;
+        const { saveQuestionnarie } = this.props.actions;
         const username = this.props.username;
-        saveQuestionnarie(questionnaire,username);
-        
+        saveQuestionnarie(questionnaire, username);
+
+    }
+
+    //发布问卷
+    handlePublishQuestionnaire() {
+        const questionnaire = this.state;
+        const { publishQuestionnarie } = this.props.actions;
+        const username = this.props.username;
+        debugger
+
+    }
+
+    //校验问卷
+    validQuestionnaire() {
+        const questionnaire = this.state;
+        const questions = questionnaire.questions
+        if (questionnaire.questionnarireTitle === null ||
+            questionnaire.questionnarireTitle === undefined ||
+            questionnaire.questionnarireTitle === '') {
+            return {
+                bollean: false,
+                msg: '还没有写问卷标题啊！'
+            }
+        }
+        if(questions.length === 0) {
+            return {
+                bollean: false,
+                msg: '请至少设置一个问题~~'
+            } 
+        }
+        for (let i = 0, questionsLen = questions.length; i < questionsLen; i++) {
+            let q = questions[i]
+            if (q.questionTitle === null ||
+                q.questionTitle === undefined ||
+                q.questionTitle === '') {
+                return {
+                    bollean: false,
+                    msg: `第${i + 1}题标题还没有写啊！`
+                }
+            }
+            if (q.options.length < 2) {
+                return {
+                    bollean: false,
+                    msg: `第${i + 1}题至少要有2个选项！`
+                }
+            }
+            for (let j = 0, optionLen = q.options.length; j < optionLen; j++) {
+                let o = q.options[j]
+                if (o === null ||
+                    o === undefined ||
+                    o === '') {
+                    return {
+                        bollean: false,
+                        msg: `第${i + 1}题第${j+1}个选项标题还没有写啊！`
+                    }
+                }
+
+            }
+        }
+        if (questionnaire.deadline === 0) {
+            return {
+                bollean: false,
+                msg: '请设置问卷截止日期(￣～￣) 嚼!'
+            }
+        }
+        return {
+            boolean: true,
+            deadline:questionnaire.deadline
+        }
+
     }
     renderQuestions() { //渲染题目
         // let qusetionsArray = [];
@@ -302,7 +371,9 @@ class New extends Component {
                 <hr className={styles.hr} />
                 </div>
                 <Footer
-                history = {this.props.history}
+                    history={this.props.history}
+                    validQuestionnaire={::this.validQuestionnaire}
+                    handlePublishQuestionnaire={::this.handlePublishQuestionnaire}
                     handleSaveQuestionnaire= {::this.handleSaveQuestionnaire}
                     handleSetDeadLine={::this.handleSetDeadLine}/>
             </div>

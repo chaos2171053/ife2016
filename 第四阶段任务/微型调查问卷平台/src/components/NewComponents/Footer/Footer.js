@@ -10,19 +10,46 @@ const disabledDate = function (current) {
         return current.valueOf() + 86400000 < Date.now();
     }
 }
-const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history}) => {
+const Footer = withRouter(({ handleSetDeadLine, 
+    handleSaveQuestionnaire, history, handlePublishQuestionnaire,validQuestionnaire }) => {
     const handleSaveQuestionnaireModal = () => {
         Modal.confirm({
             title: '提示',
-            content: '确定要保存问卷吗？',
+            content: '是否保存问卷？',
             okText: '确定',
             cancelText: '取消',
-            onOk(){
+            onOk() {
                 handleSaveQuestionnaire();
                 history.push('/home')
             },
-            onCancel() {},
+            onCancel() { },
         });
+    }
+    const handlePublishQuestionnaireModal = () => {
+        const result = validQuestionnaire()
+        debugger
+        if (result.boolean === true) {
+            Modal.confirm({
+                title: '提示',
+                // content: `是否发布问卷？`+ `${\n}` +`（此问卷的截止日期为${result.deadline}）`,
+                content: <div><p>是否发布问卷?</p> <p>(此问卷的截止日期为{result.deadline})</p></div>,
+                okText: '确定',
+                cancelText: '取消',
+                onOk() {
+                    handlePublishQuestionnaire();
+                    history.push('/home')
+                },
+                onCancel() { },
+            });
+        } else {
+            Modal.error({
+                title: '啊喂！出错啦！',
+                content: result.msg,
+                onOk(){},
+                onCancel() { },
+            });
+        }
+
     }
     return (
         <div className={styles.footer}>
@@ -34,8 +61,8 @@ const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history
                     disabledDate={disabledDate}
                 />
             </div>
-                <button onClick={handleSaveQuestionnaireModal}>保存问卷</button>
-            <button>发布问卷</button>
+            <button onClick={handleSaveQuestionnaireModal}>保存问卷</button>
+            <button onClick={handlePublishQuestionnaireModal}>发布问卷</button>
             <Link to='/home' className={styles.link}>
                 <button>返回</button>
             </Link>
@@ -43,6 +70,9 @@ const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history
     )
 })
 Footer.propTypes = {
+    history: React.PropTypes.object.isRequired,
+    validQuestionnaire: React.PropTypes.func.isRequired,
+    handlePublishQuestionnaire: React.PropTypes.func.isRequired,
     handleSetDeadLine: React.PropTypes.func.isRequired,
     handleSaveQuestionnaire: React.PropTypes.func.isRequired,
 }
