@@ -1089,3 +1089,31 @@ export function cloneObject (source) {
 ####15.16 使用Redux DevTools浏览器插件调试redux
 使用了Redux DevTools来调试
 -[使用Redux DevTools浏览器插件调试redux](http://blog.csdn.net/applebomb/article/details/54918659)
+
+####15.16 在对话框中点击确定后跳转页面
+-[50-5](problemsPic/50-4.png)<br>
+因为使用了antd库的对话框组件，所以需要在点击确定的时候提交问卷并且返回主界面。
+在确定按钮的回调函数中`<Link to ='/home'/>`，但是这样无法跳转。
+解决方法：使用history的push方法,调用withRouter方法。
+`
+import { Link, withRouter } from 'react-router-dom'
+...
+const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history}) => {
+    const handleSaveQuestionnaireModal = () => {
+        Modal.confirm({
+            title: '提示',
+            content: '确定要保存问卷吗？',
+            okText: '确定',
+            cancelText: '取消',
+            onOk(){
+                handleSaveQuestionnaire();
+                history.push('/home')
+            },
+            onCancel() {},
+        });
+    }
+    return (
+        .....
+    )
+})
+`

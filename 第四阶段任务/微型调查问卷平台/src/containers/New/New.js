@@ -302,6 +302,7 @@ class New extends Component {
                 <hr className={styles.hr} />
                 </div>
                 <Footer
+                history = {this.props.history}
                     handleSaveQuestionnaire= {::this.handleSaveQuestionnaire}
                     handleSetDeadLine={::this.handleSetDeadLine}/>
             </div>

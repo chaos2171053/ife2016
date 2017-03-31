@@ -65,7 +65,6 @@ const questionnaire = (state = {}, action) => {
         }
             break;
         case SAVE_QUESTIONNAIRE: { //保存问卷
-            debugger
             const { questionnaire } = action.payload
             if (questionnaire.id === -1) { //如果问卷之前没有创建过，
                 questionnaire.id = v4() //赋予一个独一的id
