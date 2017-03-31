@@ -1,7 +1,7 @@
 import * as types from '../constants/QuestionnairesActionsTypes'
 import { USER_SIGNUP, SAVE_QUESTIONNAIRE } from '../constants/QuestionnairesActionsTypes'
 import { userModel, questionnaireModel, questionModel } from '../data/data'
-
+import { v4 } from 'node-uuid';
 //需要本地存储的数据
 const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
     [
@@ -64,14 +64,16 @@ const questionnaire = (state = {}, action) => {
             }
         }
             break;
-        case SAVE_QUESTIONNAIRE :{ //保存问卷
-            const {questionnaire} = action.payload
+        case SAVE_QUESTIONNAIRE: { //保存问卷
             debugger
-            if(questionnaire.id === -1) { //如果问卷之前没有创建过，
-                
-                
+            const { questionnaire } = action.payload
+            if (questionnaire.id === -1) { //如果问卷之前没有创建过，
+                questionnaire.id = v4() //赋予一个独一的id
+                state.questionnaires.push(questionnaire)
             }
+            return state
         }
+            break;
         default:
             return state
     }
@@ -89,16 +91,14 @@ const questionnaires = (state = dataBase, action) => {
         }
             break;
         case SAVE_QUESTIONNAIRE: { //保存问卷
-            const {username} = action.payload
-            state.map((user)=>{
-                if(user.username === username){
-                    state = [
-                        // questionnaire(user,action)
-                    ]
-                    questionnaire(user,action)
+            const { username } = action.payload
+            state.map((user) => {
+                if (user.username === username) {
+                    questionnaire(user, action)
                 }
             })
-
+            localStorage.dataBase = JSON.stringify(state);
+            return state
         }
             break;
         default:

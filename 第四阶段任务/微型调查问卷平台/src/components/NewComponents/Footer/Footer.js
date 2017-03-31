@@ -10,7 +10,7 @@ const disabledDate = function (current) {
         return current.valueOf() + 86400000 < Date.now();
     }
 }
-const Footer = ({ handleSetDeadLine,handleSaveQuestionnaire }) => {
+const Footer = ({ handleSetDeadLine, handleSaveQuestionnaire }) => {
     return (
         <div className={styles.footer}>
             <div className={styles['datePicker-wrapper']}>
@@ -21,16 +21,18 @@ const Footer = ({ handleSetDeadLine,handleSaveQuestionnaire }) => {
                     disabledDate={disabledDate}
                 />
             </div>
-            <button onClick = {handleSaveQuestionnaire}>保存问卷</button>
+            <Link to='/home' className={styles.link}>
+                <button onClick={handleSaveQuestionnaire}>保存问卷</button>
+            </Link>
             <button>发布问卷</button>
-            <Link to='/home' className = {styles.link}>
+            <Link to='/home' className={styles.link}>
                 <button>返回</button>
             </Link>
         </div>
     )
 }
 Footer.propTypes = {
-    handleSetDeadLine:React.PropTypes.func.isRequired,
-    handleSaveQuestionnaire:React.PropTypes.func.isRequired,
+    handleSetDeadLine: React.PropTypes.func.isRequired,
+    handleSaveQuestionnaire: React.PropTypes.func.isRequired,
 }
 export default Footer
