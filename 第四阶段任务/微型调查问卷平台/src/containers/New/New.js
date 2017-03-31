@@ -289,7 +289,6 @@ class New extends Component {
     render() {
         const { username } = this.props.username;
         let qusetionsArray = this.renderQuestions();
-        console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
