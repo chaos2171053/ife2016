@@ -35,7 +35,7 @@ class New extends Component {
         this.state = {
             id: '',
             questionnarireTitle: '',
-            deadline: '',
+            deadline: 0,
             status: '',
             questions: []
         }
@@ -190,12 +190,15 @@ class New extends Component {
 
         })
     }
+
+    //处理获取设置的问卷截止时间
+    handleSetDeadLine(...args) {
+        // const timestamp = args[0].valueOf()
+        this.setState({deadline:args[0].valueOf() })
+    }
     renderQuestions() { //渲染题目
         let qusetionsArray = [];
         const { questions } = this.state;
-        // if (questions.length === 0) {
-        //     return null;
-        // }
         let last = questions.length - 1
         return (
             questions.map((question, questionIndex) =>
@@ -289,6 +292,7 @@ class New extends Component {
     render() {
         const { username } = this.props.username;
         let qusetionsArray = this.renderQuestions();
+        console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
@@ -298,7 +302,7 @@ class New extends Component {
                     <AddQuestion addQuestion={::this.addQuestion}/>
                 <hr className={styles.hr} />
                 </div>
-                <Footer />
+                <Footer handleSetDeadLine = {::this.handleSetDeadLine}/>
             </div>
         )
     }

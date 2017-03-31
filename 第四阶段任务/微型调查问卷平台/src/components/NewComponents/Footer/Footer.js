@@ -7,14 +7,19 @@ import styles from './Footer.scss'
 
 moment.locale('zh-cn');
 const disabledDate = function(current) {
-  return current && current.valueOf() < Date.now();
+    if(current !== undefined){
+        return current.valueOf() + 86400000 < Date.now();
+    }
+//   return current && current.valueOf() < Date.now();
 }
-const Footer = () => {
+const Footer = ({handleSetDeadLine}) => {
     return (
         <div className={styles.footer}>
             <div className={styles['datePicker-wrapper']}>
                 <span className = {styles.deadline}>问卷截止日期:</span>
                 <DatePicker
+                    allowClear = {false}
+                    onChange = {handleSetDeadLine}
                     disabledDate={disabledDate}
                     />
             </div>
