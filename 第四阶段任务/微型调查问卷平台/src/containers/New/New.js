@@ -231,15 +231,15 @@ class New extends Component {
         }
         for (let i = 0, questionsLen = questions.length; i < questionsLen; i++) {
             let q = questions[i]
-            if (q.questionTitle === null ||
-                q.questionTitle === undefined ||
-                q.questionTitle === '') {
-                return {
-                    bollean: false,
-                    msg: `第${i + 1}题标题还没有写啊！`
-                }
-            }
             if (q.type !== TEXT) {
+                if (q.questionTitle === null ||
+                    q.questionTitle === undefined ||
+                    q.questionTitle === '') {
+                    return {
+                        bollean: false,
+                        msg: `第${i + 1}题标题还没有写啊！`
+                    }
+                }
                 if (q.options.length < 2) {
                     return {
                         bollean: false,
@@ -255,6 +255,13 @@ class New extends Component {
                             bollean: false,
                             msg: `第${i + 1}题第${j + 1}个选项标题还没有写啊！`
                         }
+                    }
+                }
+            } else {
+                if (q.content === null || q.content === undefined || q.content === '') {
+                    return {
+                        bollean: false,
+                        msg: `第${i + 1}题文本题还没有写题目啊`
                     }
                 }
             }
@@ -375,8 +382,8 @@ class New extends Component {
                     <hr className={styles.hr} />
                     {/*{this.renderQuestions()}*/}
                     <Main
-                        questions = {this.state.questions}
-                        handleAddOption = {::this.handleAddOption.bind(this)}
+                        questions={this.state.questions}
+                        handleAddOption={::this.handleAddOption.bind(this)}
                         handleEditOption = {::this.handleEditOption.bind(this)}
                         handleRemoveOption = {::this.handleRemoveOption.bind(this)}
                         handleEditQuetion ={::this.handleEditQuetion.bind(this)}

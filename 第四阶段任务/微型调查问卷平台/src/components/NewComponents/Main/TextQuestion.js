@@ -4,6 +4,7 @@ import classNames from 'classnames'
 const TextQuestion = ({ question,questionIndex,handleEditTextQuestion,handleToggleRequirement }) => (
     <div>
         <textarea
+            placeholder ={`请输入题目`}
             value={question.content}
             className={styles.text}
             onChange={(event) =>handleEditTextQuestion(event, questionIndex)}
