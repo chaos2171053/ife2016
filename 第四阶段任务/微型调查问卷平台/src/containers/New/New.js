@@ -22,10 +22,10 @@ const mapDispatchToProps = dispatch => ({
 class New extends Component {
     static propTypes = {
         username: React.PropTypes.string.isRequired,
-        actions:React.PropTypes.shape({
-            userSignup:PropTypes.func.isRequired,
-            saveQuestionnaire:PropTypes.func.isRequired,
-            publishQuestionnaire:PropTypes.func.isRequired,
+        actions: React.PropTypes.shape({
+            userSignup: PropTypes.func.isRequired,
+            saveQuestionnaire: PropTypes.func.isRequired,
+            publishQuestionnaire: PropTypes.func.isRequired,
         })
     }
     constructor(props) {
@@ -367,13 +367,18 @@ class New extends Component {
 
     render() {
         // let qusetionsArray = this.renderQuestions();
-        // console.log(this.props)
+        console.log(this.state)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
                 <div className={styles.main}>
                     <hr className={styles.hr} />
-                    {this.renderQuestions()}
+                    {/*{this.renderQuestions()}*/}
+                    <Main
+                        questions = {this.state.questions}
+                        handleEditQuetion ={::this.handleEditQuetion.bind(this)}
+                        handleEditTextQuestion = {::this.handleEditTextQuestion.bind(this)}
+                        handleToggleRequirement = {::this.handleToggleRequirement.bind(this)}/>
                     <AddQuestion addQuestion={::this.addQuestion}/>
                 <hr className={styles.hr} />
                 </div>
