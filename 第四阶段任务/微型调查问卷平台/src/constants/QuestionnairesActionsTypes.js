@@ -1,3 +1,4 @@
 export const USER_SIGNUP = 'USER_SIGNUP' // 注册用户
 export const SAVE_QUESTIONNAIRE = 'SAVE_QUESTIONNAIRE' //保存问卷
 export const PUBLISH_QUESTIONNAIRE = 'PUBLISH_QUESTIONNAIRE' //发布问卷
+export const CLOSE_QUESTIONNAIRE = 'CLOSE_QUESTIONNAIRE' // 关闭问卷，状态变为已结束
