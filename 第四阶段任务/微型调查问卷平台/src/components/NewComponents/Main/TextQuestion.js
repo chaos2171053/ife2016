@@ -11,8 +11,8 @@ const TextQuestion = ({ question,questionIndex,handleEditTextQuestion,handleTogg
         />
         <div
             className={classNames({
-                [styles.required]: !question.isRequired,
-                [styles['not-required']]: question.isRequired
+                [styles.required]: question.isRequired,
+                [styles['not-required']]: !question.isRequired
             })}
             onClick={() => handleToggleRequirement(questionIndex)}
         >

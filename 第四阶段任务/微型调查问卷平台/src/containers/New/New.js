@@ -182,7 +182,7 @@ class New extends Component {
                     questionTitle: '', // 问题标题
                     options: option, // 问题选项
                     content: content,
-                    isRequired: false,
+                    isRequired: true,
                 }
             ]
 

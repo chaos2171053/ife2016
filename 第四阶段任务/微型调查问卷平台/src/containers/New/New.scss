@@ -124,12 +124,12 @@
         }
         .required {
             &::before {
-                @include iconfont($checkbox-option, .8em, 1em);
+                @include iconfont($checkbox, .8em, 1em);
             }
         }
         .not-required {
             &::before {
-                @include iconfont($checkbox, .8em, 1em);
+                @include iconfont($checkbox-option, .8em, 1em); 
             }
         }
         .operation-wraper {
