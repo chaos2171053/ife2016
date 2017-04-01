@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import styles from '../../../containers/New/New.scss';
-import { Input } from '../../'
 import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes'
 import classNames from 'classnames'
 import QuestionTitle from './QuestionTitle'
 import TextQuestion from './TextQuestion'
-const Main = ({ questions, handleEditQuetion,handleEditTextQuestion,handleToggleRequirement }) => {
+import MultipleQuestion from './MultipleQuestion'
+const Main = ({ questions, handleEditQuetion,handleEditTextQuestion,
+    handleToggleRequirement,handleEditOption,handleRemoveOption,handleAddOption }) => {
     const last = questions.length - 1;
     return (
         <div>
@@ -18,7 +19,12 @@ const Main = ({ questions, handleEditQuetion,handleEditTextQuestion,handleToggle
                     <div>
                     {
                         question.type !== TEXT?
-                        (1):
+                        (<MultipleQuestion
+                            question= {question}
+                            handleAddOption = {handleAddOption}
+                            handleRemoveOption = {handleRemoveOption}
+                            handleEditOption = {handleEditOption}
+                            questionIndex = {questionIndex}/>):
                         (<TextQuestion
                             question = {question}
                             questionIndex = {questionIndex}
@@ -36,5 +42,8 @@ Main.propTypes = {
     handleEditQuetion:PropTypes.func.isRequired,
     handleEditTextQuestion:PropTypes.func.isRequired,
     handleToggleRequirement:PropTypes.func.isRequired,
+    handleEditOption:PropTypes.func.isRequired,
+    handleRemoveOption:PropTypes.func.isRequired,
+    handleAddOption:PropTypes.func.isRequired
 }
 export default Main

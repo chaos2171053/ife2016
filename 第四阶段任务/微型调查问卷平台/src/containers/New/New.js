@@ -376,6 +376,9 @@ class New extends Component {
                     {/*{this.renderQuestions()}*/}
                     <Main
                         questions = {this.state.questions}
+                        handleAddOption = {::this.handleAddOption.bind(this)}
+                        handleEditOption = {::this.handleEditOption.bind(this)}
+                        handleRemoveOption = {::this.handleRemoveOption.bind(this)}
                         handleEditQuetion ={::this.handleEditQuetion.bind(this)}
                         handleEditTextQuestion = {::this.handleEditTextQuestion.bind(this)}
                         handleToggleRequirement = {::this.handleToggleRequirement.bind(this)}/>
