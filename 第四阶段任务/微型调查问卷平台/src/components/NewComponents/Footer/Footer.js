@@ -32,7 +32,7 @@ const Footer = withRouter(({ handleSetDeadLine,
             const [year, month, date] = [time.getFullYear(), time.getMonth() + 1, time.getDate()];
             Modal.confirm({
                 title: '提示',
-                content: <div><p>是否发布问卷?</p> <p>{`（本问卷截止日期为${year}-${month}-${date}）`}</p></div>,
+                content: <div><p>是否发布问卷?</p> <p>{`(本问卷截止日期为${year}-${month}-${date})`}</p></div>,
                 okText: '确定',
                 cancelText: '取消',
                 onOk() {

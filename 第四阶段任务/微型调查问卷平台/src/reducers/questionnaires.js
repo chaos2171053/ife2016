@@ -13,22 +13,24 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
             username: 'chaos666', // 用户名
             phonenumber: '18664376937', // 手机号
             password: '666666', // 密码
-            questionnaires: [{ // 问卷数组
-                id: '',// 每个问卷的id
-                questionnaireTitle: '', // 该问卷的标题
-                deadline: '', // 该问卷的截止日期
-                status: '', // 问卷的状态
-                questions: [ // 问题数组 
-                    {
-                        type: '', // 问题类型
-                        questionTitle: '', // 问题标题
-                        options: [], // 问题选项
-                        isRequired: false, // 是否必填 默认不必填
-                        content: '', // 文本题 
-                    },
-                ]
+            questionnaires: [
+                //{ // 问卷数组
+                //     id: '',// 每个问卷的id
+                //     questionnaireTitle: '', // 该问卷的标题
+                //     deadline: '', // 该问卷的截止日期
+                //     status: '', // 问卷的状态
+                //     questions: [ // 问题数组 
+                //         {
+                //             type: '', // 问题类型
+                //             questionTitle: '', // 问题标题
+                //             options: [], // 问题选项
+                //             isRequired: false, // 是否必填 默认不必填
+                //             content: '', // 文本题 
+                //         },
+                //     ]
 
-            },]
+                // },
+            ]
         },
     ];
 
@@ -77,10 +79,9 @@ const questionnaire = (state = {}, action) => {
         }
             break;
         case CLOSE_QUESTIONNAIRE: { // 关闭问卷
-            const questionnaireIndex= action.payload.questionnaireIndex
-            debugger
-            state.questionnaires.map((q,index)=>{
-                if(index === questionnaireIndex) {
+            const questionnaireIndex = action.payload.questionnaireIndex
+            state.questionnaires.map((q, index) => {
+                if (index === questionnaireIndex) {
                     q.status = CLOSED
                 }
             })
@@ -125,17 +126,17 @@ const questionnaires = (state = dataBase, action) => {
             return state
         }
             break;
-        case CLOSE_QUESTIONNAIRE:{ //关闭问卷
-            const {username} = action.payload
-            state.map((user)=>{
-                if(user.username === username){
+        case CLOSE_QUESTIONNAIRE: { //关闭问卷
+            const { username } = action.payload
+            state.map((user) => {
+                if (user.username === username) {
                     questionnaire(user, action)
                 }
             })
             localStorage.dataBase = JSON.stringify(state);
             return state;
         }
-        break;
+            break;
         default:
             return state
     }
