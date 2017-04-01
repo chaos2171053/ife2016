@@ -62,6 +62,7 @@ const questionnaire = (state = {}, action) => {
                 username: username,
                 phonenumber: phonenumber,
                 password: password,
+                questionnaires:[]
             }
         }
             break;
