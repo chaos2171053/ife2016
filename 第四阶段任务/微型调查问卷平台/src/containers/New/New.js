@@ -22,6 +22,11 @@ const mapDispatchToProps = dispatch => ({
 class New extends Component {
     static propTypes = {
         username: React.PropTypes.string.isRequired,
+        actions:React.PropTypes.shape({
+            userSignup:PropTypes.func.isRequired,
+            saveQuestionnaire:PropTypes.func.isRequired,
+            publishQuestionnaire:PropTypes.func.isRequired,
+        })
     }
     constructor(props) {
         super(props);
@@ -361,7 +366,8 @@ class New extends Component {
     }
 
     render() {
-        let qusetionsArray = this.renderQuestions();
+        // let qusetionsArray = this.renderQuestions();
+        // console.log(this.props)
         return (
             <div>
                 <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
