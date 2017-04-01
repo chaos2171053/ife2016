@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { NewComponents, Input } from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionType'
+import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
 import classNames from 'classnames'
 import { trim, swapArrayItems, cloneObject } from '../../utils/util'
 import * as Actions from '../../actions/questionnaires';
@@ -192,19 +192,18 @@ class New extends Component {
     //保存问卷
     handleSaveQuestionnaire() {
         const questionnaire = this.state;
-        const { saveQuestionnarie } = this.props.actions;
+        const { saveQuestionnaire } = this.props.actions;
         const username = this.props.username;
-        saveQuestionnarie(questionnaire, username);
+        saveQuestionnaire(questionnaire, username);
 
     }
 
     //发布问卷
     handlePublishQuestionnaire() {
         const questionnaire = this.state;
-        const { publishQuestionnarie } = this.props.actions;
+        const { publishQuestionnaire } = this.props.actions;
         const username = this.props.username;
-        debugger
-
+        publishQuestionnaire(questionnaire, username)
     }
 
     //校验问卷
@@ -219,11 +218,11 @@ class New extends Component {
                 msg: '还没有写问卷标题啊！'
             }
         }
-        if(questions.length === 0) {
+        if (questions.length === 0) {
             return {
                 bollean: false,
                 msg: '请至少设置一个问题~~'
-            } 
+            }
         }
         for (let i = 0, questionsLen = questions.length; i < questionsLen; i++) {
             let q = questions[i]
@@ -235,24 +234,26 @@ class New extends Component {
                     msg: `第${i + 1}题标题还没有写啊！`
                 }
             }
-            if (q.options.length < 2) {
-                return {
-                    bollean: false,
-                    msg: `第${i + 1}题至少要有2个选项！`
-                }
-            }
-            for (let j = 0, optionLen = q.options.length; j < optionLen; j++) {
-                let o = q.options[j]
-                if (o === null ||
-                    o === undefined ||
-                    o === '') {
+            if (q.type !== TEXT) {
+                if (q.options.length < 2) {
                     return {
                         bollean: false,
-                        msg: `第${i + 1}题第${j+1}个选项标题还没有写啊！`
+                        msg: `第${i + 1}题至少要有2个选项！`
                     }
                 }
-
+                for (let j = 0, optionLen = q.options.length; j < optionLen; j++) {
+                    let o = q.options[j]
+                    if (o === null ||
+                        o === undefined ||
+                        o === '') {
+                        return {
+                            bollean: false,
+                            msg: `第${i + 1}题第${j + 1}个选项标题还没有写啊！`
+                        }
+                    }
+                }
             }
+
         }
         if (questionnaire.deadline === 0) {
             return {
@@ -262,7 +263,7 @@ class New extends Component {
         }
         return {
             boolean: true,
-            deadline:questionnaire.deadline
+            deadline: questionnaire.deadline
         }
 
     }

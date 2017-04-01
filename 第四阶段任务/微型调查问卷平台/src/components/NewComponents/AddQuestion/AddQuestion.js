@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import QueueAnim from 'rc-queue-anim';
 import classNames from "classnames";
 import styles from './AddQuestion.scss'
-import { RADIO, CHECKBOX, TEXT } from "../../../constants/QuestionType";
-import * as types from '../../../constants/QuestionType'
+// import { RADIO, CHECKBOX, TEXT } from "../../../constants/QuestionTypes";
+import * as types from '../../../constants/QuestionTypes'
 class AddQuestion extends Component {
     constructor(props) {
         super(props)
@@ -13,9 +13,9 @@ class AddQuestion extends Component {
     }
 
     renderChooseQuestionType(addQuestion) {
-        const RADIO = 'RADIO',
-              CHECKBOX = 'CHECKBOX',
-              TEXT = 'TEXT'
+        // const RADIO = 'RADIO',
+        //       CHECKBOX = 'CHECKBOX',
+        //       TEXT = 'TEXT'
         if (this.state.show) {
             return (
                 <QueueAnim

@@ -1,5 +1,6 @@
 import * as types from '../constants/QuestionnairesActionsTypes'
-import { USER_SIGNUP, SAVE_QUESTIONNAIRE } from '../constants/QuestionnairesActionsTypes'
+import { USER_SIGNUP, SAVE_QUESTIONNAIRE, PUBLISH_QUESTIONNAIRE } from '../constants/QuestionnairesActionsTypes'
+import {UNRELEASED,RELEASED,CLOSED} from '../constants/QuestionTypes'
 import { userModel, questionnaireModel, questionModel } from '../data/data'
 import { v4 } from 'node-uuid';
 //需要本地存储的数据
@@ -66,11 +67,34 @@ const questionnaire = (state = {}, action) => {
             break;
         case SAVE_QUESTIONNAIRE: { //保存问卷
             const { questionnaire } = action.payload
+            questionnaire.status = UNRELEASED;
+            if (questionnaire.id === -1) { //如果问卷之前没有创建过，
+                questionnaire.id = v4() //赋予一个独一的id              
+                state.questionnaires.push(questionnaire);
+            } else { //编辑之前保存的问卷
+                state.questionnaires.forEach((q,index)=>{
+                    if(q.id === questionnaire.id){
+                        state.questionnaires.splice(index,1,questionnaire);
+                    }
+                })
+            }
+            return state
+        }
+            break;
+        case PUBLISH_QUESTIONNAIRE: { // 发布问卷
+            const { questionnaire } = action.payload
+            questionnaire.status =RELEASED;
             if (questionnaire.id === -1) { //如果问卷之前没有创建过，
                 questionnaire.id = v4() //赋予一个独一的id
                 state.questionnaires.push(questionnaire)
+            } else { //发布之前保存的问卷
+                state.questionnaires.forEach((q,index)=>{
+                    if(q.id === questionnaire.id ){
+                        state.questionnaires.splice(index,1,questionnaire);
+                    }
+                })
             }
-            return state
+            return state;
         }
             break;
         default:
@@ -90,6 +114,17 @@ const questionnaires = (state = dataBase, action) => {
         }
             break;
         case SAVE_QUESTIONNAIRE: { //保存问卷
+            const { username } = action.payload
+            state.map((user) => {
+                if (user.username === username) {
+                    questionnaire(user, action)
+                }
+            })
+            localStorage.dataBase = JSON.stringify(state);
+            return state
+        }
+            break;
+        case PUBLISH_QUESTIONNAIRE: { //发布问卷
             const { username } = action.payload
             state.map((user) => {
                 if (user.username === username) {

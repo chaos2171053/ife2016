@@ -27,12 +27,12 @@ const Footer = withRouter(({ handleSetDeadLine,
     }
     const handlePublishQuestionnaireModal = () => {
         const result = validQuestionnaire()
-        debugger
         if (result.boolean === true) {
+            const time = new Date(result.deadline);
+            const [year, month, date] = [time.getFullYear(), time.getMonth() + 1, time.getDate()];
             Modal.confirm({
                 title: '提示',
-                // content: `是否发布问卷？`+ `${\n}` +`（此问卷的截止日期为${result.deadline}）`,
-                content: <div><p>是否发布问卷?</p> <p>(此问卷的截止日期为{result.deadline})</p></div>,
+                content: <div><p>是否发布问卷?</p> <p>{`（本问卷截止日期为${year}-${month}-${date}）`}</p></div>,
                 okText: '确定',
                 cancelText: '取消',
                 onOk() {
