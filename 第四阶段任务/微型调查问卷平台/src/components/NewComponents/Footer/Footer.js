@@ -6,9 +6,10 @@ import styles from './Footer.scss'
 import { Link, withRouter } from 'react-router-dom'
 moment.locale('zh-cn');
 const disabledDate = function (current) {
-    if (current !== undefined) {
-        return current.valueOf() + 86400000 < Date.now();
-    }
+    // if (current !== undefined) {
+    //     return current.valueOf() + 86400000 < Date.now();
+    // }
+    return  current  <= (new Date()).getTime()-1000*60*60*24;
 }
 const Footer = withRouter(({ handleSetDeadLine, 
     handleSaveQuestionnaire, history, handlePublishQuestionnaire,validQuestionnaire }) => {
