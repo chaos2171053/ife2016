@@ -23,5 +23,16 @@
       .status-released{
           color: #5cb85c;
       }
+      span {
+          cursor:pointer;
+          color: $blue;
+      }
+      div :nth-child(2) {
+          margin-left: .5rem;
+          @media screen and (max-width: $small-page-max-width){
+              margin-left: 0;
+              display: block;
+          }
+      }
   }
 }

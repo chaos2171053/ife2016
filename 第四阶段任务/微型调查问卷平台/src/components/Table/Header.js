@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import styles from './Table.scss'
+import { Link } from 'react-router-dom'
 const Header = ({columns})=>{
     let content = [];
     columns.map((value,index)=>{
@@ -9,10 +10,7 @@ const Header = ({columns})=>{
 					<span className={styles.desc}></span>
 					<span className={styles.asc}></span>
 				</th>);
-		    }else if(value.title === '操作') {
-                content.push(
-                    <th key = {index}><span>{value.title}</span> <button>新建问卷</button></th>);
-            }
+		    }
             else{
                 content.push(
                     <th key = {index}><span>{value.title}</span></th>);
