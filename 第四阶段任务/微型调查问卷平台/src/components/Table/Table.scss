@@ -1,5 +1,27 @@
 @import '../../styles/variables.scss';
-
 .table {
-    width: 100%;
+  width: 100%;
+  text-align: left;
+  border:.1rem solid $gray-light;
+  thead>tr>th {
+    font-size: 16px;
+    padding: 1rem;
+    line-height: 1.42857143;
+    border-bottom: .1rem solid $gray-light;
+  }
+  tbody tr td {
+    font-size: 14px;
+    padding: .8rem;
+    line-height: 1.42857143;
+    vertical-align: top;
+    border-top: 1px solid $gray-light;
+  }
+  tbody {
+      .status-closed{
+          color: #d9534f;
+      }
+      .status-released{
+          color: #5cb85c;
+      }
+  }
 }

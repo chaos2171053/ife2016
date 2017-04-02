@@ -1,9 +1,10 @@
 import React, { PropTypes } from 'react';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
-import { Modal, DatePicker } from 'antd';
+import { Modal, DatePicker,message } from 'antd';
 import styles from './Footer.scss'
 import { Link, withRouter } from 'react-router-dom'
+
 moment.locale('zh-cn');
 const disabledDate = function (current) {
     // if (current !== undefined) {
@@ -21,6 +22,7 @@ const Footer = withRouter(({ handleSetDeadLine,
             cancelText: '取消',
             onOk() {
                 handleSaveQuestionnaire();
+                message.success('保存成功');
                 history.push('/home')
             },
             onCancel() { },
@@ -38,6 +40,7 @@ const Footer = withRouter(({ handleSetDeadLine,
                 cancelText: '取消',
                 onOk() {
                     handlePublishQuestionnaire();
+                    message.success('发布成功');
                     history.push('/home')
                 },
                 onCancel() { },

@@ -21,7 +21,11 @@ export default class  Table extends Component {
         questionnaires.map ((q,index)=>{
             const time = new Date(q.deadline)
             const [year,month,day,hour,mintues] = [time.getFullYear(), time.getMonth() + 1, time.getDate(),time.getHours(),time.getMinutes()];
+            if(q.deadline === 0){
+                q.timeFormat = `未选择`
+            }else{
             q.timeFormat = `${year}-${month}-${day} ${hour}:${mintues}`
+            }
         })
         this.setState({questionnaires:questionnaires})
     }
