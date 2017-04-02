@@ -1,6 +1,8 @@
 import React, {Component,PropTypes} from 'react';
 import styles from './Table.scss'
 import {cloneObject} from '../../utils/util'
+import Header from './Header'
+import Body from './Body'
 export default class  Table extends Component {
     constructor(props){
         super(props)
@@ -8,6 +10,9 @@ export default class  Table extends Component {
         this.state = {
             questionnaires:questionnaires
         }
+    }
+    static propTypes = {
+        questionnairesArray:PropTypes.array.isRequired
     }
 
     //把时间戳处理成年-月-日
@@ -20,13 +25,32 @@ export default class  Table extends Component {
         })
         this.setState({questionnaires:questionnaires})
     }
-    static propTypes = {
-        questionnairesArray:PropTypes.array.isRequired
-    }
     render() {
-        console.log(this.props.questionnairesArray)
+        // console.log(this.state.questionnaires)
+        const columns = [{
+            title:'标题',
+            dataIndex: 'questionnairetitle', 
+			key:'title',
+        },{
+            title:'截止日期',
+            dataIndex:'deadline',
+            key:'deadline',
+            asc:(a,b) =>b.deadline-a.deadline,
+			desc:(a,b) =>a.deadline-b.deadline
+        },{
+            title:'状态',
+            dataIndex:'status',
+            key:'status'
+        },{
+            title:'操作',
+            dataIndex:'operate',
+            key:'operate'
+        },]
         return(
-            <div className = {styles.table}>table</div>
+            <table className = {styles.table}>
+                <Header columns = {columns}/>
+                <Body data = {this.state.questionnaires}/>
+            </table>
         )
     }
 

@@ -55,7 +55,12 @@ class Home extends Component {
             }
         })
         if (questionnairesArray.length !== 0) {
-            return <div> <Table questionnairesArray={questionnairesArray} /></div>
+            return (
+            <div className = {styles['questionnaires-list']}> 
+                <div className = {styles['list-header']}>问卷列表</div>
+                <Table 
+                    questionnairesArray={questionnairesArray} />
+            </div>)
         }
         return (
             <div>
