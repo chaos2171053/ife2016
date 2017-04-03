@@ -37,7 +37,6 @@ class MainLayout extends Component {
     }
     render() {
         const { actions: { signOut }, status: { isLogin } } = this.props;
-        // debugger
         if (!isLogin) {
             return <Redirect to='/' />
         }

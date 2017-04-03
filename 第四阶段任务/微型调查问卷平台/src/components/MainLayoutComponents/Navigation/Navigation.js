@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom'
+import React,{PropTypes} from 'react';
+import { Link} from 'react-router-dom'
 import styles from '../../../containers/MainLayout/MainLayout.scss'
 import classNames from "classnames";
 const Navigation = ({ signout }) => {
@@ -18,5 +18,8 @@ const Navigation = ({ signout }) => {
             </div >
         )
 
+}
+Navigation.proTypes = {
+    signout:PropTypes.func.isRequired
 }
 export default Navigation

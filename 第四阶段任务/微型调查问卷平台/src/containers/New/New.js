@@ -284,12 +284,12 @@ class New extends Component {
             }
 
         }
-        if (questionnaire.deadline === 0) {
-            return {
-                bollean: false,
-                msg: '请设置问卷截止日期(￣～￣) 嚼!'
-            }
-        }
+        // if (questionnaire.deadline === 0) {
+        //     return {
+        //         bollean: false,
+        //         msg: '请设置问卷截止日期(￣～￣) 嚼!'
+        //     }
+        // }
         if(questionnaire.deadline <=Date.now()){
             return {
                 bollean: false,
@@ -307,6 +307,7 @@ class New extends Component {
     render() {
         // let qusetionsArray = this.renderQuestions();
         // console.log(this.state)
+        // debugger
         return (
             <div>
                 <Header
