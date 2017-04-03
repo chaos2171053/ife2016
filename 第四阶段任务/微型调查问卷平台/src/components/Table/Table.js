@@ -6,14 +6,28 @@ import Body from './Body'
 export default class  Table extends Component {
     constructor(props){
         super(props)
-        let questionnaires = cloneObject(this.props.questionnairesArray)
+        let questionnaires = cloneObject(props.questionnairesArray)
         this.state = {
             questionnaires:questionnaires
         }
     }
     static propTypes = {
-        questionnairesArray:PropTypes.array.isRequired
+        username: PropTypes.string.isRequired,
+        questionnairesArray:PropTypes.array.isRequired,
+        deleteQuestionnaire:PropTypes.func.isRequired,
     }
+
+    // updateState(){
+    //     let questionnaires = cloneObject(this.props.questionnairesArray)
+    //     this.setState({questionnaires:questionnaires})
+    // }
+
+    // componentWillReceiveProps(nextProps) {
+    //     let questionnaires = cloneObject(nextProps)
+    //     this.setState({
+    //         text: nextProps.text
+    //     });
+    // }
 
     //把时间戳处理成年-月-日
     componentWillMount() {
@@ -30,7 +44,8 @@ export default class  Table extends Component {
         this.setState({questionnaires:questionnaires})
     }
     render() {
-        // console.log(this.state.questionnaires)
+        const {username,deleteQuestionnaire} = this.props;
+        // console.log(this.props.questionnairesArray)
         const columns = [{
             title:'标题',
             dataIndex: 'questionnairetitle', 
@@ -53,7 +68,10 @@ export default class  Table extends Component {
         return(
             <table className = {styles.table}>
                 <Header columns = {columns}/>
-                <Body data = {this.state.questionnaires}/>
+                <Body
+                    username = {username}
+                    deleteQuestionnaire = {deleteQuestionnaire}
+                    data = {this.state.questionnaires}/>
             </table>
         )
     }

@@ -7,13 +7,24 @@ import { Table } from '../../components'
 import { RELEASED } from '../../constants/QuestionTypes'
 import * as Actions from '../../actions/questionnaires';
 
-const mapStateToProps = state => ({
+// const mapStateToProps = state => ({
+//     username: state.rootReducer.status.username,
+//     userInfomations: state.rootReducer.questionnaires
+// })
+const mapStateToProps = state => {
+    return {
     username: state.rootReducer.status.username,
     userInfomations: state.rootReducer.questionnaires
-})
+}}
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
 })
+
+// const mapDispatchToProps = dispatch => ({
+//     actions: Object.assign({},
+//         bindActionCreators(Actions, dispatch)
+//     )
+// })
 @connect(mapStateToProps,mapDispatchToProps)
 
 class Home extends Component {
@@ -22,7 +33,10 @@ class Home extends Component {
     }
     static propTypes = {
         username: PropTypes.string.isRequired,
-        userInfomations: PropTypes.array.isRequired
+        userInfomations: PropTypes.array.isRequired,
+        actions: PropTypes.shape({
+        deleteQuestionnaire: PropTypes.func.isRequired,
+        }).isRequired
     }
 
     //关闭过期的问卷
@@ -48,6 +62,7 @@ class Home extends Component {
     }
     render() {
         const { username, userInfomations } = this.props;
+        debugger
         let questionnairesArray;
         userInfomations.map(user => {
             if (user.username === username) {
@@ -55,10 +70,13 @@ class Home extends Component {
             }
         })
         if (questionnairesArray.length !== 0) {
+            const {deleteQuestionnaire} = this.props.actions
             return (
             <div className = {styles['questionnaires-list']}> 
                 <div className = {styles['list-header']}>问卷列表</div>
-                <Table 
+                <Table
+                    username = {username}
+                    deleteQuestionnaire = {deleteQuestionnaire}
                     questionnairesArray={questionnairesArray} />
             </div>)
         }

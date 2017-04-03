@@ -15,8 +15,6 @@ const mapStateToProps = state => ({
     status: state.rootReducer.status,
     questionnaires: state.rootReducer.questionnaires,
 })
-
-
 const mapDispatchToProps = dispatch => ({
     actions: Object.assign({},
         bindActionCreators(StatusActions, dispatch),
