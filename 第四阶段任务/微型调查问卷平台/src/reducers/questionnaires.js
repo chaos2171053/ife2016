@@ -1,11 +1,12 @@
 import * as types from '../constants/QuestionnairesActionsTypes'
 import {
     USER_SIGNUP, SAVE_QUESTIONNAIRE,
-    PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE,DELETE_QUESTIONNAIRE
+    PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE, DELETE_QUESTIONNAIRE
 } from '../constants/QuestionnairesActionsTypes'
 import { UNRELEASED, RELEASED, CLOSED } from '../constants/QuestionTypes'
 import { userModel, questionnaireModel, questionModel } from '../data/data'
 import { v4 } from 'node-uuid';
+import { cloneObject } from '../utils/util'
 //需要本地存储的数据
 const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
     [
@@ -89,7 +90,7 @@ const questionnaire = (state = {}, action) => {
         }
             break
         //删除问卷
-        case DELETE_QUESTIONNAIRE:{
+        case DELETE_QUESTIONNAIRE: {
             const questionnaireId = action.payload.questionnaireId
             state.questionnaires.map((q, index) => {
                 if (q.id === questionnaireId) {
@@ -99,7 +100,7 @@ const questionnaire = (state = {}, action) => {
             return state
 
         }
-        return state
+            return state
         default:
             return state
     }
@@ -116,9 +117,9 @@ const questionnaires = (state = dataBase, action) => {
             return state
         }
             break;
-            
+
         //保存问卷
-        case SAVE_QUESTIONNAIRE: 
+        case SAVE_QUESTIONNAIRE:
         // { 
         //     const { username } = action.payload
         //     state.map((user) => {
@@ -130,8 +131,10 @@ const questionnaires = (state = dataBase, action) => {
         //     return state
         // }
         //     break;
+
+
         //发布问卷
-        case PUBLISH_QUESTIONNAIRE: 
+        case PUBLISH_QUESTIONNAIRE:
         // { 
         //     const { username } = action.payload
         //     state.map((user) => {
@@ -143,8 +146,9 @@ const questionnaires = (state = dataBase, action) => {
         //     return state
         // }
         //     break;
+
         //关闭问卷
-        case CLOSE_QUESTIONNAIRE: 
+        case CLOSE_QUESTIONNAIRE:
         // { 
         //     const { username } = action.payload
         //     state.map((user) => {
@@ -156,26 +160,34 @@ const questionnaires = (state = dataBase, action) => {
         //     return state;
         // }
         //     break;
+        // { 
+        //     const { username } = action.payload
+        //     debugger
+        //     let newState = cloneObject(state);
+        //     newState.map((user) => {
+        //         if (user.username === username) {
+        //             questionnaire(user, action)
+        //         }
+        //     })
+        //     localStorage.dataBase = JSON.stringify(newState);
+        //     return newState
+        // }
+        //     break;
+
         //删除问卷
         case DELETE_QUESTIONNAIRE:
-            const { username } = action.payload;
-            let newState;
-            //  state.map((user) => {
-            //     if (user.username === username) {
-            //         questionnaire(user, action)
-            //     }
-            // })
-            state.map((user) => {
-                if (user.username === username) {
-                    return newState = [
-                        ...state,
+            {
+                const { username } = action.payload
+                let newState = cloneObject(state);
+                newState.map((user) => {
+                    if (user.username === username) {
                         questionnaire(user, action)
-                    ]
-                }
-            })
-        localStorage.dataBase = JSON.stringify(newState);
-        return newState;
-        break;
+                    }
+                })
+                localStorage.dataBase = JSON.stringify(newState);
+                return newState
+            }
+            break;
         default:
             return state
     }

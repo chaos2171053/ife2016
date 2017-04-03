@@ -12,6 +12,7 @@ import * as Actions from '../../actions/questionnaires';
 //     userInfomations: state.rootReducer.questionnaires
 // })
 const mapStateToProps = state => {
+    debugger
     return {
     username: state.rootReducer.status.username,
     userInfomations: state.rootReducer.questionnaires
