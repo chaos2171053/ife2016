@@ -12,7 +12,6 @@ import * as Actions from '../../actions/questionnaires';
 //     userInfomations: state.rootReducer.questionnaires
 // })
 const mapStateToProps = state => {
-    debugger
     return {
     username: state.rootReducer.status.username,
     userInfomations: state.rootReducer.questionnaires
@@ -63,7 +62,6 @@ class Home extends Component {
     }
     render() {
         const { username, userInfomations } = this.props;
-        debugger
         let questionnairesArray;
         userInfomations.map(user => {
             if (user.username === username) {
