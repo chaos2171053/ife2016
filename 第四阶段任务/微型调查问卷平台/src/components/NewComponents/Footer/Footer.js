@@ -13,7 +13,7 @@ const disabledDate = function (current) {
     return  current  <= (new Date()).getTime()-1000*60*60*24;
 }
 const Footer = withRouter(({ handleSetDeadLine, 
-    handleSaveQuestionnaire, history, handlePublishQuestionnaire,validQuestionnaire }) => {
+    handleSaveQuestionnaire, history, handlePublishQuestionnaire,validQuestionnaire,deadline }) => {
     const handleSaveQuestionnaireModal = () => {
         Modal.confirm({
             title: '提示',
@@ -55,6 +55,8 @@ const Footer = withRouter(({ handleSetDeadLine,
         }
 
     }
+
+    const  deadlineValue = deadline === 0 ? moment(Date.now()): moment(deadline)
     return (
         <div className={styles.footer}>
             <div className={styles['datePicker-wrapper']}>
@@ -63,7 +65,7 @@ const Footer = withRouter(({ handleSetDeadLine,
                     showTime
                     format='YYYY-MM-DD HH:mm:ss'
                     allowClear={false}
-                    
+                    value ={deadlineValue}
                     onChange={handleSetDeadLine}
                     disabledDate={disabledDate}
                 />
@@ -77,6 +79,7 @@ const Footer = withRouter(({ handleSetDeadLine,
     )
 })
 Footer.propTypes = {
+    deadline:React.PropTypes.number.isRequired,
     history: React.PropTypes.object.isRequired,
     validQuestionnaire: React.PropTypes.func.isRequired,
     handlePublishQuestionnaire: React.PropTypes.func.isRequired,

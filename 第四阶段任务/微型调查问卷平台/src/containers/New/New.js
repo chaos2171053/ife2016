@@ -290,6 +290,12 @@ class New extends Component {
                 msg: '请设置问卷截止日期(￣～￣) 嚼!'
             }
         }
+        if(questionnaire.deadline <=Date.now()){
+            return {
+                bollean: false,
+                msg: '截止日期不能早于现在!'
+            }
+        }
         return {
             boolean: true,
             deadline: questionnaire.deadline
@@ -300,7 +306,7 @@ class New extends Component {
 
     render() {
         // let qusetionsArray = this.renderQuestions();
-        console.log(this.state)
+        // console.log(this.state)
         return (
             <div>
                 <Header
@@ -322,6 +328,7 @@ class New extends Component {
                 <hr className={styles.hr} />
                 </div>
                 <Footer
+                    deadline = {this.state.deadline}
                     history={this.props.history}
                     validQuestionnaire={::this.validQuestionnaire}
                     handlePublishQuestionnaire={::this.handlePublishQuestionnaire}
