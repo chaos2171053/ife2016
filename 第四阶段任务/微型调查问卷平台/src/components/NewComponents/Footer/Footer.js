@@ -63,7 +63,7 @@ const Footer = withRouter(({ handleSetDeadLine,
                     showTime
                     format='YYYY-MM-DD HH:mm:ss'
                     allowClear={false}
-                    onOk={handleSetDeadLine}
+                    
                     onChange={handleSetDeadLine}
                     disabledDate={disabledDate}
                 />

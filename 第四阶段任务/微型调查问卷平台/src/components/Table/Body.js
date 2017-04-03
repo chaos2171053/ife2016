@@ -3,6 +3,7 @@ import styles from './Table.scss'
 import classNames from 'classnames'
 import { CLOSED, RELEASED,UNRELEASED } from '../../constants/QuestionTypes'
 import { message } from 'antd';
+import { Link } from 'react-router-dom'
 const Body = ({data,username,deleteQuestionnaire})=>{
     const renderOperate = (value)=>{
         switch (value.status) {
@@ -24,7 +25,7 @@ const Body = ({data,username,deleteQuestionnaire})=>{
             case UNRELEASED:
                 return (
                     <div>
-                        <span>编辑</span>
+                        <Link to ={{pathname:'/new',questionnaire:value}}><span>编辑</span></Link>
                         <span onClick = {()=>{
                             deleteQuestionnaire(username,value.id)
                             message.success('删除成功');}

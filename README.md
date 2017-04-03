@@ -1123,3 +1123,20 @@ const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history
 
 ####15.18 css行高line-height的用法
 -[css行高line-height的用法](http://www.studyofnet.com/news/273.html)
+
+####15.19 删除问卷时表格不同步渲染问卷数量，每次添加新的问卷创建新的用户副本和问卷副本
+原因：
+1、在reducers里，我没有每次返回一个新的state，我直接修改state返回了，导致没有获取新的state。
+2、在表格组件里，我把问卷数量信息作为表格组件的state独自维护，在接受到新的props时，没有触发更新。
+解决方法：
+1、在reducers里，删除问卷时返回新的state，使用深度克隆。
+2、在表格组组件里，使用
+`
+componentWillReceiveProps(nextProps) {
+       let questionnaires = this.handleFormatDeadline(cloneObject(nextProps.questionnairesArray))
+       this.setState({ questionnaires: questionnaires })
+    }
+ `   
+ 在表格组件实例存在的生命周期，接受新的props，更新其state，触发render，更新问卷列表。
+
+ -[React组件生命周期过程说明](http://react-china.org/t/react/1740)

@@ -26,7 +26,10 @@ class New extends Component {
             userSignup: PropTypes.func.isRequired,
             saveQuestionnaire: PropTypes.func.isRequired,
             publishQuestionnaire: PropTypes.func.isRequired,
-        })
+        }),
+        location:PropTypes.shape({
+            questionnaire:PropTypes.object,
+        }),
     }
     constructor(props) {
         super(props);
@@ -36,6 +39,20 @@ class New extends Component {
             deadline: 0,
             status: '',
             questions: []
+        }
+    }
+    componentWillMount() {
+        if(this.props.location.questionnaire){
+            const {questionnaire}= this.props.location
+            let cloneObj = cloneObject(questionnaire)
+            this.state = {
+                id: cloneObj.id,
+                questionnarireTitle: cloneObj.questionnarireTitle,
+                deadline: cloneObj.deadline,
+                status: cloneObj.status,
+                questions: cloneObj.questions
+            }
+
         }
     }
 
@@ -279,105 +296,16 @@ class New extends Component {
         }
 
     }
-    // renderQuestions() { //渲染题目
-    //     // let qusetionsArray = [];
-    //     const { questions } = this.state;
-    //     const last = questions.length - 1
-    //     return (
-    //         questions.map((question, questionIndex) =>
-    //             <div className={styles['question-wrapper']} key={questionIndex}>
-    //                 <div className={styles['question-title-wrapper']}>
-    //                     <span>{`Q${questionIndex + 1} (${question.type})`}</span>
-    //                     <Input
-    //                         value={question.questionTitle}
-    //                         placeholder={`请填写标题`}
-    //                         handleEditText={(event) => this.handleEditQuetion(event, questionIndex)} />
-    //                 </div>
-    //                 <div>
-    //                     {question.type !== TEXT ? (
-    //                         <div>
-    //                             {question.options.map((option, optionIndex) => {
-    //                                 return (
-    //                                     <div className={styles['options-wrapper']} key={optionIndex}>
-    //                                         <span className={classNames({
-    //                                             [styles['radio-option-icon']]: question.type === RADIO,
-    //                                             [styles['checkbox-option-icon']]: question.type === CHECKBOX
-    //                                         })} />
-    //                                         <Input
-    //                                             value={question.options[optionIndex]}
-    //                                             placeholder={`选项${optionIndex + 1}`}
-    //                                             handleEditText={(event) => this.handleEditOption(event, questionIndex, optionIndex)}
-    //                                         />
-    //                                         <span
-    //                                             className={styles['remove-option-btn']}
-    //                                             onClick={() => { this.handleRemoveOption(questionIndex, optionIndex) }}
-    //                                         />
-    //                                     </div>
-    //                                 )
-    //                             })}
-    //                             <div className={styles['add-option-btn']}
-    //                                 onClick={() => { this.handleAddOption(questionIndex) }} />
-    //                         </div>
-    //                     ) : (
-    //                             <div>
-    //                                 <textarea
-    //                                     value={question.content}
-    //                                     className={styles.text}
-    //                                     onChange={(event) => this.handleEditTextQuestion(event, questionIndex)}
-    //                                 />
-    //                                 <div
-    //                                     className={classNames({
-    //                                         [styles.required]: !question.isRequired,
-    //                                         [styles['not-required']]: question.isRequired
-    //                                     })}
-    //                                     onClick={() => this.handleToggleRequirement(questionIndex)}
-    //                                 >
-    //                                     <span>此题是否必填</span>
-    //                                 </div>
-    //                             </div>)}
-    //                     <div className={styles['operation-wraper']}>
-    //                         {
-    //                             questionIndex > 0 && (
-    //                                 <div
-    //                                     className={styles.operation}
-    //                                     onClick={() => this.handleChangeQuestionIndex(questionIndex, '上移')}>
-    //                                     <span>上移</span>
-    //                                 </div>
-    //                             )
-    //                         }
-    //                         {
-    //                             questionIndex < last && (
-    //                                 <div
-    //                                     className={styles.operation}
-    //                                     onClick={() => this.handleChangeQuestionIndex(questionIndex, '下移')}
-    //                                 >
-    //                                     <span>下移</span>
-    //                                 </div>
-    //                             )
-    //                         }
-    //                         <div
-    //                             className={styles.operation}
-    //                             onClick={() => this.handleChangeQuestionIndex(questionIndex, '删除')}>
-    //                             <span>删除</span>
-    //                         </div>
-    //                         <div
-    //                             className={styles.operation}
-    //                             onClick={() => this.handleChangeQuestionIndex(questionIndex, '复用')}>
-    //                             <span>复用</span>
-    //                         </div>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         )
-    //     )
-    // }
+   
 
     render() {
         // let qusetionsArray = this.renderQuestions();
-        // console.log(this.state)
+        console.log(this.state)
         return (
             <div>
-                <Header handleEditText={::this.handleEditQuestionnaireTitle}/>
+                <Header
+                    questionnarireTitle = {this.state.questionnarireTitle} 
+                    handleEditText={::this.handleEditQuestionnaireTitle}/>
                 <div className={styles.main}>
                     <hr className={styles.hr} />
                     {/*{this.renderQuestions()}*/}
