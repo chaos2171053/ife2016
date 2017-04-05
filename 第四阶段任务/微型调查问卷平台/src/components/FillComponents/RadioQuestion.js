@@ -10,27 +10,36 @@ export default class RadioQuestion extends Component {
         }
     }
     static PropTypes = {
-        options: PropTypes.array.isRequired
+        options: PropTypes.array.isRequired,
+        handleRadio:PropTypes.func.isRequired,
+        questionIndex:PropTypes.number.isRequired,
     }
 
     onChange = (e) => {
-        // console.log('radio checked', e.target.value);
         this.setState({
             value: e.target.value,
         });
+        this.props.handleRadio(e.target.questionIndex,e.target.value);
     }
 
     render() {
-        const { options } = this.props;
+        const { options,questionIndex } = this.props;
         const optionsArray = [];
         const radioStyle = {
             display: 'block',
-            height: '2.3rem',
-            lineHeight: '2.3rem',
+            // height: '2.3rem',
+            // lineHeight: '2.3rem',
+            marginTop:'1rem',
         };
         options.map((option, optionIndex) => {
             optionsArray.push(
-                <Radio value={optionIndex} key={optionIndex} style={radioStyle}>{option}</Radio>
+                <Radio 
+                     value={optionIndex} 
+                     key={optionIndex} 
+                     style={radioStyle} 
+                     questionIndex = {questionIndex}>
+                     {option}
+                </Radio>
             )
         })
         return (

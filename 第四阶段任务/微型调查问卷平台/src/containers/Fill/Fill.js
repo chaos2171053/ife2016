@@ -17,7 +17,7 @@ export default class Fill extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fillData: []//存放填写的问卷数据
+            // fillData: []//存放填写的问卷数据
         }
     }
     static propTypes = {
@@ -26,7 +26,24 @@ export default class Fill extends Component {
         }),
 
     }
+    
+    componentWillMount() {
+        const { questionnaire:{questions} } = this.props.location;
+        let fillData = new Array(questions.length)
+        this.setState({
+            fillData:fillData
+        })
+    }
 
+    //处理单选题
+    handleRadio(questionIndex,optionIndex){
+        let fillData = this.state.fillData;
+        fillData[questionIndex] = [optionIndex]; // 把选择的选项索引放入数组中
+        this.setState({
+            fillData:fillData
+        })
+        console.log(this.state.fillData)
+    }
     render() {
         const { questionnaire } = this.props.location;
         const {questions} = questionnaire;
@@ -39,6 +56,7 @@ export default class Fill extends Component {
                 <div className = {styles['questions-wrapper']}>
                 <Main
                     questions={questions}
+                    handleRadio = {::this.handleRadio}
                 />
                </div>
             </div>

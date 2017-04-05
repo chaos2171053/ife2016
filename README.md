@@ -1140,3 +1140,6 @@ componentWillReceiveProps(nextProps) {
  在表格组件实例存在的生命周期，接受新的props，更新其state，触发render，更新问卷列表。
 
  -[React组件生命周期过程说明](http://react-china.org/t/react/1740)
+
+ ####15.20 span内容自动换行
+ -[span 文本内容超过宽度自动换行](http://blog.csdn.net/qingyun0719/article/details/5629981)

@@ -3,14 +3,16 @@ import styles from '../../containers/Fill/Fill.scss'
 import QuestionTitle from './QuestionTitle'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
 import RadioQuestion from './RadioQuestion'
-const Main = ({questions}) => {
+const Main = ({questions,handleRadio}) => {
     // console.log(questions)
-    const renderQuestionType=(question) => {
+    const renderQuestionType=(question,questionIndex) => {
         switch(question.type){
             case RADIO :{
                 return (
                     <RadioQuestion
+                        questionIndex = {questionIndex}
                         options = {question.options}
+                        handleRadio = {handleRadio}
                     ></RadioQuestion>
                     )
             }
@@ -27,7 +29,7 @@ const Main = ({questions}) => {
                     questionType = {question.type} 
                     questionTitle = {question.questionTitle}/>
                  <div className ={styles['options-wrapper']}>
-                 {renderQuestionType(question)}
+                 {renderQuestionType(question,questionIndex)}
                  </div>
             </div>
 
@@ -38,5 +40,6 @@ const Main = ({questions}) => {
 }
 Main.propTypes = {
     questions:PropTypes.array.isRequired,
+    handleRadio:PropTypes.func.isRequired,
 }
 export default Main
