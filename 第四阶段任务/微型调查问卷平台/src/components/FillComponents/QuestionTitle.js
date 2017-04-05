@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 const QuestionTitle =({questionIndex,questionTitle,questionType})=>{
     return(
-        <h2>{`Q${questionIndex + 1} (${questionType}) ${questionTitle}`}</h2>
+        <h2>{`Q${questionIndex + 1} (${questionType})${questionTitle}`}</h2>
     )
 }
 QuestionTitle.propTypes = {

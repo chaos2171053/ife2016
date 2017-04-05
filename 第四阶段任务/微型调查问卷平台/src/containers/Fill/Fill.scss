@@ -13,5 +13,12 @@
     }
     .questions-wrapper{
         @extend .main;
+        .question-wrapper{
+            padding: 1.2rem;
+            .options-wrapper{
+                margin-top: .6rem;
+                padding-left: 2rem;
+            }
+        }
     }
 }
