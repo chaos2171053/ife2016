@@ -20,7 +20,7 @@ const Body = ({data,username,deleteQuestionnaire})=>{
             case RELEASED:
                 return (
                     <div>
-                        <span>填写</span>
+                        <Link to = {{pathname:'/fill',questionnaire:value}}><span>填写</span></Link>
                         <span>统计</span>
                     </div>)
             case UNRELEASED:

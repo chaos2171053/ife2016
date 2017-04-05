@@ -62,6 +62,7 @@ const Footer = withRouter(({ handleSetDeadLine,
             <div className={styles['datePicker-wrapper']}>
                 <span className={styles.deadline}>问卷截止日期:</span>
                 <DatePicker
+                    placeholder = '请选择时间'
                     showTime
                     format='YYYY-MM-DD HH:mm:ss'
                     allowClear={false}

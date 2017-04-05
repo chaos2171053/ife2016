@@ -1,0 +1,17 @@
+@import '../../styles/variables.scss';
+
+.main {
+    width: 93.5%;
+    margin: 0 auto;
+    .hr {
+        width: 93.5%;
+        margin: 1rem auto;
+        border-top: 2px solid $gray-light;
+    }
+    .header{
+        text-align: center;
+    }
+    .questions-wrapper{
+        @extend .main;
+    }
+}
