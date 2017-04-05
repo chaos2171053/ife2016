@@ -24,7 +24,7 @@ export default class RadioQuestion extends Component {
 
     render() {
         const { options,questionIndex } = this.props;
-        const optionsArray = [];
+        let optionsArray = [];
         const radioStyle = {
             display: 'block',
             // height: '2.3rem',

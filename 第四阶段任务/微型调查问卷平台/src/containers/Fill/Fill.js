@@ -42,7 +42,17 @@ export default class Fill extends Component {
         this.setState({
             fillData:fillData
         })
-        console.log(this.state.fillData)
+        // console.log(this.state.fillData)
+    }
+
+    //处理多选题
+    handleCheckBox(questionIndex,optionIndexArray) {
+        let fillData = this.state.fillData;
+        fillData[questionIndex] = optionIndexArray;
+        this.setState({
+            fillData:fillData
+        })
+        // console.log(this.state.fillData)
     }
     render() {
         const { questionnaire } = this.props.location;
@@ -57,6 +67,7 @@ export default class Fill extends Component {
                 <Main
                     questions={questions}
                     handleRadio = {::this.handleRadio}
+                    handleCheckBox ={::this.handleCheckBox}
                 />
                </div>
             </div>
