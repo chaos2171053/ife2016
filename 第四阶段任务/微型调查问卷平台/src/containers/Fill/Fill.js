@@ -4,16 +4,20 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { FillComponents } from '../../components'
 import { trim } from '../../utils/util'
+import { Link, withRouter } from 'react-router-dom'
+import { Modal, message } from 'antd';
+import * as Actions from '../../actions/questionnaires';
 const { Main } = FillComponents
-// const mapStateToProps = state => ({
-//     username: state.rootReducer.status.username,
-// })
 
-// const mapDispatchToProps = dispatch => ({
-//     actions: bindActionCreators(Actions, dispatch)
-// })
+const mapStateToProps = state => ({
+    username: state.rootReducer.status.username,
+})
 
-// @connect(mapDispatchToProps)
+const mapDispatchToProps = dispatch => ({
+    actions: bindActionCreators(Actions, dispatch)
+})
+
+@connect(mapStateToProps,mapDispatchToProps)
 export default class Fill extends Component {
     constructor(props) {
         super(props);
@@ -31,6 +35,7 @@ export default class Fill extends Component {
     componentWillMount() {
         const { questionnaire: { questions } } = this.props.location;
         let fillData = new Array(questions.length)
+        fillData.fill(['defaultValue']);
         this.setState({
             fillData: fillData
         })
@@ -64,9 +69,27 @@ export default class Fill extends Component {
             fillData: fillData
         })
     }
+
+    //处理提交问卷
+    handleSubmitQuestionnnaire(username,id) {
+        const fillData = this.state.fillData;
+        const {submitQuestionnaire} =this.props.actions;
+        const history = this.props.history
+        const result = fillData.some((question) => {
+            return question.some(value => value === 'defaultValue')
+        })
+        if (result) {
+            message.error('请把问卷填写完整！');
+        } else {
+            submitQuestionnaire(username,id,fillData);
+            history.push('/home');
+            message.success('提交成功O(∩_∩)O');
+        }
+    }
     render() {
         const { questionnaire } = this.props.location;
-        const { questions } = questionnaire;
+        const { questions,id } = questionnaire;
+        const username = this.props.username
         // console.log(this.state.fillData)
         return (
             <div className={styles.main}>
@@ -83,11 +106,13 @@ export default class Fill extends Component {
                 />
                 </div>
                 <hr className={styles.hr} />
-                <div className ={styles['footer-wrapper']}>
-                <button>提交问卷</button>
-                <button>返回</button>
-                </div>
+                <div className={styles['footer-wrapper']}>
+                    <button onClick={()=>this.handleSubmitQuestionnnaire(username,id)}>提交问卷</button>
+                <Link to='/home' className={styles.link}>
+                    <button>返回</button>
+                </Link>
             </div>
+            </div >
         )
     }
 }

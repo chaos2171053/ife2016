@@ -1,7 +1,7 @@
 import * as types from '../constants/QuestionnairesActionsTypes'
 import {
     USER_SIGNUP, SAVE_QUESTIONNAIRE,
-    PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE, DELETE_QUESTIONNAIRE
+    PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE, DELETE_QUESTIONNAIRE,SUBMIT_QUESTIONNAIRE
 } from '../constants/QuestionnairesActionsTypes'
 import { UNRELEASED, RELEASED, CLOSED } from '../constants/QuestionTypes'
 import { userModel, questionnaireModel, questionModel } from '../data/data'
@@ -101,6 +101,16 @@ const questionnaire = (state = {}, action) => {
 
         }
             return state
+        case SUBMIT_QUESTIONNAIRE: {
+            const questionnaireId = action.payload.questionnaireId;
+            const fillData = action.payload.fillData;
+            state.questionnaires.map((q, index) => {
+                if (q.id === questionnaireId) {
+                    state.questionnaires[index].fillData = fillData
+                }
+            })
+            return state
+        }
         default:
             return state
     }
@@ -120,59 +130,15 @@ const questionnaires = (state = dataBase, action) => {
 
         //保存问卷
         case SAVE_QUESTIONNAIRE:
-        // { 
-        //     const { username } = action.payload
-        //     state.map((user) => {
-        //         if (user.username === username) {
-        //             questionnaire(user, action)
-        //         }
-        //     })
-        //     localStorage.dataBase = JSON.stringify(state);
-        //     return state
-        // }
-        //     break;
-
 
         //发布问卷
         case PUBLISH_QUESTIONNAIRE:
-        // { 
-        //     const { username } = action.payload
-        //     state.map((user) => {
-        //         if (user.username === username) {
-        //             questionnaire(user, action)
-        //         }
-        //     })
-        //     localStorage.dataBase = JSON.stringify(state);
-        //     return state
-        // }
-        //     break;
 
         //关闭问卷
         case CLOSE_QUESTIONNAIRE:
-        // { 
-        //     const { username } = action.payload
-        //     state.map((user) => {
-        //         if (user.username === username) {
-        //             questionnaire(user, action)
-        //         }
-        //     })
-        //     localStorage.dataBase = JSON.stringify(state);
-        //     return state;
-        // }
-        //     break;
-        // { 
-        //     const { username } = action.payload
-        //     debugger
-        //     let newState = cloneObject(state);
-        //     newState.map((user) => {
-        //         if (user.username === username) {
-        //             questionnaire(user, action)
-        //         }
-        //     })
-        //     localStorage.dataBase = JSON.stringify(newState);
-        //     return newState
-        // }
-        //     break;
+
+        //提交问卷
+        case SUBMIT_QUESTIONNAIRE:
 
         //删除问卷
         case DELETE_QUESTIONNAIRE:
