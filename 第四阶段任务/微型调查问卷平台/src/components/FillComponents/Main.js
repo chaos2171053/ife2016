@@ -4,7 +4,9 @@ import QuestionTitle from './QuestionTitle'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
 import RadioQuestion from './RadioQuestion'
 import CheckBoxQuestion from './CheckBoxQuestion'
-const Main = ({ questions, handleRadio,handleCheckBox }) => {
+import TextQuestion from './TextQuestion'
+
+const Main = ({ questions, handleRadio, handleCheckBox,handleTextQuestion }) => {
     const renderQuestionType = (question, questionIndex) => {
         switch (question.type) {
             case RADIO: {
@@ -19,12 +21,22 @@ const Main = ({ questions, handleRadio,handleCheckBox }) => {
                 break;
             case CHECKBOX: {
                 return (
-                    <CheckBoxQuestion 
-                        questionIndex = {questionIndex}
-                        options = {question.options}
-                        handleCheckBox = {handleCheckBox}
-                        />
-                        
+                    <CheckBoxQuestion
+                        questionIndex={questionIndex}
+                        options={question.options}
+                        handleCheckBox={handleCheckBox}
+                    />
+
+                )
+            }
+                break;
+            case TEXT: {
+                return (
+                    <TextQuestion
+                        handleTextQuestion = {handleTextQuestion}
+                        questionIndex={questionIndex}
+                        isRequired = {question.isRequired}
+                    />
                 )
             }
             default:
@@ -37,6 +49,7 @@ const Main = ({ questions, handleRadio,handleCheckBox }) => {
             questions.map((question, questionIndex) =>
                 <div className={styles['question-wrapper']} key={questionIndex}>
                     <QuestionTitle
+                        questionContent = {question.content}
                         questionIndex={questionIndex}
                         questionType={question.type}
                         questionTitle={question.questionTitle} />
@@ -54,5 +67,6 @@ Main.propTypes = {
     questions: PropTypes.array.isRequired,
     handleRadio: PropTypes.func.isRequired,
     handleCheckBox: PropTypes.func.isRequired,
+    handleTextQuestion:PropTypes.func.isRequired
 }
 export default Main

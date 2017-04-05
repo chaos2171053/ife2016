@@ -21,6 +21,13 @@
                 span {
                     white-space:normal;
                 }
+                textarea {
+                    width: 90%;
+                    height: 8rem;
+                }
+                .is-required {
+                    color:$red;
+                }
             }
         }
     }

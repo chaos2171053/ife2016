@@ -3,6 +3,7 @@ import styles from './Fill.scss'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { FillComponents} from '../../components'
+import { trim} from '../../utils/util'
 const { Main} = FillComponents
 // const mapStateToProps = state => ({
 //     username: state.rootReducer.status.username,
@@ -54,9 +55,19 @@ export default class Fill extends Component {
         })
         // console.log(this.state.fillData)
     }
+
+    //处理文本题
+    handleTextQuestion(event,questionIndex){
+        let fillData = this.state.fillData;
+        fillData[questionIndex] = [trim(event.target.value)];
+        this.setState({
+            fillData:fillData
+        })
+    }
     render() {
         const { questionnaire } = this.props.location;
         const {questions} = questionnaire;
+        // console.log(this.state.fillData)
         return (
             <div className={styles.main}>
                 <div className = {styles.header}>
@@ -68,6 +79,7 @@ export default class Fill extends Component {
                     questions={questions}
                     handleRadio = {::this.handleRadio}
                     handleCheckBox ={::this.handleCheckBox}
+                    handleTextQuestion = {::this.handleTextQuestion}
                 />
                </div>
             </div>
