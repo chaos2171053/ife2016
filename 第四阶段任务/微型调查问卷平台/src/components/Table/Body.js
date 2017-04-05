@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import styles from './Table.scss'
 import classNames from 'classnames'
 import { CLOSED, RELEASED,UNRELEASED } from '../../constants/QuestionTypes'
-import { message } from 'antd';
+import { message,Popconfirm } from 'antd';
 import { Link } from 'react-router-dom'
 const Body = ({data,username,deleteQuestionnaire})=>{
     const renderOperate = (value)=>{
@@ -11,10 +11,11 @@ const Body = ({data,username,deleteQuestionnaire})=>{
                 return (
                     <div>
                         <span>统计</span>
-                        <span onClick = {()=>{
+                        <Popconfirm title="确定要删除该问卷吗？" onConfirm={()=>{
                             deleteQuestionnaire(username,value.id)
-                            message.success('删除成功');}
-                            }>删除</span>
+                            message.success('删除成功');}}  okText="确定" cancelText="取消">
+                        <span>删除</span>
+                        </Popconfirm>
                     </div>)
             case RELEASED:
                 return (
@@ -26,10 +27,11 @@ const Body = ({data,username,deleteQuestionnaire})=>{
                 return (
                     <div>
                         <Link to ={{pathname:'/new',questionnaire:value}}><span>编辑</span></Link>
-                        <span onClick = {()=>{
+                        <Popconfirm title="确定要删除该问卷吗？" onConfirm={()=>{
                             deleteQuestionnaire(username,value.id)
-                            message.success('删除成功');}
-                            }>删除</span>
+                            message.success('删除成功');}}  okText="确定" cancelText="取消">
+                        <span>删除</span>
+                        </Popconfirm>
                     </div>)
             default:
                 break;

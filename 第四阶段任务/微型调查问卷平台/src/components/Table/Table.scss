@@ -34,5 +34,10 @@
               display: block;
           }
       }
+      tr{
+          &:hover {
+              background-color: $gray-light
+          }
+      }
   }
 }
