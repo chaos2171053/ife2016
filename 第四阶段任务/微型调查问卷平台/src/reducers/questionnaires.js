@@ -101,12 +101,13 @@ const questionnaire = (state = {}, action) => {
 
         }
             return state
-        case SUBMIT_QUESTIONNAIRE: {
+        case SUBMIT_QUESTIONNAIRE: { // 提交问卷
             const questionnaireId = action.payload.questionnaireId;
             const fillData = action.payload.fillData;
             state.questionnaires.map((q, index) => {
                 if (q.id === questionnaireId) {
-                    state.questionnaires[index].fillData = fillData
+                    state.questionnaires[index].fillData.push(fillData);
+                    console.log(state.questionnaires[index])
                 }
             })
             return state

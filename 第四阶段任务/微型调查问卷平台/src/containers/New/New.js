@@ -38,7 +38,8 @@ class New extends Component {
             questionnarireTitle: '',
             deadline: 0,
             status: '',
-            questions: []
+            questions: [],
+            fillData:[],
         }
     }
     componentWillMount() {
@@ -50,7 +51,8 @@ class New extends Component {
                 questionnarireTitle: cloneObj.questionnarireTitle,
                 deadline: cloneObj.deadline,
                 status: cloneObj.status,
-                questions: cloneObj.questions
+                questions: cloneObj.questions,
+                fillData:cloneObj.fillData,
             }
 
         }

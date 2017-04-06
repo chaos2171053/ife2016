@@ -7,6 +7,7 @@ import { trim } from '../../utils/util'
 import { Link, withRouter } from 'react-router-dom'
 import { Modal, message } from 'antd';
 import * as Actions from '../../actions/questionnaires';
+import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
 const { Main } = FillComponents
 
 const mapStateToProps = state => ({
@@ -35,7 +36,7 @@ export default class Fill extends Component {
     componentWillMount() {
         const { questionnaire: { questions } } = this.props.location;
         let fillData = new Array(questions.length)
-        fillData.fill(['defaultValue']);
+        fillData.fill(['']);
         this.setState({
             fillData: fillData
         })
@@ -74,9 +75,19 @@ export default class Fill extends Component {
     handleSubmitQuestionnnaire(username,id) {
         const fillData = this.state.fillData;
         const {submitQuestionnaire} =this.props.actions;
-        const history = this.props.history
-        const result = fillData.some((question) => {
-            return question.some(value => value === 'defaultValue')
+        const history = this.props.history;
+        const { questionnaire:{questions} } = this.props.location;
+        const result = fillData.some((question,index) => {
+            if(questions[index].type !== TEXT){
+                return question.some(value => value === '')
+            }else {
+                if(questions[index].isRequired === true){
+                    return question.some(value => value === '')
+                }else {
+                    return false;
+                }
+            }
+            
         })
         if (result) {
             message.error('请把问卷填写完整！');
