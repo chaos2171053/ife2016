@@ -17,7 +17,7 @@ export default class Check extends Component {
     render() {
         const { questionnaire } = this.props.location;
         const { questions, fillData } = questionnaire;
-        console.log(questionnaire)
+        // console.log(questionnaire)
         return (
             <div className={styles.main}>
                 <div className={styles.header}>
