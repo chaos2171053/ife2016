@@ -4,9 +4,9 @@ import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes'
 import PieChart from '../PieChart/PieChart'
 const Main = ({ questions, fillData }) => {
     const renderQuestionType = (question, questionIndex) => {
+        const { options } = question;
         switch (question.type) {
             case RADIO: {
-                const { options } = question;
                 let dataPie = []
                 options.map((option, optionIndex) => {
                     let count = 0;
@@ -22,6 +22,7 @@ const Main = ({ questions, fillData }) => {
                 return (
                     <div>
                         <PieChart
+                            options={options}
                             dataPie={dataPie}
                             questionIndex={questionIndex}
                             questionTitle={question.questionTitle}
@@ -29,17 +30,31 @@ const Main = ({ questions, fillData }) => {
                     </div>
                 )
             }
-                break
+                break;
+            case CHECKBOX: {
+
+            }
+                break;
             default:
                 break;
         }
     }
-    // debugger 
     return (
         <div>
             {
                 questions.map((question, questionIndex) =>
                     <div className={styles['question-wrapper']} key={questionIndex}>
+                        <div className={styles['question-title']}>
+                            <div className={styles['title-wrapper']}>
+                                {
+                                    question.type !== TEXT? 
+                                    (<h2>{`Q${questionIndex + 1}  ${question.questionTitle}`}</h2>):
+                                    (<h2>{`Q${questionIndex + 1}  ${question.content}`}</h2>)
+                                }
+                                
+                            </div>
+                            <h3>{question.type}</h3>
+                        </div>
                         {renderQuestionType(question, questionIndex)}
                     </div>
                 )

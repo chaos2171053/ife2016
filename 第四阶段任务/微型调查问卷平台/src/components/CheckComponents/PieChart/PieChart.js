@@ -4,7 +4,7 @@ import React, { Component, PropTypes } from 'react';
 var echarts = require('echarts/lib/echarts') //必须
 require('echarts/lib/chart/pie') //图表类型
 require('echarts/lib/component/title') //标题插件
-// require('echarts/lib/component/legend');
+require('echarts/lib/component/legend');
 require('echarts/lib/component/tooltip');
 
 export default class PieChart extends Component {
@@ -18,8 +18,8 @@ export default class PieChart extends Component {
         data: PropTypes.shape({
             dataPie: React.PropTypes.array,
             questionIndex: React.PropTypes.number,
-            questionTitle:React.PropTypes.string,
-            questionType:React.PropTypes.string
+            questionTitle: React.PropTypes.string,
+            questionType: React.PropTypes.string
         }),
     }
 
@@ -35,7 +35,7 @@ export default class PieChart extends Component {
     render() {
         return (
             <div className="pie-react">
-                <div ref="pieReact" style={{ width: "100%", height: "300%" }}></div>
+                <div ref="pieReact" style={{ width: '100%', height: '250%', margin: '0 auto' }}></div>
             </div>
         )
     }
@@ -44,25 +44,25 @@ export default class PieChart extends Component {
     setPieOption(data) {
         return {
             title: {
-                text: `Q${data.questionIndex + 1} ${data.questionTitle}`,
-                subtext: data.questionType,
+                // text: `Q${data.questionIndex + 1} ${data.questionTitle}`,
+                subtext: '饼图',
                 x: 'center'
             },
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
             },
-            // legend: {
-            //     orient: 'vertical',
-            //     left: 'left',
-            //     data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
-            // },
+            legend: {
+                orient: 'horizontal',
+                bottom: 'bottom',
+                data: data.options,
+            },
             series: [
                 {
                     name: '选项',
                     type: 'pie',
                     radius: '55%',
-                    center: ['50%', '60%'],
+                    center: ['50%', '50%'],
                     data: data.dataPie,
                     itemStyle: {
                         emphasis: {
@@ -70,7 +70,23 @@ export default class PieChart extends Component {
                             shadowOffsetX: 0,
                             shadowColor: 'rgba(0, 0, 0, 0.5)'
                         }
-                    }
+                    },
+                    label: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: false
+                        }
+                    },
+                    lableLine: {
+                        normal: {
+                            show: false
+                        },
+                        emphasis: {
+                            show: false
+                        }
+                    },
                 }
             ]
         };
