@@ -32,45 +32,46 @@ const Main = ({ questions, fillData }) => {
                 break;
             case CHECKBOX: {
                 let barData = [];
-                options.map((option,optionIndex)=>{
+                options.map((option, optionIndex) => {
                     let count = 0;
-                    fillData.map((data,dataIndex)=>{
-                       data[questionIndex].map((choice,choiceIndex)=>{
-                           if(data[questionIndex][choiceIndex] === optionIndex){
-                               count ++;
-                           }
-                       })
+                    fillData.map((data, dataIndex) => {
+                        data[questionIndex].map((choice, choiceIndex) => {
+                            if (data[questionIndex][choiceIndex] === optionIndex) {
+                                count++;
+                            }
+                        })
                     })
                     barData.push(count);
                 })
-                return(
+                return (
                     <div>
-                    <BarChart
-                        options = {options}
-                        barData = {barData}
+                        <BarChart
+                            options={options}
+                            barData={barData}
                         />
                     </div>
                 )
             }
                 break;
-            case TEXT :{
+            case TEXT: {
                 let barData = 0;
                 // let result = 0;
                 let count = 0;
-                fillData.map((data,dataIndex)=>{
-                    if(data[questionIndex][0] !==''){
+                fillData.map((data, dataIndex) => {
+                    if (data[questionIndex][0] !== '') {
                         count++;
                     }
                 })
-                if((count !==0) && (fillData .length!==0)){
-                    barData = (count/fillData.length ) * 100
+                if ((count !== 0) && (fillData.length !== 0)) {
+                    const result = (count / fillData.length) * 100
+                    barData = result.toFixed(2)
                 }
                 // barData.push(result);
-                return(
+                return (
                     <div>
-                    <PictorialBar
-                        barData ={barData}
-                    />
+                        <PictorialBar
+                            barData={barData}
+                        />
                     </div>
                 )
             }
@@ -86,13 +87,17 @@ const Main = ({ questions, fillData }) => {
                         <div className={styles['question-title']}>
                             <div className={styles['title-wrapper']}>
                                 {
-                                    question.type !== TEXT? 
-                                    (<h2>{`Q${questionIndex + 1}  ${question.questionTitle}`}</h2>):
-                                    (<h2>{`Q${questionIndex + 1}  ${question.content}`}</h2>)
+                                    question.type !== TEXT ?
+                                        (<h2>{`Q${questionIndex + 1}  ${question.questionTitle}`}</h2>) :
+                                        ( <h2>{`Q${questionIndex + 1}  ${question.content}`}</h2>)
                                 }
-                                
+
                             </div>
-                            <h3>{question.type}</h3>
+                            {
+                                question.type !== TEXT ?(<h3>{`${question.type}`}</h3>):
+                                (<h3>{`${question.type} (有效回答占比)`}</h3>)
+                            }
+                            
                         </div>
                         {renderQuestionType(question, questionIndex)}
                     </div>

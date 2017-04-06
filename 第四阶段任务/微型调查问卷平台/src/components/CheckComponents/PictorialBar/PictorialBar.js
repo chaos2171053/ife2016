@@ -11,7 +11,7 @@ export default class PictorialBar extends Component {
     }
 
     static propTypes = {
-        barData: React.PropTypes.number.isRequired,
+        barData: React.PropTypes.string.isRequired,
         // barData:React.PropTypes.array.isRequired,
     }
     setPieOption(barData) {
@@ -22,10 +22,15 @@ export default class PictorialBar extends Component {
                 formatter: "{b} {c}"
             },
             grid: {
-                left: '15%',
-                top: '5%',
-                bottom: '0',
-                right: '0'
+                // left: '15%',
+                // top: '5%',
+                // bottom: '0',
+                // right: '0'
+            },
+            legend: {
+                orient: 'horizontal',
+                bottom: 'bottom',
+                data: ['123'],
             },
             xAxis: [
                 {
@@ -48,7 +53,7 @@ export default class PictorialBar extends Component {
             yAxis: [
                 {
                     type: 'category',
-                    data: ['有效问答比'],
+                    data: [''],
                     nameTextStyle: {
                         color: '#b7ce9e',
                         fontSize: '18px'
@@ -88,7 +93,6 @@ export default class PictorialBar extends Component {
     componentDidMount() {
         let myChart = echarts.init(this.refs.pictorialBar)
         let { barData } = this.props;
-        debugger
         let chartOptions = this.setPieOption(barData)
         myChart.setOption(chartOptions)
     }
