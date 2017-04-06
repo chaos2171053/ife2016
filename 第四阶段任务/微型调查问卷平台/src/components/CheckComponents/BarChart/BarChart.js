@@ -12,6 +12,7 @@ export default class PieChart extends Component {
 
     static propTypes = {
         options: React.PropTypes.array.isRequired,
+        barData:React.PropTypes.array.isRequired,
     }
     setPieOption(options, barData) {
         return {
@@ -47,7 +48,7 @@ export default class PieChart extends Component {
             ],
             series: [
                 {
-                    name: '选项',
+                    name: '人数',
                     type: 'bar',
                     // barWidth: '60%',
                     data: barData,
@@ -59,13 +60,13 @@ export default class PieChart extends Component {
     componentDidMount() {
         let myChart = echarts.init(this.refs.barChart)
         let { options, barData } = this.props;
-        let chartoptions = this.setPieOption(options, barData)
-        myChart.setOption(chartoptions)
+        let chartOptions = this.setPieOption(options, barData)
+        myChart.setOption(chartOptions)
     }
     render() {
         return (
             <div>
-                <div ref="barChart" style={{ width: '100%', height: '250%', margin: '0 auto' }}></div>
+                <div ref='barChart' style={{ width: '100%', height: '250%', margin: '0 auto' }}></div>
             </div>
         )
     }

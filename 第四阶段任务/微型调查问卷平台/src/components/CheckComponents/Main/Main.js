@@ -3,6 +3,7 @@ import styles from '../../../containers/Check/Check.scss';
 import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes';
 import PieChart from '../PieChart/PieChart';
 import BarChart from '../BarChart/BarChart';
+import PictorialBar from '../PictorialBar/PictorialBar';
 const Main = ({ questions, fillData }) => {
     const renderQuestionType = (question, questionIndex) => {
         const { options } = question;
@@ -52,6 +53,27 @@ const Main = ({ questions, fillData }) => {
                 )
             }
                 break;
+            case TEXT :{
+                let barData = 0;
+                // let result = 0;
+                let count = 0;
+                fillData.map((data,dataIndex)=>{
+                    if(data[questionIndex][0] !==''){
+                        count++;
+                    }
+                })
+                if((count !==0) && (fillData .length!==0)){
+                    barData = (count/fillData.length ) * 100
+                }
+                // barData.push(result);
+                return(
+                    <div>
+                    <PictorialBar
+                        barData ={barData}
+                    />
+                    </div>
+                )
+            }
             default:
                 break;
         }

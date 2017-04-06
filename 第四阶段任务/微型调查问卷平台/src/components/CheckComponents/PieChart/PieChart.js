@@ -57,7 +57,7 @@ export default class PieChart extends Component {
             },
             series: [
                 {
-                    name: '选项',
+                    name: '人数',
                     type: 'pie',
                     radius: '55%',
                     center: ['50%', '50%'],
