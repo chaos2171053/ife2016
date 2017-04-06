@@ -13,7 +13,7 @@ import { Switch } from 'react-router-dom'
 import rootReducer from './reducers/index'
 // import { App, Header, Home, Main, Edit, Login } from './containers/index';
 
-import { App, Login, MainLayout, Home, New,Fill } from './containers/index';
+import { App, Login, MainLayout, Home, New,Fill,Check } from './containers/index';
 
 
 const history = createHistory()
@@ -73,7 +73,8 @@ ReactDOM.render(
                     <MainLayout>
                         <Route exact path="/home" component={Home} />
                         <Route exact path="/new" component={New} />
-                        <Route exact path="/Fill" component={Fill} />
+                        <Route exact path="/fill" component={Fill} />
+                        <Route exact path="/check" component={Check} />
                     </MainLayout>
                 </Switch>
             </App>

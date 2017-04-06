@@ -4,4 +4,5 @@ import NewComponents from './NewComponents/index'
 import Input from './Input/Input'
 import Table from './Table/Table'
 import FillComponents from './FillComponents'
-export {LoginComponents,MainLayoutComponents,NewComponents,Input,Table,FillComponents}
+import CheckComponents from './CheckComponents/index'
+export {LoginComponents,MainLayoutComponents,NewComponents,Input,Table,FillComponents,CheckComponents}

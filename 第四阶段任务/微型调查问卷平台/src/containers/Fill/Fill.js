@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(Actions, dispatch)
 })
 
-@connect(mapStateToProps,mapDispatchToProps)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class Fill extends Component {
     constructor(props) {
         super(props);
@@ -72,34 +72,34 @@ export default class Fill extends Component {
     }
 
     //处理提交问卷
-    handleSubmitQuestionnnaire(username,id) {
+    handleSubmitQuestionnnaire(username, id) {
         const fillData = this.state.fillData;
-        const {submitQuestionnaire} =this.props.actions;
+        const { submitQuestionnaire } = this.props.actions;
         const history = this.props.history;
-        const { questionnaire:{questions} } = this.props.location;
-        const result = fillData.some((question,index) => {
-            if(questions[index].type !== TEXT){
+        const { questionnaire: { questions } } = this.props.location;
+        const result = fillData.some((question, index) => {
+            if (questions[index].type !== TEXT) {
                 return question.some(value => value === '')
-            }else {
-                if(questions[index].isRequired === true){
+            } else {
+                if (questions[index].isRequired === true) {
                     return question.some(value => value === '')
-                }else {
+                } else {
                     return false;
                 }
             }
-            
+
         })
         if (result) {
             message.error('请把问卷填写完整！');
         } else {
-            submitQuestionnaire(username,id,fillData);
+            submitQuestionnaire(username, id, fillData);
             history.push('/home');
             message.success('提交成功O(∩_∩)O');
         }
     }
     render() {
         const { questionnaire } = this.props.location;
-        const { questions,id } = questionnaire;
+        const { questions, id } = questionnaire;
         const username = this.props.username
         // console.log(this.state.fillData)
         return (
@@ -112,17 +112,17 @@ export default class Fill extends Component {
                     <Main
                         questions={questions}
                         handleRadio={::this.handleRadio}
-                    handleCheckBox ={::this.handleCheckBox}
-                    handleTextQuestion = {::this.handleTextQuestion}
+                        handleCheckBox ={::this.handleCheckBox}
+                        handleTextQuestion = {::this.handleTextQuestion}
                 />
                 </div>
                 <hr className={styles.hr} />
                 <div className={styles['footer-wrapper']}>
-                    <button onClick={()=>this.handleSubmitQuestionnnaire(username,id)}>提交问卷</button>
-                <Link to='/home' className={styles.link}>
-                    <button>返回</button>
-                </Link>
-            </div>
+                    <button onClick={() => this.handleSubmitQuestionnnaire(username, id)}>提交问卷</button>
+                    <Link to='/home' className={styles.link}>
+                        <button>返回</button>
+                    </Link>
+                </div>
             </div >
         )
     }

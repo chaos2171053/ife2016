@@ -10,7 +10,7 @@ const Body = ({data,username,deleteQuestionnaire})=>{
             case CLOSED:
                 return (
                     <div>
-                        <span>统计</span>
+                        <Link to = {{pathname:'/check',questionnaire:value}}><span>统计</span></Link>
                         <Popconfirm title="确定要删除该问卷吗？" onConfirm={()=>{
                             deleteQuestionnaire(username,value.id)
                             message.success('删除成功');}}  okText="确定" cancelText="取消">
@@ -21,7 +21,7 @@ const Body = ({data,username,deleteQuestionnaire})=>{
                 return (
                     <div>
                         <Link to = {{pathname:'/fill',questionnaire:value}}><span>填写</span></Link>
-                        <span>统计</span>
+                        <Link to = {{pathname:'/check',questionnaire:value}}><span>统计</span></Link>
                     </div>)
             case UNRELEASED:
                 return (

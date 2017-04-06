@@ -20,13 +20,17 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
         //         //     questionnaireTitle: '', // 该问卷的标题
         //         //     deadline: '', // 该问卷的截止日期
         //         //     status: '', // 问卷的状态
+        //         //     fillData:[ //存放用户填写问卷的数据
+        //         //     [[问题1选择或填写的内容]],[问题2选择或填写的内容]],//填写的第一份问卷
+        //         //      [第二次填写的问卷...],[第三次],[..]....
+        //         //     ] //
         //         //     questions: [ // 问题数组 
         //         //         {
         //         //             type: '', // 问题类型
         //         //             questionTitle: '', // 问题标题
         //         //             options: [], // 问题选项
-        //         //             isRequired: false, // 是否必填 默认不必填
-        //         //             content: '', // 文本题 
+        //         //             isRequired: true, // 是否必填 默认必填
+        //         //             content: '', // 文本题题目
         //         //         },
         //         //     ]
 
@@ -34,7 +38,7 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
         //     ]
         // },
     ];
-
+//每个用户表
 const questionnaire = (state = {}, action) => {
     switch (action.type) {
         case USER_SIGNUP: { //用户注册
