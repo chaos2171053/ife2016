@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react'
-import styles from '../../../containers/Check/Check.scss'
-import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes'
-import PieChart from '../PieChart/PieChart'
+import React, { PropTypes } from 'react';
+import styles from '../../../containers/Check/Check.scss';
+import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes';
+import PieChart from '../PieChart/PieChart';
+import BarChart from '../BarChart/BarChart';
 const Main = ({ questions, fillData }) => {
     const renderQuestionType = (question, questionIndex) => {
         const { options } = question;
         switch (question.type) {
             case RADIO: {
-                let dataPie = []
+                let pieData = []
                 options.map((option, optionIndex) => {
                     let count = 0;
                     fillData.map((data, dataIndex) => {
@@ -15,7 +16,7 @@ const Main = ({ questions, fillData }) => {
                             count++;
                         }
                     })
-                    dataPie.push({
+                    pieData.push({
                         value: count, name: option
                     })
                 })
@@ -23,16 +24,32 @@ const Main = ({ questions, fillData }) => {
                     <div>
                         <PieChart
                             options={options}
-                            dataPie={dataPie}
-                            questionIndex={questionIndex}
-                            questionTitle={question.questionTitle}
-                            questionType={question.type} />
+                            pieData={pieData} />
                     </div>
                 )
             }
                 break;
             case CHECKBOX: {
-
+                let barData = [];
+                options.map((option,optionIndex)=>{
+                    let count = 0;
+                    fillData.map((data,dataIndex)=>{
+                       data[questionIndex].map((choice,choiceIndex)=>{
+                           if(data[questionIndex][choiceIndex] === optionIndex){
+                               count ++;
+                           }
+                       })
+                    })
+                    barData.push(count);
+                })
+                return(
+                    <div>
+                    <BarChart
+                        options = {options}
+                        barData = {barData}
+                        />
+                    </div>
+                )
             }
                 break;
             default:

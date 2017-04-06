@@ -8,19 +8,17 @@ require('echarts/lib/component/legend');
 require('echarts/lib/component/tooltip');
 
 export default class PieChart extends Component {
-
     constructor(props) {
         super(props);
         this.setPieOption = this.setPieOption.bind(this);
     }
 
     static propTypes = {
-        data: PropTypes.shape({
-            dataPie: React.PropTypes.array,
-            questionIndex: React.PropTypes.number,
-            questionTitle: React.PropTypes.string,
-            questionType: React.PropTypes.string
-        }),
+            pieData: React.PropTypes.array.isRequired,
+            options: React.PropTypes.array.isRequired,
+            // questionIndex: React.PropTypes.number,
+            // questionTitle: React.PropTypes.string,
+            // questionType: React.PropTypes.string
     }
 
     componentDidMount() {
@@ -34,7 +32,7 @@ export default class PieChart extends Component {
 
     render() {
         return (
-            <div className="pie-react">
+            <div>
                 <div ref="pieReact" style={{ width: '100%', height: '250%', margin: '0 auto' }}></div>
             </div>
         )
@@ -43,11 +41,11 @@ export default class PieChart extends Component {
     //一个基本的echarts图表配置函数
     setPieOption(data) {
         return {
-            title: {
-                // text: `Q${data.questionIndex + 1} ${data.questionTitle}`,
-                subtext: '饼图',
-                x: 'center'
-            },
+            // title: {
+            //     // text: `Q${data.questionIndex + 1} ${data.questionTitle}`,
+            //     subtext: '饼图',
+            //     x: 'center'
+            // },
             tooltip: {
                 trigger: 'item',
                 formatter: "{a} <br/>{b} : {c} ({d}%)"
@@ -63,7 +61,7 @@ export default class PieChart extends Component {
                     type: 'pie',
                     radius: '55%',
                     center: ['50%', '50%'],
-                    data: data.dataPie,
+                    data: data.pieData,
                     itemStyle: {
                         emphasis: {
                             shadowBlur: 10,
