@@ -6,6 +6,8 @@ import { connect } from 'react-redux'
 import * as Actions from '../../actions/status';
 import { Redirect } from 'react-router-dom';
 import styles from './MainLayout.scss';
+import { Layout } from 'antd';
+const { Footer } = Layout;
 
 const { Navigation } = MainLayoutComponents
 const mapStateToProps = state => ({
@@ -44,11 +46,16 @@ class MainLayout extends Component {
             <div>
                 <Navigation signout={::this.signout}/>
                 <div className={styles['content-wrapper']}>
-                    <div className = {styles.wrapper}>
+                    <div className={styles.wrapper}>
                         <div className={styles.jumbotron}>
                             {this.props.children}
                         </div>
                     </div>
+                </div>
+                <div className={styles.footer}>
+                    <Footer style={{ textAlign: 'center' }}>
+                        走，去撸串？ ©2017 Created by Chaos
+                    </Footer>
                 </div>
             </div>
         )

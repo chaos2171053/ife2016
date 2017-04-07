@@ -38,6 +38,7 @@
             outline: 0;
             border: none;
             display: inline-block;
+            width: 90%;
             &:focus {
                 background-color: $white;
             }
@@ -66,15 +67,17 @@
         .question-title-wrapper {
             margin-top: 1rem;
             font-size: 120%;
+            width: 85%;
             input {
                 margin-left: 1rem;
                 line-height: 2rem;
                 @media screen and (max-width: $small-page-max-width) {
                     margin-left: .5rem;
+                    width: 50%;
                 }
-                &:focus {
-                    width: 30%;
-                }
+                // &:focus {
+                //     // width: 30%;
+                // }
             }
         }
         .options-wrapper {
@@ -83,8 +86,9 @@
             input {
                 line-height: 1.8rem;
                 font-size: 110%;
-                &:focus {
-                    width: 20%;
+
+                @media screen and (max-width: $small-page-max-width) {
+                    width: 60%;
                 }
             }
             .radio-option-icon::before {
