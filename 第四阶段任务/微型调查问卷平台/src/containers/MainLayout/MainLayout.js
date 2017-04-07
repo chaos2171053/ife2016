@@ -52,11 +52,6 @@ class MainLayout extends Component {
                         </div>
                     </div>
                 </div>
-                <div className={styles.footer}>
-                    <Footer style={{ textAlign: 'center' }}>
-                        走，去撸串？ ©2017 Created by Chaos
-                    </Footer>
-                </div>
             </div>
         )
     }

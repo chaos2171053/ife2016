@@ -59,3 +59,26 @@
          
 
 }
+
+.enter {
+        height: 0;
+        transform: scale3d(1, 0, 1);
+        opacity: 0;
+        transition: height $edit-transition-timeout, transform $edit-transition-timeout, opacity $edit-transition-timeout;
+    }
+    .enter.enterActive {
+        height: 5em;
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+    }
+    .leave {
+        height: 5em;
+        transform: scale3d(1, 1, 1);
+        opacity: 1;
+        transition: height $edit-transition-timeout, transform $edit-transition-timeout, opacity $edit-transition-timeout;
+    }
+    .leave.leaveActive {
+        height: 0;
+        transform: scale3d(1, 0, 1);
+        opacity: 0;
+    }

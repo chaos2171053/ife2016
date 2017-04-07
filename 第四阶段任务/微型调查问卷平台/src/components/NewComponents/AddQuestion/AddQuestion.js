@@ -3,6 +3,7 @@ import QueueAnim from 'rc-queue-anim';
 import classNames from "classnames";
 import styles from './AddQuestion.scss'
 // import { RADIO, CHECKBOX, TEXT } from "../../../constants/QuestionTypes";
+import ReactCSSTransitionGroup from "react-addons-css-transition-group";
 import * as types from '../../../constants/QuestionTypes'
 class AddQuestion extends Component {
     constructor(props) {
@@ -18,15 +19,20 @@ class AddQuestion extends Component {
         //       TEXT = 'TEXT'
         if (this.state.show) {
             return (
-                <QueueAnim
-                    type={['bottom', 'top']}
-                    ease={['easeOutQuart', 'easeInOutQuart']}>
-                    <div className={styles['type-wrapper']} key='type-wrapper'>
-                        <div className={classNames(styles.type, styles.radio)} onClick = {()=>{addQuestion(types.RADIO)}}>单选</div>
-                        <div className={classNames(styles.type, styles.checkbox)} onClick = {()=>addQuestion(types.CHECKBOX)}>多选</div>
-                        <div className={classNames(styles.type, styles.text)} onClick = {()=>addQuestion(types.TEXT)}>文本</div>
-                    </div>
-                </QueueAnim>)
+                // <QueueAnim
+                //     type={['bottom', 'top']}
+                //     ease={['easeOutQuart', 'easeInOutQuart']}>
+                //     <div className={styles['type-wrapper']} key='type-wrapper'>
+                //         <div className={classNames(styles.type, styles.radio)} onClick = {()=>{addQuestion(types.RADIO)}}>单选</div>
+                //         <div className={classNames(styles.type, styles.checkbox)} onClick = {()=>addQuestion(types.CHECKBOX)}>多选</div>
+                //         <div className={classNames(styles.type, styles.text)} onClick = {()=>addQuestion(types.TEXT)}>文本</div>
+                //     </div>
+                // </QueueAnim>)
+                <div className={styles['type-wrapper']} key='type-wrapper'>
+                    <div className={classNames(styles.type, styles.radio)} onClick={() => { addQuestion(types.RADIO) }}>单选</div>
+                    <div className={classNames(styles.type, styles.checkbox)} onClick={() => addQuestion(types.CHECKBOX)}>多选</div>
+                    <div className={classNames(styles.type, styles.text)} onClick={() => addQuestion(types.TEXT)}>文本</div>
+                </div>)
 
         }
     }
@@ -39,10 +45,16 @@ class AddQuestion extends Component {
     }
 
     render() {
-        const {addQuestion} = this.props
+        const { addQuestion } = this.props
         return (
             <div className={styles['add-question']}>
-                {this.renderChooseQuestionType(addQuestion)}
+                <ReactCSSTransitionGroup
+                    transitionName={styles}
+                    transitionEnterTimeout={300}
+                    transitionLeaveTimeout={300}
+                >
+                    {this.renderChooseQuestionType(addQuestion)}
+                </ReactCSSTransitionGroup>
                 <div className={styles["add-question-btn"]}
                     key='a'
                     onClick={::this.toogleAddQuestionType}>
