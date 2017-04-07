@@ -31,6 +31,12 @@ export default class Table extends Component {
         return questionnaires
     }
 
+    handleSorter(sorter) {
+		let questionnaires = this.state.questionnaires;
+		questionnaires.sort(sorter);
+		this.setState({questionnaires:questionnaires})
+	}
+
     componentWillReceiveProps(nextProps) {
        let questionnaires = this.handleFormatDeadline(cloneObject(nextProps.questionnairesArray))
        this.setState({ questionnaires: questionnaires })
@@ -42,7 +48,7 @@ export default class Table extends Component {
     }
     render() {
         const { username, deleteQuestionnaire } = this.props;
-        // console.log(this.props.questionnairesArray)
+        // console.log(this.state.questionnaires)
         const columns = [{
             title: '标题',
             dataIndex: 'questionnairetitle',
@@ -64,7 +70,9 @@ export default class Table extends Component {
         },]
         return (
             <table className={styles.table}>
-                <Header columns={columns} />
+                <Header
+                    handleSorter = {::this.handleSorter}  
+                    columns={columns} />
                 <Body
                     username={username}
                     deleteQuestionnaire={deleteQuestionnaire}
