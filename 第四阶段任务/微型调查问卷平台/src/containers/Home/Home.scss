@@ -4,6 +4,7 @@
 .new-questionnaire-wrapper {
      margin-top: .5rem;
      padding: 2rem;
+     text-align: center;
      @media screen and (max-width: $small-page-max-width) {
          padding: .1rem; 
     }
@@ -16,19 +17,21 @@
             font-size: 63px;
             }
     }
+    .new-questionnaire-wrapper{
+        
+    }
     .new-questionnaire-btn {
-        margin-top: 2rem;
+        // margin-top: 2rem;
+        margin: 2rem auto 0;
         background-color: $blue;
         box-shadow: none;
-        width: 8rem;
+        width: 6rem;
         border: 0;
         border-radius: .25em;
         line-height: 3em;
         color: $white;
         display: block;
-        padding: 0;
-        font-size: 15px;
-        text-align: center;
+        font-size: 12px;
         text-shadow: 0 1px 1px rgba(0,0,0,.2);
         outline: 0;
         cursor: pointer;
