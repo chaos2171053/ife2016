@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import QueueAnim from 'rc-queue-anim';
 import classNames from "classnames";
 import styles from './AddQuestion.scss'
 // import { RADIO, CHECKBOX, TEXT } from "../../../constants/QuestionTypes";
