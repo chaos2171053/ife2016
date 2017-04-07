@@ -70,7 +70,7 @@ export default class PictorialBar extends Component {
                 {
                     name: ' ',
                     type: 'bar',
-                    barWidth: 20,
+                    barWidth: 25,
                     label: {
                         normal: {
                             show: true,

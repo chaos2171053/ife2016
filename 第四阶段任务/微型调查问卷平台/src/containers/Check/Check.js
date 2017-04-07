@@ -3,6 +3,7 @@ import styles from './Check.scss';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { CheckComponents } from '../../components'
+import { Link, withRouter } from 'react-router-dom'
 const { Main } = CheckComponents
 
 export default class Check extends Component {
@@ -28,6 +29,12 @@ export default class Check extends Component {
                     <Main
                         questions={questions}
                         fillData={fillData} />
+                </div>
+                <hr className={styles.hr} />
+                <div className={styles.footer}>
+                    <Link to='/home' className={styles.link}>
+                        <button>返回</button>
+                    </Link>
                 </div>
             </div>
         )
