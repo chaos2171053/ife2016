@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from '../../../containers/New/New.scss';
-import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes'
+import { RADIO, CHECKBOX} from '../../../constants/QuestionTypes'
 import { Input } from '../../'
 import classNames from 'classnames'
 const MultipleQuestion = ({question,questionIndex,handleEditOption,handleRemoveOption,handleAddOption}) => (

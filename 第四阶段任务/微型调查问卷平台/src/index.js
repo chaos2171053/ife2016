@@ -8,7 +8,7 @@ import { Provider } from 'react-redux'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter, routerReducer, routerMiddleware,} from 'react-router-redux'
 import { Switch } from 'react-router-dom'
 import rootReducer from './reducers/index'
 // import { App, Header, Home, Main, Edit, Login } from './containers/index';

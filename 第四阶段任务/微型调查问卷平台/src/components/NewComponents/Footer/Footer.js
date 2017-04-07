@@ -80,11 +80,11 @@ const Footer = withRouter(({ handleSetDeadLine,
     )
 })
 Footer.propTypes = {
-    deadline:React.PropTypes.number.isRequired,
-    history: React.PropTypes.object.isRequired,
-    validQuestionnaire: React.PropTypes.func.isRequired,
-    handlePublishQuestionnaire: React.PropTypes.func.isRequired,
-    handleSetDeadLine: React.PropTypes.func.isRequired,
-    handleSaveQuestionnaire: React.PropTypes.func.isRequired,
+    deadline:PropTypes.number.isRequired,
+    history: PropTypes.object.isRequired,
+    validQuestionnaire: PropTypes.func.isRequired,
+    handlePublishQuestionnaire: PropTypes.func.isRequired,
+    handleSetDeadLine: PropTypes.func.isRequired,
+    handleSaveQuestionnaire: PropTypes.func.isRequired,
 }
 export default Footer

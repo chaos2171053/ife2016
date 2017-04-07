@@ -4,10 +4,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { FillComponents } from '../../components'
 import { trim } from '../../utils/util'
-import { Link, withRouter } from 'react-router-dom'
-import { Modal, message } from 'antd';
+import { Link} from 'react-router-dom'
+import { message } from 'antd';
 import * as Actions from '../../actions/questionnaires';
-import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
+import {TEXT } from '../../constants/QuestionTypes'
 const { Main } = FillComponents
 
 const mapStateToProps = state => ({

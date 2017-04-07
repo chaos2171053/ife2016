@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './New.scss'
-import { Link } from 'react-router-dom'
-import { NewComponents, Input } from '../../components'
+// import { Link } from 'react-router-dom'
+import { NewComponents} from '../../components'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { RADIO, CHECKBOX, TEXT } from '../../constants/QuestionTypes'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import { trim, swapArrayItems, cloneObject } from '../../utils/util'
 import * as Actions from '../../actions/questionnaires';
 const { Header, Main, Footer, AddQuestion } = NewComponents

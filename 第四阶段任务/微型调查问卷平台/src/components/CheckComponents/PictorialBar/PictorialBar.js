@@ -11,7 +11,7 @@ export default class PictorialBar extends Component {
     }
 
     static propTypes = {
-        barData: React.PropTypes.string.isRequired,
+        barData: PropTypes.string.isRequired,
         // barData:React.PropTypes.array.isRequired,
     }
     setPieOption(barData) {
@@ -19,7 +19,7 @@ export default class PictorialBar extends Component {
         return {
             tooltip: {
                 show: true,
-                formatter: "{b} {c}"
+                formatter: '{b} {c}'
             },
             grid: {
                 // left: '15%',

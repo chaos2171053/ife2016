@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import styles from '../../../containers/New/New.scss';
-import { RADIO, CHECKBOX, TEXT } from '../../../constants/QuestionTypes'
-import classNames from 'classnames'
+import { TEXT } from '../../../constants/QuestionTypes'
+// import classNames from 'classnames'
 import QuestionTitle from './QuestionTitle'
 import TextQuestion from './TextQuestion'
 import MultipleQuestion from './MultipleQuestion'

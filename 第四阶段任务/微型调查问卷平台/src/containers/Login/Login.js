@@ -6,7 +6,6 @@ import * as QuestionnairesActions from '../../actions/questionnaires'
 import { Redirect } from 'react-router-dom'
 import '../../styles/reset.css';
 import styles from './Login.scss'
-import { Main } from '../';
 import { LoginComponents } from '../../components'
 
 const { Header, Navigation, Signup, Signin, Starry } = LoginComponents
@@ -26,18 +25,18 @@ const mapDispatchToProps = dispatch => ({
 
 class Login extends Component {
     static propTypes = {
-        actions: React.PropTypes.shape({
-            logIn: React.PropTypes.func.isRequired,
-            renderSignin: React.PropTypes.func,
-            renderSignup: React.PropTypes.func,
-            userSignup: React.PropTypes.func.isRequired,
+        actions: PropTypes.shape({
+            logIn: PropTypes.func.isRequired,
+            renderSignin: PropTypes.func,
+            renderSignup: PropTypes.func,
+            userSignup: PropTypes.func.isRequired,
         }),
-        status: React.PropTypes.shape({
-            isLogin: React.PropTypes.bool.isRequired,
-            isRenderSignin: React.PropTypes.bool,
-            isRenderSignup: React.PropTypes.bool,
+        status: PropTypes.shape({
+            isLogin: PropTypes.bool.isRequired,
+            isRenderSignin: PropTypes.bool,
+            isRenderSignup: PropTypes.bool,
         }),
-        questionnaires: React.PropTypes.arrayOf(React.PropTypes.object)
+        questionnaires: PropTypes.arrayOf(PropTypes.object)
     }
     constructor(props) {
         super(props);
@@ -71,7 +70,7 @@ class Login extends Component {
             actions: { logIn, renderSignin, renderSignup, userSignup },
             status: { isLogin, isRenderSignin, isRenderSignup },
             questionnaires,
-            location,
+            // location,
         } = this.props;
         // const WIDTH = window.innerWidth, HEIGHT = window.innerHeight;
         const canvasStyle = {

@@ -1,4 +1,3 @@
-import * as types from '../constants/QuestionnairesActionsTypes'
 import {
     USER_SIGNUP, SAVE_QUESTIONNAIRE,
     PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE, DELETE_QUESTIONNAIRE,SUBMIT_QUESTIONNAIRE

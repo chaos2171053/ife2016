@@ -5,7 +5,7 @@ function Starry(cx,ctx){
   this.mousePos = [0, 0];
   this.easingFactor = 10;
   this.backgroundColor = 'rgba(0,0,0,0)';
-  this.dotColor = 'rgba(128,128,128,0.4)';
+  this.dotColor = 'rgba(128,128,128,0.25)';
   this.lineColor = 'rgba(128,128,128,0.7)'
   this.dots = [];//点
   this.lines = [];//线

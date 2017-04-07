@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from "react";
+import React, { PropTypes} from "react";
 import styles from '../../../containers/Login/Login.scss'
 import classNames from "classnames";
 
@@ -23,14 +23,14 @@ const Navigation = ({ actions, status }) => {
 }
 
 Navigation.propTypes = {
-    actions: React.PropTypes.shape({
-        logIn: React.PropTypes.func,
-        renderSignin: React.PropTypes.func,
-        renderSignup: React.PropTypes.func,
+    actions: PropTypes.shape({
+        logIn: PropTypes.func,
+        renderSignin: PropTypes.func,
+        renderSignup: PropTypes.func,
     }),
-    status: React.PropTypes.shape({
-        isRenderSignin: React.PropTypes.bool,
-        isRenderSignup: React.PropTypes.bool,
+    status: PropTypes.shape({
+        isRenderSignin: PropTypes.bool,
+        isRenderSignup: PropTypes.bool,
     }),
 };
 export default Navigation

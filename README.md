@@ -1143,3 +1143,10 @@ componentWillReceiveProps(nextProps) {
 
  ####15.20 span内容自动换行
  -[span 文本内容超过宽度自动换行](http://blog.csdn.net/qingyun0719/article/details/5629981)
+
+ ####15.21 移动端测试网页
+ 在控制台敲入下面的命令：
+ `browser-sync start --proxy http://localhost:8000/webpack-dev-server/ --files "style/**"`
+ 手机上访问192.168.0.108:3000
+ -[知乎](https://www.zhihu.com/question/37361845)
+ -[移动端页面调试神器-browser-sync](http://www.cnblogs.com/kbqncf/p/4206244.html)

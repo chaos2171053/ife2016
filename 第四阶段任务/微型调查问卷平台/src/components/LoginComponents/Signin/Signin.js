@@ -3,7 +3,7 @@ import styles from '../../../containers/Login/Login.scss'
 import classNames from 'classnames';
 import { trim } from '../../../utils/util'
 import { message } from 'antd';
-import { Link, Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 class Signin extends Component {
     constructor(props) {
         super(props);
@@ -92,7 +92,7 @@ class Signin extends Component {
                             className={styles['signin-signup-button']}>登录</button>
                 </div>
                 <p className={styles.agreement}>
-                    也可以使用测试账号chaos666，密码666666
+                    也可以使用测试账号666666，密码666666
                 </p>
             </div>
             </div >

@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import styles from './Check.scss';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+// import { bindActionCreators } from 'redux';
+// import { connect } from 'react-redux';
 import { CheckComponents } from '../../components'
-import { Link, withRouter } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 const { Main } = CheckComponents
 
 export default class Check extends Component {

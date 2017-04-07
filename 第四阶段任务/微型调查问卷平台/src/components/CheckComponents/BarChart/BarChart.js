@@ -11,8 +11,8 @@ export default class PieChart extends Component {
     }
 
     static propTypes = {
-        options: React.PropTypes.array.isRequired,
-        barData:React.PropTypes.array.isRequired,
+        options: PropTypes.array.isRequired,
+        barData:PropTypes.array.isRequired,
     }
     setPieOption(options, barData) {
         return {

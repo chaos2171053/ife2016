@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import styles from './Table.scss'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 const Header = ({ columns,handleSorter }) => {
     let content = [];
     const upDate = (e,sorter)=>{
