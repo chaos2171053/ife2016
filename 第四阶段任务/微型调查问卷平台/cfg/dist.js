@@ -12,7 +12,7 @@ let BowerWebpackPlugin = require('bower-webpack-plugin');
 let config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
   cache: false,
-  devtool: 'sourcemap',
+  devtool: 'false',
   plugins: [
     new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
@@ -21,7 +21,12 @@ let config = Object.assign({}, baseConfig, {
     new BowerWebpackPlugin({
       searchResolveModulesDirectories: false
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+        comments: false,        //去掉注释
+        compress: {
+            warnings: false    //忽略警告,要不然会有一大堆的黄色字体出现……
+        }
+    }),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoErrorsPlugin()
