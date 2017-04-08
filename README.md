@@ -1150,3 +1150,11 @@ componentWillReceiveProps(nextProps) {
  手机上访问192.168.0.108:3000
  -[知乎](https://www.zhihu.com/question/37361845)
  -[移动端页面调试神器-browser-sync](http://www.cnblogs.com/kbqncf/p/4206244.html)
+ 
+####15.22 打包后运行index.html报错
+`Uncaught DOMException: Failed to execute 'replaceState' on 'History': A history state object with URL`
+原因我在项目中history使用了browserHistory，打包后服务器，所有访问不了。
+在代码中改为就可以了
+`import createHistory from 'history/createHashHistory'`
+
+####15.23 webpack打包压缩
