@@ -144,3 +144,6 @@ ol li:before {
 .wall {
     background-color: #bdc3c7;
 }
+.note {
+    color: #999;
+}

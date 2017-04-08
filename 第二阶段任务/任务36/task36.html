@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="utf-8">
 	<title>IFE JavaScript Task </title>
 	<link rel="stylesheet" type="text/css" href="css/style36.css">
-	<script src="../../libs/require.js" data-main="js/main" defer async="true" ></script>
-	<script type="text/javascript" src = "../../libs/jquery-3.1.1.min.js"></script>
+	<script src="../../libs/require.js" data-main="js/main" defer async="true"></script>
+	<script type="text/javascript" src="../../libs/jquery-3.1.1.min.js"></script>
 </head>
+
 <body>
 	<div class="container clearfix">
 		<table id="background" class="background">
 		</table>
 		<div class="control-pannel clearfix">
 			<div class="button-pannel clearfix">
-				<button id  = "run" type="button">运行</button>
-				<button id  = "reset" type="button">重置</button>
-				<button id  = "random" type="button">随机修墙</button>
-				<p id = "error"></p>
+				<button id="run" type="button">运行</button>
+				<button id="reset" type="button">重置</button>
+				<button id="random" type="button">随机修墙</button>
+				<p id="error"></p>
 			</div>
 			<div class="command-pannel">
-				<div class = "command-number-wrapper ">
+				<div class="command-number-wrapper ">
 					<ol id="command-number">
 					</ol>
 				</div>
-				<textarea id = "command-list" spellcheck="false" title="指令编辑器">
+				<textarea id="command-list" spellcheck="false" title="指令编辑器">
 GO 2
 build
 bru #ffd700
@@ -33,9 +35,21 @@ mov bot 2
 mov to 1,1
 				</textarea>
 			</div>
-			
+
 		</div>
 
 	</div>
+	<p class = "note">
+		<em>可输入指令序列，n代表数字,支持大小写:<br>
+		* 前进：GO/GO n<br>
+		* 向左/右/后转：TUN LEF，TUN RIG，TUN BAC<br>
+		* 向屏幕的左/右/上/后侧移动n格，方向不变: TRA LEF n，TRA RIG n，TRA TOP n，TRA BOT n<br>
+		* 方向转向屏幕左/右/上/后侧，并向屏幕的左/右/上/后侧移动n格:MOV LEF n，MOV RIG n，MOV TOP n，MOV BOT n<br>
+		* 在小方块面对的方向造墙: BUILD，<br>
+		* 改变墙的颜色BRU #ffffff，颜色值为16进制，6位<br>
+		* 自动寻路，移动到指定坐标点(x, y): MOV TO x,y<br>
+		</em>
+	</p>
 </body>
+
 </html>
