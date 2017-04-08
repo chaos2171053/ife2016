@@ -3,7 +3,7 @@ import {
     PUBLISH_QUESTIONNAIRE, CLOSE_QUESTIONNAIRE, DELETE_QUESTIONNAIRE,SUBMIT_QUESTIONNAIRE
 } from '../constants/QuestionnairesActionsTypes'
 import { UNRELEASED, RELEASED, CLOSED } from '../constants/QuestionTypes'
-import { userModel, questionnaireModel, questionModel } from '../data/data'
+import { defaultUser } from '../data/data'
 import { v4 } from 'node-uuid';
 import { cloneObject } from '../utils/util'
 //需要本地存储的数据
@@ -20,8 +20,8 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
         //         //     deadline: '', // 该问卷的截止日期
         //         //     status: '', // 问卷的状态
         //         //     fillData:[ //存放用户填写问卷的数据
-        //         //     [[问题1选择或填写的内容]],[问题2选择或填写的内容]],//填写的第一份问卷
-        //         //      [第二次填写的问卷...],[第三次],[..]....
+        //         //     [[问题1选择或填写的内容]],[问题2选择或填写的内容]],//第一次填写问卷的数据
+        //         //      [第二次填写...],[第三次],[..]....
         //         //     ] //
         //         //     questions: [ // 问题数组 
         //         //         {
@@ -36,6 +36,7 @@ const dataBase = localStorage.dataBase ? JSON.parse(localStorage.dataBase) :
         //         // },
         //     ]
         // },
+        defaultUser,
     ];
 //每个用户表
 const questionnaire = (state = {}, action) => {
