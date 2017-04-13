@@ -3,9 +3,9 @@
 **开始时间**：`2016/12/17`
 
 ## 遇到的问题及其解决方法
-###1. 任务十四
+### 1. 任务十四
 
-####1.1 遇到需要排序，复习了下几种基本排序算法
+#### 1.1 遇到需要排序，复习了下几种基本排序算法
 [JS版十大排序算法](http://blog.csdn.net/fengyinchao/article/details/52667625)<br>
 [快速排序](http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html)<br>
 [快速排序（Quicksort）的Javascript实现](http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html)<br>
