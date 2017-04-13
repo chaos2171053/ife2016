@@ -11,7 +11,7 @@
 [快速排序（Quicksort）的Javascript实现](http://www.ruanyifeng.com/blog/2011/04/quicksort_in_javascript.html)<br>
 看了网上的别人的解法，可以用array.filter、array.sort来实现大于60的筛选和排序，用array.forEach方法来代替for循环遍历处理数组元素。<br>
 
-####1.2 对空气质量大于60筛选数据时，原始数据为如下：<br>
+#### 1.2 对空气质量大于60筛选数据时，原始数据为如下：<br>
 ```
 var aqiData = [
     ["北京", 90],
@@ -31,7 +31,7 @@ var temp=[];//声明一个临时数组
 temp.push(arr[pivotIndex]);//用push方法把作为基准的城市数据暂存下来。
 ```
 
-####1.3 动态添加li生成排行榜发现在循环在appendChild会导致回流。
+#### 1.3 动态添加li生成排行榜发现在循环在appendChild会导致回流。
 ```
 var parentUl = document.getElementById('aqi-list');
 var len = result.length;
@@ -59,16 +59,16 @@ parentUl.innerHTML = contentStr;
 
 [页面呈现流程 ](http://www.blogjava.net/BearRui/archive/2010/05/10/320502.html)
 
-###2. 任务十六
+### 2. 任务十六
 
-####2.1 运行时发现can't set property onclick' of null。
+#### 2.1 运行时发现can't set property onclick' of null。
 解决方法把js文件放在`</body>`前执行
-####2.2 绑定删除按钮删除事件，参考了[别人的代码](http://www.cnblogs.com/AfterStories/articles/5384051.html)，学习了[call()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
+#### 2.2 绑定删除按钮删除事件，参考了[别人的代码](http://www.cnblogs.com/AfterStories/articles/5384051.html)，学习了[call()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/call).
 
 使用call()可以实现继承，新的对象可以继承另一个对象的方法而不用重写这个方法。
 
-###3. 任务十七
-####3.1 发现动态添加<option>的方法除了声明一个字符串，将option的内容使用innerHTML插入外，在《JavaScript高级程序设计》中发现
+### 3. 任务十七
+#### 3.1 发现动态添加`<option>的方法除了声明一个字符串，将option的内容使用innerHTML插入外，在《JavaScript高级程序设计》中发现
 还可以使用add（）方法。
 书中说，add（）接受两个参数：要添加的新选项和将位于新选项之后的选项。如果想在列表的最后添加一个选项，应该将第二个参数设置为null。在IE中，add（）第二个参数是可选的，兼容DOM的浏览器必须要求制定第二个参数。这时候，可以将第二个参数传入undefined。
 innerHTML方法：
@@ -89,7 +89,7 @@ for(var cityName in aqiSourceData){//遍历数据源aqiSourceData的key
 }
 ```
 
-####3.2 事件委托
+#### 3.2 事件委托
 如果为fieldset中的每个input添加点击事件，循环遍历radio，为每个radio添加处理，增加交互就绪的时间。采用事件委托就是比较好的处理方式。适合用事件委托的事件：click、mousedown、mouseup、keydown、keyup、keypress。
 好处：
 1. 管理的函数变少了。不需要为每个元素都添加监听函数。对于同一个父节点下面类似的子元素，可以通过委托给父元素的监听函数来处理事件。
@@ -98,11 +98,11 @@ for(var cityName in aqiSourceData){//遍历数据源aqiSourceData的key
 
 任务中只需为input的父层fieldset添加点击添加点击事件监听，判断是否点击input，点击则执行相应处理。
 
-###4.任务十八
+### 4.任务十八
 
-####4.1 delete 一个数组arr[i]，只能让原来的arr[i]的值为undefined，应该使用数组的splice方法。
+#### 4.1 delete 一个数组arr[i]，只能让原来的arr[i]的值为undefined，应该使用数组的splice方法。
 [MDN关于Array的描述](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array)
-####4.2 实现“点击队列中任何一个元素，则该元素会被从队列中删除”需求时，一开始考虑的是判断点击的div里面的数字和队列中的哪个数字相等，如果相等则删除。忘记考虑了从多个数字相等的情况。应该获取点击的div在父元素中的索引，删除队列中对应的索引。
+#### 4.2 实现“点击队列中任何一个元素，则该元素会被从队列中删除”需求时，一开始考虑的是判断点击的div里面的数字和队列中的哪个数字相等，如果相等则删除。忘记考虑了从多个数字相等的情况。应该获取点击的div在父元素中的索引，删除队列中对应的索引。
 ```
 for()方法代码如下：
 if(target && target.className === "numberList"){
@@ -120,8 +120,8 @@ data.splice(i,1);
 renderChart(data);
 ```
 
-###4.任务二十
-####4.1 在textarea中按tab键会调到页面的下一个元素，而又想在textarea中按tab进行缩进。解决方法
+### 5.任务二十
+#### 5.1 在textarea中按tab键会调到页面的下一个元素，而又想在textarea中按tab进行缩进。解决方法
 是判断按下的键是否是tab键。
 ```
 function inputKeyDown(e){
@@ -138,19 +138,19 @@ function inputKeyDown(e){
 }
 ```
 
-###5. 任务二十一
-####5.1 input标签没有hover属性
+### 6. 任务二十一
+#### 6.1 input标签没有hover属性
 
-####5.2 当输入标签为input时，对input设置keydown事件监听，按回车会提交表单，如果按1，会判断按下的键值，但是不会将1放入input的value属性里，使得console.log(input的value属性)为空值。应改为监听input的onkeyup事件,同时判断当按下回车时，阻止input的默认行为。
+#### 6.2 当输入标签为input时，对input设置keydown事件监听，按回车会提交表单，如果按1，会判断按下的键值，但是不会将1放入input的value属性里，使得console.log(input的value属性)为空值。应改为监听input的onkeyup事件,同时判断当按下回车时，阻止input的默认行为。
 
-####5.3 想把获取的数据插入元素的内容，
+#### 6.3 想把获取的数据插入元素的内容，
 ```
 var str = "<div class=" + '"tagListTop"' + ">" + 123123 +"</div>";
 wrapperTagsTop.innerHTML = str;
 ```
 发现插入的是一个数组，原因在于通过getElementsByClassName返回的是一个数组，还要通过索引获取想要的节点。
 
-####5.4 给div设置onmouseover事件监听鼠标移动到div时获取点击的是哪个节点，然后通过innerHTML改变其样式，代码如下
+#### 6.4 给div设置onmouseover事件监听鼠标移动到div时获取点击的是哪个节点，然后通过innerHTML改变其样式，代码如下
 ```
 function divMouseOver(ele){
   var ele = ele|| window.event;
@@ -178,7 +178,7 @@ function divMouseOut(){
 解决方法：在mouseover时插入"点击删除"和该爱好标签的内容，在mouseout时插入该爱好标签的内容。
 
 
-####5.5 数组元素去重
+#### 6.5 数组元素去重
 一开始的思路是：
 1. 声明一个新的数组用来存放结果；
 2. for循环中每次从原数组中取出一个元素，用这个元素循环与结果数组对比；
@@ -190,7 +190,7 @@ function divMouseOut(){
 
 review别人的代码发现对数组使用indexof方法，如果返回-1则不重复。代码更简练。
 
-####5.6 本来想用正则表达式和test（）判断标签输入框如果有空格、回车、逗号按下时，输入框内的内容自动生成一个标签，但是发现这样有一个bug就是先按空格、回车、逗号，会马上生成一个标签内容为空格、回车、逗号，而需求是输入标签内容后按空格、回车、逗号才生成标签。
+#### 6.6 本来想用正则表达式和test（）判断标签输入框如果有空格、回车、逗号按下时，输入框内的内容自动生成一个标签，但是发现这样有一个bug就是先按空格、回车、逗号，会马上生成一个标签内容为空格、回车、逗号，而需求是输入标签内容后按空格、回车、逗号才生成标签。
 ```
 keyRegExp = /[,，、\s\n]/;
 function inputTagsEvent(event){
@@ -203,9 +203,9 @@ function inputTagsEvent(event){
 }
 ```
 
-###6. 任务二十二
+### 7. 任务二十二
 
-####6.1 实现前序遍历动画后点击其他遍历无法进行。
+#### 7.1 实现前序遍历动画后点击其他遍历无法进行。
 ```
 buildTree.prototype.animation = function(){
   var stack       = this.stack,
@@ -244,8 +244,8 @@ buildTree.prototype.animation = function(){
  解决方法：
  在进入setInterval方法前，把this引用复制给一个变量，在setInterval中使用该变量引用节点对象。
 
-###6. 任务二十四
-####6.1 设置默认背景色
+### 8. 任务二十四
+#### 8.1 设置默认背景色
 实现“点击某个节点元素，则该节点元素呈现一个特殊被选中的样式”需求时，对节点元素设置事件代理个，点击时改变其颜色为红色。发现点击一个节点后，里面的子节点颜色也变红。
 ```
     var event = event || window.event;
@@ -268,22 +268,22 @@ Shaq1、Shaq2、Shaq3、Shaq4的样式
 ![24-4](problemsPic/24-4.png)<br>
 
 
-####6.2 
+#### 8.2 
 删除子节点时，使用for循环从索引为0开始删除，发现不能删除完全部子节点，当删除索引为0的子节点后，原来索引为1的节点此时变成0了，而这时变量i已经变成1了，for继续运行时时就会删除原先索引为２的现在为1的节点删除。
 解决办法是从索引最大值开始删除，采用递减的方法。
 [Javascript removeChild()删除节点及删除子节点的方法](http://www.jb51.net/article/77042.htm);
 
-####6.3 将wrapper下所有节点删除后发现在chrome下还有两个text空白节点，而且使用querySelector获取wrapper,使用wrpper.childNodes 返回的是一个NodeList，而 NodeList 不是数组，不能用数组方法。
+#### 8.3 将wrapper下所有节点删除后发现在chrome下还有两个text空白节点，而且使用querySelector获取wrapper,使用wrpper.childNodes 返回的是一个NodeList，而 NodeList 不是数组，不能用数组方法。
 ```
 var wrapper= document.querySelector('.wrapper'),
     NodeList = wrapper.childNodes,//返回的是NodeList！，NodeList不是数组，没有数组方法！
     regExp = /[^text,]+/,
     arr = Array.prototype.slice.call(NodeList)//将 NodeList 转换为 Array
 ```
--如果使用wrapper = document.getElementsByClassName('wrapper')，使用Object.prototype.toString.call判断wrapper，返回[object HTMLCollection].
--wrapper= document.querySelector('.wrapper')，使用Object.prototype.toString.call判断wrapper返回[object HTMLDivElement]。
--Node.childNodes返回的是[object NodeList]
--Node.children返回的是[object HTMLCollection]
+如果使用wrapper = document.getElementsByClassName('wrapper')，使用Object.prototype.toString.call判断wrapper，返回[object HTMLCollection].
+wrapper= document.querySelector('.wrapper')，使用Object.prototype.toString.call判断wrapper返回[object HTMLDivElement]。
+Node.childNodes返回的是[object NodeList]
+Node.children返回的是[object HTMLCollection]
 
 删除wapper内所有节点后，看控制台可以发现
 ![24-5](problemsPic/24-5.png)<br>
@@ -292,11 +292,11 @@ var wrapper= document.querySelector('.wrapper'),
 [DOM树中的Node（节点）与Element（元素）的区别](http://blog.csdn.net/zgrjkflmkyc/article/details/43268933)
 
 
-###7. 任务二十五
-####7.1 js中静态方法
+### 9 任务二十五
+#### 9.1 js中静态方法
 [js中静态方法（属性）、实例方法（属性）、内部方法（属性）和原型的一点见解](http://blog.csdn.net/panying0903/article/details/50246091)
 
-#####7.2 查找祖节点
+#### 9.2 查找祖节点
 实现“按照内容进行节点查找，并且把找到的节点进行特殊样式呈现，如果找到的节点处于被父节点折叠隐藏的状态，则需要做对应的展开”需求时，一开始想到的是找到该节点node，找到该节点的父节点node.parentNode，然后展开，但是发现如果还有祖节点，那还需要把祖节点也展开。于是需要遍历该节点的所有祖节点。
 ```
 //寻找祖节点
@@ -324,8 +324,8 @@ var wrapper= document.querySelector('.wrapper'),
 
 但是发现这样仍然存在不足，如果兄弟节点A、B都包含有需要查找的内容，如果找到A，再找到所有祖节点依次展开，到B的时候，还得再执行依次一样的流程，而这些祖节点在找到A后都已经展开了。
 
-###7. 任务二十六
-####7.1 当飞船飞行时，发现
+### 10. 任务二十六
+#### 10.1 当飞船飞行时，发现
 ![26-1](problemsPic/26-1.png)<br>
 原因:
 ```
@@ -365,9 +365,9 @@ var wrapper= document.querySelector('.wrapper'),
 ctx.clearRect(0,0,SCREEN_WIDTH,SCREEN_HEIGHT); // clear canvas
                 AminateUtil.drawPlanet();
                 AminateUtil.drawOrbits();
-``
+```
 
-####7.2image对象onload方法没有执行，没有显示图片。
+#### 10.2image对象onload方法没有执行，没有显示图片。
 再次刷新canvas（如销毁飞船，需要重绘时）由于图片加载缓冲区的速度太快，以至于没有运行到onload的时候，图片已经被加载完毕了。所以没有显示图片。
 解决方法，利用image对象的complete属性,如：
 ```
@@ -385,34 +385,35 @@ var imgLoad = function (url) {
 };
 ```
 
-####7.3使用requirejs对代码进行模块化优化
-学习了requirejs，提高了代码的维护性。
--[require.js 入门学习](http://www.2cto.com/kf/201312/262057.html)
--[使用RequireJS优化Web应用前端](http://www.csdn.net/article/2012-09-27/2810404)
--[require.js 简洁入门](http://blog.sae.sina.com.cn/archives/4382)
+#### 10.3使用requirejs对代码进行模块化优化
+学习了requirejs，提高了代码的维护性。<br>
+[require.js 入门学习](http://www.2cto.com/kf/201312/262057.html)<br>
+[使用RequireJS优化Web应用前端](http://www.csdn.net/article/2012-09-27/2810404)<br>
+[require.js 简洁入门](http://blog.sae.sina.com.cn/archives/4382)<br>
 
-####7.4 this和$(this)的区别
+#### 10.4 this和$(this)的区别
 实际上$(this)=jquery()，所以$(this)获取的是jq对象
 
-####7.5飞船销毁
+#### 10.5飞船销毁
 飞船销毁时，如果一开始销毁1号，第二次销毁3号时，无法销毁。这是因为一开始我把每个飞船的id从0到3赋值，如果销毁1号（1号飞船在飞船队列的索引为1），那2号飞船在队列的索引自动变为1,3号为2，这样，执行
-`spaceships.splice(obj.id,1)`时，无法删除3号，因为他一开始的索引为3。解决方法使用delete删除属性:
-`delete spaceships[obj.id]`
--[MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)
+`spaceships.splice(obj.id,1)`时，无法删除3号，因为他一开始的索引为3。<br>
+解决方法使用delete删除属性:
+`delete spaceships[obj.id]`<br>
+[MDN-delete](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/delete)<br>
 
 
-###8. 任务三十三
-####8.1 如何获取表格的在某行某列上的单元格
+### 11. 任务三十三
+#### 11.1 如何获取表格的在某行某列上的单元格
 `return table.rows[index].cells[index]`
 
-###9. 任务三十四
-####9.1 旋转div
+### 12. 任务三十四
+#### 12.1 旋转div
 原本想通过角度变化，旋转div实现向左向右方向改变,如向左：
 `$(square.div).css("transform", "rotate(" -90 +"deg)");`
 发现只能旋转一次，第二次再向左就无法旋转了。这是因为在rotate（）中的角度永远都是根据最初始的角度0度旋转，不是根据现在的角度。
 
-###10. 任务三十五
-####10.1 textarea光标定位在最后一行
+### 13. 任务三十五
+#### 13.1 textarea光标定位在最后一行
 ![35-1](problemsPic/35-1.png)<br>
 想点击textarea时，光标定位在文本最后一行（第三行）。
 获取textarea的文本内容，利用focus()将光标定位在文本最后一行。
@@ -420,9 +421,9 @@ var imgLoad = function (url) {
 var content=$.trim($('#command-list').val());  
 $('#command-list').val("").focus().val(content); 
 ``` 
--[JQUERY实现点击INPUT使光标移动到最后或指定位置](https://www.xiariboke.com/design/2441.html)
+[JQUERY实现点击INPUT使光标移动到最后或指定位置](https://www.xiariboke.com/design/2441.html)
 
-####10.2 
+#### 13.2 
 实现删除命令后，左边指令行标同步。但是发现这样再按回车就无法新增一行。因为删除li和添加li冲突。按下回车，新增一行（此时这行的内容为空，做了忽略前后空白字符处理），代码中根据换行符匹配出指令的条数，忽略了空指令。此时指令条数和li数目不同，就会把新增的li删掉。只需不忽略指令前后空字符即可。
 ```
 var editorBackSpace = function(event){
@@ -435,11 +436,11 @@ var editorBackSpace = function(event){
   };
 
 ```
-####10.3 滚动右边指令时，左边指令行数同步滚动。
+#### 13.3 滚动右边指令时，左边指令行数同步滚动。
 -![35-2](problemsPic/35-2.png)<br>
 ```$commandNumber.scrollTop($commandList.get(0).scrollTop).get(0);```
 
-####10.4 jquery click()、keydown()中如何传递参数
+#### 13.4 jquery click()、keydown()中如何传递参数
 想在keydwons()事件中把editor对象当参数传进去
 ```
 var Editor = function(x,y) {
@@ -457,7 +458,7 @@ var Editor = function(x,y) {
     this.$commandList.on('input propertychange',this.inputBackSpace);
   };
 
-``
+```
 但是在
 ```
 Editor.prototype.inputKeyDown = function(event) {
@@ -474,9 +475,9 @@ this是当前执行inputKeyDown的控件。查了资料，发现在
 解决方法：
 声明一个对象`var object = {object:this};`
 在`this.$commandList.keydown(object,this.inputKeyDown);`中传进去。
--[JQuery中如何传递参数如click(),change()等具体实现](http://www.jb51.net/article/36249.htm)
+[JQuery中如何传递参数如click(),change()等具体实现](http://www.jb51.net/article/36249.htm)
 
-####10.5 for循环里使用setTimeout()
+####13.5 for循环里使用setTimeout()
 ```
 //执行指令
 if(!commandError) {
@@ -515,10 +516,10 @@ setTimeout和setInterval的运行机制是，将指定的代码移出本次执�
       }
     }
 ```
--[关于setTimeout()你所不知道的地方](http://caibaojian.com/about-settimeout.html)<br>
--[js for里面setTimeout问题]()<br>
+[关于setTimeout()你所不知道的地方](http://caibaojian.com/about-settimeout.html)<br>
+[js for里面setTimeout问题]()<br>
 
-####10.6 使用apply()、call()、bind()传递this
+#### 13.6 使用apply()、call()、bind()传递this
 依次执行执行的时候
 ```
  Square.prototype.execute = function(string) {
@@ -563,10 +564,10 @@ setTimeout和setInterval的运行机制是，将指定的代码移出本次执�
     },
     ];
 ```
-解决:`command.handler.apply(this,[match[2]]);`把Square对象当参数传进去。
+解决:`command.handler.apply(this,[match[2]]);`把Square对象当参数传进去。<br>
 [js中bind、call、apply函数的用法](http://rangercyh.blog.51cto.com/1444712/1615809);
 
-####10.7 块级作用域
+#### 13.7 块级作用域
 js没有块级作用域。
 ```
 if(true){
@@ -576,14 +577,14 @@ alert(color);//red
 ```
 如果在c、java、c++中，color会在if语句执行完毕后销毁。在js中，if中的变量声明会将变量添加到当前执行环境中。在使用for语句时要牢记这一点。
 
-####10.8 在点击运行时，在点击运行，小方块执行了两次全部指令
+#### 13.8 在点击运行时，在点击运行，小方块执行了两次全部指令
 原因还是同10.5中所说。setTimeout在“任务队列”的现有事件的后面再添加一个事件，规定在指定时间执行某段代码。第一次点击，判断编辑器是否在运行的变量_self.editor.isRunning已经在setTimeout的指定时间内运行完变成false，所以可以再点击运行按钮重复运行指令。
 解决方法，把原本在一开始执行指令后使```_self.editor.isRunning = ture```放在setTimeout方法里面。
 
-####10.9 指令执行时间
+#### 13.9 指令执行时间
 当有空指令时，虽然没有执行指令，但是也等待了一段时间才执行有效指令。而我想要的是跳过空指令的等待时间，直接执行有效指令。
 ![35-5](problemsPic/35-5.png)<br>
-这里等待了3秒后才执行go，应该是等待1s执行go。
+这里等待了3秒后才执行go，应该是等待1s执行go。<br>
 解决方法：
 1、先筛选有效指令的索引
 ```
@@ -620,7 +621,7 @@ for(var k=0,ln = validComandsIndex.length;k<ln;k++){
           }
 ```
 
-####10.10 中断setTimeout
+#### 13.10 中断setTimeout
 当小方块前面有墙时，应该不能执行下一步指令。我在setTimeout中设置了return 中止。但是发现这样不行。
 ![35-6](problemsPic/35-6.png)<br>
 ```
@@ -662,61 +663,62 @@ var t = null;
 ```
 因为闭包的关系，timer每隔1s被赋予新的值。因为每次执行timer，timer会自己+1。一开始想到的是把timer+1然后赋值给t，执行下一条指令判断t是否等于timer，但是忘记考虑多条指令的情况下了。毕竟可能还有timer+2、timer+3等等情况。所以利用这一点，在需要清除的时候，t值赋予false（t需要声明在闭包外)。每次执行setTimeout时候，判断t是否等于false。同样编辑器是否正在运行的判断也要这样处理。
 
-###11 任务37
-####11.1  `<button>`和`<input type="button">`的区别
--[HTML<button>和<input type="button"> 的区别](http://blog.csdn.net/lee_sire/article/details/50312301)<br>
+### 14 任务37
+#### 14.1  
+`<button>`和`<input type="button">`的区别
+[HTML<button>和<input type="button"> 的区别](http://blog.csdn.net/lee_sire/article/details/50312301)<br>
 
-####11.2 配置CSS Modules
--[CSS Modules 用法教程](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)<br>
+#### 14.2 配置CSS Modules
+[CSS Modules 用法教程](http://www.ruanyifeng.com/blog/2016/06/css_modules.html)<br>
 
-####11.3 React中设置不同class
--[React中classSet的用法](http://lib.csdn.net/article/react/12201?knId=685)
--[React学习笔记—类名操作](http://www.07net01.com/2015/04/827648.html)
--[github-Classnames](https://github.com/JedWatson/classnames)
+#### 14.3 React中设置不同class
+[React中classSet的用法](http://lib.csdn.net/article/react/12201?knId=685)<br>
+[React学习笔记—类名操作](http://www.07net01.com/2015/04/827648.html)<br>
+[github-Classnames](https://github.com/JedWatson/classnames)<br>
 
-####11.4 学习使用React DnD 实现拖拽浮出层
--[React-DnD 的使用](http://www.phperz.com/article/16/0115/183290.html)
--[HTML5拖放事件](http://www.bubuko.com/infodetail-832223.html)
--[HTML5 拖放（Drag 和 Drop）](http://www.runoob.com/html/html5-draganddrop.html)
--[React-DnD 官方文档](https://react-dnd.github.io/react-dnd/docs-tutorial.html)
+#### 14.4 学习使用React DnD 实现拖拽浮出层
+[React-DnD 的使用](http://www.phperz.com/article/16/0115/183290.html)<br>
+[HTML5拖放事件](http://www.bubuko.com/infodetail-832223.html)<br>
+[HTML5 拖放（Drag 和 Drop）](http://www.runoob.com/html/html5-draganddrop.html)<br>
+[React-DnD 官方文档](https://react-dnd.github.io/react-dnd/docs-tutorial.html)<br>
 
-####11.5 修饰器
--[ECMAScript 6 入门-修饰器](http://es6.ruanyifeng.com/#docs/decorator#Mixin)
--[github-Babel Legacy Decorator plugin](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)
+#### 14.5 修饰器
+[ECMAScript 6 入门-修饰器](http://es6.ruanyifeng.com/#docs/decorator#Mixin)<br>
+[github-Babel Legacy Decorator plugin](https://github.com/loganfsmyth/babel-plugin-transform-decorators-legacy)<br>
 
-###12 任务38、39
-####12.1 px em rem区别
+### 16 任务38、39
+#### 16.1 px em rem区别
 一般`1rem=16px`
 em是相对于元素的父元素的font-size进行计算；rem是相对于根元素html的font-size进行计算。
-[彻底弄懂css中单位px和em,rem的区别](https://www.baidu.com/s?ie=UTF-8&wd=rem)
-[Sass基础——Rem与Px的转换](http://www.w3cplus.com/preprocessor/sass-px-to-rem-with-mixin-and-function.html)
+[彻底弄懂css中单位px和em,rem的区别](https://www.baidu.com/s?ie=UTF-8&wd=rem)<br>
+[Sass基础——Rem与Px的转换](http://www.w3cplus.com/preprocessor/sass-px-to-rem-with-mixin-and-function.html)<br>
 
-####12.2 react中this问题
+#### 16.2 react中this问题
 想在父组件TableController中实现一个回调函数，子组件TableHeader中点击降序/升序调用这个回调函数，在父组件中更新表格中的数据进行排序，但是遇到了[这种情况](http://react-china.org/t/this-null/3749/2。
 解决方法：在注入该回调函数给子组件时绑定this，同时在文件头`import React, {Component,PropTypes} from 'react';`，声明组建时使用`class TableController extends Component `。原来为`class TableController extends React.Component`
 Component是React内的一个基类，用于继承和创建React自定义组件。ES6规范下的面向对象实现起来非常精简，class关键字 可以快速创建一个类，而Component类内的所有属性和方法均可以通过this访问。换而言之，在Component内的任意方法内，可以通过this.xxx的方式调用该Component的其他属性和方法。
--[深入理解React中的上下文this](http://blog.csdn.net/u011413061/article/details/51946425)
--[react中this](http://react-china.org/t/this-null/3749/2)
--[React:ES6:ES7中的6种this绑定方法](http://blog.csdn.net/wzgl708937822/article/details/52399617)
+[深入理解React中的上下文this](http://blog.csdn.net/u011413061/article/details/51946425)<br>
+[react中this](http://react-china.org/t/this-null/3749/2)<br>
+[React:ES6:ES7中的6种this绑定方法](http://blog.csdn.net/wzgl708937822/article/details/52399617)<br>
 
-####12.3 react中获取到真实的DOM节点
-想在渲染完表格后获取表头的真是dom节点。需要`import ReactDOM from 'react-dom';`
+#### 16.3 react中获取到真实的DOM节点
+想在渲染完表格后获取表头的真是dom节点。需要<br>
+`import ReactDOM from 'react-dom';`
 `let headerDOM = ReactDOM.findDOMNode(this.refs.tHeader);`
 
-###13 任务40
+### 17 任务40
 安装不了node-sass
+[安装node-sass](https://segmentfault.com/q/1010000006025361)<br>
+[node-sass安装](http://www.jianshu.com/p/0ccf4587122d)<br>
+[sass-loader](https://github.com/webpack-contrib/sass-loader)<br>
 
--[安装node-sass](https://segmentfault.com/q/1010000006025361)
--[node-sass安装](http://www.jianshu.com/p/0ccf4587122d)
--[sass-loader](https://github.com/webpack-contrib/sass-loader)
-
-###14 react-yelp
-####14.1
--[Sass with CSS Modules & Webpack](http://stackoverflow.com/questions/34443827/sass-with-css-modules-webpack)
-####14.2 
-使用了css modules处理样式，但是使用了sass，所以要将scss文件转成css
-webpack中配置
-`
+### 18 react-yelp
+#### 18.1
+[Sass with CSS Modules & Webpack](http://stackoverflow.com/questions/34443827/sass-with-css-modules-webpack)<br>
+#### 18.2 
+使用了css modules处理样式，但是使用了sass，所以要将scss文件转成css<br>
+webpack中配置<br>
+```
 {
     test: /\.scss$/,
     exclude: path.resolve(__dirname, 'src/styles'),
@@ -726,12 +728,12 @@ webpack中配置
     include: path.resolve(__dirname, 'src/styles'),
     loader: 'style!css!sass?sourceMap=true'
   }
-`
--[CSS Modules 详解及 React 中实践](https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender)
+````
+[CSS Modules 详解及 React 中实践](https://zhuanlan.zhihu.com/p/20495964?columnSlug=purerender)<br>
 
-
-###15 问卷管理系统
-####15.1 
+ 
+### 19 问卷管理系统
+#### 19.1 
 1. calc()
 2. em
 3. rem
@@ -740,25 +742,25 @@ webpack中配置
 5. 视窗 viewport
 简单的理解，viewport是严格等于浏览器的窗口。在桌面浏览器中，viewport就是浏览器窗口的宽度高度。但在移动端设备上就有点复杂。
 6. meta标签
-主要用来告诉浏览器如何规范的渲染Web页面
--[CSS3的calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)
--[CSS中强大的EM ](http://www.uml.org.cn/html/201207311.asp)
--[css中的px、em、rem 详解](http://www.mamicode.com/info-detail-655497.html)
--[css3的字体大小单位[rem]到底好在哪？](https://www.zhihu.com/question/21504656)
--[移动端适配方案(上)](https://github.com/riskers/blog/issues/17)
--[深入了解viewport和px](http://tgideas.qq.com/webplat/info/news_version3/804/7104/7106/m5723/201509/376281.shtml)
--[移动端适配方案(下)](https://github.com/riskers/blog/issues/18)
--[MobileWeb 适配总结](http://html-js.com/article/MobileWeb)
--[手机百度移动适配切图解决方案介绍](http://js8.in/2015/12/12/%E6%89%8B%E6%9C%BA%E7%99%BE%E5%BA%A6%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D%E5%88%87%E5%9B%BE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D/)
--[使用Flexible实现手淘H5页面的终端适配](https://github.com/amfe/article/issues/17)
--[掘金-rem](http://www.w3cplus.com/blog/tags/143.html)
--[viewports剖析](http://www.w3cplus.com/css/viewports.html)
--[媒体查询](http://www.cnblogs.com/lyzg/p/4877277.html)
 
-####15.2 子路由嵌套问题
-在react-router v4之前 
-可能需要这样写
-`
+主要用来告诉浏览器如何规范的渲染Web页面<br>
+[CSS3的calc()使用](http://www.w3cplus.com/css3/how-to-use-css3-calc-function.html)<br>
+[CSS中强大的EM ](http://www.uml.org.cn/html/201207311.asp)<br>
+[css中的px、em、rem 详解](http://www.mamicode.com/info-detail-655497.html)<br>
+[css3的字体大小单位[rem]到底好在哪？](https://www.zhihu.com/question/21504656)<br>
+[移动端适配方案(上)](https://github.com/riskers/blog/issues/17)<br>
+[深入了解viewport和px](http://tgideas.qq.com/webplat/info/news_version3/804/7104/7106/m5723/201509/376281.shtml)<br>
+[移动端适配方案(下)](https://github.com/riskers/blog/issues/18)<br>
+[MobileWeb 适配总结](http://html-js.com/article/MobileWeb)<br>
+[手机百度移动适配切图解决方案介绍](http://js8.in/2015/12/12/%E6%89%8B%E6%9C%BA%E7%99%BE%E5%BA%A6%E7%A7%BB%E5%8A%A8%E9%80%82%E9%85%8D%E5%88%87%E5%9B%BE%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E4%BB%8B%E7%BB%8D/)<br>
+[使用Flexible实现手淘H5页面的终端适配](https://github.com/amfe/article/issues/17)<br>
+[掘金-rem](http://www.w3cplus.com/blog/tags/143.html)<br>
+[viewports剖析](http://www.w3cplus.com/css/viewports.html)<br>
+[媒体查询](http://www.cnblogs.com/lyzg/p/4877277.html)<br>
+
+#### 19.2 子路由嵌套问题
+在react-router v4之前,可能需要这样写
+```
 <Provider store={store}>
         <Router history={history}>
             <Route path="/" component={App}>
@@ -769,9 +771,9 @@ webpack中配置
             </Route>
         </Router>
     </Provider>,
-`
+```
 但是在V4之后，需要改为这样，这样才支持嵌套
-`
+```
 <Provider store={store}>
         { /* ConnectedRouter will use the store from Provider automatically */}
         <ConnectedRouter history={history}>
@@ -789,17 +791,18 @@ webpack中配置
                 </div>
             </App>
         </ConnectedRouter>
-`
+```
 因为在v4版本，this.props.children已被移除
 
-####15.3 组件重复渲染
-`
+#### 19.3 组件重复渲染
+```
 this.state = {
             chooseSignin: false,
             chooseSignup: true
         }
-`
-`renderNavs() {
+```
+```
+renderNavs() {
         console.log(this.state.chooseSignin)
         return (
             <div className={styles.navs}>
@@ -820,36 +823,35 @@ this.state = {
             </div>
         )
     }
-`
-想点击登录、注册改变state切换显示登录、注册面板组件。但是发现点击一次，打印两次`this.state.chooseSignin`的值。
-原因在于使用了a标签，点击时改变了一次state，页面跳转，改变一次state，一共两次。
-解决方法：改为用div或span标签。
+```
+想点击登录、注册改变state切换显示登录、注册面板组件。但是发现点击一次，打印两次`this.state.chooseSignin`的值。<br>
+原因在于使用了a标签，点击时改变了一次state，页面跳转，改变一次state，一共两次。<br>
+解决方法：改为用div或span标签。<br>
 
-####15.4 上面的代码出现了另外的bug
+#### 19.4 上面的代码出现了另外的bug
 ![50-1](problemsPic/50-1.png)<br>
-原因是我在 state 还在更新中时 setState。
-解决方法:
+原因是我在 state 还在更新中时 setState。<br>
+解决方法:<br>
 在组件constructor方法里面
-`
+```
 this.toogleRenderSignup = this.toogleRenderSignup.bind(this,true)
 this.toogleRenderSignin = this.toogleRenderSignin.bind(this,false)
-`
+```
 在render方法里
-`
+```
 <span className={classNames({ [styles['active']]: this.state.chooseSignup })}
                                 onClick ={this.toogleRenderSignup}>注册</span>
 <span className={classNames({ [styles['active']]: this.state.chooseSignin })}
                                 onClick ={this.toogleRenderSignin}>登录</span>
-`
+```
 
-解决方法：使用redux控制组件切换更新。
--[参考](http://4dev.tech/2016/03/reactjs-error-cannot-update-during-an-existing-state-transition-such-as-within-render-render-methods-should-be-a-pure-function-of-props-and-state/)
+解决方法：使用redux控制组件切换更新。<br>
+[参考](http://4dev.tech/2016/03/reactjs-error-cannot-update-during-an-existing-state-transition-such-as-within-render-render-methods-should-be-a-pure-function-of-props-and-state/)<br>
 
-####15.5 canvas的宽高自适应
-登录界面的背景用了canvas，可是发现css设置了宽高100%，高度都无法达到100%。
-解决方法：
-在render方法里使用内联式
-`
+#### 19.5 canvas的宽高自适应
+登录界面的背景用了canvas，可是发现css设置了宽高100%，高度都无法达到100%。<br>
+解决方法：在render方法里使用内联式<br>
+```
 const canvasStyle = {
             position: 'absolute',
             top: '0',
@@ -860,26 +862,27 @@ const canvasStyle = {
             display: 'block',
             background: 'blue',
         }
-`
+```
 `<canvas id='canvas' style={canvasStyle} className={styles.canvasBackground}></canvas>`
 
-####15.5 div内文字怎么水平垂直居中忘记了
-令行高等于div高度，然后加上`text-align:center;`即可
+#### 19.6 div内文字怎么水平垂直居中忘记了
+令行高等于div高度，然后加上`text-align:center;`即可<br>
 
-####15.6 如果之前已经登录过系统，再重新刷新页面，应该直接跳过登录页面到主界面。但是此时报错
+#### 19.7 如果之前已经登录过系统，再重新刷新页面，应该直接跳过登录页面到主界面。但是此时报错
 `Uncaught TypeError: Cannot read property 'getContext' of null`
 这是因为在登录页面的componentDidMount方法里，我渲染canvas,需要获取getContext，但是此时已调到主界面了，获取不到。
 解决方法
-`let cx = document.getElementById('canvas');
+```
+let cx = document.getElementById('canvas');
         if (cx!==null) {
           let ctx = cx.getContext('2d');
           ...
         }
-`
+```
 
-####15.7 登出的时候路由重定向，action的type不同。
-我定义了action的type为 `SIGN_OUT`
-`
+#### 19.8 登出的时候路由重定向，action的type不同。<br>
+我定义了action的type为 `SIGN_OUT`<br>
+```
 case SIGN_OUT: {//登出状态
             const state = Object.assign({}, state, {
                 isRenderSignin:false,
@@ -889,29 +892,29 @@ case SIGN_OUT: {//登出状态
             localStorage.statusState = JSON.stringify(state);
             return state
         }
-`
+```
 但是在我定义Link点击事件的时候
-`
+```
 signout() {
         const history = this.props.history
         history.push('/')
         this.props.actions.signOut()
         <!--return <Redirect to='/home' />-->
     }
-`
+```
 触发action signOout方法，在reducer里面应该根据signOout的type来计算新的state，但是打断点发现action的type变了。无论是我使用
-`
+```
 const history = this.props.history
 history.push('/')
 this.props.actions.signOut()
-`
-还是`return <Redirect to='/home'`，action的type都是 `
+```
+还是`return <Redirect to='/home'`，action的type都是
 ![50-2](problemsPic/50-2.png)<br>
 解决方法就把action的type改成`@@router/LOCATION_CHANGE`
 
 
-####15.8 路由重定向
-`
+#### 19.9 路由重定向
+```
 const initialState = localStorage.statusState ? JSON.parse(localStorage.statusState) : {
     isLogin: false,
     isRenderSignin: false,
@@ -944,20 +947,20 @@ const status = (state = initialState, action) => {
             return state
         }
             break;
-`
-发现第一次进入系统，打印出来
+```
+发现第一次进入系统，打印出来<br>
 ![50-3](problemsPic/50-3.png)<br>
-登陆后打印：
+登陆后打印：<br>
 ![50-4](problemsPic/50-4.png)<br>
-登陆后竟然触发了logout的action。。。
-可能是因为重定向的action也同时执行了？后面发现其实刷新页面触发了很多种action。所以需要对action的payload里判断是不是登出。
-解决：
-`
+登陆后竟然触发了logout的action。。。<br>
+可能是因为重定向的action也同时执行了？后面发现其实刷新页面触发了很多种action。所以需要对action的payload里判断是不是登出。<br>
+解决：<br>
+```
 signout() {
        this.props.actions.signOut('SIGN_OUT')
     }
-`
-`
+```
+```
 case ROUTER_LOACTION_CHANGE: { //路由切换
             if (action.payload.signout === SIGN_OUT) {//登出
                 const state = Object.assign({}, state, {
@@ -971,8 +974,8 @@ case ROUTER_LOACTION_CHANGE: { //路由切换
                 return state;
             }
         }
-`
-`
+```
+```
 render() {
         const { actions: { signOut }, status: { isLogin } } = this.props;
         // debugger
@@ -980,21 +983,22 @@ render() {
             return <Redirect to='/' />
         }
         ......
-`
+```
 
-####15.9 导航固定
-`.nav{
+#### 19.10 导航固定
+```
+.nav{
     position: fixed;
     top: 0;
     left: 0;
     ....    
 }
-`
-####15.10 切图先把大概div分布确定好
+```
+#### 19.11 切图先把大概div分布确定好
 
-####15.14 数组中元素交换位置
-在新增页面中，对问题进行上移下移操作，需要对state中question数组进行重新排序
-`var swapItems = function(arr, index1, index2) {
+#### 19.12 数组中元素交换位置
+在新增页面中，对问题进行上移下移操作，需要对state中question数组进行重新排序<br>
+```var swapItems = function(arr, index1, index2) {
     arr[index1] = arr.splice(index2, 1, arr[index1])[0];
     return arr;
     };
@@ -1002,11 +1006,11 @@ render() {
 swapItems(arr, index, index - 1);
 //下移
 swapItems(arr, index, index + 1);
-`
--[JavaScript下实现交换数组元素上下移动例子](http://www.111cn.net/wy/js-ajax/80973.htm)
+```
+[JavaScript下实现交换数组元素上下移动例子](http://www.111cn.net/wy/js-ajax/80973.htm)
 
-####15.15 克隆数组中的元素
-`
+#### 19.13 克隆数组中的元素
+```
 /**
  * 判断arr是否为一个数组，返回一个bool值
  *
@@ -1084,18 +1088,18 @@ export function cloneObject (source) {
     }
     return result;
 }
-`
+```
 
-####15.16 使用Redux DevTools浏览器插件调试redux
-使用了Redux DevTools来调试
--[使用Redux DevTools浏览器插件调试redux](http://blog.csdn.net/applebomb/article/details/54918659)
+#### 19.14 使用Redux DevTools浏览器插件调试redux
+使用了Redux DevTools来调试<br>
+[使用Redux DevTools浏览器插件调试redux](http://blog.csdn.net/applebomb/article/details/54918659)<br>
 
-####15.16 在对话框中点击确定后跳转页面
--[50-5](problemsPic/50-4.png)<br>
-因为使用了antd库的对话框组件，所以需要在点击确定的时候提交问卷并且返回主界面。
-在确定按钮的回调函数中`<Link to ='/home'/>`，但是这样无法跳转。
-解决方法：使用history的push方法,调用withRouter方法。
-`
+#### 19.15 在对话框中点击确定后跳转页面
+[50-5](problemsPic/50-4.png)<br>
+因为使用了antd库的对话框组件，所以需要在点击确定的时候提交问卷并且返回主界面。<br>
+在确定按钮的回调函数中`<Link to ='/home'/>`，但是这样无法跳转。<br>
+解决方法：使用history的push方法,调用withRouter方法。<br>
+```
 import { Link, withRouter } from 'react-router-dom'
 ...
 const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history}) => {
@@ -1116,45 +1120,44 @@ const Footer = withRouter(({ handleSetDeadLine, handleSaveQuestionnaire ,history
         .....
     )
 })
-`
+```
 
-####15.17 npm start
+#### 19.16 npm start
 `"start": "node node_modules/webpack-dev-server/bin/webpack-dev-server.js",`
 
-####15.18 css行高line-height的用法
--[css行高line-height的用法](http://www.studyofnet.com/news/273.html)
+#### 19.17 css行高line-height的用法
+[css行高line-height的用法](http://www.studyofnet.com/news/273.html)
 
-####15.19 删除问卷时表格不同步渲染问卷数量，每次添加新的问卷创建新的用户副本和问卷副本
+#### 19.18 删除问卷时表格不同步渲染问卷数量，每次添加新的问卷创建新的用户副本和问卷副本
 原因：
 1、在reducers里，我没有每次返回一个新的state，我直接修改state返回了，导致没有获取新的state。
 2、在表格组件里，我把问卷数量信息作为表格组件的state独自维护，在接受到新的props时，没有触发更新。
 解决方法：
 1、在reducers里，删除问卷时返回新的state，使用深度克隆。
 2、在表格组组件里，使用
-`
+```
 componentWillReceiveProps(nextProps) {
        let questionnaires = this.handleFormatDeadline(cloneObject(nextProps.questionnairesArray))
        this.setState({ questionnaires: questionnaires })
     }
- `   
- 在表格组件实例存在的生命周期，接受新的props，更新其state，触发render，更新问卷列表。
+```
+ 在表格组件实例存在的生命周期，接受新的props，更新其state，触发render，更新问卷列表。<br>
+[React组件生命周期过程说明](http://react-china.org/t/react/1740)
 
- -[React组件生命周期过程说明](http://react-china.org/t/react/1740)
+#### 19.19 span内容自动换行
+[span 文本内容超过宽度自动换行](http://blog.csdn.net/qingyun0719/article/details/5629981)<br>
 
- ####15.20 span内容自动换行
- -[span 文本内容超过宽度自动换行](http://blog.csdn.net/qingyun0719/article/details/5629981)
-
- ####15.21 移动端测试网页
- 在控制台敲入下面的命令：
- `browser-sync start --proxy http://localhost:8000/webpack-dev-server/ --files "style/**"`
- 手机上访问192.168.0.108:3000
- -[知乎](https://www.zhihu.com/question/37361845)
- -[移动端页面调试神器-browser-sync](http://www.cnblogs.com/kbqncf/p/4206244.html)
+#### 19.20 移动端测试网页
+在控制台敲入下面的命令：
+`browser-sync start --proxy http://localhost:8000/webpack-dev-server/ --files "style/**"`
+手机上访问192.168.0.108:3000<br>
+[知乎](https://www.zhihu.com/question/37361845)<br>
+[移动端页面调试神器-browser-sync](http://www.cnblogs.com/kbqncf/p/4206244.html)<br>
  
-####15.22 打包后运行index.html报错
+#### 19.21 打包后运行index.html报错
 `Uncaught DOMException: Failed to execute 'replaceState' on 'History': A history state object with URL`
-原因我在项目中history使用了browserHistory，打包后服务器，所有访问不了。
-在代码中改为就可以了
+原因我在项目中history使用了browserHistory，打包后服务器，所有访问不了。<br>
+在代码中改为就可以了<br>
 `import createHistory from 'history/createHashHistory'`
 
-####15.23 webpack打包压缩
+
