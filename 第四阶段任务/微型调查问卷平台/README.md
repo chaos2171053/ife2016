@@ -101,7 +101,6 @@
 * **封装可复用组件**
     
     封装了Input、Table等组件可多次复用。
-    新增问卷、编辑问卷等为拥有本地状态的组件，使用内部state，使store不那么庞大，更容易维护。
 
 * **使用 `Sass` ,`CSS Modules`,`classnams`处理 CSS 代码**
     
